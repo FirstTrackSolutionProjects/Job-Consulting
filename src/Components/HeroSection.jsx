@@ -1,7 +1,11 @@
 import React from "react";
+import { navigate, useNavigate } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 
 const HeroSection = () => {
+
+  const navigate = useNavigate();
+  
   return (
     <div className="relative h-150 w-full bg-black text-white">
       {/* Background image */}
@@ -28,7 +32,8 @@ const HeroSection = () => {
           solutions designed to accelerate your business growth and drive impactful results.
         </p>
 
-        <button className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded flex items-center gap-2 shadow-lg">
+        <button onClick={() => navigate("/contact")}
+        className="bg-orange-500 hover:bg-orange-600 text-white font-semibold px-6 py-3 rounded flex items-center gap-2 shadow-lg">
           GET IN TOUCH <ArrowRight size={18} />
         </button>
       </div>
