@@ -16,7 +16,8 @@ const closeMenu = () => {
 
 return (
     <>
-    <nav className="flex items-center justify-between px-4 py-2 shadow-md bg-white">
+    <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 py-2 shadow-md bg-white">
+
         {/* Logo and Brand */}
         <div className="flex items-center gap-2">
         <Link to="/" className="flex items-center gap-2" onClick={closeMenu}>
@@ -25,8 +26,8 @@ return (
             alt="Consulting Logo"
             className="w-12 h-12 rounded-full"
             />
-            <span className="font-bold text-xl">First Track Solution Technologies <br/> 
-            Consulting Services</span>
+            <span className="font-bold text-md">First Track Solution Technologies <br/> 
+            </span>
         </Link>
         </div>
 
