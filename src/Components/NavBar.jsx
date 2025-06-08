@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Menu } from "lucide-react"; 
-import Sidebar from "./Sidebar";
-
+import Sidebar from "./SideBar"; 
 
 const NavBar = () => {
 const [menuOpen, setMenuOpen] = useState(false);
