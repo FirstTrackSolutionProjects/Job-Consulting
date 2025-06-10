@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ProtectedPage from "../components/ProtectedPage";
+import ProtectedPage from "../Components/ProtectedPage";
 
 const JoinUs = () => {
   const [formData, setFormData] = useState({
