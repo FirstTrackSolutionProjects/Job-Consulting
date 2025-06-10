@@ -38,7 +38,33 @@ return (
         <Link to="/about" className="hover:underline">About</Link>
         <Link to="/contact" className="hover:underline">Contact</Link>
         <Link to="/services" className="hover:underline">Services</Link>
-        <Link to="/career" className="hover:underline">Career</Link>
+
+        {/* Career Dropdown */}
+        <div className="relative group">
+          <button className="hidden md:flex space-x-6 text-black font-medium hover:underline">Career</button>
+
+          {/* Dropdown */}
+          <div className="absolute left-0 mt-2 w-48 bg-gray-900 text-white rounded-lg shadow-lg z-50 hidden group-hover:block">
+            <Link
+              to="/jobs"
+              className="block px-4 py-2 text-sm hover:bg-gray-700"
+              onClick={closeMenu}
+            > 
+              Current Openings
+            </Link>
+            <Link
+              to="/join-us"
+              className="block px-4 py-2 text-sm hover:bg-gray-700"
+              onClick={closeMenu}
+            >
+              Join Us
+            </Link>
+          </div>
+        </div>
+
+
+
+
         <Link to="/login" className="hover:underline">Login</Link>
         </div>
 
@@ -49,7 +75,7 @@ return (
     </nav>
 
       {/* Sidebar for Mobile */}
-    <Sidebar isOpen={menuOpen} toggleMenu={toggleMenu} />
+    <Sidebar isOpen={menuOpen} toggleMenu={toggleMenu} closeMenu={closeMenu} />
     </>
 );
 };

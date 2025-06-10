@@ -7,6 +7,7 @@ import Testimonials from "../Components/Testimonial";
 import ApplyForm from "../Components/ApplyForm";
 
 
+
 const Home = () => {
     return (
         <div className="min-h-screen bg-gray-100">

@@ -40,11 +40,14 @@ const Footer = () => {
 
         {/* Job Seekers */}
         <div>
-          <h3 className="text-lg font-semibold mb-3">For Job Seekers</h3>
+          <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-sm text-gray-300">
-            <li><Link to="/job-seekers">Upload Resume</Link></li>
-            <li><Link to="/jobs">Search Jobs</Link></li>
-            <li><Link to="/career-tips">Career Tips</Link></li>
+          <li><Link to="/job-seekers">Upload Your Resume</Link></li>
+           <li><Link to="/career-tips">Career Tips</Link></li>
+            <li><Link to="/terms">Terms Of Service</Link></li>
+            <li><Link to="/privacy">Privacy Policy</Link></li>
+
+            
           </ul>
         </div>
 
@@ -62,9 +65,9 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-3">Contact</h3>
           <ul className="space-y-2 text-sm text-gray-300">
-            <li>Email: support@jobconsult.com</li>
-            <li>Phone: +91 98765 43210</li>
-            <li>Address: 123 Sector</li>
+            <li>Email: contact@firsttracksolutiontechnologies.com</li>
+            <li>Phone: +91 9040170727</li>
+            <li>Address: BMC Bhawani Mall, Saheed Nagar Bhubaneswar, Odisha-751007</li>
           </ul>
         </div>
       </div>

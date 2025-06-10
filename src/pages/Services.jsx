@@ -123,7 +123,7 @@ export default function Services() {
   };
 
   return (
-    <div className="px-6 md:px-12 py-8 space-y-12 max-w-7xl mx-auto">
+    <div className="px-6 md:px-12 py-8 space-y-12 max-w-7xl mx-auto mt-12">
       
       {/* Banner / Hero */}
       <div>
