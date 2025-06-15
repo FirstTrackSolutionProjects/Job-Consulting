@@ -18,12 +18,12 @@ const services = [
   { title: "Web Development", image: "/images/web-development.jpg" },
   { title: "E-commerce Development", image: "/images/ecommerce.jpg" },
   { title: "Blockchain Solutions", image: "/images/blockchain.jpg" },
-  
-  ];
+  { title: "System Administration", image: "/images/system-admin.jpg" },
+];
 
 const OurService = () => {
   return (
-    <section className="py-16 px-4 bg-yellow-100">
+    <section className="py-16 px-4 bg-green-500">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Introducing Our Latest Consulting Solutions
@@ -32,26 +32,21 @@ const OurService = () => {
           Simplifying Success
         </p>
 
-        {/* Universal Swiper Slider for all screen sizes */}
+        {/* Swiper */}
         <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={20}
           slidesPerView={1}
-          pagination={{ clickable: true }}
           autoplay={{ delay: 2500, disableOnInteraction: false }}
+          pagination={{
+            clickable: true,
+            el: ".custom-pagination", // External container class
+          }}
           breakpoints={{
-            640: {
-              slidesPerView: 1.5,
-            },
-            768: {
-              slidesPerView: 2,
-            },
-            1024: {
-              slidesPerView: 3,
-            },
-            1280: {
-              slidesPerView: 4,
-            },
+            640: { slidesPerView: 1.5 },
+            768: { slidesPerView: 2 },
+            1024: { slidesPerView: 3 },
+            1280: { slidesPerView: 4 },
           }}
         >
           {services.map((service, index) => (
@@ -72,6 +67,9 @@ const OurService = () => {
             </SwiperSlide>
           ))}
         </Swiper>
+
+        {/* Custom Pagination Dots Container (positioned BELOW) */}
+        <div className="custom-pagination mt-6 flex justify-center gap-2"></div>
       </div>
     </section>
   );

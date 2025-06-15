@@ -8,7 +8,7 @@ const achievements = [
   },
   {
     icon: <ListChecks className="w-8 h-8 text-white" />,
-    value: "1200+",
+    value: "100000+",
     label: "Positions Filled",
   },
   {
@@ -18,7 +18,7 @@ const achievements = [
   },
   {
     icon: <Award className="w-8 h-8 text-white" />,
-    value: "10+",
+    value: "14+",
     label: "Years of Excellence",
   },
 ];

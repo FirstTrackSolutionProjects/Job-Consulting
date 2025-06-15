@@ -42,6 +42,7 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-semibold mb-3">Quick Links</h3>
           <ul className="space-y-2 text-sm text-gray-300">
+            <li><Link to="/career-form">Career</Link></li>
           <li><Link to="/job-seekers">Upload Your Resume</Link></li>
            <li><Link to="/career-tips">Career Tips</Link></li>
             <li><Link to="/terms">Terms Of Service</Link></li>

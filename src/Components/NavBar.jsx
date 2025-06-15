@@ -26,7 +26,7 @@ return (
             alt="Consulting Logo"
             className="w-12 h-12 rounded-full"
             />
-            <span className="font-bold text-md">First Track Solution Technologies <br/> 
+            <span className="font-bold text-md">First Track <br/>Solution Technologies
             </span>
         </Link>
         </div>
@@ -41,7 +41,7 @@ return (
 
         {/* Career Dropdown */}
         <div className="relative group">
-          <button className="hidden md:flex space-x-6 text-black font-medium hover:underline">Career</button>
+          <Link to="/career-form" className="hidden md:flex space-x-6 text-black font-medium hover:underline"  onClick={closeMenu}>Career</Link>
 
           {/* Dropdown */}
           <div className="absolute left-0 mt-2 w-48 bg-gray-900 text-white rounded-lg shadow-lg z-50 hidden group-hover:block">
@@ -65,7 +65,7 @@ return (
 
 
 
-        <Link to="/login" className="hover:underline">Login</Link>
+        {/* <Link to="/login" className="hover:underline">Login</Link> */}
         </div>
 
         {/* Mobile Menu Toggle */}

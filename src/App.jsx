@@ -5,13 +5,15 @@ import NavBar from "./Components/NavBar";
 import Footer from "./Components/Footer";
 import Home from "./pages/Home";
 import About from "./pages/About";
-import Career from "./pages/Career";
+
 import Login from "./pages/Login";
 import Register from "./pages/Register";
 
 import Contact from "./pages/Contact";
 // import ForgotPassword from "./pages/ForgotPassword";
+import CareerForm from "./pages/CareerForm";
 import Jobs from "./pages/Jobs";
+import JobDetails from "./pages/JobDetails";
 import JoinUs from "./pages/JoinUs";
 // import JobDetails from "./pages/JobDetails";
 import Services from "./pages/Services";
@@ -33,10 +35,13 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/career" element={<Career />} />
+         
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/career-form" element={<CareerForm />} />
+          
           <Route path="/jobs" element={<Jobs />} />
+          <Route path="/jobs/:id" element={<JobDetails />} />
           <Route path="/join-us" element={<JoinUs />} />
           {/* <Route path="/job-details/:id" element={<JobDetails />} /> */}
           <Route path="/services" element={<Services />} />

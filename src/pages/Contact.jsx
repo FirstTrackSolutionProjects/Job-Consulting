@@ -41,12 +41,23 @@ const Contact = () => {
               <label className="block text-sm font-medium mb-2" htmlFor="mobile">
                 Mobile
               </label>
+              <div className="flex">
+                 <select
+                    className="p-2 border border-gray-300 rounded-l bg-gray-100 text-sm"
+                    defaultValue="+91"
+                    >
+                  <option value="+91">+91 (India)</option>
+                  <option value="+1">+1 (USA)</option>
+                  <option value="+44">+44 (UK)</option>
+                  <option value="+61">+61 (Australia)</option>
+                </select>
               <input
                 type="tel"
                 id="mobile"
                 className="w-full p-2 border border-gray-300 rounded"
                 required
               />
+              </div>
             </div>
             <div className="mb-4">
               <label className="block text-sm font-medium mb-2" htmlFor="message">

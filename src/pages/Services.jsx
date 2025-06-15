@@ -15,6 +15,15 @@ const sectors = {
     'Email Support Executive',
     'Chat Support Executive',
   ],
+  bankingSector: [
+    'Relationship Manager',
+    'Acquisition Manager',
+    'Asst. Manager',
+    'Sales Officer',
+    'Sr. Sales Officer',
+    'Business Development Manager',
+    'Cashier/Teller',
+  ],
   itSector: [
     'Software Developer',
     'Automation Engineer',
@@ -24,11 +33,21 @@ const sectors = {
     'App Developer',
     'UI/UX Developer',
   ],
+  operationalHiring: [
+    'HR Executive',
+    'Sr. HR Executive',
+    'HR Manager',
+    'Operations Manager',
+    'Account Manager',
+    'Account Executive',
+    'Admin Executive',
+  ],
   execHiring: [
     'Team Leaders',
     'Managers',
     'Subject Matter Experts',
     'Quality Analyst',
+    'Cilent Relationship Manager',
   ]
 };
 
@@ -127,7 +146,11 @@ export default function Services() {
       
       {/* Banner / Hero */}
       <div>
-        <img src={bannerImg} alt="Consulting" className="w-full h-auto rounded-lg" />
+        <img
+          src="/images/banner-consulting.jpg"
+          alt="Consulting"
+          className="w-full h-80 object-cover lg:h-auto lg:w-1/2"
+        />
       </div>
 
       {/* Intro */}
@@ -170,6 +193,8 @@ export default function Services() {
               
               {key === 'voiceBPO' ? 'BPO Sector (Voice Process)'
                 : key === 'nonVoiceBPO' ? 'BPO Sector (Non‑Voice Process)'
+                  : key === 'bankingSector' ? 'Banking Sector'
+                  : key === 'operationalHiring' ? 'Operational Hiring'
                 : key === 'itSector' ? 'IT Sector'
                   : 'Executive Level Hiring'}
                   

@@ -4,6 +4,7 @@ import OurService from "../Components/OurService";
 import WhyUs from "../Components/WhyUs";
 import Highlights from "../Components/Highlights";
 import Testimonials from "../Components/Testimonial";
+import TrustedPartners from "../Components/TrustedPartner";
 import ApplyForm from "../Components/ApplyForm";
 
 
@@ -16,9 +17,8 @@ const Home = () => {
         <WhyUs />
         <Highlights />
         <Testimonials />
+        <TrustedPartners />
         <ApplyForm />
-        
-
         </div>
     );
 }

@@ -44,7 +44,7 @@ const Sidebar = ({ isOpen, toggleMenu, closeMenu }) => {
 
         
 
-        <Link to="/login" onClick={toggleMenu} className="hover:text-blue-400">Login</Link>
+        {/* <Link to="/login" onClick={toggleMenu} className="hover:text-blue-400">Login</Link> */}
       </div>
     </div>
   );
