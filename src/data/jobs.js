@@ -29,7 +29,17 @@ const jobs = [
     salary: "₹10K/Month",
     description: "Join our team as a UI Intern and gain hands-on experience in designing user interfaces. Ideal for fresh graduates.",
   },
-  // Add more jobs as needed
+  {
+    id: 4,
+    title: "Backend Developer",
+    company: "CodeCraft",
+    location: "Bangalore",
+    experience: "3-5",
+    jobType: "full-time",
+    salary: "₹8-12 LPA",
+    description: "Seeking an experienced Backend Developer proficient in Node.js and MongoDB. Work on scalable applications with a talented team.",
+  },
+  
 ];
 
 export default jobs;
