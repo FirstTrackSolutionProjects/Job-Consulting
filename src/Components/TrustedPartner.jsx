@@ -5,17 +5,24 @@ import { Autoplay } from 'swiper/modules';
 
 const partners = [
     
-     { name: 'ITM', logo: '/assets/itm.jpg' },
-//   { name: 'Zoho', logo: '/assets/zoho.jpg' },
-//   { name: 'Hostinger', logo: '/assets/hostinger.jpg' },
-//   { name: 'AWs', logo: '/assets/aws.jpg' },
-//   { name: 'Netlify', logo: '/assets/netlify.jpg' },
-//   { name: 'Zoho', logo: '/assets/zoho.jpg' },
-//   { name: 'Hostinger', logo: '/assets/hostinger.jpg' },
-//   { name: 'AWs', logo: '/assets/aws.jpg' },
-//   { name: 'Netlify', logo: '/assets/netlify.jpg' },
-
- ];
+    { name: 'ITM', logo: '/Partners/itm.jpg' },
+    { name: 'Zoho', logo: '/Partners/zoho.png' },
+    { name: 'Hostinger', logo: '/Partners/hostinger.png' },
+    { name: 'AWs', logo: '/Partners/aws.png' },
+    { name: 'Netlify', logo: '/Partners/netlify.png' },
+    { name: 'NAC', logo: '/Partners/nac.jpg' },
+    { name: 'Upgrade', logo: '/Partners/upgrade.jpg' },
+    { name: 'Recruit', logo: '/Partners/recruit.jpg' },
+    { name: 'CrackPD', logo: '/Partners/crackpd.jpg' },
+    { name: 'MaxLife', logo: '/Partners/maxlife.jpg' },
+    { name: 'ICICI', logo: '/Partners/icici.png' },
+    { name: 'HDFC', logo: '/Partners/hdfc.png' },
+    { name: 'Axis', logo: '/Partners/axis.png' },
+    { name: 'Kotak', logo: '/Partners/kotak.png' },
+    { name: 'Jana', logo: '/Partners/jana.png' },
+    { name: 'AU Small Finance', logo: '/Partners/au.jpg' },
+    { name: 'LensKart', logo: '/Partners/lenskart.png' },
+];
 
 const TrustedPartners = () => {
   return (

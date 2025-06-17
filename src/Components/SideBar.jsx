@@ -8,7 +8,7 @@ const Sidebar = ({ isOpen, toggleMenu, closeMenu }) => {
 
   return (
     <div
-      className={`fixed top-0 right-0 h-full w-64 bg-gray-400 text-white z-50 transition-transform duration-300 ease-in-out ${
+      className={`fixed top-0 right-0 h-[100vh] w-64 bg-gray-700 text-white z-50 transition-transform duration-300 ease-in-out ${
         isOpen ? "translate-x-0" : "translate-x-full"
       } md:hidden`}
     >
@@ -35,9 +35,9 @@ const Sidebar = ({ isOpen, toggleMenu, closeMenu }) => {
               <Link to="/jobs" onClick={toggleMenu} className="block hover:text-blue-400">
                 Current Openings
               </Link>
-              <Link to="/join-us" onClick={toggleMenu} className="block hover:text-blue-400">
+              {/* <Link to="/join-us" onClick={toggleMenu} className="block hover:text-blue-400">
                 Join Us
-              </Link>
+              </Link> */}
             </div>
           )}
         </div>

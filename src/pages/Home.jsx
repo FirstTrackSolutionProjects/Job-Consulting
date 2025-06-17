@@ -5,7 +5,7 @@ import WhyUs from "../Components/WhyUs";
 import Highlights from "../Components/Highlights";
 import Testimonials from "../Components/Testimonial";
 import TrustedPartners from "../Components/TrustedPartner";
-import ApplyForm from "../Components/ApplyForm";
+import ApplicationForm from "../Components/ApplicationForm";
 
 
 
@@ -18,7 +18,7 @@ const Home = () => {
         <Highlights />
         <Testimonials />
         <TrustedPartners />
-        <ApplyForm />
+        <ApplicationForm />
         </div>
     );
 }

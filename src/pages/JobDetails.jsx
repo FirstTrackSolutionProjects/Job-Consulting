@@ -36,11 +36,11 @@ const JobDetails = () => {
         <hr className="my-4" />
 
         <p className="text-gray-700">
-          {job.description || "This role involves working closely with the development/design/HR teams, contributing to impactful projects, and growing your professional skills."}
+          {job.description }
         </p>
 
         {/* Apply button */}
-        <button className="mt-6 bg-green-600 text-white px-6 py-2 rounded ">
+        <button onClick={() => navigate("/career-form", { state: { jobTitle: job.title } })} className="mt-6 bg-green-600 text-white px-6 py-2 rounded ">
           Apply Now
         </button>
       </div>

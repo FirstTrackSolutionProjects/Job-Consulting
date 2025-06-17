@@ -14,6 +14,7 @@ import Contact from "./pages/Contact";
 import CareerForm from "./pages/CareerForm";
 import Jobs from "./pages/Jobs";
 import JobDetails from "./pages/JobDetails";
+import ApplyForm from "./pages/ApplyForm";
 import JoinUs from "./pages/JoinUs";
 // import JobDetails from "./pages/JobDetails";
 import Services from "./pages/Services";
@@ -42,6 +43,8 @@ function App() {
           
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/jobs/:id" element={<JobDetails />} />
+          <Route path="/apply-form/:id" element={<ApplyForm />} />
+          
           <Route path="/join-us" element={<JoinUs />} />
           {/* <Route path="/job-details/:id" element={<JobDetails />} /> */}
           <Route path="/services" element={<Services />} />

@@ -52,13 +52,13 @@ return (
             > 
               Current Openings
             </Link>
-            <Link
+            {/* <Link
               to="/join-us"
               className="block px-4 py-2 text-sm hover:bg-gray-700"
               onClick={closeMenu}
             >
               Join Us
-            </Link>
+            </Link> */}
           </div>
         </div>
 

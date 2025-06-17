@@ -19,11 +19,13 @@ const services = [
   { title: "E-commerce Development", image: "/images/ecommerce.jpg" },
   { title: "Blockchain Solutions", image: "/images/blockchain.jpg" },
   { title: "System Administration", image: "/images/system-admin.jpg" },
+  { title: "Training & Development", image: "/images/training.jpg" },
+  { title: "Job Recruitment", image: "/images/job-recruitment.jpg" },
 ];
 
 const OurService = () => {
   return (
-    <section className="py-16 px-4 bg-green-500">
+    <section className="py-16 px-4 bg-gradient-to-br from-sky-200 to-blue-100">
       <div className="max-w-7xl mx-auto text-center">
         <h2 className="text-3xl md:text-4xl font-bold mb-4">
           Introducing Our Latest Consulting Solutions
@@ -69,7 +71,7 @@ const OurService = () => {
         </Swiper>
 
         {/* Custom Pagination Dots Container (positioned BELOW) */}
-        <div className="custom-pagination mt-6 flex justify-center gap-2"></div>
+        {/* <div className="custom-pagination mt-6 flex justify-center gap-2"></div> */}
       </div>
     </section>
   );

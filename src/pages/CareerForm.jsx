@@ -1,6 +1,9 @@
 import React, { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const CareerForm = () => {
+   const location = useLocation();
+  const jobTitle = location.state?.jobTitle || "";
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
