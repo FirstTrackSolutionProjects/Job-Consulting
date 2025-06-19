@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Menu } from "lucide-react";
-import Sidebar from "./SideBar"; 
+import { Menu, ChevronDown, ChevronUp } from "lucide-react";
+import Sidebar from "./SideBar";
+
 const NavBar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [isJobsOpen, setIsJobsOpen] = useState(false); // new state for dropdown
+  const [isJobsOpen, setIsJobsOpen] = useState(false);
+  const [fintechOpen, setFintechOpen] = useState(false);
 
   const toggleMenu = () => setMenuOpen(!menuOpen);
   const closeMenu = () => setMenuOpen(false);
+
+  const handleFintechClick = () => setFintechOpen(!fintechOpen);
 
   return (
     <>
@@ -27,34 +31,61 @@ const NavBar = () => {
           <Link to="/" className="hover:underline" onClick={closeMenu}>Home</Link>
           <Link to="/about" className="hover:underline" onClick={closeMenu}>About</Link>
 
-          {/* Jobs Dropdown - hover stays open */}
+          {/* Jobs Dropdown */}
           <div
             className="relative"
             onMouseEnter={() => setIsJobsOpen(true)}
             onMouseLeave={() => setIsJobsOpen(false)}
           >
-            <Link to="/jobs" className="hover:underline" onClick={closeMenu}>Jobs</Link>
+            <span className="cursor-pointer hover:underline">Jobs</span>
             {isJobsOpen && (
               <div className="absolute left-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
-                <Link
-                  to="/current-openings"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                  onClick={closeMenu}
-                >
+                <Link to="/current-openings" className="block px-4 py-2 hover:bg-gray-100" onClick={closeMenu}>
                   Current Openings
                 </Link>
-                <Link
-                  to="/position"
-                  className="block px-4 py-2 hover:bg-gray-100"
-                  onClick={closeMenu}
-                >
+                <Link to="/position" className="block px-4 py-2 hover:bg-gray-100" onClick={closeMenu}>
                   Position
                 </Link>
               </div>
             )}
           </div>
 
-          <Link to="/fintech" className="hover:underline" onClick={closeMenu}>Fintech</Link>
+          {/* Fintech Dropdown */}
+          <div className="relative">
+            <button
+              onClick={() => setFintechOpen(!fintechOpen)}
+              className="flex items-center gap-1 hover:underline"
+            >
+              Fintech {fintechOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+            </button>
+        {fintechOpen && (
+              <div className="absolute left-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
+            <Link
+              to="/loan"
+                onClick={() => { closeMenu(); setFintechOpen(false); }}
+                className="block px-4 py-2 hover:bg-gray-100"
+            >
+              Loan
+            </Link>
+            <Link
+              to="/insurance"
+              onClick={() => { closeMenu(); setFintechOpen(false); }}
+              className="block px-4 py-2 hover:bg-gray-100"
+            >
+                Insurance
+            </Link>
+            <Link
+              to="/credit-card"
+              onClick={() => { closeMenu(); setFintechOpen(false); }}
+              className="block px-4 py-2 hover:bg-gray-100"
+            >
+              Credit Card
+            </Link>
+          </div>
+          )}
+        </div>
+
+
           <Link to="/career-form" className="hover:underline" onClick={closeMenu}>Career</Link>
           <Link to="/contact" className="hover:underline" onClick={closeMenu}>Contact</Link>
           <Link to="/partner" className="hover:underline" onClick={closeMenu}>Partner</Link>
@@ -66,6 +97,7 @@ const NavBar = () => {
         </button>
       </nav>
 
+      {/* Sidebar for Mobile */}
       <Sidebar isOpen={menuOpen} toggleMenu={toggleMenu} closeMenu={closeMenu} />
     </>
   );

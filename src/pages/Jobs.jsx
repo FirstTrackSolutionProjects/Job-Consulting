@@ -108,22 +108,23 @@ const Jobs = () => {
       job.location.toLowerCase().includes(appliedFilters.location.toLowerCase());
 
     const matchType =
-      !appliedFilters.jobType || job.jobType === appliedFilters.jobType;
+      !appliedFilters.jobType ||
+      job.jobType.toLowerCase() === appliedFilters.jobType.toLowerCase();
 
     return matchTitle && matchLocation && matchType;
   });
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 mt-12">
-      
-      {/* ✅ Banner Image at the Top */}
+      {/* ✅ Banner Image */}
       <img
-        src="/images/jobs-banner.jpg" // 🔁 Update with your image path
+        src="/images/jobs-banner.jpg"
         alt="Job Opportunities"
         className="w-full h-80 object-cover rounded-xl mb-6"
       />
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+        {/* 🔍 Filters */}
         <div className="md:col-span-1">
           <Filters
             filters={filters}
@@ -132,42 +133,48 @@ const Jobs = () => {
           />
         </div>
 
+        {/* 📋 Job Listings */}
         <div className="md:col-span-3 space-y-6">
           {!hasSearched ? (
             <p className="text-gray-400 text-sm">Please search to see job listings.</p>
           ) : filteredJobs.length === 0 ? (
             <p className="text-gray-500 mt-4">No jobs match your filters.</p>
           ) : (
-            filteredJobs.map((job) => (
-              <div
-                key={job.id}
-                className="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition duration-300 border border-gray-100"
-              >
-                <div className="flex flex-col space-y-2">
-                  <div className="flex justify-between items-center">
-                    <h3 className="text-xl font-semibold text-gray-800">{job.title}</h3>
-                    <span className="text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded">
-                      {job.jobType}
-                    </span>
-                  </div>
-                  <p className="text-gray-600">
-                    {job.company} • {job.location}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    Experience: {job.experience} years
-                  </p>
-                  <p className="text-sm text-gray-500">Salary: {job.salary}</p>
-                  <div className="flex justify-end mt-4">
-                    <Link
-                      to={`/jobs/${job.id}`}
-                      className="px-4 py-2 bg-blue-600 text-white rounded-full font-medium text-sm"
-                    >
-                      Read more →
-                    </Link>
+            <>
+              <p className="text-sm text-gray-500">
+                Showing {filteredJobs.length} job(s)
+              </p>
+              {filteredJobs.map((job) => (
+                <div
+                  key={job.id}
+                  className="bg-white p-5 rounded-xl shadow-md hover:shadow-lg transition duration-300 border border-gray-100"
+                >
+                  <div className="flex flex-col space-y-2">
+                    <div className="flex justify-between items-center">
+                      <h3 className="text-xl font-semibold text-gray-800">{job.title}</h3>
+                      <span className="text-sm bg-blue-100 text-blue-600 px-2 py-1 rounded">
+                        {job.jobType}
+                      </span>
+                    </div>
+                    <p className="text-gray-600">
+                      {job.company} • {job.location}
+                    </p>
+                    <p className="text-sm text-gray-500">
+                      Experience: {job.experience} years
+                    </p>
+                    <p className="text-sm text-gray-500">Salary: {job.salary}</p>
+                    <div className="flex justify-end mt-4">
+                      <Link
+                        to={`/jobs/${job.id}`}
+                        className="px-4 py-2 bg-blue-600 text-white rounded-full font-medium text-sm"
+                      >
+                        Read more →
+                      </Link>
+                    </div>
                   </div>
                 </div>
-              </div>
-            ))
+              ))}
+            </>
           )}
         </div>
       </div>

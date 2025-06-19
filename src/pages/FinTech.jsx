@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import CreditCard from "./CreditCard";
 const Fintech = () => {
   const [formData, setFormData] = useState({
     fullName: "",

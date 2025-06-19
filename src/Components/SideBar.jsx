@@ -4,12 +4,15 @@ import { X, ChevronDown, ChevronUp } from "lucide-react";
 
 const Sidebar = ({ isOpen, toggleMenu }) => {
   const [jobsOpen, setJobsOpen] = useState(false);
+  const [fintechOpen, setFintechOpen] = useState(false); // 👈 new state
   const navigate = useNavigate();
 
   const handleJobsClick = () => {
-    setJobsOpen(!jobsOpen);     // Toggle dropdown
-    navigate("/jobs");          // Navigate to /jobs
-    toggleMenu();               // Close sidebar (optional)
+    setJobsOpen(!jobsOpen);
+  };
+
+  const handleFintechClick = () => {
+    setFintechOpen(!fintechOpen);
   };
 
   return (
@@ -52,8 +55,29 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
             </div>
           )}
         </div>
-        <Link to="/fintech" onClick={toggleMenu} className="hover:text-blue-400">
-          Fintech</Link>
+
+        {/* Fintech Dropdown */}
+        <div>
+          <button
+            onClick={handleFintechClick}
+            className="flex items-center justify-between w-full font-medium text-white"
+          >
+            Fintech {fintechOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
+          </button>
+          {fintechOpen && (
+            <div className="ml-4 mt-2 space-y-2">
+              <Link to="/loan" onClick={toggleMenu} className="block hover:text-blue-400">
+                Loan
+              </Link>
+              <Link to="/insurance" onClick={toggleMenu} className="block hover:text-blue-400">
+                Insurance
+              </Link>
+              <Link to="/credit-card" onClick={toggleMenu} className="block hover:text-blue-400">
+                Credit Card
+              </Link>
+            </div>
+          )}
+        </div>
 
         <Link to="/career-form" onClick={toggleMenu} className="hover:text-blue-400">
           Career
@@ -61,6 +85,10 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
 
         <Link to="/contact" onClick={toggleMenu} className="hover:text-blue-400">
           Contact
+        </Link>
+
+        <Link to="/partner" onClick={toggleMenu} className="hover:text-blue-400">
+          Partner
         </Link>
       </div>
     </div>

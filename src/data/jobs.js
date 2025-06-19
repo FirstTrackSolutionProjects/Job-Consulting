@@ -7,7 +7,11 @@ const jobs = [
     experience: "2-4",
     jobType: "full-time",
     salary: "₹6-8 LPA",
+    workmode: "remote/hybrid/onsite",
     description: "We are looking for a skilled Frontend Developer with experience in React and JavaScript. Join our dynamic team to build innovative web applications.",
+    education: "Bachelor's in Computer Science or related field",
+    skills: "React, JavaScript, HTML, CSS",
+    responsibilities: "Develop user interfaces, collaborate with designers, optimize applications for speed and scalability.",
   },
   {
     id: 2,
@@ -17,7 +21,11 @@ const jobs = [
     experience: "0-2",
     jobType: "part-time",
     salary: "₹3-4 LPA",
+    workmode: "remote/hybrid/onsite",
     description: "Looking for a dynamic HR Executive to manage recruitment and employee relations. Freshers are welcome.",
+    education: "Bachelor's in Human Resources or related field",
+    skills: "Communication, Recruitment, Employee Relations",
+    responsibilities: "Handle recruitment processes, manage employee records, assist in performance management.",
   },
   {
     id: 3,
@@ -27,7 +35,11 @@ const jobs = [
     experience: "0-1",
     jobType: "internship",
     salary: "₹10K/Month",
+    workmode: "remote/hybrid/onsite",
     description: "Join our team as a UI Intern and gain hands-on experience in designing user interfaces. Ideal for fresh graduates.",
+    education: "Bachelor's in Design or related field",
+    skills: "Figma, Adobe XD, Basic HTML/CSS",
+    responsibilities: "Assist in designing user interfaces, collaborate with developers, learn about user experience design.",
   },
   {
     id: 4,
@@ -37,7 +49,11 @@ const jobs = [
     experience: "3-5",
     jobType: "full-time",
     salary: "₹8-12 LPA",
+    workmode: "remote/hybrid/onsite",
     description: "Seeking an experienced Backend Developer proficient in Node.js and MongoDB. Work on scalable applications with a talented team.",
+    education: "Bachelor's in Computer Science or related field",
+    skills: "Node.js, MongoDB, RESTful APIs, Express.js",
+    responsibilities: "Design and implement server-side logic, manage database operations, ensure high performance and responsiveness.",
   },
   {
     id: 5,
@@ -47,7 +63,11 @@ const jobs = [
     experience: "2-4",
     jobType: "full-time",
     salary: "₹7-10 LPA",
+    workmode: "remote/hybrid/onsite",
     description: "We are looking for a React Native Developer to create cross-platform mobile applications. Experience with mobile development is a plus.",
+    education: "Bachelor's in Computer Science or related field",
+    skills: "React Native, JavaScript, Mobile Development",
+    responsibilities: "Develop mobile applications using React Native, collaborate with designers and backend developers, ensure app performance and quality.",
   },
   {
     id: 6,
@@ -57,7 +77,11 @@ const jobs = [
     experience: "1-3",
     jobType: "full-time",
     salary: "₹5-8 LPA",
+    workmode: "remote/hybrid/onsite",
     description: "Join our creative team as a UI/UX Designer. You will be responsible for designing user-friendly interfaces and enhancing user experience.",
+    education: "Bachelor's in Design or related field",
+    skills: "UI Design, UX Research, Figma, Adobe Creative Suite",
+    responsibilities: "Conduct user research, create wireframes and prototypes, collaborate with developers to implement designs.",
   }
 
 ];

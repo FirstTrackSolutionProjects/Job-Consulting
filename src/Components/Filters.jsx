@@ -96,8 +96,8 @@ const Filters = ({ filters, onChange, onSubmit }) => {
           Find A Job
         </div>
 
-        <div className="bg-white bg-opacity-70 p-6 rounded-xl space-y-4">
-          <h2 className="text-2xl font-bold text-black bg-gray-300 text-center">Find a Job</h2>
+        <div className="bg-white bg-opacity-70 p-6 rounded-xl space-y-4 mt-4">
+          <h2 className="text-2xl font-bold text-black bg-gray-300 text-center rounded">Find a Job</h2>
 
           <input
             type="text"
@@ -105,7 +105,7 @@ const Filters = ({ filters, onChange, onSubmit }) => {
             value={filters.title}
             onChange={onChange}
             placeholder="Job title or company"
-            className="w-full px-4 py-2 rounded-md bg-gray-400 bg-opacity-60 text-white placeholder-white focus:outline-none"
+            className="w-full px-4 py-2 rounded-md bg-gray-400 bg-opacity-60 text-white placeholder-white/80 focus:outline-none"
           />
 
           <select
@@ -126,7 +126,7 @@ const Filters = ({ filters, onChange, onSubmit }) => {
             value={filters.location}
             onChange={onChange}
             placeholder="Location"
-            className="w-full px-4 py-2 rounded-md bg-gray-400 bg-opacity-60 text-white placeholder-white focus:outline-none"
+            className="w-full px-4 py-2 rounded-md bg-gray-400 bg-opacity-60 text-white placeholder-white/80 focus:outline-none"
           />
 
           <button
