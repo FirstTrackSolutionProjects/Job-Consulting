@@ -17,7 +17,7 @@ const jobs = [
     experience: "0-2",
     jobType: "part-time",
     salary: "₹3-4 LPA",
-  description: "Looking for a dynamic HR Executive to manage recruitment and employee relations. Freshers are welcome.",
+    description: "Looking for a dynamic HR Executive to manage recruitment and employee relations. Freshers are welcome.",
   },
   {
     id: 3,
@@ -39,7 +39,27 @@ const jobs = [
     salary: "₹8-12 LPA",
     description: "Seeking an experienced Backend Developer proficient in Node.js and MongoDB. Work on scalable applications with a talented team.",
   },
-  
+  {
+    id: 5,
+    title: "React Native Developer",
+    company: "AppSolutions",
+    location: "Hyderabad",
+    experience: "2-4",
+    jobType: "full-time",
+    salary: "₹7-10 LPA",
+    description: "We are looking for a React Native Developer to create cross-platform mobile applications. Experience with mobile development is a plus.",
+  },
+  {
+    id: 6,
+    title: "UI/UX Designer",
+    company: "DesignHub",
+    location: "Chennai",
+    experience: "1-3",
+    jobType: "full-time",
+    salary: "₹5-8 LPA",
+    description: "Join our creative team as a UI/UX Designer. You will be responsible for designing user-friendly interfaces and enhancing user experience.",
+  }
+
 ];
 
 export default jobs;

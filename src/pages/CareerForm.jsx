@@ -261,14 +261,14 @@ const CareerForm = () => {
             accept=".pdf,.doc,.docx"
             required
             onChange={handleChange}
-              className="w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-teal-500 file:text-gray-700 "
+              className="w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-semibold file:bg-blue-100 file:text-gray-700 "
           />
           </div>
         </div>
 
         <button
           type="submit"
-          className="bg-teal-500 text-white px-4 py-2 rounded hover:bg-teal-600"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-teal-600"
         >
           Submit
         </button>

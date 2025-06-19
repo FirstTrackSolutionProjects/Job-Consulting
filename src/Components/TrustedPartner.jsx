@@ -12,7 +12,7 @@ const partners = [
     { name: 'Netlify', logo: '/Partners/netlify.png' },
     { name: 'NAC', logo: '/Partners/nac.jpg' },
     { name: 'Upgrade', logo: '/Partners/upgrade.jpg' },
-    { name: 'Recruit', logo: '/Partners/recruit.jpg' },
+    { name: 'RecruitIndia', logo: '/Partners/recruit.jpg' },
     { name: 'CrackPD', logo: '/Partners/crackpd.jpg' },
     { name: 'MaxLife', logo: '/Partners/maxlife.jpg' },
     { name: 'ICICI', logo: '/Partners/icici.png' },

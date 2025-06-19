@@ -21,6 +21,7 @@ const services = [
   { title: "System Administration", image: "/images/system-admin.jpg" },
   { title: "Training & Development", image: "/images/training.jpg" },
   { title: "Job Recruitment", image: "/images/job-recruitment.jpg" },
+  { title: "Fintech Solutions", image: "/images/fintech.jpg" },
 ];
 
 const OurService = () => {

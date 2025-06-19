@@ -1,6 +1,6 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
+import { Autoplay } from "swiper/modules";
 import "swiper/css";
 
 import "swiper/css/pagination";
@@ -14,8 +14,8 @@ const testimonials = [
       "Thanks to this consultancy, I landed my dream role within 2 weeks! Their support and job matching were spot on.",
   },
   {
-    name: "Ravi Sharma",
-    role: "Marketing Manager at HDFC Bank",
+    name: "Prakash Pradhan",
+    role: "Assistant Manager at Axis Bank",
     image: "/images/Bavatar.png",
     quote:
       "Professional, fast, and reliable. They guided me through every step and helped me prepare for interviews.",
@@ -28,8 +28,8 @@ const testimonials = [
       "The team was very responsive and truly understood what I was looking for in a new role.",
   },
   {
-    name: "Suresh Kumar",
-    role: "Data Analyst at Wipro",
+    name: "Amit Chauhan",
+    role: "Sales Officer",
     image: "/images/Bavatar.png",
     quote:
       "Excellent placement assistance and follow-up. Got my offer letter in no time.",
@@ -43,10 +43,17 @@ const testimonials = [
   },
   {
     name: "Amit Singh",
-    role: "Financial Advisor at ICICI Bank",
+    role: "Relationship Manager at ICICI Bank",
     image: "/images/Bavatar.png",
     quote:
       "Very professional and prompt service. Highly recommend to job seekers.",
+  },
+  {
+    name: "Shamiya Takhsis",
+    role: "HR Executive at ITM Skills Academy",
+    image: "/images/Gavatar.png",
+    quote:
+      "I was impressed with their personalized approach. They really care about matching candidates with the right jobs.",
   },
 ];
 
@@ -60,11 +67,11 @@ export default function Testimonials() {
         </p>
 
         <Swiper
-          modules={[Autoplay, Pagination]}
+          modules={[Autoplay]}
           spaceBetween={30}
           slidesPerView={1}
          
-          pagination={{ clickable: true }}
+          
           autoplay={{ delay: 4000, disableOnInteraction: false }}
           breakpoints={{
             768: {

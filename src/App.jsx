@@ -8,23 +8,24 @@ import About from "./pages/About";
 
 import Login from "./pages/Login";
 import Register from "./pages/Register";
-
+import Position from "./pages/Position";
 import Contact from "./pages/Contact";
 // import ForgotPassword from "./pages/ForgotPassword";
 import CareerForm from "./pages/CareerForm";
 import Jobs from "./pages/Jobs";
 import JobDetails from "./pages/JobDetails";
 import ApplyForm from "./pages/ApplyForm";
-import JoinUs from "./pages/JoinUs";
+// import JoinUs from "./pages/JoinUs";
 // import JobDetails from "./pages/JobDetails";
-import Services from "./pages/Services";
+
 import JobSeekers from "./pages/JobSeekers";
 import CareerTips from "./pages/CareerTips";
 import Terms from "./pages/Terms";
 import Privacy from "./pages/Privacy";
-// import Employers from "./pages/Employers";
-// import Applications from "./pages/Applications";
-// import Pricing from "./pages/Pricing";
+import Partner from "./pages/Partner";
+import PartnerForm from "./pages/PartnerForm";
+import Fintech from "./pages/FinTech";
+
 
 function App() {
   return (
@@ -45,16 +46,19 @@ function App() {
           <Route path="/jobs/:id" element={<JobDetails />} />
           <Route path="/apply-form/:id" element={<ApplyForm />} />
           
-          <Route path="/join-us" element={<JoinUs />} />
+          {/* <Route path="/join-us" element={<JoinUs />} /> */}
           {/* <Route path="/job-details/:id" element={<JobDetails />} /> */}
-          <Route path="/services" element={<Services />} />
+          <Route path="/position" element={<Position />} />
+          
           <Route path="/job-seekers" element={<JobSeekers />} />
           <Route path="/career-tips" element={<CareerTips />} />
           <Route path="/terms" element={<Terms />} />
           <Route path="/privacy" element={<Privacy />} />
-          {/* <Route path="/employers" element={<Employers />} />
-          <Route path="/applications" element={<Applications />} /> */}
-          {/* <Route path="/pricing" element={<Pricing />} /> */}
+          <Route path="/partner" element={<Partner />} />
+          <Route path="/partner/:type" element={<PartnerForm />} />
+          <Route path="/fintech" element={<Fintech />} />
+          
+          
           
         </Routes>
       </main>
