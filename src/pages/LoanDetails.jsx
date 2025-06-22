@@ -4,8 +4,16 @@ import { BadgePercent, CalendarClock, ShieldCheck, CheckCircle } from "lucide-re
 
 const LoanDetails = () => {
   const navigate = useNavigate();
-  const { type } = useParams(); // 👈 get loan type from URL
-  const loanType = type.charAt(0).toUpperCase() + type.slice(1); // capitalize first letter
+  const { type } = useParams();
+
+  const formatTitle = (slug) => {
+    return slug
+      .split("-")
+      .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+      .join(" ");
+  };
+
+  const loanType = formatTitle(type);
 
   return (
     <div className="max-w-4xl mx-auto mt-16 p-8 bg-white rounded-xl shadow-lg">
@@ -13,7 +21,7 @@ const LoanDetails = () => {
         🏦 {loanType} Loan Details
       </h2>
       <p className="text-gray-700 text-center mb-6">
-        Our {loanType.toLowerCase()} loan offers low interest rates and flexible repayment options.
+        Our {loanType.toLowerCase()} offers low interest rates and flexible repayment options.
         You’ll need income proof, KYC documents, and a valid CIBIL score for faster approval.
       </p>
 

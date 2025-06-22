@@ -55,14 +55,7 @@ const sectors = {
   ]
 };
 
-const executivePositions = [
-  'CEO (Chief Executive Officer)',
-  'CTO (Chief Technology Officer)',
-  'VP (Vice President)',
-  'CXO (Chief Experience Officer)',
-  'CFO (Chief Financial Officer)',
-  'CHRO (Chief Human Resources Officer)',
-];
+
 
 const additionalPositions = [
   'Network Engineer',
@@ -169,14 +162,6 @@ export default function Position() {
       <div className="md:flex gap-8">
         {/* Left – listings */}
         <div className="flex-1 space-y-10">
-          {/* Executive Level */}
-          <div>
-            <h2 className="text-2xl font-semibold mb-3">Executive Level Positions</h2>
-            <ul className="list-disc list-inside space-y-1">
-              {executivePositions.map(pos => <li key={pos}>{pos}</li>)}
-            </ul>
-          </div>
-
           {/* Additional Positions */}
           <div>
             <h2 className="text-2xl font-semibold mb-3">Additional Positions</h2>

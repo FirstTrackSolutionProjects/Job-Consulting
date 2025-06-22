@@ -31,24 +31,9 @@ const NavBar = () => {
           <Link to="/" className="hover:underline" onClick={closeMenu}>Home</Link>
           <Link to="/about" className="hover:underline" onClick={closeMenu}>About</Link>
 
-          {/* Jobs Dropdown */}
-          <div
-            className="relative"
-            onMouseEnter={() => setIsJobsOpen(true)}
-            onMouseLeave={() => setIsJobsOpen(false)}
-          >
-            <span className="cursor-pointer hover:underline">Jobs</span>
-            {isJobsOpen && (
-              <div className="absolute left-0 mt-2 w-48 bg-white border rounded-md shadow-lg z-50">
-                <Link to="/current-openings" className="block px-4 py-2 hover:bg-gray-100" onClick={closeMenu}>
-                  Current Openings
-                </Link>
-                <Link to="/position" className="block px-4 py-2 hover:bg-gray-100" onClick={closeMenu}>
-                  Position
-                </Link>
-              </div>
-            )}
-          </div>
+          <Link to="/jobs" className="hover:underline" onClick={closeMenu}>Jobs</Link>
+          <Link to="/current-openings" className="hover:underline" onClick={closeMenu}>Current Openings</Link>
+          <Link to="/position" className="hover:underline" onClick={closeMenu}>Position</Link>
 
           {/* Fintech Dropdown */}
           <div className="relative">
@@ -86,7 +71,16 @@ const NavBar = () => {
         </div>
 
 
-          <Link to="/career-form" className="hover:underline" onClick={closeMenu}>Career</Link>
+          <a
+          href="https://firsttracksolutiontechnologies.com/career"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={toggleMenu}
+          className="hover:text-blue-400"
+        >
+          Career
+        </a>
+
           <Link to="/contact" className="hover:underline" onClick={closeMenu}>Contact</Link>
           <Link to="/partner" className="hover:underline" onClick={closeMenu}>Partner</Link>
         </div>

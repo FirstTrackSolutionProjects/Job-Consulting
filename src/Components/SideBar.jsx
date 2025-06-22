@@ -36,25 +36,9 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
           About
         </Link>
 
-        {/* Jobs Dropdown */}
-        <div>
-          <button
-            onClick={handleJobsClick}
-            className="flex items-center justify-between w-full font-medium text-white"
-          >
-            Jobs {jobsOpen ? <ChevronUp size={18} /> : <ChevronDown size={18} />}
-          </button>
-          {jobsOpen && (
-            <div className="ml-4 mt-2 space-y-2">
-              <Link to="/jobs" onClick={toggleMenu} className="block hover:text-blue-400">
-                Current Openings
-              </Link>
-              <Link to="/position" onClick={toggleMenu} className="block hover:text-blue-400">
-                Positions
-              </Link>
-            </div>
-          )}
-        </div>
+       <Link to="/jobs" onClick={toggleMenu} className="hover:text-blue-400">Jobs</Link>
+       <Link to="/current-openings" onClick={toggleMenu} className="hover:text-blue-400">Current Openings</Link>
+       <Link to="/position" onClick={toggleMenu} className="hover:text-blue-400">Position</Link>
 
         {/* Fintech Dropdown */}
         <div>
@@ -79,9 +63,16 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
           )}
         </div>
 
-        <Link to="/career-form" onClick={toggleMenu} className="hover:text-blue-400">
+        <a
+          href="https://firsttracksolutiontechnologies.com/career"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={toggleMenu}
+          className="hover:text-blue-400"
+        >
           Career
-        </Link>
+        </a>
+
 
         <Link to="/contact" onClick={toggleMenu} className="hover:text-blue-400">
           Contact

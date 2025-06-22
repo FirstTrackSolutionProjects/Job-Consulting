@@ -11,12 +11,12 @@ import Register from "./pages/Register";
 import Position from "./pages/Position";
 import Contact from "./pages/Contact";
 
-import CareerForm from "./pages/CareerForm";
+// import CareerForm from "./pages/CareerForm";
 import Jobs from "./pages/Jobs";
 import JobDetails from "./pages/JobDetails";
+import CurrentOpening from "./pages/CurrentOpening";
 import ApplyForm from "./pages/ApplyForm";
-// import JoinUs from "./pages/JoinUs";
-// import JobDetails from "./pages/JobDetails";
+
 
 import JobSeekers from "./pages/JobSeekers";
 import CareerTips from "./pages/CareerTips";
@@ -29,8 +29,14 @@ import Fintech from "./pages/FinTech";
 import CreditCard from "./pages/CreditCard";
 import LoanPage from "./pages/Loan";
 import LoanDetails from "./pages/LoanDetails";
-import LoanApply from "./pages/LoanApply";
-
+ import LoanApply from "./pages/LoanApply";
+import PersonalLoanForm from "./Forms/PersonalLoanForm";
+import BusinessLoanForm from "./Forms/BusinessLoanForm";
+import HomeLoanForm from "./Forms/HomeLoanForm";
+import MortgageLoanForm from "./Forms/MortgageLoanForm";
+import UsedCarLoanForm from "./Forms/UsedCarLoanForm";
+import EducationLoanForm from "./Forms/EducationLoanForm";
+import TractorLoanForm from "./Forms/TractorLoanForm";
 
 
 function App() {
@@ -46,14 +52,14 @@ function App() {
          
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/career-form" element={<CareerForm />} />
+          {/* <Route path="/career-form" element={<CareerForm />} /> */}
           
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/jobs/:id" element={<JobDetails />} />
+          <Route path="/current-openings" element={<CurrentOpening />} />
           <Route path="/apply-form/:id" element={<ApplyForm />} />
           
-          {/* <Route path="/join-us" element={<JoinUs />} /> */}
-          {/* <Route path="/job-details/:id" element={<JobDetails />} /> */}
+         
           <Route path="/position" element={<Position />} />
           
           <Route path="/job-seekers" element={<JobSeekers />} />
@@ -68,6 +74,14 @@ function App() {
           <Route path="/loan" element={<LoanPage />} />
           <Route path="/loan-details/:type" element={<LoanDetails />} />
           <Route path="/loan/apply" element={<LoanApply />} />
+          <Route path="/loan/apply/personal" element={<PersonalLoanForm />} />
+          <Route path="/loan/apply/business" element={<BusinessLoanForm />} />
+          <Route path="/loan/apply/home" element={<HomeLoanForm />} />
+          <Route path="/loan/apply/mortgage" element={<MortgageLoanForm />} />
+          <Route path="/loan/apply/used-car" element={<UsedCarLoanForm />} />
+          <Route path="/loan/apply/education" element={<EducationLoanForm />} />
+          <Route path="/loan/apply/tractor" element={<TractorLoanForm />} />
+          
           
           
           

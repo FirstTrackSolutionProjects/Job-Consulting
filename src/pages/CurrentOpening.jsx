@@ -1,0 +1,70 @@
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import jobs from "../data/jobs";
+
+const CurrentOpening = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="max-w-4xl mx-auto px-4 py-10 mt-12">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-10">
+        Current Openings
+      </h1>
+
+      {jobs.length === 0 ? (
+        <p className="text-center text-gray-500">No job openings available right now.</p>
+      ) : (
+        <div className="space-y-10">
+          {jobs.map((job) => (
+            <div
+              key={job.id}
+              className="bg-white border border-gray-200 p-6 rounded-xl shadow-md hover:shadow-lg transition"
+            >
+              {/* Job Title Heading */}
+              <h2 className="text-2xl font-bold text-gray-800 mb-3">
+                {job.title}
+              </h2>
+
+              {/* Job Info */}
+              <p className="text-gray-600 text-sm mb-1">
+                <strong>Company:</strong> {job.company}
+              </p>
+              <p className="text-gray-600 text-sm mb-1">
+                <strong>Location:</strong> {job.location}
+              </p>
+              <p className="text-sm text-gray-500 mb-1">
+                <strong>Type:</strong> {job.jobType}
+              </p>
+              <p className="text-sm text-gray-500 mb-1">
+                <strong>Experience:</strong> {job.experience} years
+              </p>
+              <p className="text-sm text-gray-500 mb-4">
+                <strong>Salary:</strong> {job.salary}
+              </p>
+
+              {/* Buttons */}
+              <div className="mt-4 flex justify-between">
+                <Link
+                  to={`/jobs/${job.id}`}
+                  className="text-sm text-blue-600 hover:underline font-medium"
+                >
+                  Read More →
+                </Link>
+                <button
+                  onClick={() =>
+                    navigate("/career-form", { state: { jobTitle: job.title } })
+                  }
+                  className="text-sm bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium"
+                >
+                  Apply Now
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default CurrentOpening;

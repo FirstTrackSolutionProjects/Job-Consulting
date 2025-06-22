@@ -1,9 +1,15 @@
+
 import React from "react";
 import { Link } from "react-router-dom";
 
 const loanTypes = [
+  { name: "Personal Loan", type: "personal" },
+  { name: "Business Loan", type: "business" },
   { name: "Home Loan", type: "home" },
+  { name: "Mortgage Loan", type: "mortgage/laps" },
+  { name: "Used Car Loan", type: "used-car" },
   { name: "Education Loan", type: "education" },
+  { name: "Tractor Loan", type: "tractor" },
 ];
 
 const LoanPage = () => {
@@ -13,7 +19,6 @@ const LoanPage = () => {
         Choose a Loan Type
       </h2>
 
-      {/* Loan List */}
       <div className="grid md:grid-cols-2 gap-6 mb-10">
         {loanTypes.map((loan) => (
           <div
@@ -26,8 +31,6 @@ const LoanPage = () => {
                 Apply for a {loan.name.toLowerCase()} with minimal documents and quick approval.
               </p>
             </div>
-
-            {/* Buttons: Read More (left) and Apply Now (right) */}
             <div className="flex justify-between items-center mt-6">
               <Link
                 to={`/loan-details/${loan.type}`}
@@ -37,6 +40,7 @@ const LoanPage = () => {
               </Link>
               <Link
                 to="/loan/apply"
+                state={{ loanType: loan.type }}
                 className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
               >
                 Apply Now
