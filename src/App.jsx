@@ -11,7 +11,7 @@ import Register from "./pages/Register";
 import Position from "./pages/Position";
 import Contact from "./pages/Contact";
 
-// import CareerForm from "./pages/CareerForm";
+ import CareerForm from "./pages/CareerForm";
 import Jobs from "./pages/Jobs";
 import JobDetails from "./pages/JobDetails";
 import CurrentOpening from "./pages/CurrentOpening";
@@ -26,6 +26,7 @@ import Partner from "./pages/Partner";
 import Freelancer from "./pages/Freelancer";
 import BusinessAssociate from "./pages/BusinessAssociate";
 import Fintech from "./pages/FinTech";
+import InsuranceForm from "./pages/InsuranceForm";
 import CreditCard from "./pages/CreditCard";
 import LoanPage from "./pages/Loan";
 import LoanDetails from "./pages/LoanDetails";
@@ -52,7 +53,7 @@ function App() {
          
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          {/* <Route path="/career-form" element={<CareerForm />} /> */}
+          <Route path="/career-form" element={<CareerForm />} />
           
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/jobs/:id" element={<JobDetails />} />
@@ -70,6 +71,7 @@ function App() {
           <Route path="/partner/freelancer" element={<Freelancer />} />
           <Route path="/partner/business" element={<BusinessAssociate />} />
           <Route path="/fintech" element={<Fintech />} />
+          <Route path="/insurance" element={<InsuranceForm />} />
           <Route path="/credit-card" element={<CreditCard />} />
           <Route path="/loan" element={<LoanPage />} />
           <Route path="/loan-details/:type" element={<LoanDetails />} />

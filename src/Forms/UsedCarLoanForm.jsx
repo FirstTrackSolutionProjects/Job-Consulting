@@ -22,7 +22,26 @@ const UsedCarLoanForm = () => {
     carYear: "",
     carPrice: "",
     loanAmount: "",
+     accountHolderName: "",
+    bankName: "",
+    accountNumber: "",
+    ifsc: "",
   });
+
+   const handleSameAddress = (e) => {
+  const isChecked = e.target.checked;
+  if (isChecked) {
+    setFormData((prev) => ({
+      ...prev,
+      currentAddress: prev.permanentAddress,
+    }));
+  } else {
+    setFormData((prev) => ({
+      ...prev,
+      currentAddress: "",
+    }));
+  }
+};
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -79,37 +98,46 @@ const UsedCarLoanForm = () => {
           />
         </div>
 
-        {/* Phone, DOB, Gender */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-           <div className="flex">
-        <select
-          name="stdCode"
-          value={formData.stdCode}
+            {/* Phone, DOB, Gender */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+          {/* Phone Number with STD Code */}
+          <div className="flex items-stretch gap-2">
+            <select
+              name="stdCode"
+              value={formData.stdCode}
+              onChange={handleChange}
+              className="border p-2 rounded w-24 text-sm bg-white"
+            >
+              <option value="+91">+91 🇮🇳</option>
+            </select>
+            <input
+              type="tel"
+              name="phone"
+              value={formData.phone}
+              onChange={handleChange}
+              placeholder="Phone number"
+              className="border p-2 rounded w-full"
+              required
+            />
+          </div>
+
+          {/* Date of Birth */}
+          <input
+          type="text"
+          name="dob"
+          value={formData.dob}
           onChange={handleChange}
-          className="border border-r-0 p-2 rounded-l w-20 text-sm bg-white"
-        >
-          <option value="+91">+91 🇮🇳</option>
-        </select>
-        <input
-          type="tel"
-          name="phone"
-          value={formData.phone}
-          onChange={handleChange}
-          placeholder="Phone number"
-          className="flex-grow border p-2 rounded-r"
+          placeholder="dd-mm-yyyy"
+          onFocus={(e) => (e.target.type = "date")}
+          onBlur={(e) => {
+            if (!e.target.value) e.target.type = "text";
+          }}
+          className="p-2 border rounded"
           required
         />
-      </div>
 
-          <input
-            type="date"
-            name="dob"
-            value={formData.dob}
-            onChange={handleChange}
-            className="p-2 border rounded"
-            required
-          />
 
+          {/* Gender */}
           <select
             name="gender"
             value={formData.gender}
@@ -120,9 +148,10 @@ const UsedCarLoanForm = () => {
             <option value="">Select Gender</option>
             <option>Male</option>
             <option>Female</option>
-            <option>Other</option>
+          
           </select>
         </div>
+
 
         {/* Father's & Mother's Name */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
@@ -277,6 +306,20 @@ const UsedCarLoanForm = () => {
         </div>
       </div>
 
+         {/* Bank Details */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank Details</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" name="accountHolderName" value={formData.accountHolderName} onChange={handleChange} placeholder="Account Holder Name" className="p-2 border rounded" required />
+          <input type="text" name="bankName" value={formData.bankName} onChange={handleChange} placeholder="Bank Name" className="p-2 border rounded" required />
+          <input type="text" name="accountNumber" value={formData.accountNumber} onChange={handleChange} placeholder="Account Number" className="p-2 border rounded" required />
+          <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
+        </div>
+
+        <label className="block mt-4 mb-1">Upload Cancelled Cheque / Passbook</label>
+        <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+      </div>
+
       {/* Document Upload */}
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-2">
@@ -285,6 +328,15 @@ const UsedCarLoanForm = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
+             <label className="block text-gray-700 mb-1">Your Photo (Passport Size)</label>
+              <input
+                type="file"
+                name="photo"
+                accept=".jpg,.jpeg,.png"
+                className="w-full p-2 border rounded"
+                required
+              />
+
             <label className="block text-gray-700 mb-1">
               Aadhaar Card (PDF/Image)
             </label>

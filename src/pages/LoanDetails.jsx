@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BadgePercent, CalendarClock, ShieldCheck, CheckCircle } from "lucide-react";
+import loans from "../data/loans.js"; // adjust path if needed
 
 const LoanDetails = () => {
   const navigate = useNavigate();
@@ -15,6 +16,10 @@ const LoanDetails = () => {
 
   const loanType = formatTitle(type);
 
+  // 🔍 Find current loan data from list
+  const currentLoan = loans.find((loan) => loan.type === type);
+  const maxTenure = currentLoan?.maxTenure || "N/A";
+
   return (
     <div className="max-w-4xl mx-auto mt-16 p-8 bg-white rounded-xl shadow-lg">
       <h2 className="text-3xl font-bold text-blue-700 mb-4 text-center">
@@ -23,16 +28,18 @@ const LoanDetails = () => {
       <p className="text-gray-700 text-center mb-6">
         Our {loanType.toLowerCase()} offers low interest rates and flexible repayment options.
         You’ll need income proof, KYC documents, and a valid CIBIL score for faster approval.
+        <br />
+        <strong>Note:</strong> Interest rates may vary by bank or financial institution.
       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div className="flex items-center gap-3">
           <BadgePercent className="text-blue-600" />
-          <span>Interest rates from <strong>8.5%</strong></span>
+          <span>Secure and trusted financial partners</span>
         </div>
         <div className="flex items-center gap-3">
           <CalendarClock className="text-blue-600" />
-          <span>Tenure up to <strong>20 years</strong></span>
+          <span>Tenure up to <strong>{maxTenure}</strong></span>
         </div>
         <div className="flex items-center gap-3">
           <ShieldCheck className="text-blue-600" />

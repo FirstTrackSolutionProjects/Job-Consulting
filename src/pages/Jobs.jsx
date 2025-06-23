@@ -23,24 +23,29 @@ const Jobs = () => {
 
   // ✅ Case-insensitive and safe filtering logic
   const filteredJobs = jobs.filter((job) => {
-    const titleFilter = (appliedFilters.title || "").toLowerCase();
-    const locationFilter = (appliedFilters.location || "").toLowerCase();
-    const typeFilter = (appliedFilters.jobType || "").toLowerCase();
+  const titleFilter = (appliedFilters.title || "").trim().toLowerCase();
+  const locationFilter = (appliedFilters.location || "").trim().toLowerCase();
+  const typeFilter = (appliedFilters.jobType || "").trim().toLowerCase();
 
-    const matchTitle =
-      !titleFilter ||
-      job.title.toLowerCase().includes(titleFilter) ||
-      job.company.toLowerCase().includes(titleFilter);
+  const matchTitle =
+    !titleFilter ||
+    (job.title?.toLowerCase().includes(titleFilter) ||
+     job.company?.toLowerCase().includes(titleFilter));
 
-    const matchLocation =
-      !locationFilter ||
-      job.location.toLowerCase().includes(locationFilter);
+  const matchLocation =
+    !locationFilter ||
+    (Array.isArray(job.location)
+      ? job.location.some((loc) =>
+          loc.toLowerCase().includes(locationFilter)
+        )
+      : job.location?.toLowerCase().includes(locationFilter));
 
-    const matchType =
-      !typeFilter || job.jobType.toLowerCase() === typeFilter;
+  const matchType =
+    !typeFilter || job.jobType?.toLowerCase() === typeFilter;
 
-    return matchTitle && matchLocation && matchType;
-  });
+  return matchTitle && matchLocation && matchType;
+});
+
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 mt-12">

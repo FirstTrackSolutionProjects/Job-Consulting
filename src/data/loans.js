@@ -4,8 +4,8 @@ const loans = [
     title: "Personal Loan",
     type: "personal",
     description: "Quick personal loan for your needs with minimal documentation.",
-    interestRate: "10.5%",
-    maxTenure: "5 years",
+    interestRate: "Interest rate as per lender policy",
+    maxTenure: "7 years",
     features: [
       "No collateral required",
       "Instant approval",
@@ -18,7 +18,7 @@ const loans = [
     title: "Business Loan",
     type: "business",
     description: "Grow your business with secure and fast loan processing.",
-    interestRate: "11%",
+    interestRate: "Interest rate as per lender policy",
     maxTenure: "7 years",
     features: [
       "Loan up to ₹50 Lakhs",
@@ -33,7 +33,7 @@ const loans = [
     type: "home",
     description: "Affordable home loan options for your dream house.",
     interestRate: "8.5%",
-    maxTenure: "30 years",
+    maxTenure: "20 years",
     features: [
       "Lowest interest rates",
       "Pre-approved balance transfer",
@@ -46,8 +46,8 @@ const loans = [
     title: "Mortgage Loan",
     type: "mortgage/laps",
     description: "Loan against your property with high eligibility and low rates.",
-    interestRate: "9.5%",
-    maxTenure: "15 years",
+    interestRate: "Interest rate as per lender policy",
+    maxTenure: "10 years",
     features: [
       "Loan up to 70% of property value",
       "Quick disbursal",
@@ -60,7 +60,7 @@ const loans = [
     title: "Used Car Loan",
     type: "used-car",
     description: "Easy loan options for buying second-hand vehicles.",
-    interestRate: "12%",
+    interestRate: "Interest rate as per lender policy",
     maxTenure: "7 years",
     features: [
       "Loan up to 90% of car value",
@@ -74,8 +74,8 @@ const loans = [
     title: "Education Loan",
     type: "education",
     description: "Finance your studies in India or abroad at low interest rates.",
-    interestRate: "8.25%",
-    maxTenure: "15 years",
+    interestRate: "Interest rate as per lender policy",
+    maxTenure: "7 years",
     features: [
       "Covers tuition, hostel & travel",
       "Tax benefits under 80E",
@@ -88,8 +88,8 @@ const loans = [
     title: "Tractor Loan",
     type: "tractor",
     description: "Get funds to purchase new or used tractors for agriculture.",
-    interestRate: "9%",
-    maxTenure: "6 years",
+    interestRate: "Interest rate as per lender policy",
+    maxTenure: "7 years",
     features: [
       "Loan up to 85% of tractor value",
       "Quick disbursal",
