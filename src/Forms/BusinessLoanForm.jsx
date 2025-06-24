@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 
 const BusinessLoanForm = () => {
+  const [sameAddress, setSameAddress] = useState(false);
+
   const [formData, setFormData] = useState({
     title: "",
     fullName: "",
@@ -12,10 +14,11 @@ const BusinessLoanForm = () => {
     gender: "",
     fatherName: "",
     motherName: "",
+    landmark: "",
     state: "",
     city: "",
     pincode: "",
-    permanentAddress: "",
+  
     currentAddress: "",
     aadhar: "",
     pan: "",
@@ -31,20 +34,16 @@ const BusinessLoanForm = () => {
     loanAmount: "",
   });
 
-  const handleSameAddress = (e) => {
+ const handleSameAddress = (e) => {
   const isChecked = e.target.checked;
-  if (isChecked) {
-    setFormData((prev) => ({
-      ...prev,
-      currentAddress: prev.permanentAddress,
-    }));
-  } else {
-    setFormData((prev) => ({
-      ...prev,
-      currentAddress: "",
-    }));
-  }
+  setSameAddress(isChecked);
+  setFormData((prev) => ({
+    ...prev,
+    currentAddress: isChecked ? prev.permanentAddress : prev.currentAddress,
+    permanentAddress: isChecked ? prev.currentAddress : "",
+  }));
 };
+
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -113,7 +112,14 @@ const BusinessLoanForm = () => {
 
       {/* Address Details */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">Address Details</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Present Address Details</h3>
+
+         <select residence="residence" value={formData.residence} onChange={handleChange} className="w-full p-2 border rounded mb-2" required>
+          <option value="">Residence Type</option>
+          <option>Own</option>
+          <option>Rented</option>
+         </select>
+
         <input type="text" name="currentAddress" value={formData.currentAddress} onChange={handleChange} placeholder="Current Address" className="w-full p-2 border rounded mb-2" required />
         <input type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" className="w-full p-2 border rounded mb-2" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
@@ -124,11 +130,21 @@ const BusinessLoanForm = () => {
         </div>
 
         <label className="flex items-center gap-2 mb-2">
-          <input type="checkbox" onChange={handleSameAddress} />
-          Same as Current Address
-        </label>
+            <input type="checkbox" checked={sameAddress} onChange={handleSameAddress} />
+            Same as Present Address
+          </label>
 
-        <input type="text" name="permanentAddress" value={formData.permanentAddress} onChange={handleChange} placeholder="Permanent Address" className="w-full p-2 border rounded" required />
+          {!sameAddress && (
+            <input
+              type="text"
+              name="permanentAddress"
+              value={formData.permanentAddress}
+              onChange={handleChange}
+              placeholder="Permanent Address"
+              className="w-full p-2 border rounded"
+              required
+            />
+          )}
       </div>
 
       {/* Family Details */}
@@ -165,38 +181,38 @@ const BusinessLoanForm = () => {
       </div>
 
       {/* Business Loan Details */}
-<div>
-  <h3 className="text-xl font-semibold text-gray-700 mb-2">Business Details</h3>
+      <div>
+        <h3 className="text-xl font-semibold text-gray-700 mb-2">Business Details</h3>
 
-  <div className="space-y-4">
-    {/* Business Name */}
-    <div>
-      <label className="block text-gray-700 mb-1">Business Name</label>
-      <input
-        type="text"
-        name="businessName"
-        value={formData.businessName}
-        onChange={handleChange}
-        placeholder="Business Name"
-        required
-        className="w-full p-2 border rounded"
-      />
-    </div>
+        <div className="space-y-4">
+          {/* Business Name */}
+          <div>
+            <label className="block text-gray-700 mb-1">Business Name</label>
+            <input
+              type="text"
+              name="businessName"
+              value={formData.businessName}
+              onChange={handleChange}
+              placeholder="Business Name"
+              required
+              className="w-full p-2 border rounded"
+            />
+          </div>
       {/* Business Type (Owned / Rented) */}
-    <div>
-      <label className="block text-gray-700 mb-1">Business Type</label>
-      <select
-        name="businessType"
-        value={formData.businessType}
-        onChange={handleChange}
-        className="w-full p-2 border rounded"
-        required
-      >
-        <option value="">Select Business Type</option>
-        <option value="Owned">Owned</option>
-        <option value="Rented">Rented</option>
-      </select>
-    </div>
+        <div>
+          <label className="block text-gray-700 mb-1">Business Type</label>
+          <select
+            name="businessType"
+            value={formData.businessType}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          >
+            <option value="">Select Business Type</option>
+            <option value="Owned">Owned</option>
+            <option value="Rented">Rented</option>
+          </select>
+        </div>
 
     {/* Business Address */}
     <div>
@@ -207,6 +223,15 @@ const BusinessLoanForm = () => {
         value={formData.businessAddress || ""}
         onChange={handleChange}
         placeholder="Address"
+        className="w-full p-2 border rounded mb-2"
+        required
+      />
+      <input 
+        type="text"
+        name="landmark"
+        value={formData.landmark || ""}
+        onChange={handleChange}
+        placeholder="Landmark"
         className="w-full p-2 border rounded mb-2"
         required
       />
@@ -223,6 +248,15 @@ const BusinessLoanForm = () => {
         />
         <input
           type="text"
+          name="pincode"
+          value={formData.pincode || ""}
+          onChange={handleChange}
+          placeholder="Pincode"
+          className="p-2 border rounded"
+          required
+        />
+        <input
+          type="text"
           name="state"
           value={formData.state || ""}
           onChange={handleChange}
@@ -230,9 +264,9 @@ const BusinessLoanForm = () => {
           className="p-2 border rounded"
           required
         />
-      </div>
+     
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+     
         <input
           type="text"
           name="country"
@@ -242,15 +276,7 @@ const BusinessLoanForm = () => {
           className="p-2 border rounded"
           required
         />
-        <input
-          type="text"
-          name="pincode"
-          value={formData.pincode || ""}
-          onChange={handleChange}
-          placeholder="Pincode"
-          className="p-2 border rounded"
-          required
-        />
+        
       </div>
     </div>
 
@@ -295,8 +321,22 @@ const BusinessLoanForm = () => {
         className="w-full p-2 border rounded"
       />
     </div>
-  </div>
-</div>
+
+            {/*Purpose of Loan */}
+            <div className="mb-4">
+            <label className="block font-medium mb-2">Purpose of Loan *</label>
+            <input
+              type="text"
+              name="purpose"
+              value={formData.purpose}
+              onChange={handleChange}
+              placeholder="Enter purpose of the loan"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+        </div>
+      </div>
 
 
          {/* Bank Details */}
@@ -309,7 +349,7 @@ const BusinessLoanForm = () => {
           <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
         </div>
 
-        <label className="block mt-4 mb-1">Upload Cancelled Cheque / Passbook</label>
+        <label className="block mt-4 mb-1">Bank Statement(1 Year)</label>
         <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
       </div>
 
@@ -390,7 +430,7 @@ const BusinessLoanForm = () => {
     </div>
 
     <div>
-      <label className="block text-gray-700 mb-1">Paid Rent Agreement (if rented)</label>
+      <label className="block text-gray-700 mb-1">Rent Agreement (if rented)</label>
       <input
         type="file"
         name="rentAgreement"
@@ -400,7 +440,7 @@ const BusinessLoanForm = () => {
     </div>
 
     <div>
-      <label className="block text-gray-700 mb-1">Electricity Bill (Business Location)</label>
+      <label className="block text-gray-700 mb-1">Electricity Bill</label>
       <input
         type="file"
         name="electricityBill"
@@ -418,19 +458,29 @@ const BusinessLoanForm = () => {
         <span className="text-xs text-gray-500"> (Corporate Identity Number)</span>
       </label>
       <input
-        type="text"
+        type="file"
         name="cin"
-        placeholder="Enter CIN"
+        accept=".pdf,.jpg,.jpeg,.png"
+        className="w-full p-2 border rounded"
+      />
+      </div>
+
+    <div>
+      <label className="block text-gray-700 mb-1">Company PAN </label>
+      <input
+        type="file"
+        name="companyPan"
+        accept=".pdf,.jpg,.jpeg,.png"
         className="w-full p-2 border rounded"
       />
     </div>
 
-    <div>
-      <label className="block text-gray-700 mb-1">Company PAN Number</label>
+     <div>
+      <label className="block text-gray-700 mb-1">Company TAN </label>
       <input
-        type="text"
-        name="companyPan"
-        placeholder="Enter Company PAN"
+        type="file"
+        name="companyTan"
+        accept=".pdf,.jpg,.jpeg,.png"
         className="w-full p-2 border rounded"
       />
     </div>
@@ -471,7 +521,7 @@ const BusinessLoanForm = () => {
 
   {/* Bank Statement */}
   <div className="mb-4">
-    <label className="block text-gray-700 mb-1">Last 3 Months Bank Statements (PDF/Image)</label>
+    <label className="block text-gray-700 mb-1"> 1 Year Bank Statements (Current Account)</label>
     <input
       type="file"
       name="bankStatements"
@@ -480,6 +530,17 @@ const BusinessLoanForm = () => {
       className="w-full p-2 border rounded"
       required
     />
+    <div>
+       <label className="block text-gray-700 mb-1"> 1 Year Bank Statements (CC)</label>
+    <input
+      type="file"
+      name="bankStatements"
+      accept=".pdf,.jpg,.jpeg,.png"
+      multiple
+      className="w-full p-2 border rounded"
+    />
+    </div>
+    
   </div>
 </div>
 

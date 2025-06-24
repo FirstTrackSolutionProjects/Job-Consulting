@@ -28,14 +28,12 @@ const LoanDetails = () => {
       <p className="text-gray-700 text-center mb-6">
         Our {loanType.toLowerCase()} offers low interest rates and flexible repayment options.
         You’ll need income proof, KYC documents, and a valid CIBIL score for faster approval.
-        <br />
-        <strong>Note:</strong> Interest rates may vary by bank or financial institution.
-      </p>
+       </p>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
         <div className="flex items-center gap-3">
           <BadgePercent className="text-blue-600" />
-          <span>Secure and trusted financial partners</span>
+          <span>Reasonable rate of interest</span>
         </div>
         <div className="flex items-center gap-3">
           <CalendarClock className="text-blue-600" />

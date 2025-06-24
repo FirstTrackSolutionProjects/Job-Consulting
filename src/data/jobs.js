@@ -7,98 +7,107 @@ const jobs = [
     experience: "2-4",
     jobType: "full-time",
     salary: "₹6-8 LPA",
-    description: "We are looking for a skilled Frontend Developer with experience in React and JavaScript. Join our dynamic team to build innovative web applications.",
+    description:
+      "We are looking for a skilled Frontend Developer with experience in React and JavaScript. Join our dynamic team to build innovative web applications.",
     education: "Bachelor's in Computer Science or related field",
-    skills: ["React, JavaScript, HTML, CSS"],
+    skills: ["React", "JavaScript", "HTML", "CSS"],
     responsibilities: [
       "Develop user interfaces",
-      "collaborate with designers",
-      "optimize applications for speed and scalability."
+      "Collaborate with designers",
+      "Optimize applications for speed and scalability.",
     ],
   },
   {
     id: 2,
     title: "HR Executive",
-    location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai", "Bangalore", "Ahmedabad", "Jaipur", "Ranchi", "Lucknow", "Patna", "Raipur", "Indore"],
+    location: [
+      "Delhi", "Bhubaneswar", "Kolkata", "Mumbai", "Bangalore", "Ahmedabad", "Jaipur",
+      "Ranchi", "Lucknow", "Patna", "Raipur", "Indore"
+    ],
     experience: "0-2",
     jobType: "part-time",
     salary: "₹3-4 LPA",
     workmode: ["remote", "hybrid", "onsite"],
-    description: "Looking for a dynamic HR Executive to manage recruitment and employee relations. Freshers are welcome.",
+    description:
+      "Looking for a dynamic HR Executive to manage recruitment and employee relations. Freshers are welcome.",
     education: "Bachelor's in Human Resources or related field",
-    skills: ["Communication, Recruitment, Employee Relations"],
+    skills: ["Communication", "Recruitment", "Employee Relations"],
     responsibilities: [
       "Handle recruitment processes",
-      "manage employee records",
-      "assist in performance management"
+      "Manage employee records",
+      "Assist in performance management",
     ],
   },
   {
     id: 3,
     title: "UI Intern",
-   location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
+    location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
     experience: "0-1",
     jobType: "internship",
     salary: "₹10K/Month",
     workmode: ["remote", "hybrid", "onsite"],
-    description: "Join our team as a UI Intern and gain hands-on experience in designing user interfaces. Ideal for fresh graduates.",
+    description:
+      "Join our team as a UI Intern and gain hands-on experience in designing user interfaces. Ideal for fresh graduates.",
     education: "Bachelor's in Design or related field",
-    skills: ["Figma, Adobe XD, Basic HTML/CSS"],
+    skills: ["Figma", "Adobe XD", "Basic HTML/CSS"],
     responsibilities: [
       "Assist in designing user interfaces",
-      "collaborate with developers",
-      "learn about user experience design."
+      "Collaborate with developers",
+      "Learn about user experience design.",
     ],
   },
   {
     id: 4,
     title: "Backend Developer",
-   location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
+    location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
     experience: "3-5",
     jobType: "full-time",
     salary: "₹8-12 LPA",
     workmode: ["remote", "hybrid", "onsite"],
-    description: "Seeking an experienced Backend Developer proficient in Node.js and MongoDB. Work on scalable applications with a talented team.",
+    description:
+      "Seeking an experienced Backend Developer proficient in Node.js and MongoDB. Work on scalable applications with a talented team.",
     education: "Bachelor's in Computer Science or related field",
-    skills: ["Node.js, MongoDB, RESTful APIs, Express.js"],
+    skills: ["Node.js", "MongoDB", "RESTful APIs", "Express.js"],
     responsibilities: [
       "Design and implement server-side logic",
-      "manage database operations",
-      "ensure high performance and responsiveness."
+      "Manage database operations",
+      "Ensure high performance and responsiveness.",
     ],
   },
   {
     id: 5,
     title: "React Native Developer",
-   location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
+    location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
     experience: "2-4",
     jobType: "full-time",
     salary: "₹7-10 LPA",
     workmode: ["remote", "hybrid", "onsite"],
-    description: "We are looking for a React Native Developer to create cross-platform mobile applications. Experience with mobile development is a plus.",
+    description:
+      "We are looking for a React Native Developer to create cross-platform mobile applications. Experience with mobile development is a plus.",
     education: "Bachelor's in Computer Science or related field",
-    skills: ["React Native, JavaScript, Mobile Development"],
+    skills: ["React Native", "JavaScript", "Mobile Development"],
     responsibilities: [
       "Develop mobile applications using React Native",
-      "collaborate with designers and backend developers",
-      "ensure app performance and quality."
+      "Collaborate with designers and backend developers",
+      "Ensure app performance and quality.",
     ],
   },
   {
     id: 6,
     title: "UI/UX Designer",
-   location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
+    location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
     experience: "1-3",
     jobType: "full-time",
     salary: "₹5-8 LPA",
     workmode: ["remote", "hybrid", "onsite"],
-    description: "Join our creative team as a UI/UX Designer. You will be responsible for designing user-friendly interfaces and enhancing user experience.",
+    description:
+      "Join our creative team as a UI/UX Designer. You will be responsible for designing user-friendly interfaces and enhancing user experience.",
     education: "Bachelor's in Design or related field",
-    skills: ["UI Design, UX Research, Figma, Adobe Creative Suite"],
+    skills: ["UI Design", "UX Research", "Figma", "Adobe Creative Suite"],
     responsibilities: [
       "Conduct user research",
-      "create wireframes and prototypes",
-      "collaborate with developers to implement designs."
+      "Create wireframes and prototypes",
+      "Collaborate with developers to implement designs.",
     ],
   },
   {
@@ -109,13 +118,14 @@ const jobs = [
     jobType: "full-time",
     salary: "₹4-6 LPA",
     workmode: ["remote", "hybrid", "onsite"],
-    description: "Creative Graphic Designer needed to design visuals for digital and print platforms.",
+    description:
+      "Creative Graphic Designer needed to design visuals for digital and print platforms.",
     education: "Bachelor's in Design, Fine Arts, or related field",
-    skills: ["Photoshop, Illustrator, InDesign, Canva"],
+    skills: ["Photoshop", "Illustrator", "InDesign", "Canva"],
     responsibilities: [
       "Create engaging graphics and layouts",
-      "work with the marketing team to design campaigns",
-      "ensure brand consistency across media"
+      "Work with the marketing team to design campaigns",
+      "Ensure brand consistency across media",
     ],
   },
   {
@@ -126,30 +136,32 @@ const jobs = [
     jobType: "internship",
     salary: "₹8K/Month",
     workmode: ["remote", "hybrid", "onsite"],
-    description: "Support IT infrastructure and help desk operations. Good opportunity for freshers.",
+    description:
+      "Support IT infrastructure and help desk operations. Good opportunity for freshers.",
     education: "Bachelor's in IT or Computer Applications",
-    skills: ["Networking, Troubleshooting, Basic Hardware"],
+    skills: ["Networking", "Troubleshooting", "Basic Hardware"],
     responsibilities: [
       "Assist in software installations and troubleshooting",
-      "help maintain systems and networks",
-      "respond to user queries"
+      "Help maintain systems and networks",
+      "Respond to user queries",
     ],
   },
   {
     id: 9,
     title: "HR Intern",
-    location: ["Delhi", "Mumbai", "Bhubaneswar", "kolkata"],
+    location: ["Delhi", "Mumbai", "Bhubaneswar", "Kolkata"],
     experience: "0-1",
     jobType: "internship",
     salary: "₹5K/Month",
     workmode: ["remote", "hybrid", "onsite"],
-    description: "Assist HR team with day-to-day operations including recruitment and employee engagement.",
+    description:
+      "Assist HR team with day-to-day operations including recruitment and employee engagement.",
     education: "Pursuing Bachelor's in HR or similar",
-    skills: ["Communication, Coordination, MS Office"],
+    skills: ["Communication", "Coordination", "MS Office"],
     responsibilities: [
       "Screen resumes and schedule interviews",
-      "maintain candidate database",
-      "support employee engagement activities"
+      "Maintain candidate database",
+      "Support employee engagement activities",
     ],
   },
   {
@@ -160,13 +172,14 @@ const jobs = [
     jobType: "full-time",
     salary: "₹6-9 LPA",
     workmode: ["remote", "hybrid", "onsite"],
-    description: "Looking for a proactive professional to manage and grow client accounts.",
+    description:
+      "Looking for a proactive professional to manage and grow client accounts.",
     education: "Bachelor’s degree in Business or similar",
-    skills: ["Client Handling, CRM Tools, Communication"],
+    skills: ["Client Handling", "CRM Tools", "Communication"],
     responsibilities: [
       "Maintain strong client relationships",
-      "handle escalations and queries",
-      "identify upselling opportunities"
+      "Handle escalations and queries",
+      "Identify upselling opportunities",
     ],
   },
   {
@@ -177,13 +190,14 @@ const jobs = [
     jobType: "full-time",
     salary: "₹9-14 LPA",
     workmode: ["remote", "hybrid", "onsite"],
-    description: "Experienced full stack developer needed for end-to-end product development.",
+    description:
+      "Experienced full stack developer needed for end-to-end product development.",
     education: "Bachelor's in Computer Science or related",
-    skills: ["React, Node.js, MongoDB, REST APIs"],
+    skills: ["React", "Node.js", "MongoDB", "REST APIs"],
     responsibilities: [
       "Design front-end and back-end systems",
-      "manage database and cloud deployment",
-      "collaborate across teams"
+      "Manage database and cloud deployment",
+      "Collaborate across teams",
     ],
   },
   {
@@ -194,13 +208,14 @@ const jobs = [
     jobType: "full-time",
     salary: "₹8-12 LPA",
     workmode: ["remote", "hybrid", "onsite"],
-    description: "Oversee HR operations including payroll, compliance, and employee onboarding.",
+    description:
+      "Oversee HR operations including payroll, compliance, and employee onboarding.",
     education: "MBA in HR or equivalent",
-    skills: ["HRMS, Payroll, Compliance, Leadership"],
+    skills: ["HRMS", "Payroll", "Compliance", "Leadership"],
     responsibilities: [
       "Manage HR processes and policies",
-      "lead onboarding and offboarding",
-      "ensure statutory compliance"
+      "Lead onboarding and offboarding",
+      "Ensure statutory compliance",
     ],
   },
   {
@@ -211,13 +226,14 @@ const jobs = [
     jobType: "full-time",
     salary: "₹4-7 LPA",
     workmode: ["remote", "hybrid", "onsite"],
-    description: "Drive digital marketing strategies across social, SEO, and email campaigns.",
+    description:
+      "Drive digital marketing strategies across social, SEO, and email campaigns.",
     education: "Bachelor's in Marketing or similar",
-    skills: ["SEO, SEM, Google Ads, Social Media Marketing"],
+    skills: ["SEO", "SEM", "Google Ads", "Social Media Marketing"],
     responsibilities: [
       "Create and manage digital campaigns",
-      "track performance metrics",
-      "optimize campaigns for better reach and ROI"
+      "Track performance metrics",
+      "Optimize campaigns for better reach and ROI",
     ],
   },
 ];

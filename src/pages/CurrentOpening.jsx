@@ -26,12 +26,23 @@ const CurrentOpening = () => {
               </h2>
 
               {/* Job Info */}
-              <p className="text-gray-600 text-sm mb-1">
-                <strong>Company:</strong> {job.company}
-              </p>
-              <p className="text-gray-600 text-sm mb-1">
-                <strong>Location:</strong> {job.location}
-              </p>
+              
+             <div className="text-sm text-gray-700">
+                <strong>Location:</strong>
+                <div className="mt-1 flex flex-wrap gap-x-1 gap-y-1 max-w-full break-words">
+                  {Array.isArray(job.location)
+                    ? job.location.map((loc, idx) => (
+                        <span
+                          key={idx}
+                          className="after:content-['/'] last:after:content-none"
+                        >
+                          {loc}
+                        </span>
+                      ))
+                    : <span>{job.location}</span>}
+                </div>
+              </div>
+
               <p className="text-sm text-gray-500 mb-1">
                 <strong>Type:</strong> {job.jobType}
               </p>

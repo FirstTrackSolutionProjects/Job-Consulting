@@ -26,6 +26,7 @@ const MortgageLoanForm = () => {
     bankName: "",
     accountNumber: "",
     ifsc: "",
+    purpose: "",
   });
 
    const handleSameAddress = (e) => {
@@ -109,7 +110,14 @@ const MortgageLoanForm = () => {
 
       {/* Address Details */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">Address Details</h3>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Present Address Details</h3>
+
+         <select residence="residence" value={formData.residence} onChange={handleChange} className="w-full p-2 border rounded mb-2" required>
+          <option value="">Residence Type</option>
+          <option>Own</option>
+          <option>Rented</option>
+         </select>
+
         <input type="text" name="currentAddress" value={formData.currentAddress} onChange={handleChange} placeholder="Current Address" className="w-full p-2 border rounded mb-2" required />
         <input type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" className="w-full p-2 border rounded mb-2" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
@@ -121,7 +129,7 @@ const MortgageLoanForm = () => {
 
         <label className="flex items-center gap-2 mb-2">
           <input type="checkbox" onChange={handleSameAddress} />
-          Same as Current Address
+          Same as Present Address
         </label>
 
         <input type="text" name="permanentAddress" value={formData.permanentAddress} onChange={handleChange} placeholder="Permanent Address" className="w-full p-2 border rounded" required />
@@ -215,6 +223,20 @@ const MortgageLoanForm = () => {
     </div>
   </div>
 </div>
+
+              {/*Purpose of Loan */}
+            <div className="mb-4">
+            <label className="block font-medium mb-2">Purpose of Loan *</label>
+            <input
+              type="text"
+              name="purpose"
+              value={formData.purpose}
+              onChange={handleChange}
+              placeholder="Enter purpose of the loan"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
 
    {/* Bank Details */}
       <div>

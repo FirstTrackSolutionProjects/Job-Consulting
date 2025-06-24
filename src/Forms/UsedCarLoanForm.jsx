@@ -26,6 +26,7 @@ const UsedCarLoanForm = () => {
     bankName: "",
     accountNumber: "",
     ifsc: "",
+    purpose: "",
   });
 
    const handleSameAddress = (e) => {
@@ -305,6 +306,20 @@ const UsedCarLoanForm = () => {
           />
         </div>
       </div>
+
+       {/*Purpose of Loan */}
+            <div className="mb-4">
+            <label className="block font-medium mb-2">Purpose of Loan *</label>
+            <input
+              type="text"
+              name="purpose"
+              value={formData.purpose}
+              onChange={handleChange}
+              placeholder="Enter purpose of the loan"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
 
          {/* Bank Details */}
       <div>

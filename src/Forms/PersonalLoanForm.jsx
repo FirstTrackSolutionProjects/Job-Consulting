@@ -26,11 +26,20 @@ const PersonalLoanForm = () => {
     income: "",
     employmentType: "",
     loanAmount: "",
+    purpose: "",
     accountHolderName: "",
     bankName: "",
     accountNumber: "",
     ifsc: "",
+    officialLandmark: "",
+    officialCity: "",
+    officialPincode: "",
+    officialState: "",
+    officialCountry: "",
+
   });
+
+  const [showExperienceDropdown, setShowExperienceDropdown] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -104,19 +113,26 @@ const PersonalLoanForm = () => {
 
       {/* Address Details */}
       <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">Address Details</h3>
-        <input type="text" name="currentAddress" value={formData.currentAddress} onChange={handleChange} placeholder="Current Address" className="w-full p-2 border rounded mb-2" required />
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Present Address Details</h3>
+         <select residence="residence" value={formData.residence} onChange={handleChange} className="w-full p-2 border rounded mb-2" required>
+          <option value="">Residence Type</option>
+          <option>Own</option>
+          <option>Rented</option>
+         </select>
+
+        <input type="text" name="presentAddress" value={formData.currentAddress} onChange={handleChange} placeholder="Present Address" className="w-full p-2 border rounded mb-2" required />
         <input type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" className="w-full p-2 border rounded mb-2" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
+         
           <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" className="p-2 border rounded" required />
-          <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" className="p-2 border rounded" required />
           <input type="text" name="pincode" value={formData.pincode} onChange={handleChange} placeholder="Pincode" className="p-2 border rounded" required />
+          <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" className="p-2 border rounded" required />
           <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" className="p-2 border rounded" required />
         </div>
 
         <label className="flex items-center gap-2 mb-2">
           <input type="checkbox" onChange={handleSameAddress} />
-          Same as Current Address
+          Same as Present Address
         </label>
 
         <input type="text" name="permanentAddress" value={formData.permanentAddress} onChange={handleChange} placeholder="Permanent Address" className="w-full p-2 border rounded" required />
@@ -156,147 +172,268 @@ const PersonalLoanForm = () => {
       </div>
 
       {/* Employment & Loan Details */}
-<div>
-  <h3 className="text-xl font-semibold text-gray-900 mb-4">Employment & Loan Details</h3>
+        <div>
+          <h3 className="text-xl font-semibold text-gray-900 mb-4">Employment & Loan Details</h3>
 
-  <input
-    type="number"
-    name="income"
-    value={formData.income}
-    onChange={handleChange}
-    placeholder="Monthly Income (₹)"
-    className="w-full p-2 border rounded mb-2"
-    required
-  />
+          <input
+            type="number"
+            name="income"
+            value={formData.income}
+            onChange={handleChange}
+            placeholder="Monthly Income (₹)"
+            className="w-full p-2 border rounded mb-2"
+            required
+          />
 
-  <select
-    name="employmentType"
-    value={formData.employmentType}
-    onChange={handleChange}
-    className="w-full p-2 border rounded mb-4"
-    required
-  >
-    <option value="">Employment Type</option>
-    <option value="Govt">Government</option>
-    <option value="Private">Private</option>
-  </select>
+          <select
+            name="employmentType"
+            value={formData.employmentType}
+            onChange={handleChange}
+            className="w-full p-2 border rounded mb-4"
+            required
+          >
+            <option value="">Employment Type</option>
+            <option value="Govt">Government</option>
+            <option value="Private">Private Sector</option>
+          </select>
 
-  {/* Conditional Employment Details */}
-  {formData.employmentType && (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-      <input
-        type="text"
-        name="organization"
-        value={formData.organization || ""}
-        onChange={handleChange}
-        placeholder={formData.employmentType === "Govt" ? "Organization Name" : "Company Name"}
-        className="p-2 border rounded"
-        required
-      />
+        {/* Conditional Employment Details */}
+        {formData.employmentType && (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+            <input
+              type="text"
+              name="organization"
+              value={formData.organization || ""}
+              onChange={handleChange}
+              placeholder={formData.employmentType === "Govt" ? "Organization Name" : "Company Name"}
+              className="p-2 border rounded"
+              required
+            />
 
-      <input
-        type="text"
-        name="designation"
-        value={formData.designation || ""}
-        onChange={handleChange}
-        placeholder="Designation"
-        className="p-2 border rounded"
-        required
-      />
+            <input
+              type="text"
+              name="designation"
+              value={formData.designation || ""}
+              onChange={handleChange}
+              placeholder="Designation"
+              className="p-2 border rounded"
+              required
+            />
 
-      {formData.employmentType === "Govt" ? (
-        <select
-          name="department"
-          value={formData.department || ""}
-          onChange={handleChange}
-          className="p-2 border rounded"
-          required
-        >
-          <option value="">Select Department</option>
-          <option>Railways</option>
-          <option>PSU</option>
-          <option>Defense</option>
-          <option>Police</option>
-          <option>State Govt</option>
-          <option>Central Govt</option>
-          <option>Other</option>
-        </select>
-      ) : (
-        <select
-          name="profession"
-          value={formData.profession || ""}
-          onChange={handleChange}
-          className="p-2 border rounded"
-          required
-        >
-          <option value="">Select Profession</option>
-          <option>Software Engineer</option>
-          <option>Marketing Executive</option>
-          <option>Accountant</option>
-          <option>Sales Manager</option>
-          <option>HR</option>
-          <option>Operations</option>
-          <option>Other</option>
-        </select>
-      )}
+              {formData.employmentType === "Govt" ? (
+                <select
+                  name="department"
+                  value={formData.department || ""}
+                  onChange={handleChange}
+                  className="p-2 border rounded"
+                  required
+                >
+                  <option value="">Select Department</option>
+                  <option>Railways</option>
+                  <option>PSU</option>
+                  <option>Defense</option>
+                  <option>Police</option>
+                  <option>State Govt</option>
+                  <option>Central Govt</option>
+                  <option>Other</option>
+                </select>
+              ) : (
+                <select
+                  name="profession"
+                  value={formData.profession || ""}
+                  onChange={handleChange}
+                  className="p-2 border rounded"
+                  required
+                >
+                  <option value="">Select Profession</option>
+                  <option>Engineer</option>
+                  <option>Doctor</option>
+                  <option>Chartered Accountant</option>
+                  <option>Lawyer</option>
+                  <option>Other</option>
+                </select>
+              )}
 
-      <input
-        type="text"
-        name="officialAddress"
-        value={formData.officialAddress || ""}
-        onChange={handleChange}
-        placeholder="Official Address"
-        className="p-2 border rounded"
-        required
-      />
+              <div className="col-span-full">
+              <label className="block font-medium mb-2">Office Address</label>
 
-      <input
-        type="email"
-        name="officialEmail"
-        value={formData.officialEmail || ""}
-        onChange={handleChange}
-        placeholder="Official Email ID"
-        className="p-2 border rounded"
-        required
-      />
+              {/* Address Line */}
+              <input
+                type="text"
+                name="officialAddress"
+                value={formData.officialAddress || ""}
+                onChange={handleChange}
+                placeholder="Address Line"
+                className="w-full p-2 border rounded mb-2"
+                required
+              />
 
-      <input
-        type="number"
-        name="experience"
-        value={formData.experience || ""}
-        onChange={handleChange}
-        placeholder="Years of Experience"
-        className="p-2 border rounded"
-        required
-      />
-    </div>
-  )}
+                {/* Landmark */}
+                <input
+                  type="text"
+                  name="officialLandmark"
+                  value={formData.officialLandmark || ""}
+                  onChange={handleChange}
+                  placeholder="Landmark"
+                  className="w-full p-2 border rounded mb-2"
+                />
 
-  {/* Salary Slip Upload */}
-  {formData.employmentType && (
-    <div className="mb-4">
-      <label className="block mb-1">Upload 3 Month Salary Slip (PDF/Image)</label>
-      <input
-        type="file"
-        name="salarySlip"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-        required
-      />
-    </div>
-  )}
+                {/* Grid for City, Pincode, State, Country */}
+                <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+                  <input
+                    type="text"
+                    name="officialCity"
+                    value={formData.officialCity || ""}
+                    onChange={handleChange}
+                    placeholder="City"
+                    className="p-2 border rounded"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="officialPincode"
+                    value={formData.officialPincode || ""}
+                    onChange={handleChange}
+                    placeholder="Pincode"
+                    className="p-2 border rounded"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="officialState"
+                    value={formData.officialState || ""}
+                    onChange={handleChange}
+                    placeholder="State"
+                    className="p-2 border rounded"
+                    required
+                  />
+                  <input
+                    type="text"
+                    name="officialCountry"
+                    value={formData.officialCountry || ""}
+                    onChange={handleChange}
+                    placeholder="Country"
+                    className="p-2 border rounded"
+                    required
+                  />
+                </div>
+              </div>
 
-  {/* Loan Amount */}
-  <input
-    type="number"
-    name="loanAmount"
-    value={formData.loanAmount}
-    onChange={handleChange}
-    placeholder="Loan Amount (₹)"
-    className="w-full p-2 border rounded"
-    required
-  />
-</div>
+
+              <input
+                type="email"
+                name="officialEmail"
+                value={formData.officialEmail || ""}
+                onChange={handleChange}
+                placeholder="Official Email ID"
+                className="p-2 border rounded"
+                required
+              />
+
+              {/* Years in Job (Dropdown Style) */}
+            <div className="mb-4">
+              <label className="block font-medium mb-2">Years in Job *</label>
+
+              {/* Display Field (Read-only) */}
+              <input
+                type="text"
+                value={
+                  formData.experienceYears || formData.experienceMonths
+                    ? `${formData.experienceYears || 0} year(s) ${formData.experienceMonths || 0} month(s)`
+                    : ""
+                }
+                readOnly
+                placeholder="Select experience"
+                className="p-2 border rounded w-full bg-gray-100 cursor-pointer"
+                onClick={() => setShowExperienceDropdown(!showExperienceDropdown)}
+              />
+
+              {/* Two dropdowns: Year and Month */}
+              {showExperienceDropdown && (
+                <div className="grid grid-cols-2 gap-4 mt-2">
+                  <select
+                    name="experienceYears"
+                    value={formData.experienceYears}
+                    onChange={(e) => {
+                      const years = e.target.value;
+                      setFormData((prev) => ({
+                        ...prev,
+                        experienceYears: years,
+                        experience: `${years} year(s) ${prev.experienceMonths || 0} month(s)`,
+                      }));
+                    }}
+                    className="p-2 border rounded"
+                  >
+                    <option value="">Years</option>
+                    {Array.from({ length: 31 }, (_, i) => (
+                      <option key={i} value={i}>{i}</option>
+                    ))}
+                  </select>
+
+                  <select
+                    name="experienceMonths"
+                    value={formData.experienceMonths}
+                    onChange={(e) => {
+                      const months = e.target.value;
+                      setFormData((prev) => ({
+                        ...prev,
+                        experienceMonths: months,
+                        experience: `${prev.experienceYears || 0} year(s) ${months} month(s)`,
+                      }));
+                    }}
+                    className="p-2 border rounded"
+                  >
+                    <option value="">Months</option>
+                    {Array.from({ length: 12 }, (_, i) => (
+                      <option key={i} value={i}>{i}</option>
+                    ))}
+                  </select>
+                </div>
+              )}
+            </div>
+          </div>
+            )}
+
+          {/* Salary Slip Upload */}
+          {formData.employmentType && (
+            <div className="mb-4">
+              <label className="block mb-1">Upload 3 Month Salary Slip (PDF/Image)</label>
+              <input
+                type="file"
+                name="salarySlip"
+                accept=".pdf,.jpg,.jpeg,.png"
+                className="w-full p-2 border rounded"
+                required
+              />
+            </div>
+          )}
+
+          {/* Loan Amount */}
+          <input
+            type="number"
+            name="loanAmount"
+            value={formData.loanAmount}
+            onChange={handleChange}
+            placeholder="Loan Amount (₹)"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+
+            {/*Purpose of Loan */}
+            <div className="mb-4">
+            <label className="block font-medium mb-2">Purpose of Loan *</label>
+            <input
+              type="text"
+              name="purpose"
+              value={formData.purpose}
+              onChange={handleChange}
+              placeholder="Enter purpose of the loan"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+
 
 
       {/* Bank Details */}
@@ -309,7 +446,7 @@ const PersonalLoanForm = () => {
           <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
         </div>
 
-        <label className="block mt-4 mb-1">Upload Cancelled Cheque / Passbook</label>
+        <label className="block mt-4 mb-1">Bank Statement(6 Month)</label>
         <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
       </div>
 
