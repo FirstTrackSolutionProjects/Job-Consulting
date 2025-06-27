@@ -10,15 +10,19 @@ const BusinessLoanForm = () => {
     email: "",
     phone: "",
     stdCode: "+91",
+    altStdCode: "+91",   
+    altPhone: "",     
     dob: "",
     gender: "",
+    maritalStatus: "",
+    spouseName: "",
+    childrenCount: "",
     fatherName: "",
     motherName: "",
     landmark: "",
     state: "",
     city: "",
     pincode: "",
-  
     currentAddress: "",
     aadhar: "",
     pan: "",
@@ -32,6 +36,12 @@ const BusinessLoanForm = () => {
     turnover: "",
     years: "",
     loanAmount: "",
+    itr1: "",
+    itr2: "",
+    itr3: "",
+    computation1: "",
+    computation2: "",
+    computation3: "",
   });
 
  const handleSameAddress = (e) => {
@@ -58,7 +68,14 @@ const BusinessLoanForm = () => {
       onSubmit={handleSubmit}
       className="max-w-3xl mx-auto bg-white p-6 rounded shadow space-y-6"
     >
-     
+     <div className="grid lg:grid-cols-2 bg-white rounded-xl shadow-lg overflow-hidden">
+          {/* Left Side - Image */}
+          <img
+            src="/Loan/business-loan.jpg"
+            alt="Loan"
+            className="w-full h-96 object-cover lg:h-auto"
+          />
+          </div>
 
       {/* Personal Details */}
       <div>
@@ -76,7 +93,7 @@ const BusinessLoanForm = () => {
 
           <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" className="p-2 border rounded" required />
         </div>
-
+          {/* phone number */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
           <div className="flex gap-2">
             <select name="stdCode" value={formData.stdCode} onChange={handleChange} className="p-2 border rounded w-1/3">
@@ -85,6 +102,29 @@ const BusinessLoanForm = () => {
             <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" className="p-2 border rounded w-full" required />
           </div>
 
+          {/* Alternate Phone Number */}
+        <div className="flex gap-2">
+          <select
+            name="altStdCode"
+            value={formData.altStdCode}
+            onChange={handleChange}
+            className="p-2 border rounded w-1/3"
+          >
+            <option value="+91">+91 🇮🇳</option>
+            <option value="+1">+1 🇺🇸</option>
+            <option value="+44">+44 🇬🇧</option>
+          </select>
+          <input
+            type="tel"
+            name="altPhone"
+            value={formData.altPhone}
+            onChange={handleChange}
+            placeholder="Alternate Number"
+            className="p-2 border rounded w-full"
+          />
+        </div>
+
+          {/* dob */}
         <input
           type="text"
           name="dob"
@@ -530,8 +570,9 @@ const BusinessLoanForm = () => {
       className="w-full p-2 border rounded"
       required
     />
+    </div>
     <div>
-       <label className="block text-gray-700 mb-1"> 1 Year Bank Statements (CC)</label>
+      <label className="block text-gray-700 mb-1"> 1 Year Bank Statements (CC)</label>
     <input
       type="file"
       name="bankStatements"
@@ -540,9 +581,84 @@ const BusinessLoanForm = () => {
       className="w-full p-2 border rounded"
     />
     </div>
-    
   </div>
-</div>
+
+   {/* ✅ Upload ITRs */}
+        <div>
+          <label className="block  mb-1 font-bold">Upload Last 3 Years of ITR/Computation</label>
+
+          <div className="space-y-2 mt-2">
+            <div>
+              <label className="text-sm font-semibold">ITR - Year 1</label>
+              <input
+                type="file"
+                name="itr1"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-semibold">ITR - Year 2</label>
+              <input
+                type="file"
+                name="itr2"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-semibold">ITR - Year 3</label>
+              <input
+                type="file"
+                name="itr3"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
+                required
+              />
+            </div>
+            <div>
+            <label className="text-sm font-semibold">Computation - Year 1</label>
+            <input
+              type="file"
+              name="computation1"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+              required
+            />
+          </div>
+          <div>
+            <label className="text-sm font-semibold">Computation - Year 2</label>
+            <input
+              type="file"
+              name="computation2"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+              required
+            />
+          </div>
+            <div>
+            <label className="text-sm font-semibold">Computation - Year 3</label>
+            <input
+              type="file"
+              name="computation3"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+              required
+            />
+          </div>
+          </div>
+        </div>
+
 
 
       <button

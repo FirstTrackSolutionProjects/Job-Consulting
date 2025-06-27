@@ -1,14 +1,20 @@
 import React, { useState } from "react";
 
 const UsedCarLoanForm = () => {
+  const [sameAddress, setSameAddress] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
     fullName: "",
     email: "",
     stdCode: "+91",
     phone: "",
+    altStdCode: "+91",   
+    altPhone: "",     
     dob: "",
     gender: "",
+    maritalStatus: "",
+    spouseName: "",
+    childrenCount: "",
     fatherName: "",
     motherName: "",
     state: "",
@@ -18,6 +24,22 @@ const UsedCarLoanForm = () => {
     currentAddress: "",
     aadhar: "",
     pan: "",
+    profession: "",
+    professionType: "",
+    businessName: "",
+    businessYears: "",
+    businessAddress: "",
+    businessCity: "",
+    businessPincode: "",
+    businessState: "",
+    businessCountry: "",
+    companyName: "",
+    jobYears: "",
+    officeAddress: "",
+    officeCity: "",
+    officePincode: "",
+    officeState: "",
+    officeCountry: "",
     carModel: "",
     carYear: "",
     carPrice: "",
@@ -27,22 +49,30 @@ const UsedCarLoanForm = () => {
     accountNumber: "",
     ifsc: "",
     purpose: "",
+    itr1: "",
+    itr2: "",
+    itr3: "",
+    computation1: "",
+    computation2: "",
+    computation3: "",
   });
 
-   const handleSameAddress = (e) => {
-  const isChecked = e.target.checked;
-  if (isChecked) {
-    setFormData((prev) => ({
-      ...prev,
-      currentAddress: prev.permanentAddress,
-    }));
-  } else {
-    setFormData((prev) => ({
-      ...prev,
-      currentAddress: "",
-    }));
-  }
-};
+  const handleSameAddress = (e) => {
+    const isChecked = e.target.checked;
+    setSameAddress(isChecked); // ✅ this line was missing
+    if (isChecked) {
+      setFormData((prev) => ({
+        ...prev,
+        permanentAddress: prev.currentAddress,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        permanentAddress: "",
+      }));
+    }
+  };
+  
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -57,6 +87,15 @@ const UsedCarLoanForm = () => {
       onSubmit={handleSubmit}
       className="max-w-5xl mx-auto bg-white p-6 rounded shadow space-y-6"
     >
+       <div className="grid lg:grid-cols-2 bg-white rounded-xl shadow-lg overflow-hidden">
+          {/* Left Side - Image */}
+          <img
+            src="/Loan/usedcar-loan.jpg"
+            alt="Loan"
+            className="w-full h-96 object-cover lg:h-auto"
+          />
+          </div>
+
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">
           Personal Details
@@ -122,6 +161,30 @@ const UsedCarLoanForm = () => {
             />
           </div>
 
+          {/* Alternate Phone Number */}
+<div className="flex gap-2">
+  <select
+    name="altStdCode"
+    value={formData.altStdCode}
+    onChange={handleChange}
+    className="p-2 border rounded w-1/3"
+  >
+    <option value="+91">+91 🇮🇳</option>
+    <option value="+1">+1 🇺🇸</option>
+    <option value="+44">+44 🇬🇧</option>
+    {/* Add more country codes as needed */}
+  </select>
+  <input
+    type="tel"
+    name="altPhone"
+    value={formData.altPhone}
+    onChange={handleChange}
+    placeholder="Alternate Number"
+    className="p-2 border rounded w-full"
+  />
+</div>
+
+
           {/* Date of Birth */}
           <input
           type="text"
@@ -137,8 +200,7 @@ const UsedCarLoanForm = () => {
           required
         />
 
-
-          {/* Gender */}
+            {/* Gender */}
           <select
             name="gender"
             value={formData.gender}
@@ -152,83 +214,73 @@ const UsedCarLoanForm = () => {
           
           </select>
         </div>
+      </div>
 
+      {/* Address Details */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Present Address Details</h3>
 
-        {/* Father's & Mother's Name */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-          <input
-            type="text"
-            name="fatherName"
-            value={formData.fatherName}
-            onChange={handleChange}
-            placeholder="Father's Name"
-            className="p-2 border rounded"
-            required
-          />
-          <input
-            type="text"
-            name="motherName"
-            value={formData.motherName}
-            onChange={handleChange}
-            placeholder="Mother's Name"
-            className="p-2 border rounded"
-            required
-          />
+         <select residence="residence" value={formData.residence} onChange={handleChange} className="w-full p-2 border rounded mb-2" required>
+          <option value="">Residence Type</option>
+          <option>Own</option>
+          <option>Rented</option>
+         </select>
+
+        <input type="text" name="currentAddress" value={formData.currentAddress} onChange={handleChange} placeholder="Current Address" className="w-full p-2 border rounded mb-2" required />
+        <input type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" className="w-full p-2 border rounded mb-2" />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
+          <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" className="p-2 border rounded" required />
+          <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" className="p-2 border rounded" required />
+          <input type="text" name="pincode" value={formData.pincode} onChange={handleChange} placeholder="Pincode" className="p-2 border rounded" required />
+          <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" className="p-2 border rounded" required />
         </div>
 
-        {/* State, City, Pincode */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-          <input
-            type="text"
-            name="state"
-            value={formData.state}
-            onChange={handleChange}
-            placeholder="State"
-            className="p-2 border rounded"
-            required
-          />
-          <input
-            type="text"
-            name="city"
-            value={formData.city}
-            onChange={handleChange}
-            placeholder="City"
-            className="p-2 border rounded"
-            required
-          />
-          <input
-            type="text"
-            name="pincode"
-            value={formData.pincode}
-            onChange={handleChange}
-            placeholder="Pincode"
-            className="p-2 border rounded"
-            required
-          />
-        </div>
+        <label className="flex items-center gap-2 mb-2">
+          <input type="checkbox" onChange={handleSameAddress} />
+          Same as Present Address
+        </label>
 
-        {/* Permanent & Current Address */}
-        <div className="mt-4 space-y-4">
-          <input
-            type="text"
-            name="permanentAddress"
-            value={formData.permanentAddress}
-            onChange={handleChange}
-            placeholder="Permanent Address"
-            className="w-full p-2 border rounded"
-            required
-          />
-          <input
-            type="text"
-            name="currentAddress"
-            value={formData.currentAddress}
-            onChange={handleChange}
-            placeholder="Current Address"
-            className="w-full p-2 border rounded"
-            required
-          />
+        {!sameAddress && (
+            <input
+              type="text"
+              name="permanentAddress"
+              value={formData.permanentAddress}
+              onChange={handleChange}
+              placeholder="Permanent Address"
+              className="w-full p-2 border rounded"
+              required
+            />
+          )}
+      </div>
+
+         {/* Family Details */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Family Details</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" name="fatherName" value={formData.fatherName} onChange={handleChange} placeholder="Father's Name" className="p-2 border rounded" required />
+          <input type="text" name="motherName" value={formData.motherName} onChange={handleChange} placeholder="Mother's Name" className="p-2 border rounded" required />
+        </div>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
+          <select name="maritalStatus" value={formData.maritalStatus} onChange={handleChange} className="p-2 border rounded" required>
+            <option value="">Marital Status</option>
+            <option>Unmarried</option>
+            <option>Married</option>
+            <option>Single</option>
+          </select>
+
+          {formData.maritalStatus === "Married" && (
+            <>
+              <input type="text" name="spouseName" value={formData.spouseName} onChange={handleChange} placeholder="Spouse Name" className="p-2 border rounded" />
+              <input type="number" name="childrenCount" value={formData.childrenCount} onChange={handleChange} placeholder="Children" className="p-2 border rounded" />
+            </>
+          )}
         </div>
       </div>
+
+
+        
+       
+   
 
       {/* KYC Details */}
       <div>
@@ -257,6 +309,202 @@ const UsedCarLoanForm = () => {
           />
         </div>
       </div>
+
+      {/* Profession Details */}
+      <div className="mb-4">
+            <label className="block text-gray-700 mb-1 font-bold">Profession</label>
+            <select
+              name="profession"
+              value={formData.profession}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            >
+              <option value="">Select Profession</option>
+              <option value="Business">Business</option>
+              <option value="Service">Service</option>
+              <option value="None">None</option>
+            </select>
+          </div>
+
+          {/* Business Section */}
+        {formData.profession === "Business" && (
+          <div className="mb-4 space-y-2">
+            <label className="block text-gray-700">Profession Type</label>
+            <select
+              name="professionType"
+              value={formData.professionType}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            >
+              <option value="">Select Business Type</option>
+              <option value="Retail">Retail</option>
+              <option value="Manufacturing">Manufacturing</option>
+              <option value="Freelancer">Freelancer</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <input
+              type="text"
+              name="businessName"
+              value={formData.businessName}
+              onChange={handleChange}
+              placeholder="Business Name"
+              className="w-full p-2 border rounded"
+              required
+            />
+
+            <input
+              type="number"
+              name="businessYears"
+              value={formData.businessYears}
+              onChange={handleChange}
+              placeholder="Years in Business"
+              className="w-full p-2 border rounded"
+              required
+            />
+
+            <input
+              type="text"
+              name="businessAddress"
+              value={formData.businessAddress}
+              onChange={handleChange}
+              placeholder="Business Address"
+              className="w-full p-2 border rounded"
+              required
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <input
+                type="text"
+                name="businessCity"
+                value={formData.businessCity}
+                onChange={handleChange}
+                placeholder="City"
+                className="p-2 border rounded"
+                required
+              />
+              <input
+                type="text"
+                name="businessPincode"
+                value={formData.businessPincode}
+                onChange={handleChange}
+                placeholder="Pincode"
+                className="p-2 border rounded"
+                required
+              />
+              <input
+                type="text"
+                name="businessState"
+                value={formData.businessState}
+                onChange={handleChange}
+                placeholder="State"
+                className="p-2 border rounded"
+                required
+              />
+              <input
+                type="text"
+                name="businessCountry"
+                value={formData.businessCountry}
+                onChange={handleChange}
+                placeholder="Country"
+                className="p-2 border rounded"
+                required
+              />
+            </div>
+          </div>
+        )}
+
+
+         {/* Service Section */}
+        {formData.profession === "Service" && (
+          <div className="mb-4 space-y-2">
+            <label className="block text-gray-700">Profession Type</label>
+            <select
+              name="professionType"
+              value={formData.professionType}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            >
+              <option value="">Select Service Type</option>
+              <option value="Private Job">Private Job</option>
+              <option value="Government Job">Government Job</option>
+              <option value="IT">IT</option>
+              <option value="Other">Other</option>
+            </select>
+
+            <input
+              type="text"
+              name="companyName"
+              value={formData.companyName}
+              onChange={handleChange}
+              placeholder="Company Name"
+              className="w-full p-2 border rounded"
+              required
+            />
+
+            <input
+              type="number"
+              name="jobYears"
+              value={formData.jobYears}
+              onChange={handleChange}
+              placeholder="Years in Job"
+              className="w-full p-2 border rounded"
+              required
+            />
+
+            <input
+              type="text"
+              name="officeAddress"
+              value={formData.officeAddress}
+              onChange={handleChange}
+              placeholder="Office Address"
+              className="w-full p-2 border rounded"
+              required
+            />
+
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+              <input
+                type="text"
+                name="officeCity"
+                value={formData.officeCity}
+                onChange={handleChange}
+                placeholder="City"
+                className="p-2 border rounded"
+                required
+              />
+              <input
+                type="text"
+                name="officePincode"
+                value={formData.officePincode}
+                onChange={handleChange}
+                placeholder="Pincode"
+                className="p-2 border rounded"
+                required
+              />
+              <input
+                type="text"
+                name="officeState"
+                value={formData.officeState}
+                onChange={handleChange}
+                placeholder="State"
+                className="p-2 border rounded"
+                required
+              />
+              <input
+                type="text"
+                name="officeCountry"
+                value={formData.officeCountry}
+                onChange={handleChange}
+                placeholder="Country"
+                className="p-2 border rounded"
+                required
+              />
+            </div>
+          </div>
+        )}
 
       {/* Car Loan Details */}
       <div>
@@ -331,7 +579,7 @@ const UsedCarLoanForm = () => {
           <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
         </div>
 
-        <label className="block mt-4 mb-1">Upload Cancelled Cheque / Passbook</label>
+        <label className="block mt-4 mb-1">Bank Statement</label>
         <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
       </div>
 
@@ -351,7 +599,9 @@ const UsedCarLoanForm = () => {
                 className="w-full p-2 border rounded"
                 required
               />
+          </div>
 
+          <div>
             <label className="block text-gray-700 mb-1">
               Aadhaar Card (PDF/Image)
             </label>
@@ -376,8 +626,104 @@ const UsedCarLoanForm = () => {
               required
             />
           </div>
+
+          {/* Quotations Upload (Max 5 Photos) */}
+          <div>
+            <label className="block text-gray-700 mb-1">
+              Upload Quotations (Max 5 Photos)
+            </label>
+            <input
+              type="file"
+              name="quotations"
+              accept=".jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              multiple
+              onChange={(e) => {
+                if (e.target.files.length > 5) {
+                  alert("You can upload a maximum of 5 photos.");
+                  e.target.value = null; // Clear input if limit exceeded
+                }
+              }}
+            />
+          </div>
         </div>
       </div>
+
+       {/* ✅ Upload ITRs */}
+        <div>
+          <label className="block  mb-1 font-bold">Upload Last 3 Years of ITR/Computation</label>
+
+          <div className="space-y-2 mt-2">
+            <div>
+              <label className="text-sm font-semibold">ITR - Year 1</label>
+              <input
+                type="file"
+                name="itr1"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-semibold">ITR - Year 2</label>
+              <input
+                type="file"
+                name="itr2"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-semibold">ITR - Year 3</label>
+              <input
+                type="file"
+                name="itr3"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
+                required
+              />
+            </div>
+            <div>
+            <label className="text-sm font-semibold">Computation - Year 1</label>
+            <input
+              type="file"
+              name="computation1"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+              required
+            />
+          </div>
+          <div>
+            <label className="text-sm font-semibold">Computation - Year 2</label>
+            <input
+              type="file"
+              name="computation2"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+              required
+            />
+          </div>
+            <div>
+            <label className="text-sm font-semibold">Computation - Year 3</label>
+            <input
+              type="file"
+              name="computation3"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+              required
+            />
+          </div>
+          </div>
+        </div>
 
       {/* Submit Button */}
       <button

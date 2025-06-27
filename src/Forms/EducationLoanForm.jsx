@@ -2,13 +2,20 @@ import React, { useState } from "react";
 
 
 const EducationLoanForm = () => {
+  const [sameAddress, setSameAddress] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
     fullName: "",
     email: "",
     phone: "",
+    stdCode: "+91",
+    altStdCode: "+91",
+    altPhone: "",
     dob: "",
     gender: "",
+    maritalStatus: "",
+    spouseName: "",
+    childrenCount: "",
     fatherName: "",
     motherName: "",
     state: "",
@@ -32,19 +39,21 @@ const EducationLoanForm = () => {
   });
 
   const handleSameAddress = (e) => {
-  const isChecked = e.target.checked;
-  if (isChecked) {
-    setFormData((prev) => ({
-      ...prev,
-      currentAddress: prev.permanentAddress,
-    }));
-  } else {
-    setFormData((prev) => ({
-      ...prev,
-      currentAddress: "",
-    }));
-  }
-};
+    const isChecked = e.target.checked;
+    setSameAddress(isChecked); // ✅ this line was missing
+    if (isChecked) {
+      setFormData((prev) => ({
+        ...prev,
+        permanentAddress: prev.currentAddress,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        permanentAddress: "",
+      }));
+    }
+  };
+  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -60,7 +69,14 @@ const EducationLoanForm = () => {
       onSubmit={handleSubmit}
       className="max-w-l mx-auto bg-white p-6 rounded shadow space-y-4"
     >
-     
+      <div className="grid lg:grid-cols-2 bg-white rounded-xl shadow-lg overflow-hidden">
+          {/* Left Side - Image */}
+          <img
+            src="/Loan/education-loan.jpg"
+            alt="Loan"
+            className="w-full h-96 object-cover lg:h-auto"
+          />
+          </div>
 
       {/* Personal Details */}
       <div>
@@ -86,6 +102,30 @@ const EducationLoanForm = () => {
             </select>
             <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" className="p-2 border rounded w-full" required />
           </div>
+
+          {/* Alternate Phone Number */}
+<div className="flex gap-2">
+  <select
+    name="altStdCode"
+    value={formData.altStdCode}
+    onChange={handleChange}
+    className="p-2 border rounded w-1/3"
+  >
+    <option value="+91">+91 🇮🇳</option>
+    <option value="+1">+1 🇺🇸</option>
+    <option value="+44">+44 🇬🇧</option>
+  
+  </select>
+  <input
+    type="tel"
+    name="altPhone"
+    value={formData.altPhone}
+    onChange={handleChange}
+    placeholder="Alternate Number"
+    className="p-2 border rounded w-full"
+  />
+</div>
+
 
           <input
             type="text"
@@ -136,7 +176,19 @@ const EducationLoanForm = () => {
           Same as Present Address
         </label>
 
-        <input type="text" name="permanentAddress" value={formData.permanentAddress} onChange={handleChange} placeholder="Permanent Address" className="w-full p-2 border rounded" required />
+        {!sameAddress && (
+            <input
+              type="text"
+              name="permanentAddress"
+              value={formData.permanentAddress}
+              onChange={handleChange}
+              placeholder="Permanent Address"
+              className="w-full p-2 border rounded"
+              required
+            />
+          )}
+
+       
       </div>
 
       {/* Family Details */}
@@ -174,7 +226,7 @@ const EducationLoanForm = () => {
 
       {/* Education Loan Details */}
       <div>
-        <h2 className="text-xl font-semibold text-gray-700 mb-2">Education Details</h2>
+        <h2 className="text-xl font-semibold text-gray-700 mb-2">Education Loan Details</h2>
       </div>
       <div>
         <label className="block text-gray-900 mb-1">Student Name</label>
@@ -255,20 +307,251 @@ const EducationLoanForm = () => {
             />
           </div>
 
-      <div>
-        <label className="block text-gray-700 mb-1">Guardian Name</label>
-        <input
-          type="text"
-          name="guardianName"
-          value={formData.guardianName}
-          onChange={handleChange}
-          placeholder="Guardian Name"
-          required
-          className="w-full p-2 border rounded"
-        />
-      </div>
+        {/* Guardian Details */}
+        <div>
+          <h3 className="text-xl font-semibold text-gray-900 mb-4">Guardian Details</h3>
 
-         {/* Bank Details */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <input
+              type="text"
+              name="guardianName"
+              value={formData.guardianName}
+              onChange={handleChange}
+              placeholder="Guardian Name"
+              className="p-2 border rounded"
+              required
+            />
+            <input
+              type="tel"
+              name="guardianPhone"
+              value={formData.guardianPhone}
+              onChange={handleChange}
+              placeholder="Guardian Phone Number"
+              className="p-2 border rounded"
+              required
+            />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+            <input
+              type="text"
+              name="guardianAadhar"
+              value={formData.guardianAadhar}
+              onChange={handleChange}
+              placeholder="Guardian Aadhaar Number"
+              className="p-2 border rounded"
+              required
+            />
+            <input
+              type="text"
+              name="guardianPan"
+              value={formData.guardianPan}
+              onChange={handleChange}
+              placeholder="Guardian PAN Number"
+              className="p-2 border rounded"
+              required
+            />
+          </div>
+
+          <div className="mt-4">
+            <label className="block text-gray-700 mb-1">Guardian Occupation</label>
+            <select
+              name="guardianOccupation"
+              value={formData.guardianOccupation}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            >
+              <option value="">Select Occupation</option>
+              <option value="service">Service</option>
+              <option value="business">Business</option>
+              <option value="farmer">Farmer</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          {/* Conditional Fields Based on Occupation */}
+{formData.guardianOccupation === "service" && (
+  <div className="mt-4 space-y-4">
+    <input
+      type="text"
+      name="guardianCompanyName"
+      value={formData.guardianCompanyName}
+      onChange={handleChange}
+      placeholder="Company/Organization Name"
+      className="w-full p-2 border rounded"
+      required
+    />
+
+    <input
+      type="number"
+      name="guardianYearsInJob"
+      value={formData.guardianYearsInJob}
+      onChange={handleChange}
+      placeholder="Years in Job"
+      className="w-full p-2 border rounded"
+      required
+    />
+
+    <input
+      type="text"
+      name="guardianAddress"
+      value={formData.guardianAddress}
+      onChange={handleChange}
+      placeholder="Office/Work Address"
+      className="w-full p-2 border rounded"
+      required
+    />
+
+    <input
+      type="text"
+      name="guardianLandmark"
+      value={formData.guardianLandmark}
+      onChange={handleChange}
+      placeholder="Landmark"
+      className="w-full p-2 border rounded"
+    />
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <input
+        type="text"
+        name="guardianCity"
+        value={formData.guardianCity}
+        onChange={handleChange}
+        placeholder="City"
+        className="p-2 border rounded"
+        required
+      />
+      <input
+        type="text"
+        name="guardianPincode"
+        value={formData.guardianPincode}
+        onChange={handleChange}
+        placeholder="Pincode"
+        className="p-2 border rounded"
+        required
+      />
+      <input
+        type="text"
+        name="guardianState"
+        value={formData.guardianState}
+        onChange={handleChange}
+        placeholder="State"
+        className="p-2 border rounded"
+        required
+      />
+    </div>
+
+    <input
+      type="text"
+      name="guardianCountry"
+      value={formData.guardianCountry}
+      onChange={handleChange}
+      placeholder="Country"
+      className="w-full p-2 border rounded"
+      required
+    />
+  </div>
+)}
+
+{formData.guardianOccupation === "business" && (
+  <div className="mt-4 space-y-4">
+    <input
+      type="text"
+      name="guardianBusinessName"
+      value={formData.guardianBusinessName}
+      onChange={handleChange}
+      placeholder="Business Name"
+      className="w-full p-2 border rounded"
+      required
+    />
+
+    <input
+      type="number"
+      name="guardianYearsInJob"
+      value={formData.guardianYearsInJob}
+      onChange={handleChange}
+      placeholder="Years in Business"
+      className="w-full p-2 border rounded"
+      required
+    />
+
+    <input
+      type="text"
+      name="guardianAddress"
+      value={formData.guardianAddress}
+      onChange={handleChange}
+      placeholder="Business Address"
+      className="w-full p-2 border rounded"
+      required
+    />
+
+    <input
+      type="text"
+      name="guardianLandmark"
+      value={formData.guardianLandmark}
+      onChange={handleChange}
+      placeholder="Landmark"
+      className="w-full p-2 border rounded"
+    />
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <input
+        type="text"
+        name="guardianCity"
+        value={formData.guardianCity}
+        onChange={handleChange}
+        placeholder="City"
+        className="p-2 border rounded"
+        required
+      />
+      <input
+        type="text"
+        name="guardianPincode"
+        value={formData.guardianPincode}
+        onChange={handleChange}
+        placeholder="Pincode"
+        className="p-2 border rounded"
+        required
+      />
+      <input
+        type="text"
+        name="guardianState"
+        value={formData.guardianState}
+        onChange={handleChange}
+        placeholder="State"
+        className="p-2 border rounded"
+        required
+      />
+    </div>
+
+    <input
+      type="text"
+      name="guardianCountry"
+      value={formData.guardianCountry}
+      onChange={handleChange}
+      placeholder="Country"
+      className="w-full p-2 border rounded"
+      required
+    />
+  </div>
+)}
+</div>
+
+  {/* 6-Month Bank Statement Upload */}
+  <div>
+    <h2 className="text-xl font-semibold text-gray-900 mb-2">Income Proof</h2>
+    <label className="block text-gray-700 mb-1">Upload 6-Month Bank Statement (PDF)</label>
+    <input
+      type="file"
+      name="guardianBankStatement"
+      accept=".pdf"
+      className="w-full p-2 border rounded"
+      required
+    />
+  </div>
+  
+        {/* Bank Details */}
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank Details</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -278,7 +561,7 @@ const EducationLoanForm = () => {
           <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
         </div>
 
-        <label className="block mt-4 mb-1">Upload Cancelled Cheque / Passbook</label>
+        <label className="block mt-4 mb-1">Bank Statement</label>
         <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
       </div>
 
@@ -286,6 +569,7 @@ const EducationLoanForm = () => {
 <div>
   <h3 className="text-xl font-semibold text-gray-700 mb-2">Upload Documents</h3>
 
+  {/* Aadhaar & PAN */}
   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
     <div>
       <label className="block text-gray-700 mb-1">Aadhaar Card (PDF/Image)</label>
@@ -309,7 +593,164 @@ const EducationLoanForm = () => {
       />
     </div>
   </div>
+
+  {/* Qualification Dropdown */}
+<div className="mt-6">
+  <label className="block text-gray-700 mb-1">Highest Qualification</label>
+  <select
+    name="highestQualification"
+    value={formData.highestQualification}
+    onChange={handleChange}
+    className="w-full p-2 border rounded"
+    required
+  >
+    <option value="">Select Qualification</option>
+    <option value="10th">10th</option>
+    <option value="12th">12th</option>
+    <option value="Diploma">Diploma</option>
+    <option value="Graduate">Graduate</option>
+    <option value="Post Graduate">Post Graduate</option>
+    <option value="PhD">PhD</option>
+  </select>
 </div>
+
+{/* Education Documents - Conditional Rendering */}
+{formData.highestQualification && (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+    {/* 10th */}
+    {formData.highestQualification === "10th" && (
+      <>
+        <div>
+          <label className="block text-gray-700 mb-1">10th Certificate</label>
+          <input
+            type="file"
+            name="tenthCertificate"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+        <div>
+          <label className="block text-gray-700 mb-1">10th Marksheet</label>
+          <input
+            type="file"
+            name="tenthMarksheet"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+      </>
+    )}
+
+    {/* 12th */}
+    {formData.highestQualification === "12th" && (
+      <>
+        <div>
+          <label className="block text-gray-700 mb-1">12th Certificate</label>
+          <input
+            type="file"
+            name="twelfthCertificate"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+        <div>
+          <label className="block text-gray-700 mb-1">12th Marksheet</label>
+          <input
+            type="file"
+            name="twelfthMarksheet"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+      </>
+    )}
+
+    {/* Diploma */}
+    {formData.highestQualification === "Diploma" && (
+      <>
+        <div>
+          <label className="block text-gray-700 mb-1">Diploma Certificate</label>
+          <input
+            type="file"
+            name="highestQualificationCertificate"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+      </>
+    )}
+
+    {/* Graduate */}
+    {formData.highestQualification === "Graduate" && (
+      <>
+        <div>
+          <label className="block text-gray-700 mb-1">Graduation Certificate</label>
+          <input
+            type="file"
+            name="highestQualificationCertificate"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+      </>
+    )}
+
+    {/* Post Graduate */}
+    {formData.highestQualification === "Post Graduate" && (
+      <>
+        <div>
+          <label className="block text-gray-700 mb-1">Post Graduation Certificate</label>
+          <input
+            type="file"
+            name="highestQualificationCertificate"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+      </>
+    )}
+
+    {/* PhD */}
+    {formData.highestQualification === "PhD" && (
+      <>
+        <div>
+          <label className="block text-gray-700 mb-1">PhD Certificate</label>
+          <input
+            type="file"
+            name="highestQualificationCertificate"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+      </>
+    )}
+
+    {/* Character Certificate (shown for all) */}
+    <div>
+      <label className="block text-gray-700 mb-1">CLC / Character Certificate</label>
+      <input
+        type="file"
+        name="clcCertificate"
+        accept=".pdf,.jpg,.jpeg,.png"
+        className="w-full p-2 border rounded"
+        required
+      />
+    </div>
+  </div>
+)}
+</div>
+
+
+
+
 
       <button
         type="submit"

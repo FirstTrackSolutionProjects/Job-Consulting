@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 
 const PersonalLoanForm = () => {
+  const [sameAddress, setSameAddress] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     fullName: "",
     email: "",
     stdCode: "+91",
     phone: "",
+    altStdCode: "+91",   
+    altPhone: "",     
     dob: "",
     gender: "",
     maritalStatus: "",
@@ -45,11 +48,18 @@ const PersonalLoanForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSameAddress = (e) => {
-    if (e.target.checked) {
+   const handleSameAddress = (e) => {
+    const isChecked = e.target.checked;
+    setSameAddress(isChecked); // ✅ this line was missing
+    if (isChecked) {
       setFormData((prev) => ({
         ...prev,
         permanentAddress: prev.currentAddress,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        permanentAddress: "",
       }));
     }
   };
@@ -61,6 +71,16 @@ const PersonalLoanForm = () => {
 
   return (
     <form onSubmit={handleSubmit} className="max-w-4xl mx-auto bg-white p-6 rounded shadow space-y-6">
+
+       <div className="grid lg:grid-cols-2 bg-white rounded-xl shadow-lg overflow-hidden">
+          {/* Left Side - Image */}
+          <img
+            src="/Loan/personal-loan.jpg"
+            alt="Loan"
+            className="w-full h-96 object-cover lg:h-auto"
+          />
+          </div>
+          
       {/* Personal Details */}
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Personal Details</h3>
@@ -85,6 +105,30 @@ const PersonalLoanForm = () => {
             </select>
             <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" className="p-2 border rounded w-full" required />
           </div>
+
+          {/* Alternate Phone Number */}
+          <div className="flex gap-2">
+            <select
+              name="altStdCode"
+              value={formData.altStdCode}
+              onChange={handleChange}
+              className="p-2 border rounded w-1/3"
+            >
+              <option value="+91">+91 🇮🇳</option>
+              <option value="+1">+1 🇺🇸</option>
+              <option value="+44">+44 🇬🇧</option>
+          
+            </select>
+            <input
+              type="tel"
+              name="altPhone"
+              value={formData.altPhone}
+              onChange={handleChange}
+              placeholder="Alternate Number"
+              className="p-2 border rounded w-full"
+            />
+          </div>
+
 
           <input
             type="text"
@@ -134,8 +178,6 @@ const PersonalLoanForm = () => {
           <input type="checkbox" onChange={handleSameAddress} />
           Same as Present Address
         </label>
-
-        <input type="text" name="permanentAddress" value={formData.permanentAddress} onChange={handleChange} placeholder="Permanent Address" className="w-full p-2 border rounded" required />
       </div>
 
       {/* Family Details */}

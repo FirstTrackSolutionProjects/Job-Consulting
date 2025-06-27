@@ -34,6 +34,15 @@ const InsuranceForm = () => {
     <form onSubmit={handleSubmit} className="max-w-3xl mx-auto p-6 bg-white shadow rounded space-y-6 mt-10">
       <h2 className="text-2xl font-bold text-gray-800 text-center">Insurance Application Form</h2>
 
+       <div className="grid lg:grid-cols-2 bg-white rounded-xl shadow-lg overflow-hidden">
+          {/* Left Side - Image */}
+          <img
+            src="/images/insurance.jpg"
+            alt="insurance"
+            className="w-full h-96 object-cover lg:h-auto"
+          />
+          </div>
+
       {/* Applicant Details */}
       <div>
         <h3 className="text-xl font-semibold mb-2">Applicant Details</h3>

@@ -1,21 +1,32 @@
 import React, { useState } from "react";
 
 const BusinessAssociate = () => {
+   const [sameAddress, setSameAddress] = useState(false)
   const [formData, setFormData] = useState({
     businessName: "",
+    fullname: "",
     email: "",
     phone: "",
+    dob: "",
+    gender: "",
     company: "",
     designation: "",
-    location: "",
+    aadhar: "",
+    pan: "",
     industry: "",
+    state: "",
+    city: "",
+    pincode: "",
+    country: "",
+    permanentAddress: "",
+    presentAddress: "",
     organisationType: "",
     associationType: "",
     experience: "",
-    proposal: null,
-    itr1: null,
-    itr2: null,
-    itr3: null,
+    proposal: "",
+    itr1: "",
+    itr2: "",
+    itr3: "",
   });
 
   const handleChange = (e) => {
@@ -23,6 +34,16 @@ const BusinessAssociate = () => {
     setFormData((prev) => ({
       ...prev,
       [name]: files ? files[0] : value,
+    }));
+  };
+
+   const handleSameAddress = (e) => {
+    const isChecked = e.target.checked;
+    setSameAddress(isChecked);
+    setFormData((prev) => ({
+      ...prev,
+      presentAddress: isChecked ? prev.permanentAddress : prev.presentAddress,
+      permanentAddress: isChecked ? prev.presentAddress : "",
     }));
   };
 
@@ -38,6 +59,29 @@ const BusinessAssociate = () => {
         Business Associate Registration Form
       </h2>
       <form onSubmit={handleSubmit} className="space-y-4">
+
+        <div className="grid lg:grid-cols-2 bg-white rounded-xl shadow-lg overflow-hidden">
+          {/* Left Side - Image */}
+          <img
+            src="/Partners/business-associate.jpg"
+            alt="partner"
+            className="w-full h-96 object-cover lg:h-auto"
+          />
+          </div>
+
+           {/* fullname */}
+        <div>
+          <label className="block font-medium mb-1">Full Name</label>
+          <input
+            type="email"
+            name="email"
+            value={formData.email}
+            onChange={handleChange}
+            required
+            placeholder="Enter your email"
+            className="w-full border p-2 rounded"
+          />
+        </div>
 
         {/* Business Name */}
         <div>
@@ -67,29 +111,68 @@ const BusinessAssociate = () => {
           />
         </div>
 
-        {/* Phone */}
-          <div className="mb-4">
-              <label className="block text-sm font-medium mb-2" htmlFor="mobile">
-                Mobile
-              </label>
-              <div className="flex">
-                 <select
-                    className="p-2 border border-gray-700 rounded-l bg-gray-100 text-sm"
-                    defaultValue="+91"
-                    >
-                  <option value="+91">+91 (India)</option>
-                  {/* <option value="+1">+1 (USA)</option>
-                  <option value="+44">+44 (UK)</option>
-                  <option value="+61">+61 (Australia)</option> */}
-                </select>
-              <input
-                type="tel"
-                id="mobile"
-                className="w-full p-2 border border-gray-700 rounded"
-                required
-              />
-              </div>
-            </div>
+        {/* Phone, DOB, Gender */}
+<div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+  {/* Phone Number */}
+  <div>
+    <label className="block text-sm font-medium mb-2">Phone</label>
+    <div className="flex">
+      <select
+        name="stdCode"
+        value={formData.stdCode}
+        onChange={handleChange}
+        className="p-2 border border-gray-700 rounded-l bg-gray-100 text-sm"
+      >
+        <option value="+91">+91 (India)</option>
+        <option value="+1">+1 (USA)</option>
+      </select>
+      <input
+        type="tel"
+        name="phone"
+        value={formData.phone}
+        onChange={handleChange}
+        placeholder="Enter phone number"
+        className="w-full p-2 border border-gray-700 rounded-r"
+        required
+      />
+    </div>
+  </div>
+
+  {/* DOB */}
+  <div>
+    <label className="block text-sm font-medium mb-2">Date of Birth</label>
+    <input
+      type="text"
+      name="dob"
+      value={formData.dob}
+      onChange={handleChange}
+      placeholder="dd-mm-yyyy"
+      onFocus={(e) => (e.target.type = "date")}
+      onBlur={(e) => {
+        if (!e.target.value) e.target.type = "text";
+      }}
+      className="p-2 border rounded w-full"
+      required
+    />
+  </div>
+
+  {/* Gender */}
+  <div>
+    <label className="block text-sm font-medium mb-2">Gender</label>
+    <select
+      name="gender"
+      value={formData.gender}
+      onChange={handleChange}
+      className="p-2 border rounded w-full"
+      required
+    >
+      <option value="">Select Gender</option>
+      <option>Male</option>
+      <option>Female</option>
+    </select>
+  </div>
+</div>
+
 
         {/* Company Name */}
         <div>
@@ -117,19 +200,51 @@ const BusinessAssociate = () => {
           />
         </div>
 
-        {/* Location */}
-        <div>
-          <label className="block font-medium mb-1">Location</label>
-          <input
-            type="text"
-            name="location"
-            value={formData.location}
-            onChange={handleChange}
-            required
-            placeholder="City / State"
-            className="w-full border p-2 rounded"
-          />
+         {/* KYC Details */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">KYC Details</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" name="aadhar" value={formData.aadhar} onChange={handleChange} placeholder="Aadhaar Number" className="p-2 border rounded" required />
+          <input type="text" name="pan" value={formData.pan} onChange={handleChange} placeholder="PAN Number" className="p-2 border rounded" required />
         </div>
+      </div>
+
+         {/* Address Details */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Present Address Details</h3>
+
+         <select residence="residence" value={formData.residence} onChange={handleChange} className="w-full p-2 border rounded mb-2" required>
+          <option value="">Residence Type</option>
+          <option>Own</option>
+          <option>Rented</option>
+         </select>
+
+        <input type="text" name="presentAddress" value={formData.presentAddress} onChange={handleChange} placeholder="Present Address" className="w-full p-2 border rounded mb-2" required />
+        <input type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" className="w-full p-2 border rounded mb-2" />
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
+          <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" className="p-2 border rounded" required />
+          <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" className="p-2 border rounded" required />
+          <input type="text" name="pincode" value={formData.pincode} onChange={handleChange} placeholder="Pincode" className="p-2 border rounded" required />
+          <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" className="p-2 border rounded" required />
+        </div>
+
+        <label className="flex items-center gap-2 mb-2">
+            <input type="checkbox" checked={sameAddress} onChange={handleSameAddress} />
+            Same as Present Address
+          </label>
+
+          {!sameAddress && (
+            <input
+              type="text"
+              name="permanentAddress"
+              value={formData.permanentAddress}
+              onChange={handleChange}
+              placeholder="Permanent Address"
+              className="w-full p-2 border rounded"
+              required
+            />
+          )}
+      </div>
 
         {/* Industry */}
         <div>

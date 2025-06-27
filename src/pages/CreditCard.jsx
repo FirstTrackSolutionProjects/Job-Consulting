@@ -32,6 +32,16 @@ const CreditCard = () => {
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
+
+        <div className="grid lg:grid-cols-2 bg-white rounded-xl shadow-lg overflow-hidden">
+          {/* Left Side - Image */}
+          <img
+            src="/images/credit-card.jpg"
+            alt="creditcard"
+            className="w-full h-96 object-cover lg:h-auto"
+          />
+          </div>
+
         <input
           type="text"
           name="name"
