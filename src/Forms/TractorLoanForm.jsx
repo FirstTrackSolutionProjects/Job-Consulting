@@ -19,22 +19,30 @@ const TractorLoanForm = () => {
     childrenCount: "",
     fatherName: "",
     motherName: "",
+    residence: "",
     state: "",
     city: "",
     pincode: "",
+    country: "",
     permanentAddress: "",
-    currentAddress: "",
+    presentAddress: "",
     aadhar: "",
     pan: "",
     tractorModel: "",
     tractorPrice: "",
     landSize: "",
     loanAmount: "",
-     accountHolderName: "",
+    accountHolderName: "",
     bankName: "",
     accountNumber: "",
     ifsc: "",
     purpose: "",
+    bankProof: "",
+    photo: "",
+    aadharFile: "",
+    panFile: "",
+    quotations: "",
+
   });
 
   const handleSameAddress = (e) => {
@@ -43,7 +51,7 @@ const TractorLoanForm = () => {
     if (isChecked) {
       setFormData((prev) => ({
         ...prev,
-        permanentAddress: prev.currentAddress,
+        permanentAddress: prev.presentAddress,
       }));
     } else {
       setFormData((prev) => ({
@@ -104,27 +112,27 @@ const TractorLoanForm = () => {
           </div>
 
           {/* Alternate Phone Number */}
-<div className="flex gap-2">
-  <select
-    name="altStdCode"
-    value={formData.altStdCode}
-    onChange={handleChange}
-    className="p-2 border rounded w-1/3"
-  >
-    <option value="+91">+91 🇮🇳</option>
-    <option value="+1">+1 🇺🇸</option>
-    <option value="+44">+44 🇬🇧</option>
-   
-  </select>
-  <input
-    type="tel"
-    name="altPhone"
-    value={formData.altPhone}
-    onChange={handleChange}
-    placeholder="Alternate Number"
-    className="p-2 border rounded w-full"
-  />
-</div>
+            <div className="flex gap-2">
+              <select
+                name="altStdCode"
+                value={formData.altStdCode}
+                onChange={handleChange}
+                className="p-2 border rounded w-1/3"
+              >
+                <option value="+91">+91 🇮🇳</option>
+                <option value="+1">+1 🇺🇸</option>
+                <option value="+44">+44 🇬🇧</option>
+              
+              </select>
+              <input
+                type="tel"
+                name="altPhone"
+                value={formData.altPhone}
+                onChange={handleChange}
+                placeholder="Alternate Number"
+                className="p-2 border rounded w-full"
+              />
+            </div>
 
 
           <input
@@ -162,13 +170,23 @@ const TractorLoanForm = () => {
           <option>Rented</option>
          </select>
 
-        <input type="text" name="currentAddress" value={formData.currentAddress} onChange={handleChange} placeholder="Current Address" className="w-full p-2 border rounded mb-2" required />
+        <input type="text" name="presentAddress" value={formData.presentAddress} onChange={handleChange} placeholder="Present Address" className="w-full p-2 border rounded mb-2" required />
         <input type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" className="w-full p-2 border rounded mb-2" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
           <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" className="p-2 border rounded" required />
           <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" className="p-2 border rounded" required />
           <input type="text" name="pincode" value={formData.pincode} onChange={handleChange} placeholder="Pincode" className="p-2 border rounded" required />
-          <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" className="p-2 border rounded" required />
+          <select
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              className="p-2 border rounded"
+              required
+            >
+              <option value="">Select Country</option>
+              <option value="India">India</option>
+            </select>
+
         </div>
 
         <label className="flex items-center gap-2 mb-2">

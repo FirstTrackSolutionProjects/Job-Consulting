@@ -19,18 +19,22 @@ const MortgageLoanForm = () => {
     childrenCount: "",
     fatherName: "",
     motherName: "",
+    residence: "",
     state: "",
     city: "",
     pincode: "",
+    country: "",
     permanentAddress: "",
-    currentAddress: "",
+    presentAddress: "",
     aadhar: "",
     pan: "",
     income: "",
+
     profession: "",
     professionType: "",
     businessName: "",
     businessYears: "",
+    businessannualturnover: "",
     businessAddress: "",
     businessCity: "",
     businessPincode: "",
@@ -43,6 +47,10 @@ const MortgageLoanForm = () => {
     officePincode: "",
     officeState: "",
     officeCountry: "",
+    companypan: "",
+    companytan: "",
+    cin: "",
+    gst: "",
     mortgageProperty: "",
     propertyValue: "",
     loanAmount: "",
@@ -50,7 +58,11 @@ const MortgageLoanForm = () => {
     bankName: "",
     accountNumber: "",
     ifsc: "",
+    bankProof: "",
     purpose: "",
+    photo: "",
+    aadharFile: "",
+    panFile: "",
     itr1: "",
     itr2: "",
     itr3: "",
@@ -65,12 +77,12 @@ const MortgageLoanForm = () => {
   if (isChecked) {
     setFormData((prev) => ({
       ...prev,
-      currentAddress: prev.permanentAddress,
+      presentAddress: prev.permanentAddress,
     }));
   } else {
     setFormData((prev) => ({
       ...prev,
-      currentAddress: "",
+      presentAddress: "",
     }));
   }
 };
@@ -125,27 +137,27 @@ const MortgageLoanForm = () => {
           </div>
 
           {/* Alternate Phone Number */}
-<div className="flex gap-2">
-  <select
-    name="altStdCode"
-    value={formData.altStdCode}
-    onChange={handleChange}
-    className="p-2 border rounded w-1/3"
-  >
-    <option value="+91">+91 🇮🇳</option>
-    <option value="+1">+1 🇺🇸</option>
-    <option value="+44">+44 🇬🇧</option>
-    {/* Add more country codes as needed */}
-  </select>
-  <input
-    type="tel"
-    name="altPhone"
-    value={formData.altPhone}
-    onChange={handleChange}
-    placeholder="Alternate Number"
-    className="p-2 border rounded w-full"
-  />
-</div>
+          <div className="flex gap-2">
+            <select
+              name="altStdCode"
+              value={formData.altStdCode}
+              onChange={handleChange}
+              className="p-2 border rounded w-1/3"
+            >
+              <option value="+91">+91 🇮🇳</option>
+              <option value="+1">+1 🇺🇸</option>
+              <option value="+44">+44 🇬🇧</option>
+              {/* Add more country codes as needed */}
+            </select>
+            <input
+              type="tel"
+              name="altPhone"
+              value={formData.altPhone}
+              onChange={handleChange}
+              placeholder="Alternate Number"
+              className="p-2 border rounded w-full"
+            />
+          </div>
 
 
           <input
@@ -183,13 +195,23 @@ const MortgageLoanForm = () => {
           <option>Rented</option>
          </select>
 
-        <input type="text" name="currentAddress" value={formData.currentAddress} onChange={handleChange} placeholder="Current Address" className="w-full p-2 border rounded mb-2" required />
+        <input type="text" name="presentAddress" value={formData.presentAddress} onChange={handleChange} placeholder="Present Address" className="w-full p-2 border rounded mb-2" required />
         <input type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" className="w-full p-2 border rounded mb-2" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
           <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" className="p-2 border rounded" required />
           <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" className="p-2 border rounded" required />
           <input type="text" name="pincode" value={formData.pincode} onChange={handleChange} placeholder="Pincode" className="p-2 border rounded" required />
-          <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" className="p-2 border rounded" required />
+          <select
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              className="p-2 border rounded"
+              required
+            >
+              <option value="">Select Country</option>
+              <option value="India">India</option>
+          </select>
+
         </div>
 
         <label className="flex items-center gap-2 mb-2">
@@ -301,6 +323,16 @@ const MortgageLoanForm = () => {
             />
 
             <input
+                type="text"
+                name="businessannualturnover"
+                value={formData.businessannualturnover}
+                onChange={handleChange}
+                placeholder="Annual Turnover"
+                className="w-full p-2 border rounded"
+                required
+              />
+
+            <input
               type="text"
               name="businessAddress"
               value={formData.businessAddress}
@@ -338,15 +370,39 @@ const MortgageLoanForm = () => {
                 className="p-2 border rounded"
                 required
               />
-              <input
-                type="text"
+              <select
                 name="businessCountry"
                 value={formData.businessCountry}
                 onChange={handleChange}
-                placeholder="Country"
                 className="p-2 border rounded"
                 required
+              >
+                <option value="">Select Country</option>
+                <option value="India">India</option>
+              </select>
+
+
+              <label className="block text-gray-900 mb-1 font-semibold">GST
+              <input
+                type="file"
+                name="gst"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded font-normal"
+                required
               />
+              </label>
+              <label className="block text-gray-900 mb-1 font-semibold">MSME
+              <input
+                type="file"
+                name="msme"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded font-normal"
+                required
+              />
+              </label>
+
             </div>
           </div>
         )}
@@ -428,15 +484,48 @@ const MortgageLoanForm = () => {
                 className="p-2 border rounded"
                 required
               />
-              <input
-                type="text"
+             <select
                 name="officeCountry"
                 value={formData.officeCountry}
                 onChange={handleChange}
-                placeholder="Country"
                 className="p-2 border rounded"
                 required
+              >
+                <option value="">Select Country</option>
+                <option value="India">India</option>
+              </select>
+
+
+               <label className="block text-gray-900 mb-1 font-semibold">Company Identification Number (CIN) 
+              <input
+                type="file"
+                name="cin"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded font-normal"
+                required
               />
+              </label>
+              <label className="block text-gray-900 mb-1 font-semibold">Company PAN
+              <input
+                type="file"
+                name="companypan"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded font-normal"
+                required
+              />
+              </label>
+              <label className="block text-gray-900 mb-1 font-semibold">Company TAN
+              <input
+                type="file"
+                name="companytan"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded font-normal"
+                required
+              />
+              </label>
             </div>
           </div>
         )}
@@ -591,7 +680,7 @@ const MortgageLoanForm = () => {
                 accept=".pdf"
                 onChange={handleChange}
                 className="w-full border p-2 rounded"
-                required
+                
               />
             </div>
 
@@ -603,7 +692,7 @@ const MortgageLoanForm = () => {
                 accept=".pdf"
                 onChange={handleChange}
                 className="w-full border p-2 rounded"
-                required
+                
               />
             </div>
             <div>
@@ -625,7 +714,7 @@ const MortgageLoanForm = () => {
               accept=".pdf"
               onChange={handleChange}
               className="w-full border p-2 rounded"
-              required
+              
             />
           </div>
             <div>
@@ -636,7 +725,7 @@ const MortgageLoanForm = () => {
               accept=".pdf"
               onChange={handleChange}
               className="w-full border p-2 rounded"
-              required
+              
             />
           </div>
           </div>

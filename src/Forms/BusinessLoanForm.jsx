@@ -19,23 +19,47 @@ const BusinessLoanForm = () => {
     childrenCount: "",
     fatherName: "",
     motherName: "",
+    residence: "",
+    permanentAddress: "",
+    presentAddress: "",
     landmark: "",
     state: "",
     city: "",
     pincode: "",
-    currentAddress: "",
+    country: "",
     aadhar: "",
     pan: "",
+    businessName: "",
+    businessType: "",
+    businessAddress: "",
+    businessCity: "",
+    businessState: "",
+    businessPincode: "",
+    businessCountry: "",
+    turnover: "",
+    years: "",
+    loanAmount: "",
+    purpose: "",
     accountHolderName: "",
     bankName: "",
     accountNumber: "",
     ifsc: "",
-    businessName: "",
-    ownerName: "",
-    businessType: "",
-    turnover: "",
-    years: "",
-    loanAmount: "",
+    bankProof: "",
+    photo: "",
+    officePhotos: "",
+    aadharFile: "",
+    panFile: "",
+    gst: "",
+    msme: "",
+    rentAgreement: "",
+    electricityBill: "",
+    cin: "",
+    companyPan: "",
+    companyTan: "",
+    tradeLicense: "",
+    foodLicense: "",
+    drugLicense: "",
+    bankStatements: "",
     itr1: "",
     itr2: "",
     itr3: "",
@@ -49,8 +73,8 @@ const BusinessLoanForm = () => {
   setSameAddress(isChecked);
   setFormData((prev) => ({
     ...prev,
-    currentAddress: isChecked ? prev.permanentAddress : prev.currentAddress,
-    permanentAddress: isChecked ? prev.currentAddress : "",
+    presentAddress: isChecked ? prev.permanentAddress : prev.presentAddress,
+    permanentAddress: isChecked ? prev.presentAddress : "",
   }));
 };
 
@@ -160,13 +184,21 @@ const BusinessLoanForm = () => {
           <option>Rented</option>
          </select>
 
-        <input type="text" name="currentAddress" value={formData.currentAddress} onChange={handleChange} placeholder="Current Address" className="w-full p-2 border rounded mb-2" required />
+        <input type="text" name="presentAddress" value={formData.presentAddress} onChange={handleChange} placeholder="Present Address" className="w-full p-2 border rounded mb-2" required />
         <input type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" className="w-full p-2 border rounded mb-2" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
           <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" className="p-2 border rounded" required />
           <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" className="p-2 border rounded" required />
           <input type="text" name="pincode" value={formData.pincode} onChange={handleChange} placeholder="Pincode" className="p-2 border rounded" required />
-          <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" className="p-2 border rounded" required />
+         <select name="country" value={formData.country} onChange={handleChange} className="p-2 border rounded" required>
+          <option value="">Select Country</option>
+          <option value="India">India</option>
+          <option value="USA">USA</option>
+          <option value="UK">UK</option>
+          <option value="Canada">Canada</option>
+          <option value="Australia">Australia</option>
+        </select>
+
         </div>
 
         <label className="flex items-center gap-2 mb-2">
@@ -305,17 +337,21 @@ const BusinessLoanForm = () => {
           required
         />
      
-
-     
-        <input
-          type="text"
+        <select
           name="country"
           value={formData.country || ""}
           onChange={handleChange}
-          placeholder="Country"
           className="p-2 border rounded"
           required
-        />
+        >
+          <option value="">Select Country</option>
+          <option value="India">India</option>
+          <option value="USA">USA</option>
+          <option value="UK">UK</option>
+          <option value="Canada">Canada</option>
+          <option value="Australia">Australia</option>
+        </select>
+
         
       </div>
     </div>
@@ -395,195 +431,195 @@ const BusinessLoanForm = () => {
 
           {/* upload documents */}
       <div>
-  <h3 className="text-xl font-semibold text-gray-700 mb-4">Upload Documents</h3>
+        <h3 className="text-xl font-semibold text-gray-700 mb-4">Upload Documents</h3>
 
-  {/* Personal Photo */}
-  <div className="mb-4">
-    <label className="block text-gray-700 mb-1">Your Photo (Passport Size)</label>
-    <input
-      type="file"
-      name="photo"
-      accept=".jpg,.jpeg,.png"
-      className="w-full p-2 border rounded"
-      required
-    />
-  </div>
+        {/* Personal Photo */}
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-1">Your Photo (Passport Size)</label>
+          <input
+            type="file"
+            name="photo"
+            accept=".jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
 
-  {/* Office Photos */}
-  <div className="mb-4">
-    <label className="block text-gray-700 mb-1">Office Photos (Upload 4)</label>
-    <input
-      type="file"
-      name="officePhotos"
-      accept=".jpg,.jpeg,.png"
-      multiple
-      className="w-full p-2 border rounded"
-      required
-    />
-  </div>
+        {/* Office Photos */}
+        <div className="mb-4">
+          <label className="block text-gray-700 mb-1">Office Photos (Upload 4)</label>
+          <input
+            type="file"
+            name="officePhotos"
+            accept=".jpg,.jpeg,.png"
+            multiple
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
 
-  {/* Identity Proof */}
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-    <div>
-      <label className="block text-gray-700 mb-1">Aadhaar Card (PDF/Image)</label>
-      <input
-        type="file"
-        name="aadharFile"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-        required
-      />
-    </div>
+        {/* Identity Proof */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block text-gray-700 mb-1">Aadhaar Card (PDF/Image)</label>
+            <input
+              type="file"
+              name="aadharFile"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
 
-    <div>
-      <label className="block text-gray-700 mb-1">PAN Card (PDF/Image)</label>
-      <input
-        type="file"
-        name="panFile"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-        required
-      />
-    </div>
-  </div>
+          <div>
+            <label className="block text-gray-700 mb-1">PAN Card (PDF/Image)</label>
+            <input
+              type="file"
+              name="panFile"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+        </div>
 
-  {/* Business Proof */}
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-    <div>
-      <label className="block text-gray-700 mb-1">GST Certificate (if available)</label>
-      <input
-        type="file"
-        name="gst"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-      />
-    </div>
+        {/* Business Proof */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block text-gray-700 mb-1">GST Certificate (if available)</label>
+            <input
+              type="file"
+              name="gst"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+            />
+          </div>
 
-    <div>
-      <label className="block text-gray-700 mb-1">MSME / Udyam Certificate</label>
-      <input
-        type="file"
-        name="msme"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-      />
-    </div>
+          <div>
+            <label className="block text-gray-700 mb-1">MSME / Udyam Certificate</label>
+            <input
+              type="file"
+              name="msme"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+            />
+          </div>
 
-    <div>
-      <label className="block text-gray-700 mb-1">Rent Agreement (if rented)</label>
-      <input
-        type="file"
-        name="rentAgreement"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-      />
-    </div>
+          <div>
+            <label className="block text-gray-700 mb-1">Rent Agreement (if rented)</label>
+            <input
+              type="file"
+              name="rentAgreement"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+            />
+          </div>
 
-    <div>
-      <label className="block text-gray-700 mb-1">Electricity Bill</label>
-      <input
-        type="file"
-        name="electricityBill"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-      />
-    </div>
-  </div>
+          <div>
+            <label className="block text-gray-700 mb-1">Electricity Bill</label>
+            <input
+              type="file"
+              name="electricityBill"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+            />
+          </div>
+        </div>
 
-  {/* Company Details */}
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-    <div>
-      <label className="block text-gray-700 mb-1">
-        Company Identification Number (CIN)
-        <span className="text-xs text-gray-500"> (Corporate Identity Number)</span>
-      </label>
-      <input
-        type="file"
-        name="cin"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-      />
+        {/* Company Details */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
+          <div>
+            <label className="block text-gray-700 mb-1">
+              Company Identification Number (CIN)
+              <span className="text-xs text-gray-500"> (Corporate Identity Number)</span>
+            </label>
+            <input
+              type="file"
+              name="cin"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+            />
+            </div>
+
+            <div>
+              <label className="block text-gray-700 mb-1">Company PAN </label>
+              <input
+                type="file"
+                name="companyPan"
+                accept=".pdf,.jpg,.jpeg,.png"
+                className="w-full p-2 border rounded"
+              />
+            </div>
+
+            <div>
+              <label className="block text-gray-700 mb-1">Company TAN </label>
+              <input
+                type="file"
+                name="companyTan"
+                accept=".pdf,.jpg,.jpeg,.png"
+                className="w-full p-2 border rounded"
+              />
+            </div>
+          </div>
+
+      {/* Trade Licenses (if applicable) */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
+        <div>
+          <label className="block text-gray-700 mb-1">Trade License</label>
+          <input
+            type="file"
+            name="tradeLicense"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 mb-1">Food License (FSSAI)</label>
+          <input
+            type="file"
+            name="foodLicense"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+          />
+        </div>
+
+        <div>
+          <label className="block text-gray-700 mb-1">Drug License</label>
+          <input
+            type="file"
+            name="drugLicense"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+          />
+        </div>
       </div>
 
-    <div>
-      <label className="block text-gray-700 mb-1">Company PAN </label>
-      <input
-        type="file"
-        name="companyPan"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-      />
-    </div>
+      {/* Bank Statement */}
+      <div className="mb-4">
+        <label className="block text-gray-700 mb-1"> 1 Year Bank Statements (current Account)</label>
+        <input
+          type="file"
+          name="bankStatements"
+          accept=".pdf,.jpg,.jpeg,.png"
+          multiple
+          className="w-full p-2 border rounded"
+          required
+        />
+        </div>
+        <div>
+          <label className="block text-gray-700 mb-1"> 1 Year Bank Statements (CC)</label>
+        <input
+          type="file"
+          name="bankStatements"
+          accept=".pdf,.jpg,.jpeg,.png"
+          multiple
+          className="w-full p-2 border rounded"
+        />
+        </div>
+      </div>
 
-     <div>
-      <label className="block text-gray-700 mb-1">Company TAN </label>
-      <input
-        type="file"
-        name="companyTan"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-      />
-    </div>
-  </div>
-
-  {/* Trade Licenses (if applicable) */}
-  <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
-    <div>
-      <label className="block text-gray-700 mb-1">Trade License</label>
-      <input
-        type="file"
-        name="tradeLicense"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-      />
-    </div>
-
-    <div>
-      <label className="block text-gray-700 mb-1">Food License (FSSAI)</label>
-      <input
-        type="file"
-        name="foodLicense"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-      />
-    </div>
-
-    <div>
-      <label className="block text-gray-700 mb-1">Drug License</label>
-      <input
-        type="file"
-        name="drugLicense"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-      />
-    </div>
-  </div>
-
-  {/* Bank Statement */}
-  <div className="mb-4">
-    <label className="block text-gray-700 mb-1"> 1 Year Bank Statements (Current Account)</label>
-    <input
-      type="file"
-      name="bankStatements"
-      accept=".pdf,.jpg,.jpeg,.png"
-      multiple
-      className="w-full p-2 border rounded"
-      required
-    />
-    </div>
-    <div>
-      <label className="block text-gray-700 mb-1"> 1 Year Bank Statements (CC)</label>
-    <input
-      type="file"
-      name="bankStatements"
-      accept=".pdf,.jpg,.jpeg,.png"
-      multiple
-      className="w-full p-2 border rounded"
-    />
-    </div>
-  </div>
-
-   {/* ✅ Upload ITRs */}
+        {/* ✅ Upload ITRs */}
         <div>
           <label className="block  mb-1 font-bold">Upload Last 3 Years of ITR/Computation</label>
 
@@ -608,7 +644,7 @@ const BusinessLoanForm = () => {
                 accept=".pdf"
                 onChange={handleChange}
                 className="w-full border p-2 rounded"
-                required
+                
               />
             </div>
 
@@ -620,7 +656,7 @@ const BusinessLoanForm = () => {
                 accept=".pdf"
                 onChange={handleChange}
                 className="w-full border p-2 rounded"
-                required
+                
               />
             </div>
             <div>
@@ -642,7 +678,7 @@ const BusinessLoanForm = () => {
               accept=".pdf"
               onChange={handleChange}
               className="w-full border p-2 rounded"
-              required
+              
             />
           </div>
             <div>
@@ -653,7 +689,7 @@ const BusinessLoanForm = () => {
               accept=".pdf"
               onChange={handleChange}
               className="w-full border p-2 rounded"
-              required
+              
             />
           </div>
           </div>

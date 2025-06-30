@@ -1,41 +1,59 @@
 import React, { useState } from "react";
+import { InputField, FileField } from "../Components/FormFields";
 
 
 const EducationLoanForm = () => {
   const [sameAddress, setSameAddress] = useState(false)
   const [formData, setFormData] = useState({
     title: "",
-    fullName: "",
-    email: "",
-    phone: "",
-    stdCode: "+91",
-    altStdCode: "+91",
-    altPhone: "",
-    dob: "",
-    gender: "",
-    maritalStatus: "",
-    spouseName: "",
-    childrenCount: "",
-    fatherName: "",
-    motherName: "",
-    state: "",
-    city: "",
-    pincode: "",
-    permanentAddress: "",
-    currentAddress: "",
-    aadhar: "",
-    pan: "",
-    studentName: "",
-    courseName: "",
-    institutionName: "",
-    duration: "",
-    loanAmount: "",
-    guardianName: "",
-     accountHolderName: "",
-    bankName: "",
-    accountNumber: "",
-    ifsc: "",
-    purpose: "",
+  fullName: "",
+  email: "",
+  phone: "",
+  stdCode: "+91",
+  altStdCode: "+91",
+  altPhone: "",
+  dob: "",
+  gender: "",
+  maritalStatus: "",
+  spouseName: "",
+  childrenCount: "",
+  fatherName: "",
+  motherName: "",
+  state: "",
+  city: "",
+  pincode: "",
+  permanentAddress: "",
+  presentAddress: "",
+  aadhar: "",
+  pan: "",
+  studentName: "",
+  courseName: "",
+  institutionName: "",
+  duration: "",
+  loanAmount: "",
+  guardianName: "",
+  guardianPhone: "",
+  guardianStdCode: "+91",
+  guardianRelation: "",
+  guardianOccupation: "",
+  businessName: "",
+  businessAddress: "",
+  businessState: "",
+  businessCity: "",
+  businessPincode: "",
+  guardianLoanAmount: "",
+  occupationDescription: "",
+  accountHolderName: "",
+  bankName: "",
+  accountNumber: "",
+  ifsc: "",
+  purpose: "",
+  aadharFile: null,
+  panFile: null,
+  bankStatementFile: null,
+  salarySlipFile: null,
+  gstFile: null,
+  msmeFile: null,
   });
 
   const handleSameAddress = (e) => {
@@ -44,7 +62,7 @@ const EducationLoanForm = () => {
     if (isChecked) {
       setFormData((prev) => ({
         ...prev,
-        permanentAddress: prev.currentAddress,
+        permanentAddress: prev.presentAddress,
       }));
     } else {
       setFormData((prev) => ({
@@ -56,8 +74,13 @@ const EducationLoanForm = () => {
   
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+  const { name, value, files } = e.target;
+  setFormData((prev) => ({
+    ...prev,
+    [name]: files ? files[0] : value,
+  }));
+};
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -104,27 +127,27 @@ const EducationLoanForm = () => {
           </div>
 
           {/* Alternate Phone Number */}
-<div className="flex gap-2">
-  <select
-    name="altStdCode"
-    value={formData.altStdCode}
-    onChange={handleChange}
-    className="p-2 border rounded w-1/3"
-  >
-    <option value="+91">+91 🇮🇳</option>
-    <option value="+1">+1 🇺🇸</option>
-    <option value="+44">+44 🇬🇧</option>
-  
-  </select>
-  <input
-    type="tel"
-    name="altPhone"
-    value={formData.altPhone}
-    onChange={handleChange}
-    placeholder="Alternate Number"
-    className="p-2 border rounded w-full"
-  />
-</div>
+          <div className="flex gap-2">
+            <select
+              name="altStdCode"
+              value={formData.altStdCode}
+              onChange={handleChange}
+              className="p-2 border rounded w-1/3"
+            >
+              <option value="+91">+91 🇮🇳</option>
+              <option value="+1">+1 🇺🇸</option>
+              <option value="+44">+44 🇬🇧</option>
+            
+            </select>
+            <input
+              type="tel"
+              name="altPhone"
+              value={formData.altPhone}
+              onChange={handleChange}
+              placeholder="Alternate Number"
+              className="p-2 border rounded w-full"
+            />
+          </div>
 
 
           <input
@@ -162,13 +185,23 @@ const EducationLoanForm = () => {
           <option>Rented</option>
          </select>
 
-        <input type="text" name="currentAddress" value={formData.currentAddress} onChange={handleChange} placeholder="Current Address" className="w-full p-2 border rounded mb-2" required />
+        <input type="text" name="presentAddress" value={formData.presentAddress} onChange={handleChange} placeholder="Present Address" className="w-full p-2 border rounded mb-2" required />
         <input type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" className="w-full p-2 border rounded mb-2" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
           <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" className="p-2 border rounded" required />
           <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" className="p-2 border rounded" required />
           <input type="text" name="pincode" value={formData.pincode} onChange={handleChange} placeholder="Pincode" className="p-2 border rounded" required />
-          <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" className="p-2 border rounded" required />
+          <select
+            name="country"
+            value={formData.country}
+            onChange={handleChange}
+            className="p-2 border rounded"
+            required
+          >
+            <option value="">Select Country</option>
+            <option value="India">India</option>
+          </select>
+
         </div>
 
         <label className="flex items-center gap-2 mb-2">
@@ -293,263 +326,163 @@ const EducationLoanForm = () => {
         />
       </div>
 
-       {/*Purpose of Loan */}
+       {/* Purpose of Loan */}
             <div className="mb-4">
-            <label className="block font-medium mb-2">Purpose of Loan *</label>
-            <input
-              type="text"
-              name="purpose"
-              value={formData.purpose}
-              onChange={handleChange}
-              placeholder="Enter purpose of the loan"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
+              <label className="block font-medium mb-2">Purpose of Loan *</label>
+              <select
+                name="purpose"
+                value={formData.purpose}
+                onChange={handleChange}
+                className="w-full p-2 border rounded"
+                required
+              >
+                <option value=""disabled hidden>Select purpose</option>
+                <option value="Education">Education</option>
+              </select>
+            </div>
 
-        {/* Guardian Details */}
-        <div>
-          <h3 className="text-xl font-semibold text-gray-900 mb-4">Guardian Details</h3>
+            {/* Guardian Details */}
+        
+          <h2 className="text-lg font-bold mb-4">Guardian Details</h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Guardian Name */}
+          <div className="mb-4">
+            <label className="block font-medium mb-1">Guardian Full Name</label>
             <input
               type="text"
               name="guardianName"
               value={formData.guardianName}
               onChange={handleChange}
-              placeholder="Guardian Name"
-              className="p-2 border rounded"
-              required
-            />
-            <input
-              type="tel"
-              name="guardianPhone"
-              value={formData.guardianPhone}
-              onChange={handleChange}
-              placeholder="Guardian Phone Number"
-              className="p-2 border rounded"
-              required
+              className="w-full p-2 border rounded"
             />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-            <input
-              type="text"
-              name="guardianAadhar"
-              value={formData.guardianAadhar}
-              onChange={handleChange}
-              placeholder="Guardian Aadhaar Number"
-              className="p-2 border rounded"
-              required
-            />
-            <input
-              type="text"
-              name="guardianPan"
-              value={formData.guardianPan}
-              onChange={handleChange}
-              placeholder="Guardian PAN Number"
-              className="p-2 border rounded"
-              required
-            />
-          </div>
+         {/* Guardian Phone */}
+      <div className="mb-4">
+        <label className="block font-medium mb-1">Guardian Phone Number</label>
+        <div className="flex">
+          <select
+            name="guardianStdCode"
+            value={formData.guardianStdCode}
+            onChange={handleChange}
+            className="border p-2 rounded-l w-24"
+          >
+            <option value="+91">+91</option>
+            <option value="+1">+1</option>
+            <option value="+44">+44</option>
+            <option value="+61">+61</option>
+          </select>
+          <input
+            type="tel"
+            name="guardianPhone"
+            value={formData.guardianPhone}
+            onChange={handleChange}
+            className="w-full p-2 border border-l-0 rounded-r"
+            placeholder="Enter phone number"
+          />
+        </div>
+      </div>
 
-          <div className="mt-4">
-            <label className="block text-gray-700 mb-1">Guardian Occupation</label>
+
+        {/* Relation Dropdown */}
+        <div className="mb-4">
+          <label className="block font-medium mb-1">Relation with Student</label>
+          <select
+            name="guardianRelation"
+            value={formData.guardianRelation}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          >
+            <option value="">Select Relation</option>
+            <option value="Father">Father</option>
+            <option value="Mother">Mother</option>
+            <option value="Brother">Brother</option>
+            <option value="Sister">Sister</option>
+          </select>
+        </div>
+
+      {/* Occupation Dropdown (visible when relation selected) */}
+      {formData.guardianRelation && (
+        <div className="mb-4">
+          <label className="block font-medium mb-1">Guardian Occupation</label>
+          <select
+            name="guardianOccupation"
+            value={formData.guardianOccupation}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          >
+            <option value="">Select Occupation</option>
+            <option value="Business">Business</option>
+            <option value="Service">Service</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      )}
+
+      {/* Business Fields */}
+      {formData.guardianOccupation === "Business" && (
+        <>
+          <InputField label="Business Name" name="businessName" />
+          <InputField label="Business Address" name="businessAddress" />
+          <InputField label="State" name="businessState" />
+          <InputField label="City" name="businessCity" />
+          <InputField label="Pincode" name="businessPincode" type="number" />
+          <InputField label="Loan Amount" name="guardianLoanAmount" type="number" />
+
+          <FileField label="Bank Statement" name="bankStatementFile" />
+          <FileField label="Aadhar Card" name="aadharFile" />
+          <FileField label="PAN Card" name="panFile" />
+          <FileField label="GST Certificate" name="gstFile" />
+          <FileField label="MSME/Udyam Certificate" name="msmeFile" />
+        </>
+      )}
+
+      {/* Service Fields */}
+      {formData.guardianOccupation === "Service" && (
+        <>
+          <InputField label="Company Name" name="businessName" />
+          <InputField label="Company Address" name="businessAddress" />
+          <InputField label="State" name="businessState" />
+          <InputField label="City" name="businessCity" />
+          <InputField label="Pincode" name="businessPincode" type="number" />
+          <InputField label="Designation" name="designation" />
+          <InputField label="Experience (Years)" name="experience" type="number" />
+          <InputField label="Loan Amount" name="guardianLoanAmount" type="number" />
+          <FileField label="Salary Slip" name="salarySlipFile" />
+          <FileField label="Aadhar Card" name="aadharFile" />
+          <FileField label="PAN Card" name="panFile" />
+        </>
+      )}
+
+        {/* Other Fields */}
+      {formData.guardianOccupation === "Other" && (
+        <>
+          {/* What does guardian do - Dropdown */}
+          <div className="mb-4">
+            <label className="block font-medium mb-1">What does the guardian do?</label>
             <select
-              name="guardianOccupation"
-              value={formData.guardianOccupation}
+              name="occupationDescription"
+              value={formData.occupationDescription}
               onChange={handleChange}
               className="w-full p-2 border rounded"
-              required
             >
-              <option value="">Select Occupation</option>
-              <option value="service">Service</option>
-              <option value="business">Business</option>
-              <option value="farmer">Farmer</option>
-              <option value="other">Other</option>
+              <option value="">Select an option</option>
+              <option value="Homemaker">Homemaker</option>
+              <option value="Farmer">Farmer</option>
+              <option value="Self-employed">Self-employed</option>
+              <option value="Freelancer">Freelancer</option>
+              <option value="Retired">Retired</option>
+              <option value="Other">Other</option>
             </select>
           </div>
 
-          {/* Conditional Fields Based on Occupation */}
-{formData.guardianOccupation === "service" && (
-  <div className="mt-4 space-y-4">
-    <input
-      type="text"
-      name="guardianCompanyName"
-      value={formData.guardianCompanyName}
-      onChange={handleChange}
-      placeholder="Company/Organization Name"
-      className="w-full p-2 border rounded"
-      required
-    />
+          <InputField label="Loan Amount" name="guardianLoanAmount" type="number" />
+          <FileField label="Aadhar Card" name="aadharFile" />
+          <FileField label="PAN Card" name="panFile" />
+        </>
+      )}
 
-    <input
-      type="number"
-      name="guardianYearsInJob"
-      value={formData.guardianYearsInJob}
-      onChange={handleChange}
-      placeholder="Years in Job"
-      className="w-full p-2 border rounded"
-      required
-    />
 
-    <input
-      type="text"
-      name="guardianAddress"
-      value={formData.guardianAddress}
-      onChange={handleChange}
-      placeholder="Office/Work Address"
-      className="w-full p-2 border rounded"
-      required
-    />
-
-    <input
-      type="text"
-      name="guardianLandmark"
-      value={formData.guardianLandmark}
-      onChange={handleChange}
-      placeholder="Landmark"
-      className="w-full p-2 border rounded"
-    />
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <input
-        type="text"
-        name="guardianCity"
-        value={formData.guardianCity}
-        onChange={handleChange}
-        placeholder="City"
-        className="p-2 border rounded"
-        required
-      />
-      <input
-        type="text"
-        name="guardianPincode"
-        value={formData.guardianPincode}
-        onChange={handleChange}
-        placeholder="Pincode"
-        className="p-2 border rounded"
-        required
-      />
-      <input
-        type="text"
-        name="guardianState"
-        value={formData.guardianState}
-        onChange={handleChange}
-        placeholder="State"
-        className="p-2 border rounded"
-        required
-      />
-    </div>
-
-    <input
-      type="text"
-      name="guardianCountry"
-      value={formData.guardianCountry}
-      onChange={handleChange}
-      placeholder="Country"
-      className="w-full p-2 border rounded"
-      required
-    />
-  </div>
-)}
-
-{formData.guardianOccupation === "business" && (
-  <div className="mt-4 space-y-4">
-    <input
-      type="text"
-      name="guardianBusinessName"
-      value={formData.guardianBusinessName}
-      onChange={handleChange}
-      placeholder="Business Name"
-      className="w-full p-2 border rounded"
-      required
-    />
-
-    <input
-      type="number"
-      name="guardianYearsInJob"
-      value={formData.guardianYearsInJob}
-      onChange={handleChange}
-      placeholder="Years in Business"
-      className="w-full p-2 border rounded"
-      required
-    />
-
-    <input
-      type="text"
-      name="guardianAddress"
-      value={formData.guardianAddress}
-      onChange={handleChange}
-      placeholder="Business Address"
-      className="w-full p-2 border rounded"
-      required
-    />
-
-    <input
-      type="text"
-      name="guardianLandmark"
-      value={formData.guardianLandmark}
-      onChange={handleChange}
-      placeholder="Landmark"
-      className="w-full p-2 border rounded"
-    />
-
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-      <input
-        type="text"
-        name="guardianCity"
-        value={formData.guardianCity}
-        onChange={handleChange}
-        placeholder="City"
-        className="p-2 border rounded"
-        required
-      />
-      <input
-        type="text"
-        name="guardianPincode"
-        value={formData.guardianPincode}
-        onChange={handleChange}
-        placeholder="Pincode"
-        className="p-2 border rounded"
-        required
-      />
-      <input
-        type="text"
-        name="guardianState"
-        value={formData.guardianState}
-        onChange={handleChange}
-        placeholder="State"
-        className="p-2 border rounded"
-        required
-      />
-    </div>
-
-    <input
-      type="text"
-      name="guardianCountry"
-      value={formData.guardianCountry}
-      onChange={handleChange}
-      placeholder="Country"
-      className="w-full p-2 border rounded"
-      required
-    />
-  </div>
-)}
-</div>
-
-  {/* 6-Month Bank Statement Upload */}
-  <div>
-    <h2 className="text-xl font-semibold text-gray-900 mb-2">Income Proof</h2>
-    <label className="block text-gray-700 mb-1">Upload 6-Month Bank Statement (PDF)</label>
-    <input
-      type="file"
-      name="guardianBankStatement"
-      accept=".pdf"
-      className="w-full p-2 border rounded"
-      required
-    />
-  </div>
   
         {/* Bank Details */}
       <div>
@@ -566,191 +499,187 @@ const EducationLoanForm = () => {
       </div>
 
        {/* Document Upload */}
-<div>
-  <h3 className="text-xl font-semibold text-gray-700 mb-2">Upload Documents</h3>
+      <div>
+        <h3 className="text-xl font-semibold text-gray-700 mb-2">Upload Documents</h3>
 
-  {/* Aadhaar & PAN */}
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-    <div>
-      <label className="block text-gray-700 mb-1">Aadhaar Card (PDF/Image)</label>
-      <input
-        type="file"
-        name="aadharFile"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-        required
-      />
+        {/* Aadhaar & PAN */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-gray-700 mb-1">Aadhaar Card (PDF/Image)</label>
+            <input
+              type="file"
+              name="aadharFile"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+
+          <div>
+            <label className="block text-gray-700 mb-1">PAN Card (PDF/Image)</label>
+            <input
+              type="file"
+              name="panFile"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+        </div>
+
+        {/* Qualification Dropdown */}
+      <div className="mt-6">
+        <label className="block text-gray-700 mb-1">Highest Qualification</label>
+        <select
+          name="highestQualification"
+          value={formData.highestQualification}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          required
+        >
+          <option value="">Select Qualification</option>
+          <option value="10th">10th</option>
+          <option value="12th">12th</option>
+          <option value="Diploma">Diploma</option>
+          <option value="Graduate">Graduate</option>
+          <option value="Post Graduate">Post Graduate</option>
+          <option value="PhD">PhD</option>
+        </select>
+      </div>
+
+      {/* Education Documents - Conditional Rendering */}
+      {formData.highestQualification && (
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+          {/* 10th */}
+          {formData.highestQualification === "10th" && (
+            <>
+              <div>
+                <label className="block text-gray-700 mb-1">10th Certificate</label>
+                <input
+                  type="file"
+                  name="tenthCertificate"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  className="w-full p-2 border rounded"
+                  required
+                />
+              </div>
+              <div>
+                <label className="block text-gray-700 mb-1">10th Marksheet</label>
+                <input
+                  type="file"
+                  name="tenthMarksheet"
+                  accept=".pdf,.jpg,.jpeg,.png"
+                  className="w-full p-2 border rounded"
+                  required
+                />
+              </div>
+            </>
+          )}
+
+      {/* 12th */}
+      {formData.highestQualification === "12th" && (
+        <>
+          <div>
+            <label className="block text-gray-700 mb-1">12th Certificate</label>
+            <input
+              type="file"
+              name="twelfthCertificate"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+          <div>
+            <label className="block text-gray-700 mb-1">12th Marksheet</label>
+            <input
+              type="file"
+              name="twelfthMarksheet"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+        </>
+      )}
+
+      {/* Diploma */}
+      {formData.highestQualification === "Diploma" && (
+        <>
+          <div>
+            <label className="block text-gray-700 mb-1">Diploma Certificate</label>
+            <input
+              type="file"
+              name="highestQualificationCertificate"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+        </>
+      )}
+
+      {/* Graduate */}
+      {formData.highestQualification === "Graduate" && (
+        <>
+          <div>
+            <label className="block text-gray-700 mb-1">Graduation Certificate</label>
+            <input
+              type="file"
+              name="highestQualificationCertificate"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+        </>
+      )}
+
+      {/* Post Graduate */}
+      {formData.highestQualification === "Post Graduate" && (
+        <>
+          <div>
+            <label className="block text-gray-700 mb-1">Post Graduation Certificate</label>
+            <input
+              type="file"
+              name="highestQualificationCertificate"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+        </>
+      )}
+
+      {/* PhD */}
+      {formData.highestQualification === "PhD" && (
+        <>
+          <div>
+            <label className="block text-gray-700 mb-1">PhD Certificate</label>
+            <input
+              type="file"
+              name="highestQualificationCertificate"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+            />
+          </div>
+        </>
+      )}
+
+        {/* Character Certificate (shown for all) */}
+        <div>
+          <label className="block text-gray-700 mb-1">CLC / Character Certificate</label>
+          <input
+            type="file"
+            name="clcCertificate"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+      </div>
+    )}
     </div>
-
-    <div>
-      <label className="block text-gray-700 mb-1">PAN Card (PDF/Image)</label>
-      <input
-        type="file"
-        name="panFile"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-        required
-      />
-    </div>
-  </div>
-
-  {/* Qualification Dropdown */}
-<div className="mt-6">
-  <label className="block text-gray-700 mb-1">Highest Qualification</label>
-  <select
-    name="highestQualification"
-    value={formData.highestQualification}
-    onChange={handleChange}
-    className="w-full p-2 border rounded"
-    required
-  >
-    <option value="">Select Qualification</option>
-    <option value="10th">10th</option>
-    <option value="12th">12th</option>
-    <option value="Diploma">Diploma</option>
-    <option value="Graduate">Graduate</option>
-    <option value="Post Graduate">Post Graduate</option>
-    <option value="PhD">PhD</option>
-  </select>
-</div>
-
-{/* Education Documents - Conditional Rendering */}
-{formData.highestQualification && (
-  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-    {/* 10th */}
-    {formData.highestQualification === "10th" && (
-      <>
-        <div>
-          <label className="block text-gray-700 mb-1">10th Certificate</label>
-          <input
-            type="file"
-            name="tenthCertificate"
-            accept=".pdf,.jpg,.jpeg,.png"
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-gray-700 mb-1">10th Marksheet</label>
-          <input
-            type="file"
-            name="tenthMarksheet"
-            accept=".pdf,.jpg,.jpeg,.png"
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-      </>
-    )}
-
-    {/* 12th */}
-    {formData.highestQualification === "12th" && (
-      <>
-        <div>
-          <label className="block text-gray-700 mb-1">12th Certificate</label>
-          <input
-            type="file"
-            name="twelfthCertificate"
-            accept=".pdf,.jpg,.jpeg,.png"
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-        <div>
-          <label className="block text-gray-700 mb-1">12th Marksheet</label>
-          <input
-            type="file"
-            name="twelfthMarksheet"
-            accept=".pdf,.jpg,.jpeg,.png"
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-      </>
-    )}
-
-    {/* Diploma */}
-    {formData.highestQualification === "Diploma" && (
-      <>
-        <div>
-          <label className="block text-gray-700 mb-1">Diploma Certificate</label>
-          <input
-            type="file"
-            name="highestQualificationCertificate"
-            accept=".pdf,.jpg,.jpeg,.png"
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-      </>
-    )}
-
-    {/* Graduate */}
-    {formData.highestQualification === "Graduate" && (
-      <>
-        <div>
-          <label className="block text-gray-700 mb-1">Graduation Certificate</label>
-          <input
-            type="file"
-            name="highestQualificationCertificate"
-            accept=".pdf,.jpg,.jpeg,.png"
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-      </>
-    )}
-
-    {/* Post Graduate */}
-    {formData.highestQualification === "Post Graduate" && (
-      <>
-        <div>
-          <label className="block text-gray-700 mb-1">Post Graduation Certificate</label>
-          <input
-            type="file"
-            name="highestQualificationCertificate"
-            accept=".pdf,.jpg,.jpeg,.png"
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-      </>
-    )}
-
-    {/* PhD */}
-    {formData.highestQualification === "PhD" && (
-      <>
-        <div>
-          <label className="block text-gray-700 mb-1">PhD Certificate</label>
-          <input
-            type="file"
-            name="highestQualificationCertificate"
-            accept=".pdf,.jpg,.jpeg,.png"
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-      </>
-    )}
-
-    {/* Character Certificate (shown for all) */}
-    <div>
-      <label className="block text-gray-700 mb-1">CLC / Character Certificate</label>
-      <input
-        type="file"
-        name="clcCertificate"
-        accept=".pdf,.jpg,.jpeg,.png"
-        className="w-full p-2 border rounded"
-        required
-      />
-    </div>
-  </div>
-)}
-</div>
-
-
-
-
 
       <button
         type="submit"

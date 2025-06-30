@@ -17,29 +17,43 @@ const PersonalLoanForm = () => {
     childrenCount: "",
     fatherName: "",
     motherName: "",
+    residence: "",
     state: "",
     city: "",
     pincode: "",
     landmark: "",
     country: "",
     permanentAddress: "",
-    currentAddress: "",
+    presentAddress: "",
     aadhar: "",
     pan: "",
     income: "",
     employmentType: "",
+    organization: "",
+    designation: "",
+    department: "",
+    profession: "",
+    experienceYears: "",
+    experienceMonths: "",
+    experience: "",
+    salarySlip: "",
     loanAmount: "",
     purpose: "",
     accountHolderName: "",
     bankName: "",
     accountNumber: "",
     ifsc: "",
+    officialAddress: "",
     officialLandmark: "",
     officialCity: "",
     officialPincode: "",
     officialState: "",
     officialCountry: "",
-
+    officialEmail: "",
+    aadharFile: "",
+    panFile: "",
+    photo: "",
+    bankProof: "",
   });
 
   const [showExperienceDropdown, setShowExperienceDropdown] = useState(false);
@@ -54,7 +68,7 @@ const PersonalLoanForm = () => {
     if (isChecked) {
       setFormData((prev) => ({
         ...prev,
-        permanentAddress: prev.currentAddress,
+        permanentAddress: prev.presentAddress,
       }));
     } else {
       setFormData((prev) => ({
@@ -164,21 +178,50 @@ const PersonalLoanForm = () => {
           <option>Rented</option>
          </select>
 
-        <input type="text" name="presentAddress" value={formData.currentAddress} onChange={handleChange} placeholder="Present Address" className="w-full p-2 border rounded mb-2" required />
+        <input type="text" name="presentAddress" value={formData.presentAddress} onChange={handleChange} placeholder="Present Address" className="w-full p-2 border rounded mb-2" required />
         <input type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" className="w-full p-2 border rounded mb-2" />
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-2">
          
           <input type="text" name="city" value={formData.city} onChange={handleChange} placeholder="City" className="p-2 border rounded" required />
           <input type="text" name="pincode" value={formData.pincode} onChange={handleChange} placeholder="Pincode" className="p-2 border rounded" required />
           <input type="text" name="state" value={formData.state} onChange={handleChange} placeholder="State" className="p-2 border rounded" required />
-          <input type="text" name="country" value={formData.country} onChange={handleChange} placeholder="Country" className="p-2 border rounded" required />
+         <select
+            name="country"
+            value={formData.country}
+            onChange={handleChange}
+            className="p-2 border rounded"
+            required
+          >
+            <option value="">Select Country</option>
+            <option value="India">India</option>
+            <option value="USA">USA</option>
+            <option value="UK">UK</option>
+            <option value="Canada">Canada</option>
+            <option value="Australia">Australia</option>
+            <option value="Other">Other</option>
+          </select>
+
         </div>
 
         <label className="flex items-center gap-2 mb-2">
           <input type="checkbox" onChange={handleSameAddress} />
           Same as Present Address
         </label>
-      </div>
+
+        {!sameAddress && (
+            <input
+              type="text"
+              name="permanentAddress"
+              value={formData.permanentAddress}
+              onChange={handleChange}
+              placeholder="Permanent Address"
+              className="w-full p-2 border rounded"
+              required
+            />
+          )}
+
+        </div>
+
 
       {/* Family Details */}
       <div>
@@ -349,15 +392,16 @@ const PersonalLoanForm = () => {
                     className="p-2 border rounded"
                     required
                   />
-                  <input
-                    type="text"
+                 <select
                     name="officialCountry"
-                    value={formData.officialCountry || ""}
+                    value={formData.officialCountry}
                     onChange={handleChange}
-                    placeholder="Country"
                     className="p-2 border rounded"
                     required
-                  />
+                    >
+                    <option value="">Select Country</option>
+                    <option value="India">India</option>
+                  </select>
                 </div>
               </div>
 
