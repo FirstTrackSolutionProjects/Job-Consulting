@@ -41,6 +41,8 @@ const HomeLoanForm = () => {
     purpose: "",
     profession: "",
     professionType: "",
+    organizationType: "",
+    industry: "",
     businessName: "",
     businessYears: "",
     businessannualturnover: "",
@@ -301,29 +303,63 @@ const HomeLoanForm = () => {
               required
             >
               <option value="">Select Business Type</option>
-              <option value="Retail">Retail</option>
+              <option value="Retail">Retail/Shop/Mart</option>
               <option value="Manufacturing">Manufacturing</option>
               <option value="Freelancer">Freelancer</option>
+              <option value="IT Consulting">IT Consulting</option>
+              <option value="Media">Media</option>
+              <option value="Internet">Internet</option>
               <option value="Other">Other</option>
             </select>
 
+             {/* Organization Type */}
+      <label className="block mb-2 font-medium">Organization Type</label>
+      <select
+        name="organizationType"
+        value={formData.organizationType}
+        onChange={handleChange}
+        className="w-full border px-3 py-2 mb-4"
+      >
+        <option value="">Select Organization Type</option>
+        <option value="proprietor">Proprietor</option>
+        <option value="partnership">Partnership</option>
+        <option value="private_limited">Private Limited</option>
+        <option value="public_limited">Public Limited</option>
+        <option value="other">Other</option>
+      </select>
+
+      {/* Industry */}
+      <label className="block mb-2 font-medium">Industry</label>
+      <input
+        type="text"
+        name="industry"
+        value={formData.industry}
+        onChange={handleChange}
+        placeholder="Enter Industry"
+        className="w-full border px-3 py-2 mb-4"
+      />
+
+      {/* Business Name */}
+          <div>
+            <label className="block text-gray-700 mb-1">Business Name</label>
             <input
               type="text"
               name="businessName"
               value={formData.businessName}
               onChange={handleChange}
               placeholder="Business Name"
-              className="w-full p-2 border rounded"
               required
+              className="w-full p-2 border rounded mb-2"
             />
-
+          </div>
+           
             <input
               type="number"
               name="businessYears"
               value={formData.businessYears}
               onChange={handleChange}
               placeholder="Years in Business"
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded mb-4"
               required
             />
              <input
@@ -332,7 +368,7 @@ const HomeLoanForm = () => {
                 value={formData.businessannualturnover}
                 onChange={handleChange}
                 placeholder="Annual Turnover"
-                className="w-full p-2 border rounded"
+                className="w-full p-2 border rounded mb-4"
                 required
               />
 
@@ -342,7 +378,7 @@ const HomeLoanForm = () => {
               value={formData.businessAddress}
               onChange={handleChange}
               placeholder="Business Address"
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded mb-4"
               required
             />
 
@@ -425,7 +461,7 @@ const HomeLoanForm = () => {
               <option value="">Select Service Type</option>
               <option value="Private Job">Private Job</option>
               <option value="Government Job">Government Job</option>
-              <option value="IT">IT</option>
+            
               <option value="Other">Other</option>
             </select>
 

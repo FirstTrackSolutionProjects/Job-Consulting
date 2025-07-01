@@ -29,6 +29,8 @@ const BusinessLoanForm = () => {
     country: "",
     aadhar: "",
     pan: "",
+    organizationType: "",
+    industry: "",
     businessName: "",
     businessType: "",
     businessAddress: "",
@@ -255,9 +257,35 @@ const BusinessLoanForm = () => {
       {/* Business Loan Details */}
       <div>
         <h3 className="text-xl font-semibold text-gray-700 mb-2">Business Details</h3>
+        
+         {/* Organization Type */}
+      <label className="block mb-2 font-medium">Organization Type</label>
+      <select
+        name="organizationType"
+        value={formData.organizationType}
+        onChange={handleChange}
+        className="w-full border px-3 py-2 mb-4"
+      >
+        <option value="">Select Organization Type</option>
+        <option value="proprietor">Proprietor</option>
+        <option value="partnership">Partnership</option>
+        <option value="private_limited">Private Limited</option>
+        <option value="public_limited">Public Limited</option>
+        <option value="other">Other</option>
+      </select>
 
-        <div className="space-y-4">
-          {/* Business Name */}
+      {/* Industry */}
+      <label className="block mb-2 font-medium">Industry</label>
+      <input
+        type="text"
+        name="industry"
+        value={formData.industry}
+        onChange={handleChange}
+        placeholder="Enter Industry"
+        className="w-full border px-3 py-2 mb-4"
+      />
+
+      {/* Business Name */}
           <div>
             <label className="block text-gray-700 mb-1">Business Name</label>
             <input
@@ -267,7 +295,7 @@ const BusinessLoanForm = () => {
               onChange={handleChange}
               placeholder="Business Name"
               required
-              className="w-full p-2 border rounded"
+              className="w-full p-2 border rounded mb-4"
             />
           </div>
       {/* Business Type (Owned / Rented) */}
@@ -277,7 +305,7 @@ const BusinessLoanForm = () => {
             name="businessType"
             value={formData.businessType}
             onChange={handleChange}
-            className="w-full p-2 border rounded"
+            className="w-full p-2 border rounded mb-4"
             required
           >
             <option value="">Select Business Type</option>
@@ -346,10 +374,6 @@ const BusinessLoanForm = () => {
         >
           <option value="">Select Country</option>
           <option value="India">India</option>
-          <option value="USA">USA</option>
-          <option value="UK">UK</option>
-          <option value="Canada">Canada</option>
-          <option value="Australia">Australia</option>
         </select>
 
         
@@ -366,7 +390,7 @@ const BusinessLoanForm = () => {
         onChange={handleChange}
         placeholder="Annual Turnover"
         required
-        className="w-full p-2 border rounded"
+        className="w-full p-2 border rounded mb-3"
       />
     </div>
 
@@ -380,7 +404,7 @@ const BusinessLoanForm = () => {
         onChange={handleChange}
         placeholder="Years in Business"
         required
-        className="w-full p-2 border rounded"
+        className="w-full p-2 border rounded mb-3"
       />
     </div>
 
@@ -394,7 +418,7 @@ const BusinessLoanForm = () => {
         onChange={handleChange}
         placeholder="Loan Amount"
         required
-        className="w-full p-2 border rounded"
+        className="w-full p-2 border rounded mb-3"
       />
     </div>
 
@@ -412,7 +436,7 @@ const BusinessLoanForm = () => {
             />
           </div>
         </div>
-      </div>
+     
 
 
          {/* Bank Details */}
