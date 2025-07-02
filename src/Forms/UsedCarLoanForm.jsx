@@ -44,6 +44,9 @@ const UsedCarLoanForm = () => {
     officePincode: "",
     officeState: "",
     officeCountry: "",
+    industry: "",
+    organizationType: "",
+    incomeproof: "",
     gst: "",
     msme: "",
     cin: "",
@@ -63,6 +66,10 @@ const UsedCarLoanForm = () => {
     aadharFile: "",
     panFile: "",
     quotations: "",
+    tradeLicense: "",
+    foodLicense: "",
+    drugLicense: "",
+    beedagreement: "",
     itr1: "",
     itr2: "",
     itr3: "",
@@ -477,27 +484,6 @@ const UsedCarLoanForm = () => {
                   <option value="India">India</option>
                 </select>
 
-                <label className="block text-gray-900 mb-1 font-semibold">GST
-              <input
-                type="file"
-                name="gst"
-                accept=".pdf"
-                onChange={handleChange}
-                className="w-full border p-2 rounded font-normal"
-                required
-              />
-              </label>
-              <label className="block text-gray-900 mb-1 font-semibold">MSME
-              <input
-                type="file"
-                name="msme"
-                accept=".pdf"
-                onChange={handleChange}
-                className="w-full border p-2 rounded font-normal"
-                required
-              />
-              </label>
-
             </div>
           </div>
         )}
@@ -588,44 +574,8 @@ const UsedCarLoanForm = () => {
                 >
                   <option value="">Select Country</option>
                   <option value="India">India</option>
-                  <option value="USA">United States</option>
-                  <option value="UK">United Kingdom</option>
-                  <option value="Canada">Canada</option>
-                  <option value="Australia">Australia</option>
                 </select>
-
-
-               <label className="block text-gray-900 mb-1 font-semibold">Company Identification Number (CIN) 
-              <input
-                type="file"
-                name="cin"
-                accept=".pdf"
-                onChange={handleChange}
-                className="w-full border p-2 rounded font-normal"
-                required
-              />
-              </label>
-              <label className="block text-gray-900 mb-1 font-semibold">Company PAN
-              <input
-                type="file"
-                name="companypan"
-                accept=".pdf"
-                onChange={handleChange}
-                className="w-full border p-2 rounded font-normal"
-                required
-              />
-              </label>
-              <label className="block text-gray-900 mb-1 font-semibold">Company TAN
-              <input
-                type="file"
-                name="companytan"
-                accept=".pdf"
-                onChange={handleChange}
-                className="w-full border p-2 rounded font-normal"
-                required
-              />
-              </label>
-            </div>
+                </div>
           </div>
         )}
 
@@ -707,70 +657,189 @@ const UsedCarLoanForm = () => {
       </div>
 
       {/* Document Upload */}
-      <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-2">
-          Upload Documents
-        </h3>
+    <div>
+      <h3 className="text-xl font-semibold text-gray-900 mb-2">
+        Upload Documents
+      </h3>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-             <label className="block text-gray-700 mb-1">Your Photo (Passport Size)</label>
-              <input
-                type="file"
-                name="photo"
-                accept=".jpg,.jpeg,.png"
-                className="w-full p-2 border rounded"
-                required
-              />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 mb-1">
-              Aadhaar Card (PDF/Image)
-            </label>
-            <input
-              type="file"
-              name="aadharFile"
-              accept=".pdf,.jpg,.jpeg,.png"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 mb-1">
-              PAN Card (PDF/Image)
-            </label>
-            <input
-              type="file"
-              name="panFile"
-              accept=".pdf,.jpg,.jpeg,.png"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-
-          {/* Quotations Upload (Max 5 Photos) */}
-          <div>
-            <label className="block text-gray-700 mb-1">
-              Upload Quotations (Max 5 Photos)
-            </label>
-            <input
-              type="file"
-              name="quotations"
-              accept=".jpg,.jpeg,.png"
-              className="w-full p-2 border rounded"
-              multiple
-              onChange={(e) => {
-                if (e.target.files.length > 5) {
-                  alert("You can upload a maximum of 5 photos.");
-                  e.target.value = null; // Clear input if limit exceeded
-                }
-              }}
-            />
-          </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        {/* Your Photo */}
+        <div>
+          <label className="block text-gray-700 mb-1">Your Photo (Passport Size)</label>
+          <input
+            type="file"
+            name="photo"
+            accept=".jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
         </div>
-      </div>
+
+        {/* Aadhaar */}
+        <div>
+          <label className="block text-gray-700 mb-1">Aadhaar Card</label>
+          <input
+            type="file"
+            name="aadharFile"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+
+        {/* PAN */}
+        <div>
+          <label className="block text-gray-700 mb-1">PAN Card</label>
+          <input
+            type="file"
+            name="panFile"
+            accept=".pdf,.jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            required
+          />
+        </div>
+
+        {/* Quotations */}
+        <div>
+          <label className="block text-gray-700 mb-1">Upload Quotations (Max 5 Photos)</label>
+          <input
+            type="file"
+            name="quotations"
+            accept=".jpg,.jpeg,.png"
+            className="w-full p-2 border rounded"
+            multiple
+            onChange={(e) => {
+              if (e.target.files.length > 5) {
+                alert("You can upload a maximum of 5 photos.");
+                e.target.value = null;
+              }
+            }}
+          />
+        </div>
+
+      {/* Show Business Docs Only if Profession is Business */}
+      {formData.profession === "Business" && (
+        <>
+          <label className="block text-gray-900 mb-1 font-semibold">
+            GST Certificate
+            <input
+              type="file"
+              name="gst"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded font-normal"
+            />
+          </label>
+
+          <label className="block text-gray-900 mb-1 font-semibold">
+            MSME/Udyam Certificate
+            <input
+              type="file"
+              name="msme"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded font-normal"
+            />
+          </label>
+
+          <label className="block text-gray-900 mb-1 font-semibold">
+            Company Identification Number (CIN)
+            <input
+              type="file"
+              name="cin"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded font-normal"
+            />
+          </label>
+
+          <label className="block text-gray-900 mb-1 font-semibold">
+            Company PAN
+            <input
+              type="file"
+              name="companypan"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded font-normal"
+            />
+          </label>
+
+          <label className="block text-gray-900 mb-1 font-semibold">
+            Company TAN
+            <input
+              type="file"
+              name="companytan"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded font-normal"
+            />
+          </label>
+
+          <label className="block text-gray-900 mb-1 font-semibold">
+            Trade License
+            <input
+              type="file"
+              name="tradeLicense"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded font-normal"
+            />
+          </label>
+
+          <label className="block text-gray-900 mb-1 font-semibold">
+            Food License
+            <input
+              type="file"
+              name="foodLicense"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded font-normal"
+            />
+          </label>
+
+          <label className="block text-gray-900 mb-1 font-semibold">
+            Drug License
+            <input
+              type="file"
+              name="drugLicense"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded font-normal"
+            />
+          </label>
+        </>
+      )}
+
+         {/* Show Salary Slip Only if Profession is Service */}
+      {formData.profession === "Service" && (
+        <label className="block text-gray-900 mb-1 font-semibold">
+          Salary Slip (Last 6 Months)
+          <input
+            type="file"
+            name="incomeproof"
+            accept=".pdf"
+            onChange={handleChange}
+            className="w-full border p-2 rounded font-normal"
+          />
+        </label>
+        )}
+
+         {/* Show beed agreement Only if organizationtype is partnership */}
+      {formData.organizationType === "partnership" && (
+        <label className="block text-gray-900 mb-1 font-semibold">
+         Beed Agreement
+          <input
+            type="file"
+            name="beedagreement"
+            accept=".pdf"
+            onChange={handleChange}
+            className="w-full border p-2 rounded font-normal"
+          />
+        </label>
+        )}
+    </div>
+  </div>
+
 
        {/* ✅ Upload ITRs */}
         <div>
