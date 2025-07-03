@@ -166,17 +166,13 @@ const BusinessLoanForm = () => {
           className="p-2 border rounded"
           required
         />
-
-
           <select name="gender" value={formData.gender} onChange={handleChange} className="p-2 border rounded" required>
             <option value="">Select Gender</option>
             <option>Male</option>
             <option>Female</option>
           </select>
         </div>
-
-      
-      </div>
+    </div>
 
       {/* Address Details */}
       <div>
@@ -197,10 +193,7 @@ const BusinessLoanForm = () => {
          <select name="country" value={formData.country} onChange={handleChange} className="p-2 border rounded" required>
           <option value="">Select Country</option>
           <option value="India">India</option>
-          <option value="USA">USA</option>
-          <option value="UK">UK</option>
-          <option value="Canada">Canada</option>
-          <option value="Australia">Australia</option>
+          
         </select>
 
         </div>
@@ -623,9 +616,25 @@ const BusinessLoanForm = () => {
         </div>
       </div>
 
+       {/* Show deed agreement Only if organizationtype is partnership */}
+        <div>
+      {formData.organizationType === "partnership" && (
+        <label className="block text-gray-900 mb-1 mt-4 font-semibold">
+         Partnership Deed
+          <input
+            type="file"
+            name="deedagreement"
+            accept=".pdf"
+            onChange={handleChange}
+            className="w-full border p-2 rounded font-normal mt-1"
+          />
+        </label>
+        )}
+        </div>
+
       {/* Bank Statement */}
       <div className="mb-4">
-        <label className="block text-gray-700 mb-1"> 1 Year Bank Statements (current Account)</label>
+        <label className="block text-gray-700 mb-1 mt-3"> 1 Year Bank Statements (CA)</label>
         <input
           type="file"
           name="bankStatements"
@@ -644,22 +653,6 @@ const BusinessLoanForm = () => {
           multiple
           className="w-full p-2 border rounded"
         />
-        </div>
-
-        {/* Show deed agreement Only if organizationtype is partnership */}
-        <div>
-      {formData.organizationType === "partnership" && (
-        <label className="block text-gray-900 mb-1 mt-4 font-semibold">
-         Deed Agreement
-          <input
-            type="file"
-            name="deedagreement"
-            accept=".pdf"
-            onChange={handleChange}
-            className="w-full border p-2 rounded font-normal mt-1"
-          />
-        </label>
-        )}
         </div>
 
       </div>

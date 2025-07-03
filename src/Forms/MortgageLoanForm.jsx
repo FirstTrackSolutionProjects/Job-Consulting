@@ -695,6 +695,20 @@ const MortgageLoanForm = () => {
             />
           </label>
 
+           {/* Show rent agreement Only if businesstype is rented */}
+          {formData.businessType === "rented" && (
+            <label className="block text-gray-900 mb-1 font-semibold">
+            Rent Agreement
+              <input
+                type="file"
+                name="rentagreement"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded font-normal"
+              />
+            </label>
+            )}
+
           <label className="block text-gray-900 mb-1 font-semibold">
             Company Identification Number (CIN)
             <input
@@ -761,6 +775,20 @@ const MortgageLoanForm = () => {
             />
           </label>
 
+           {/* Show deed agreement Only if organizationtype is partnership */}
+      {formData.organizationType === "partnership" && (
+        <label className="block text-gray-900 mb-1 font-semibold">
+         Partnership Deed
+          <input
+            type="file"
+            name="deedagreement"
+            accept=".pdf"
+            onChange={handleChange}
+            className="w-full border p-2 rounded font-normal"
+          />
+        </label>
+        )}
+
            {/* Bank Statement */}
      
         <label className="block text-gray-900 mb-1 font-semibold">
@@ -801,34 +829,6 @@ const MortgageLoanForm = () => {
           />
         </label>
         )}
-
-         {/* Show deed agreement Only if organizationtype is partnership */}
-      {formData.organizationType === "partnership" && (
-        <label className="block text-gray-900 mb-1 font-semibold">
-         Deed Agreement
-          <input
-            type="file"
-            name="deedagreement"
-            accept=".pdf"
-            onChange={handleChange}
-            className="w-full border p-2 rounded font-normal"
-          />
-        </label>
-        )}
-
-         {/* Show rent agreement Only if businesstype is rented */}
-          {formData.businessType === "rented" && (
-            <label className="block text-gray-900 mb-1 font-semibold">
-            Rent Agreement
-              <input
-                type="file"
-                name="rentagreement"
-                accept=".pdf"
-                onChange={handleChange}
-                className="w-full border p-2 rounded font-normal"
-              />
-            </label>
-            )}
         </div>
       </div>
 
