@@ -5,7 +5,7 @@ import { InputField, FileField } from "../Components/FormFields";
 const EducationLoanForm = () => {
   const [sameAddress, setSameAddress] = useState(false)
   const [formData, setFormData] = useState({
-    title: "",
+  title: "",
   fullName: "",
   email: "",
   phone: "",
@@ -36,11 +36,26 @@ const EducationLoanForm = () => {
   guardianStdCode: "+91",
   guardianRelation: "",
   guardianOccupation: "",
+  organizationType: "",
+  businessType: "",
+  industry: "",
+  businessYears: "",
   businessName: "",
   businessAddress: "",
   businessState: "",
   businessCity: "",
   businessPincode: "",
+  businessCountry: "",
+  annualturnover: "",
+  serviceType: "",
+  designation: "",
+  experience: "",
+  officeAddress: "",
+  officeState: "",
+  officeCity: "",
+  officePincode: "",
+  officeCountry: "",
+  highestQualification: "",
   guardianLoanAmount: "",
   occupationDescription: "",
   accountHolderName: "",
@@ -48,12 +63,30 @@ const EducationLoanForm = () => {
   accountNumber: "",
   ifsc: "",
   purpose: "",
+  photoFile: "",
   aadharFile: null,
   panFile: null,
   bankStatementFile: null,
   salarySlipFile: null,
   gstFile: null,
   msmeFile: null,
+  electricityBillFile: null,
+  rentAgreementFile: null,
+  companyPanFile: null,
+  companyTanFile: null,
+  cinFile: null,
+  tradeLicenseFile: null,
+  foodLicenseFile: null,
+  drugLicenseFile: null,
+  bankStatementsCurrentYear1: null,
+  bankStatementsCCYear1: null,
+  deedagreementFile: null,
+  itr1File: null,
+  itr2File: null,
+  itr3File: null,
+  computationFile1: null,
+  computationFile2: null,
+  computationFile3: null,
   });
 
   const handleSameAddress = (e) => {
@@ -340,150 +373,7 @@ const EducationLoanForm = () => {
                 <option value="Education">Education</option>
               </select>
             </div>
-
-            {/* Guardian Details */}
         
-          <h2 className="text-lg font-bold mb-4">Guardian Details</h2>
-
-          {/* Guardian Name */}
-          <div className="mb-4">
-            <label className="block font-medium mb-1">Guardian Full Name</label>
-            <input
-              type="text"
-              name="guardianName"
-              value={formData.guardianName}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-
-         {/* Guardian Phone */}
-      <div className="mb-4">
-        <label className="block font-medium mb-1">Guardian Phone Number</label>
-        <div className="flex">
-          <select
-            name="guardianStdCode"
-            value={formData.guardianStdCode}
-            onChange={handleChange}
-            className="border p-2 rounded-l w-24"
-          >
-            <option value="+91">+91</option>
-            <option value="+1">+1</option>
-            <option value="+44">+44</option>
-            <option value="+61">+61</option>
-          </select>
-          <input
-            type="tel"
-            name="guardianPhone"
-            value={formData.guardianPhone}
-            onChange={handleChange}
-            className="w-full p-2 border border-l-0 rounded-r"
-            placeholder="Enter phone number"
-          />
-        </div>
-      </div>
-
-
-        {/* Relation Dropdown */}
-        <div className="mb-4">
-          <label className="block font-medium mb-1">Relation with Student</label>
-          <select
-            name="guardianRelation"
-            value={formData.guardianRelation}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-          >
-            <option value="">Select Relation</option>
-            <option value="Father">Father</option>
-            <option value="Mother">Mother</option>
-            <option value="Brother">Brother</option>
-            <option value="Sister">Sister</option>
-          </select>
-        </div>
-
-      {/* Occupation Dropdown (visible when relation selected) */}
-      {formData.guardianRelation && (
-        <div className="mb-4">
-          <label className="block font-medium mb-1">Guardian Occupation</label>
-          <select
-            name="guardianOccupation"
-            value={formData.guardianOccupation}
-            onChange={handleChange}
-            className="w-full p-2 border rounded"
-          >
-            <option value="">Select Occupation</option>
-            <option value="Business">Business</option>
-            <option value="Service">Service</option>
-            <option value="Other">Other</option>
-          </select>
-        </div>
-      )}
-
-      {/* Business Fields */}
-      {formData.guardianOccupation === "Business" && (
-        <>
-          <InputField label="Business Name" name="businessName" />
-          <InputField label="Business Address" name="businessAddress" />
-          <InputField label="State" name="businessState" />
-          <InputField label="City" name="businessCity" />
-          <InputField label="Pincode" name="businessPincode" type="number" />
-          <InputField label="Loan Amount" name="guardianLoanAmount" type="number" />
-
-          <FileField label="Bank Statement" name="bankStatementFile" />
-          <FileField label="Aadhar Card" name="aadharFile" />
-          <FileField label="PAN Card" name="panFile" />
-          <FileField label="GST Certificate" name="gstFile" />
-          <FileField label="MSME/Udyam Certificate" name="msmeFile" />
-        </>
-      )}
-
-      {/* Service Fields */}
-      {formData.guardianOccupation === "Service" && (
-        <>
-          <InputField label="Company Name" name="businessName" />
-          <InputField label="Company Address" name="businessAddress" />
-          <InputField label="State" name="businessState" />
-          <InputField label="City" name="businessCity" />
-          <InputField label="Pincode" name="businessPincode" type="number" />
-          <InputField label="Designation" name="designation" />
-          <InputField label="Experience (Years)" name="experience" type="number" />
-          <InputField label="Loan Amount" name="guardianLoanAmount" type="number" />
-          <FileField label="Salary Slip" name="salarySlipFile" />
-          <FileField label="Aadhar Card" name="aadharFile" />
-          <FileField label="PAN Card" name="panFile" />
-        </>
-      )}
-
-        {/* Other Fields */}
-      {formData.guardianOccupation === "Other" && (
-        <>
-          {/* What does guardian do - Dropdown */}
-          <div className="mb-4">
-            <label className="block font-medium mb-1">What does the guardian do?</label>
-            <select
-              name="occupationDescription"
-              value={formData.occupationDescription}
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-            >
-              <option value="">Select an option</option>
-              <option value="Homemaker">Homemaker</option>
-              <option value="Farmer">Farmer</option>
-              <option value="Self-employed">Self-employed</option>
-              <option value="Freelancer">Freelancer</option>
-              <option value="Retired">Retired</option>
-              <option value="Other">Other</option>
-            </select>
-          </div>
-
-          <InputField label="Loan Amount" name="guardianLoanAmount" type="number" />
-          <FileField label="Aadhar Card" name="aadharFile" />
-          <FileField label="PAN Card" name="panFile" />
-        </>
-      )}
-
-
-  
         {/* Bank Details */}
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank Details</h3>
@@ -680,6 +570,279 @@ const EducationLoanForm = () => {
       </div>
     )}
     </div>
+
+     {/* Guardian Details */}
+        
+          <h2 className="text-lg font-bold mb-4">Guardian Details</h2>
+
+          {/* Guardian Name */}
+          <div className="mb-4">
+            <label className="block font-medium mb-1">Guardian Full Name</label>
+            <input
+              type="text"
+              name="guardianName"
+              value={formData.guardianName}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+            />
+          </div>
+
+         {/* Guardian Phone */}
+      <div className="mb-4">
+        <label className="block font-medium mb-1">Guardian Phone Number</label>
+        <div className="flex">
+          <select
+            name="guardianStdCode"
+            value={formData.guardianStdCode}
+            onChange={handleChange}
+            className="border p-2 rounded-l w-24"
+          >
+            <option value="+91">+91</option>
+            <option value="+1">+1</option>
+            <option value="+44">+44</option>
+            <option value="+61">+61</option>
+          </select>
+          <input
+            type="tel"
+            name="guardianPhone"
+            value={formData.guardianPhone}
+            onChange={handleChange}
+            className="w-full p-2 border border-l-0 rounded-r"
+            placeholder="Enter phone number"
+          />
+        </div>
+      </div>
+
+
+        {/* Relation Dropdown */}
+        <div className="mb-4">
+          <label className="block font-medium mb-1">Relation with Student</label>
+          <select
+            name="guardianRelation"
+            value={formData.guardianRelation}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          >
+            <option value="">Select Relation</option>
+            <option value="Father">Father</option>
+            <option value="Mother">Mother</option>
+            <option value="Brother">Brother</option>
+            <option value="Sister">Sister</option>
+          </select>
+        </div>
+
+
+      {/* Occupation Dropdown (visible when relation selected) */}
+      {formData.guardianRelation && (
+        <div className="mb-4">
+          <label className="block font-medium mb-1">Guardian Occupation</label>
+          <select
+            name="guardianOccupation"
+            value={formData.guardianOccupation}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          >
+            <option value="">Select Occupation</option>
+            <option value="Business">Business</option>
+            <option value="Service">Service</option>
+            <option value="Other">Other</option>
+          </select>
+        </div>
+      )}
+       {/* Bank Details */}
+      <div>
+        <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank Details</h3>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <input type="text" name="accountHolderName" value={formData.accountHolderName} onChange={handleChange} placeholder="Account Holder Name" className="p-2 border rounded" required />
+          <input type="text" name="bankName" value={formData.bankName} onChange={handleChange} placeholder="Bank Name" className="p-2 border rounded" required />
+          <input type="text" name="accountNumber" value={formData.accountNumber} onChange={handleChange} placeholder="Account Number" className="p-2 border rounded" required />
+          <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
+        </div>
+
+        <label className="block mt-4 mb-1">Bank Statement</label>
+        <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+      </div>
+
+
+      {/* Business Fields */}
+      {formData.guardianOccupation === "Business" && (
+        <>
+
+           {/* Organization Type */}
+          <div className="mb-4">
+            <label className="block font-medium mb-1">Organization Type</label>
+            <select
+              name="organizationType"
+              value={formData.organizationType}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            >
+              <option value="">Select Organization Type</option>
+              <option>Proprietor</option>
+              <option>Partnership</option>
+              <option>Private Limited</option>
+              <option>Public Limited</option>
+              <option>Other</option>
+            </select>
+          </div>
+
+            {/* Business Type */}
+          <div className="mb-4">
+            <label className="block font-medium mb-1">Business Type</label>
+            <select
+              name="businessType"
+              value={formData.businessType}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            >
+              <option value="">Select Business Type</option>
+              <option>Own</option>
+              <option>Rented</option>
+            </select>
+          </div>
+
+          <InputField label="Industry" name="industry" />
+          <InputField label="Business Name" name="businessName" />
+          <InputField label="Years in Business" name="yearsInBusiness" type="number" />
+          <InputField label="Annual Turnover (₹)" name="annualTurnover" type="number" />
+          <InputField label="Business Address" name="businessAddress" />
+          <InputField label="City" name="businessCity" />
+          <InputField label="Pincode" name="businessPincode" />
+          <InputField label="State" name="businessState" />
+
+           <div className="mb-4">
+            <label className="block font-medium mb-1">Country</label>
+            <select
+              name="country"
+              value={formData.country}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+              required
+            > 
+              <option value="">Select Country</option>
+              <option value="India">India</option>
+            </select>
+          </div>
+
+
+         {/* Upload Section */}
+        <FileField label="Upload Photo" name="photoFile" />
+        <FileField label="Aadhar Card" name="aadharFile" />
+        <FileField label="PAN Card" name="panFile" />
+        <FileField label="GST Certificate" name="gstFile" />
+        <FileField label="MSME/Udyam Certificate" name="msmeFile" />
+        <FileField label="Electricity Bill" name="electricityBillFile" />
+
+        {/* Conditionally show Rent Agreement */}
+        {formData.businessType === "Rented" && (
+          <FileField label="Rent Agreement" name="rentAgreementFile" />
+        )}
+         <FileField label="Company PAN" name="companyPanFile" />
+          <FileField label="Company TAN" name="companyTanFile" />
+          <FileField label="CIN (Company Identification Number)" name="cinFile" />
+          <FileField label="Trade License" name="tradeLicenseFile" />
+          <FileField label="Food License" name="foodLicenseFile" />
+          <FileField label="Drug License" name="drugLicenseFile" />
+          <FileField label="1 Year Bank Statement (CA)" name="bankStatementsFile" />
+          <FileField label="1 Year Bank Statement (CC)" name="bankStatementsCCFile" />
+
+          {/* Conditionally show Deed Agreement */}
+          {formData.organizationType === "Partnership" && (
+            <FileField label="Deed Agreement" name="deedAgreementFile" />
+          )}
+
+          {/* ITR and Computation Files */}
+          <FileField label="ITR Year 1" name="itr1File" />
+          <FileField label="ITR Year 2" name="itr2File" />
+          <FileField label="ITR Year 3" name="itr3File" />
+          <FileField label="Computation Year 1" name="computationFile1" />
+          <FileField label="Computation Year 2" name="computationFile2" />
+          <FileField label="Computation Year 3" name="computationFile3" />
+        </>
+      )}
+
+      {/* Service Fields */}
+     {formData.guardianOccupation === "Service" && (
+    <>
+      {/* Service Type Dropdown */}
+      <div className="mb-4">
+        <label className="block font-medium mb-1">Service Type</label>
+        <select
+          name="serviceType"
+          value={formData.serviceType}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          required
+        >
+          <option value="">Select Service Type</option>
+          <option value="Private Job">Private Job</option>
+          <option value="Government Job">Government Job</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+
+      {/* Company Info */}
+      <InputField label="Company/Organization Name" name="businessName" />
+      <InputField label="Designation" name="designation" />
+      <InputField label="Years in Job" name="experience" type="number" />
+      <InputField label="Office Address" name="officeAddress" />
+      <InputField label="City" name="officeCity" />
+      <InputField label="Pincode" name="officePincode" />
+      <InputField label="State" name="officeState" />
+
+        {/* Country Dropdown */}
+        <div className="mb-4">
+          <label className="block font-medium mb-1">Country</label>
+          <select
+            name="officeCountry"
+            value={formData.officeCountry}
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+            required
+          >
+            <option value="">Select Country</option>
+            <option value="India">India</option>
+          </select>
+        </div>
+
+        {/* Upload Section */}
+        <FileField label="Upload Photo" name="photoFile" />
+        <FileField label="Aadhar Card" name="aadharFile" />
+        <FileField label="PAN Card" name="panFile" />
+        <FileField label="Salary Slip (Last 3 Months)" name="salarySlipFile" />
+      </>
+    )}
+
+
+        {/* Other Fields */}
+      {formData.guardianOccupation === "Other" && (
+        <>
+          {/* What does guardian do - Dropdown */}
+          <div className="mb-4">
+            <label className="block font-medium mb-1">What does the guardian do?</label>
+            <select
+              name="occupationDescription"
+              value={formData.occupationDescription}
+              onChange={handleChange}
+              className="w-full p-2 border rounded"
+            >
+              <option value="">Select an option</option>
+              <option value="Homemaker">Homemaker</option>
+              <option value="Farmer">Farmer</option>
+              <option value="Self-employed">Self-employed</option>
+              <option value="Freelancer">Freelancer</option>
+              <option value="Retired">Retired</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <InputField label="Loan Amount" name="guardianLoanAmount" type="number" />
+          <FileField label="Aadhar Card" name="aadharFile" />
+          <FileField label="PAN Card" name="panFile" />
+        </>
+      )}
 
       <button
         type="submit"

@@ -42,6 +42,7 @@ const HomeLoanForm = () => {
     profession: "",
     professionType: "",
     organizationType: "",
+    businessType: "",
     industry: "",
     businessName: "",
     businessYears: "",
@@ -52,7 +53,6 @@ const HomeLoanForm = () => {
     businessState: "",
     businessCountry: "",
     businessProof: "",
-    businessType: "",
     companyName: "",
     jobYears: "",
     officeAddress: "",
@@ -60,20 +60,23 @@ const HomeLoanForm = () => {
     officePincode: "",
     officeState: "",
     officeCountry: "",
+    photo: "",
+    aadharFile: "",
+    panFile: "",
     incomeproof: "",
     companypan: "",
     companytan: "",
     cin: "",
     gst: "",
     msme: "",
+    electricityBill: "",
+    rentagreement: "",
     tradeLicense: "",
     foodLicense: "",
     drugLicense: "",
-    quotations: "",
     beedagreement: "",
-    photo: "",
-    aadharFile: "",
-    panFile: "",
+    bankStatementsCurrentYear1: "",
+    bankStatementsCCYear1: "",
     itr1: "",
     itr2: "",
     itr3: "",
@@ -308,7 +311,7 @@ const HomeLoanForm = () => {
               className="w-full p-2 border rounded"
               required
             >
-              <option value="">Select Business Type</option>
+              <option value="">Select Profession Type</option>
               <option value="Retail">Retail/Shop/Mart</option>
               <option value="Manufacturing">Manufacturing</option>
               <option value="Freelancer">Freelancer</option>
@@ -332,6 +335,19 @@ const HomeLoanForm = () => {
         <option value="private_limited">Private Limited</option>
         <option value="public_limited">Public Limited</option>
         <option value="other">Other</option>
+      </select>
+          
+      {/* Business Type */}
+      <label className="block mb-2 font-medium">Business Type</label>
+      <select
+        name="businessType"
+        value={formData.businessType}
+        onChange={handleChange}
+        className="w-full border px-3 py-2 mb-4"
+      >
+        <option value="">Select Business Type</option>
+        <option value="own">Own</option>
+        <option value="rented">Rented</option>
       </select>
 
       {/* Industry */}
@@ -522,10 +538,8 @@ const HomeLoanForm = () => {
             </div>
           </div>
         )}
-
-
-
-      {/* Home Loan Details */}
+          
+          {/* Home Loan Details */}
 
       <div>
         <h3 className="text-xl font-semibold text-gray-700 mb-2">Home Details</h3>
@@ -640,25 +654,7 @@ const HomeLoanForm = () => {
             required
           />
         </div>
-
-        {/* Quotations */}
-        <div>
-          <label className="block text-gray-700 mb-1">Upload Quotations (Max 5 Photos)</label>
-          <input
-            type="file"
-            name="quotations"
-            accept=".jpg,.jpeg,.png"
-            className="w-full p-2 border rounded"
-            multiple
-            onChange={(e) => {
-              if (e.target.files.length > 5) {
-                alert("You can upload a maximum of 5 photos.");
-                e.target.value = null;
-              }
-            }}
-          />
-        </div>
-
+        {/* Business Proof */}
       {/* Show Business Docs Only if Profession is Business */}
       {formData.profession === "Business" && (
         <>
@@ -678,6 +674,17 @@ const HomeLoanForm = () => {
             <input
               type="file"
               name="msme"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded font-normal"
+            />
+          </label>
+
+           <label className="block text-gray-900 mb-1 font-semibold">
+            Electricity Bill
+            <input
+              type="file"
+              name="electricityBill"
               accept=".pdf"
               onChange={handleChange}
               className="w-full border p-2 rounded font-normal"
@@ -749,40 +756,66 @@ const HomeLoanForm = () => {
               className="w-full border p-2 rounded font-normal"
             />
           </label>
+
+           {/* Bank Statement */}
+     
+        <label className="block text-gray-900 mb-1 font-semibold">
+          1 Year Bank Statements (CA)
+          <input
+            type="file"
+            name="bankStatementsCurrent"
+            accept=".pdf,.jpg,.jpeg,.png"
+            multiple
+            className="w-full p-2 border rounded font-normal"
+            required
+          />
+        </label>
+
+          <label className="block text-gray-900 mb-1 font-semibold">
+            1 Year Bank Statements (CC)
+            <input
+              type="file"
+              name="bankStatementsCC"
+              accept=".pdf,.jpg,.jpeg,.png"
+              multiple
+              className="w-full p-2 border rounded font-normal"
+            />
+          </label>
         </>
       )}
 
-         {/* Show Salary Slip Only if Profession is Service */}
-      {formData.profession === "Service" && (
-        <label className="block text-gray-900 mb-1 font-semibold">
-          Salary Slip (Last 6 Months)
-          <input
-            type="file"
-            name="incomeproof"
-            accept=".pdf"
-            onChange={handleChange}
-            className="w-full border p-2 rounded font-normal"
-          />
-        </label>
-        )}
-
-         {/* Show beed agreement Only if organizationtype is partnership */}
+         {/* Show deed agreement Only if organizationtype is partnership */}
       {formData.organizationType === "partnership" && (
         <label className="block text-gray-900 mb-1 font-semibold">
-         Beed Agreement
+         Deed Agreement
           <input
             type="file"
-            name="beedagreement"
+            name="deedagreement"
             accept=".pdf"
             onChange={handleChange}
             className="w-full border p-2 rounded font-normal"
           />
         </label>
         )}
-    </div>
-  </div>
+
+         {/* Show rent agreement Only if businesstype is rented */}
+          {formData.businessType === "rented" && (
+            <label className="block text-gray-900 mb-1 font-semibold">
+            Rent Agreement
+              <input
+                type="file"
+                name="rentagreement"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded font-normal"
+              />
+            </label>
+            )}
+          </div>
+        </div>
 
          {/* ✅ Upload ITRs */}
+          {formData.profession === "Business" && (
         <div>
           <label className="block  mb-1 font-bold">Upload Last 3 Years of ITR/Computation</label>
 
@@ -857,7 +890,24 @@ const HomeLoanForm = () => {
           </div>
           </div>
         </div>
+      )}
 
+       {/* Show Salary Slip Only if Profession is Service */}
+      {formData.profession === "Service" && (
+        <label className="block text-gray-900 mb-1 font-semibold">
+          Salary Slip (Last 3 Months)
+          <input
+            type="file"
+            name="incomeproof"
+            accept=".pdf"
+            onChange={handleChange}
+            className="w-full border p-2 rounded font-normal"
+          />
+        </label>
+        )}
+
+
+        {/* Apply Button */}
       <button
         type="submit"
         className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"

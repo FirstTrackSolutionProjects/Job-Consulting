@@ -61,7 +61,9 @@ const BusinessLoanForm = () => {
     tradeLicense: "",
     foodLicense: "",
     drugLicense: "",
-    bankStatements: "",
+    bankStatementsCurrentYear1: "",
+    bankStatementsCCYear1: "",
+    deedagreement: "",
     itr1: "",
     itr2: "",
     itr3: "",
@@ -528,9 +530,10 @@ const BusinessLoanForm = () => {
               className="w-full p-2 border rounded"
             />
           </div>
-
+          
+          {formData.businessType === "Rented" && (
           <div>
-            <label className="block text-gray-700 mb-1">Rent Agreement (if rented)</label>
+            <label className="block text-gray-700 mb-1">Rent Agreement</label>
             <input
               type="file"
               name="rentAgreement"
@@ -538,6 +541,7 @@ const BusinessLoanForm = () => {
               className="w-full p-2 border rounded"
             />
           </div>
+          )}
 
           <div>
             <label className="block text-gray-700 mb-1">Electricity Bill</label>
@@ -641,6 +645,23 @@ const BusinessLoanForm = () => {
           className="w-full p-2 border rounded"
         />
         </div>
+
+        {/* Show deed agreement Only if organizationtype is partnership */}
+        <div>
+      {formData.organizationType === "partnership" && (
+        <label className="block text-gray-900 mb-1 mt-4 font-semibold">
+         Deed Agreement
+          <input
+            type="file"
+            name="deedagreement"
+            accept=".pdf"
+            onChange={handleChange}
+            className="w-full border p-2 rounded font-normal mt-1"
+          />
+        </label>
+        )}
+        </div>
+
       </div>
 
         {/* ✅ Upload ITRs */}
