@@ -265,7 +265,6 @@ const BusinessLoanForm = () => {
         <option value="proprietor">Proprietor</option>
         <option value="partnership">Partnership</option>
         <option value="private_limited">Private Limited</option>
-        <option value="public_limited">Public Limited</option>
         <option value="other">Other</option>
       </select>
 
@@ -548,6 +547,8 @@ const BusinessLoanForm = () => {
         </div>
 
         {/* Company Details */}
+        { formData.organizationType === "private_limited" && (
+          <>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
             <label className="block text-gray-700 mb-1">
@@ -582,6 +583,8 @@ const BusinessLoanForm = () => {
               />
             </div>
           </div>
+          </>
+        )}
 
       {/* Trade Licenses (if applicable) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
@@ -644,7 +647,7 @@ const BusinessLoanForm = () => {
           required
         />
         </div>
-        <div>
+        {/* <div>
           <label className="block text-gray-700 mb-1"> 1 Year Bank Statements (CC)</label>
         <input
           type="file"
@@ -653,7 +656,7 @@ const BusinessLoanForm = () => {
           multiple
           className="w-full p-2 border rounded"
         />
-        </div>
+        </div> */}
 
       </div>
 

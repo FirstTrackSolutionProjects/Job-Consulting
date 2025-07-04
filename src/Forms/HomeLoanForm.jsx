@@ -333,7 +333,6 @@ const HomeLoanForm = () => {
         <option value="proprietor">Proprietor</option>
         <option value="partnership">Partnership</option>
         <option value="private_limited">Private Limited</option>
-        <option value="public_limited">Public Limited</option>
         <option value="other">Other</option>
       </select>
           
@@ -704,7 +703,9 @@ const HomeLoanForm = () => {
               />
             </label>
             )}
-
+            
+          {formData.organizationType === "private_limited" && (
+            <>
           <label className="block text-gray-900 mb-1 font-semibold">
             Company Identification Number (CIN)
             <input
@@ -737,6 +738,8 @@ const HomeLoanForm = () => {
               className="w-full border p-2 rounded font-normal"
             />
           </label>
+          </>
+          )}
 
           <label className="block text-gray-900 mb-1 font-semibold">
             Trade License
@@ -799,7 +802,7 @@ const HomeLoanForm = () => {
           />
         </label>
 
-          <label className="block text-gray-900 mb-1 font-semibold">
+          {/* <label className="block text-gray-900 mb-1 font-semibold">
             1 Year Bank Statements (CC)
             <input
               type="file"
@@ -808,7 +811,7 @@ const HomeLoanForm = () => {
               multiple
               className="w-full p-2 border rounded font-normal"
             />
-          </label>
+          </label> */}
         </>
       )}
           </div>

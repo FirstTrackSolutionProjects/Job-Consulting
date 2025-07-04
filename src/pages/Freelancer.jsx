@@ -236,7 +236,6 @@ const Freelancer = () => {
             <option value="">Select a Field</option>
             <option value="HR">HR Recruitment</option>
             <option value="Fintech">Fintech</option>
-            <option value="IT Consulting">IT Consulting</option>
             <option value="Digital Marketing">Digital Marketing</option>
             <option value="Sales">Sales</option>
           </select>

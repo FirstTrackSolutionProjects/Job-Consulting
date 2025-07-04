@@ -35,7 +35,6 @@ const EducationLoanForm = () => {
   guardianPhone: "",
   guardianStdCode: "+91",
   guardianRelation: "",
-  guardianOccupation: "",
   organizationType: "",
   businessType: "",
   industry: "",
@@ -56,6 +55,23 @@ const EducationLoanForm = () => {
   officePincode: "",
   officeCountry: "",
   highestQualification: "",
+  tenthCertificate: "",
+  tenthMarksheet: "",
+  tenthPercentage: "",
+  twelfthCertificate: "",
+  twelfthMarksheet: "",
+  twelfthPercentage: "",
+  diplomaCertificate: "",
+  diplomaCgpa: "",
+  graduationCertificate: "",
+  graduationCgpa: "",
+  postGradCertificate: "",
+  postGradCgpa: "",
+  phdCertificate: "",
+  phdCgpa: "",
+  clcCertificate: "",
+  appointmentLetter: "",
+  guardianOccupation: "",
   guardianLoanAmount: "",
   occupationDescription: "",
   accountHolderName: "",
@@ -64,29 +80,29 @@ const EducationLoanForm = () => {
   ifsc: "",
   purpose: "",
   photoFile: "",
-  aadharFile: null,
-  panFile: null,
-  bankStatementFile: null,
-  salarySlipFile: null,
-  gstFile: null,
-  msmeFile: null,
-  electricityBillFile: null,
-  rentAgreementFile: null,
-  companyPanFile: null,
-  companyTanFile: null,
-  cinFile: null,
-  tradeLicenseFile: null,
-  foodLicenseFile: null,
-  drugLicenseFile: null,
-  bankStatementsCurrentYear1: null,
-  bankStatementsCCYear1: null,
-  deedagreementFile: null,
-  itr1File: null,
-  itr2File: null,
-  itr3File: null,
-  computationFile1: null,
-  computationFile2: null,
-  computationFile3: null,
+  aadharFile: "",
+  panFile: "",
+  bankStatementFile: "",
+  salarySlipFile: "",
+  gstFile: "",
+  msmeFile: "",
+  electricityBillFile: "",
+  rentAgreementFile: "",
+  companyPanFile: "",
+  companyTanFile: "",
+  cinFile: "",
+  tradeLicenseFile: "",
+  foodLicenseFile: "",
+  drugLicenseFile: "",
+  bankStatementsCurrentYear1: "",
+  bankStatementsCCYear1: "",
+  deedagreementFile: "",
+  itr1File: "",
+  itr2File: "",
+  itr3File: "",
+  computationFile1: "",
+  computationFile2: "",
+  computationFile3: "",
   });
 
   const handleSameAddress = (e) => {
@@ -359,6 +375,148 @@ const EducationLoanForm = () => {
         />
       </div>
 
+        {/* Qualification Dropdown */}
+      <div className="mt-6">
+        <label className="block text-gray-700 mb-1">Highest Qualification</label>
+        <select
+          name="highestQualification"
+          value={formData.highestQualification}
+          onChange={handleChange}
+          className="w-full p-2 border rounded"
+          required
+        >
+          <option value="">Select Qualification</option>
+          <option value="10th">10th</option>
+          <option value="12th">12th</option>
+          <option value="Diploma">Diploma</option>
+          <option value="Graduate">Graduate</option>
+          <option value="Post Graduate">Post Graduate</option>
+          <option value="PhD">PhD</option>
+        </select>
+      </div>
+
+     {/* Education Documents - Conditional Rendering */}
+{formData.highestQualification && (
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+
+    {/* 10th Details */}
+    <div className="col-span-2">
+      <h4 className="text-lg font-semibold text-gray-800 mb-2">10th Details</h4>
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div>
+          <label className="block text-gray-700 mb-1">10th Certificate</label>
+          <input type="file" name="tenthCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+        </div>
+        <div>
+          <label className="block text-gray-700 mb-1">10th Marksheet</label>
+          <input type="file" name="tenthMarksheet" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+        </div>
+        <div>
+          <label className="block text-gray-700 mb-1">10th Percentage</label>
+          <input type="text" name="tenthPercent" value={formData.tenthPercent} onChange={handleChange} placeholder="e.g., 88.5%" className="w-full p-2 border rounded" required />
+        </div>
+      </div>
+    </div>
+
+    {/* 12th Details */}
+    {["12th", "Diploma", "Graduate", "Post Graduate", "PhD"].includes(formData.highestQualification) && (
+      <div className="col-span-2">
+        <h4 className="text-lg font-semibold text-gray-800 mb-2">12th Details</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-gray-700 mb-1">12th Certificate</label>
+            <input type="file" name="twelfthCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+          </div>
+          <div>
+            <label className="block text-gray-700 mb-1">12th Marksheet</label>
+            <input type="file" name="twelfthMarksheet" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+          </div>
+          <div>
+            <label className="block text-gray-700 mb-1">12th Percentage</label>
+            <input type="text" name="twelfthPercent" value={formData.twelfthPercent} onChange={handleChange} placeholder="e.g., 92%" className="w-full p-2 border rounded" required />
+          </div>
+        </div>
+      </div>
+    )}
+
+    {/* Diploma */}
+    {["Diploma", "Graduate", "Post Graduate", "PhD"].includes(formData.highestQualification) && (
+      <div className="col-span-2">
+        <h4 className="text-lg font-semibold text-gray-800 mb-2">Diploma Details</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-gray-700 mb-1">Diploma Certificate</label>
+            <input type="file" name="diplomaCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+          </div>
+          <div>
+            <label className="block text-gray-700 mb-1">Diploma CGPA</label>
+            <input type="text" name="diplomaCgpa" value={formData.diplomaCgpa} onChange={handleChange} placeholder="e.g., 8.2 CGPA" className="w-full p-2 border rounded" required />
+          </div>
+        </div>
+      </div>
+    )}
+
+    {/* Graduate */}
+    {["Graduate", "Post Graduate", "PhD"].includes(formData.highestQualification) && (
+      <div className="col-span-2">
+        <h4 className="text-lg font-semibold text-gray-800 mb-2">Graduation Details</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-gray-700 mb-1">Graduation Certificate</label>
+            <input type="file" name="graduationCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+          </div>
+          <div>
+            <label className="block text-gray-700 mb-1">Graduation CGPA</label>
+            <input type="text" name="graduationCgpa" value={formData.graduationCgpa} onChange={handleChange} placeholder="e.g., 7.8 CGPA" className="w-full p-2 border rounded" required />
+          </div>
+        </div>
+      </div>
+    )}
+
+    {/* Post Graduate */}
+    {["Post Graduate", "PhD"].includes(formData.highestQualification) && (
+      <div className="col-span-2">
+        <h4 className="text-lg font-semibold text-gray-800 mb-2">Post Graduation Details</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-gray-700 mb-1">PG Certificate</label>
+            <input type="file" name="postGradCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+          </div>
+          <div>
+            <label className="block text-gray-700 mb-1">PG CGPA</label>
+            <input type="text" name="postGradCgpa" value={formData.postGradCgpa} onChange={handleChange} placeholder="e.g., 8.0 CGPA" className="w-full p-2 border rounded" required />
+          </div>
+        </div>
+      </div>
+    )}
+
+    {/* PhD */}
+    {formData.highestQualification === "PhD" && (
+      <div className="col-span-2">
+        <h4 className="text-lg font-semibold text-gray-800 mb-2">PhD Details</h4>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label className="block text-gray-700 mb-1">PhD Certificate</label>
+            <input type="file" name="phdCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+          </div>
+          <div>
+            <label className="block text-gray-700 mb-1">PhD Grade/CGPA</label>
+            <input type="text" name="phdCgpa" value={formData.phdCgpa} onChange={handleChange} placeholder="e.g., 9.1 CGPA" className="w-full p-2 border rounded" required />
+          </div>
+        </div>
+      </div>
+    )}
+
+    {/* Character Certificate for All */}
+    <div className="col-span-2">
+      <label className="block text-gray-700 mb-1">CLC / Character Certificate</label>
+      <input type="file" name="clcCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+    </div>
+  </div>
+)}
+
+   
+
        {/* Purpose of Loan */}
             <div className="mb-4">
               <label className="block font-medium mb-2">Purpose of Loan *</label>
@@ -388,188 +546,63 @@ const EducationLoanForm = () => {
         <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
       </div>
 
-       {/* Document Upload */}
-      <div>
-        <h3 className="text-xl font-semibold text-gray-700 mb-2">Upload Documents</h3>
+      {/* Document Upload */}
+<div>
+  <h3 className="text-xl font-semibold text-gray-700 mb-2">Upload Documents</h3>
 
-        {/* Aadhaar & PAN */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label className="block text-gray-700 mb-1">Aadhaar Card (PDF/Image)</label>
-            <input
-              type="file"
-              name="aadharFile"
-              accept=".pdf,.jpg,.jpeg,.png"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-
-          <div>
-            <label className="block text-gray-700 mb-1">PAN Card (PDF/Image)</label>
-            <input
-              type="file"
-              name="panFile"
-              accept=".pdf,.jpg,.jpeg,.png"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-        </div>
-
-        {/* Qualification Dropdown */}
-      <div className="mt-6">
-        <label className="block text-gray-700 mb-1">Highest Qualification</label>
-        <select
-          name="highestQualification"
-          value={formData.highestQualification}
-          onChange={handleChange}
-          className="w-full p-2 border rounded"
-          required
-        >
-          <option value="">Select Qualification</option>
-          <option value="10th">10th</option>
-          <option value="12th">12th</option>
-          <option value="Diploma">Diploma</option>
-          <option value="Graduate">Graduate</option>
-          <option value="Post Graduate">Post Graduate</option>
-          <option value="PhD">PhD</option>
-        </select>
-      </div>
-
-      {/* Education Documents - Conditional Rendering */}
-      {formData.highestQualification && (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-          {/* 10th */}
-          {formData.highestQualification === "10th" && (
-            <>
-              <div>
-                <label className="block text-gray-700 mb-1">10th Certificate</label>
-                <input
-                  type="file"
-                  name="tenthCertificate"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  className="w-full p-2 border rounded"
-                  required
-                />
-              </div>
-              <div>
-                <label className="block text-gray-700 mb-1">10th Marksheet</label>
-                <input
-                  type="file"
-                  name="tenthMarksheet"
-                  accept=".pdf,.jpg,.jpeg,.png"
-                  className="w-full p-2 border rounded"
-                  required
-                />
-              </div>
-            </>
-          )}
-
-      {/* 12th */}
-      {formData.highestQualification === "12th" && (
-        <>
-          <div>
-            <label className="block text-gray-700 mb-1">12th Certificate</label>
-            <input
-              type="file"
-              name="twelfthCertificate"
-              accept=".pdf,.jpg,.jpeg,.png"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-          <div>
-            <label className="block text-gray-700 mb-1">12th Marksheet</label>
-            <input
-              type="file"
-              name="twelfthMarksheet"
-              accept=".pdf,.jpg,.jpeg,.png"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-        </>
-      )}
-
-      {/* Diploma */}
-      {formData.highestQualification === "Diploma" && (
-        <>
-          <div>
-            <label className="block text-gray-700 mb-1">Diploma Certificate</label>
-            <input
-              type="file"
-              name="highestQualificationCertificate"
-              accept=".pdf,.jpg,.jpeg,.png"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-        </>
-      )}
-
-      {/* Graduate */}
-      {formData.highestQualification === "Graduate" && (
-        <>
-          <div>
-            <label className="block text-gray-700 mb-1">Graduation Certificate</label>
-            <input
-              type="file"
-              name="highestQualificationCertificate"
-              accept=".pdf,.jpg,.jpeg,.png"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-        </>
-      )}
-
-      {/* Post Graduate */}
-      {formData.highestQualification === "Post Graduate" && (
-        <>
-          <div>
-            <label className="block text-gray-700 mb-1">Post Graduation Certificate</label>
-            <input
-              type="file"
-              name="highestQualificationCertificate"
-              accept=".pdf,.jpg,.jpeg,.png"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-        </>
-      )}
-
-      {/* PhD */}
-      {formData.highestQualification === "PhD" && (
-        <>
-          <div>
-            <label className="block text-gray-700 mb-1">PhD Certificate</label>
-            <input
-              type="file"
-              name="highestQualificationCertificate"
-              accept=".pdf,.jpg,.jpeg,.png"
-              className="w-full p-2 border rounded"
-              required
-            />
-          </div>
-        </>
-      )}
-
-        {/* Character Certificate (shown for all) */}
-        <div>
-          <label className="block text-gray-700 mb-1">CLC / Character Certificate</label>
-          <input
-            type="file"
-            name="clcCertificate"
-            accept=".pdf,.jpg,.jpeg,.png"
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-      </div>
-    )}
+  {/* Aadhaar, PAN, Photo */}
+  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div>
+      <label className="block text-gray-700 mb-1">Photo</label>
+      <input
+        type="file"
+        name="photoFile"
+        accept=".jpg,.jpeg,.png"
+        className="w-full p-2 border rounded"
+        required
+      />
     </div>
+
+    <div>
+      <label className="block text-gray-700 mb-1">Aadhaar Card (PDF/Image)</label>
+      <input
+        type="file"
+        name="aadharFile"
+        accept=".pdf,.jpg,.jpeg,.png"
+        className="w-full p-2 border rounded"
+        required
+      />
+    </div>
+
+    <div>
+      <label className="block text-gray-700 mb-1">PAN Card (PDF/Image)</label>
+      <input
+        type="file"
+        name="panFile"
+        accept=".pdf,.jpg,.jpeg,.png"
+        className="w-full p-2 border rounded"
+        required
+      />
+    </div>
+  </div>
+
+  {/* Appointment Letter (based on highestQualification) */}
+  {formData.highestQualification && (
+    <div className="mt-4">
+      <label className="block text-gray-700 mb-1">
+        {formData.highestQualification} Appointment Letter
+      </label>
+      <input
+        type="file"
+        name={`${formData.highestQualification.replace(/\s/g, '').toLowerCase()}AppointmentLetter`}
+        accept=".pdf,.jpg,.jpeg,.png"
+        className="w-full p-2 border rounded"
+        required
+      />
+    </div>
+  )}
+</div>
+
 
      {/* Guardian Details */}
         
@@ -682,7 +715,6 @@ const EducationLoanForm = () => {
               <option>Proprietor</option>
               <option>Partnership</option>
               <option>Private Limited</option>
-              <option>Public Limited</option>
               <option>Other</option>
             </select>
           </div>
@@ -739,14 +771,18 @@ const EducationLoanForm = () => {
         {formData.businessType === "Rented" && (
           <FileField label="Rent Agreement" name="rentAgreementFile" />
         )}
+        {formData.organizationType === "Private Limited" && (
+          <>
          <FileField label="Company PAN" name="companyPanFile" />
           <FileField label="Company TAN" name="companyTanFile" />
           <FileField label="CIN (Company Identification Number)" name="cinFile" />
+          </>
+        )}
           <FileField label="Trade License" name="tradeLicenseFile" />
           <FileField label="Food License" name="foodLicenseFile" />
           <FileField label="Drug License" name="drugLicenseFile" />
           <FileField label="1 Year Bank Statement (CA)" name="bankStatementsFile" />
-          <FileField label="1 Year Bank Statement (CC)" name="bankStatementsCCFile" />
+          {/* <FileField label="1 Year Bank Statement (CC)" name="bankStatementsCCFile" /> */}
 
           {/* Conditionally show Deed Agreement */}
           {formData.organizationType === "Partnership" && (

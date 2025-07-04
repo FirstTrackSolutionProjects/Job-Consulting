@@ -55,8 +55,6 @@ const BusinessAssociate = () => {
     companyPan: "",
     companyTan: "",
     tradeLicense: "",
-    foodLicense: "",
-    drugLicense: "",
     deedagreement: "",
     itr1: "",
     itr2: "",
@@ -267,7 +265,6 @@ const BusinessAssociate = () => {
             <option value="">Select a Field</option>
             <option value="HR">HR Recruitment</option>
             <option value="Fintech">Fintech</option>
-            <option value="IT Consulting">IT Consulting</option>
             <option value="Digital Marketing">Digital Marketing</option>
             <option value="Sales">Sales</option>
           </select>
@@ -289,7 +286,6 @@ const BusinessAssociate = () => {
             <option value="proprietor">Proprietor</option>
             <option value="partnership">Partnership</option>
             <option value="private_limited">Private Limited</option>
-            <option value="public_limited">Public Limited</option>
             <option value="other">Other</option>
           </select>
 
@@ -569,6 +565,7 @@ const BusinessAssociate = () => {
         </div>
 
         {/* Company Details */}
+        {formData.organizationType === "private_limited" && (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
           <div>
             <label className="block font-medium mb-1">
@@ -603,6 +600,7 @@ const BusinessAssociate = () => {
               />
             </div>
           </div>
+        )}
 
       {/* Trade Licenses (if applicable) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
@@ -611,26 +609,6 @@ const BusinessAssociate = () => {
           <input
             type="file"
             name="tradeLicense"
-            accept=".pdf,.jpg,.jpeg,.png"
-            className="w-full p-2 border rounded"
-          />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Food License (FSSAI)</label>
-          <input
-            type="file"
-            name="foodLicense"
-            accept=".pdf,.jpg,.jpeg,.png"
-            className="w-full p-2 border rounded"
-          />
-        </div>
-
-        <div>
-          <label className="block font-medium mb-1">Drug License</label>
-          <input
-            type="file"
-            name="drugLicense"
             accept=".pdf,.jpg,.jpeg,.png"
             className="w-full p-2 border rounded"
           />
