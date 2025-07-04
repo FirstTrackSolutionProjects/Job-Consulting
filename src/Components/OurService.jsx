@@ -1,6 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination } from "swiper/modules";
+import { Link } from "react-router-dom"; // For internal routing
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -35,7 +36,7 @@ const OurService = () => {
           Simplifying Success
         </p>
 
-        {/* Swiper */}
+        {/* Swiper Slider */}
         <Swiper
           modules={[Autoplay, Pagination]}
           spaceBetween={20}
@@ -43,7 +44,7 @@ const OurService = () => {
           autoplay={{ delay: 2500, disableOnInteraction: false }}
           pagination={{
             clickable: true,
-            el: ".custom-pagination", // External container class
+            el: ".custom-pagination",
           }}
           breakpoints={{
             640: { slidesPerView: 1.5 },
@@ -52,9 +53,9 @@ const OurService = () => {
             1280: { slidesPerView: 4 },
           }}
         >
-          {services.map((service, index) => (
-            <SwiperSlide key={index}>
-              <div className="bg-white rounded-2xl shadow-md overflow-hidden mx-auto">
+          {services.map((service, index) => {
+            const cardContent = (
+              <div className="bg-white rounded-2xl shadow-md overflow-hidden mx-auto hover:shadow-xl transition">
                 <img
                   src={service.image}
                   alt={service.title}
@@ -67,11 +68,49 @@ const OurService = () => {
                   </h3>
                 </div>
               </div>
-            </SwiperSlide>
-          ))}
+            );
+
+            // Handle clickable conditions
+            if (service.title === "Job Recruitment") {
+              return (
+                <SwiperSlide key={index}>
+                  <Link to="/jobs">{cardContent}</Link>
+                </SwiperSlide>
+              );
+            }
+
+            if (service.title === "Training & Development") {
+              return (
+                <SwiperSlide key={index}>
+                  <a
+                    href="https://firsttracksolutiontechnologies.com/training"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {cardContent}
+                  </a>
+                </SwiperSlide>
+              );
+            }
+
+            if (service.title === "Fintech Solutions") {
+              return (
+                <SwiperSlide key={index}>
+                  <Link to="/loan">{cardContent}</Link>
+                </SwiperSlide>
+              );
+            }
+
+            // Default return for all other services
+            return (
+              <SwiperSlide key={index}>
+                {cardContent}
+              </SwiperSlide>
+            );
+          })}
         </Swiper>
 
-        {/* Custom Pagination Dots Container (positioned BELOW) */}
+        {/* Optional Custom Pagination Dots */}
         {/* <div className="custom-pagination mt-6 flex justify-center gap-2"></div> */}
       </div>
     </section>

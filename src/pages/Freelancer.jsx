@@ -3,9 +3,11 @@ import React, { useState } from "react";
 const Freelancer = () => {
   const [sameAddress, setSameAddress] = useState(false)
   const [formData, setFormData] = useState({
+    title: "",
     name: "",
     email: "",
     phone: "",
+    stdCode: "+91",
     dob: "",
     gender: "",
     maritalStatus: "",
@@ -15,29 +17,25 @@ const Freelancer = () => {
     motherName: "",
     aadhar: "",
     pan: "",
-    skills: "",
-    experience: "",
-    interestedField: "",
+    residence: "",
+    landmark: "",
     state: "",
     city: "",
     pincode: "",
     country: "",
     permanentAddress: "",
     presentAddress: "",
+    skills: "",
+    experience: "",
+    interestedField: "",
+    portfolio: "",
     resume: "",
     aadharFile: "",
     panFile: "",
     photo: "",
     bankPassbook: "",
-    portfolio: "",
-    itr1: "",
-    itr2: "",
-    itr3: "",
-    computation1: "",
-    computation2: "",
-    computation3: "",
-
-  });
+   
+});
 
   const handleChange = (e) => {
     const { name, value, files } = e.target;
@@ -316,83 +314,6 @@ const Freelancer = () => {
             />
           </div>
         </div>
-
-         {/* ✅ Upload ITRs */}
-        <div>
-          <label className="block  mb-1 font-bold">Upload Last 3 Years of ITR/Computation</label>
-
-          <div className="space-y-2 mt-2">
-            <div>
-              <label className="text-sm font-semibold">ITR - Year 1</label>
-              <input
-                type="file"
-                name="itr1"
-                accept=".pdf"
-                onChange={handleChange}
-                className="w-full border p-2 rounded"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="text-sm font-semibold">ITR - Year 2</label>
-              <input
-                type="file"
-                name="itr2"
-                accept=".pdf"
-                onChange={handleChange}
-                className="w-full border p-2 rounded"
-                required
-              />
-            </div>
-
-            <div>
-              <label className="text-sm font-semibold">ITR - Year 3</label>
-              <input
-                type="file"
-                name="itr3"
-                accept=".pdf"
-                onChange={handleChange}
-                className="w-full border p-2 rounded"
-                required
-              />
-            </div>
-            <div>
-            <label className="text-sm font-semibold">Computation - Year 1</label>
-            <input
-              type="file"
-              name="computation1"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              required
-            />
-          </div>
-          <div>
-            <label className="text-sm font-semibold">Computation - Year 2</label>
-            <input
-              type="file"
-              name="computation2"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              required
-            />
-          </div>
-            <div>
-            <label className="text-sm font-semibold">Computation - Year 3</label>
-            <input
-              type="file"
-              name="computation3"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded"
-              required
-            />
-          </div>
-          </div>
-        </div>
-
 
         {/* Submit Button */}
         <div className="text-center">
