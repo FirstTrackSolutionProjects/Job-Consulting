@@ -6,7 +6,7 @@ const jobs = [
     workmode: ["remote", "hybrid", "onsite"],
     experience: "2-4",
     jobType: "full-time",
-    salary: "₹6-8 LPA",
+    // salary: "₹6-8 LPA",
     description:
       "We are looking for a skilled Frontend Developer with experience in React and JavaScript. Join our dynamic team to build innovative web applications.",
     education: "Bachelor's in Computer Science or related field",
@@ -26,7 +26,7 @@ const jobs = [
     ],
     experience: "0-2",
     jobType: "part-time",
-    salary: "₹3-4 LPA",
+    // salary: "₹3-4 LPA",
     workmode: ["remote", "hybrid", "onsite"],
     description:
       "Looking for a dynamic HR Executive to manage recruitment and employee relations. Freshers are welcome.",
@@ -44,7 +44,7 @@ const jobs = [
     location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
     experience: "0-1",
     jobType: "internship",
-    salary: "₹10K/Month",
+    // salary: "₹10K/Month",
     workmode: ["remote", "hybrid", "onsite"],
     description:
       "Join our team as a UI Intern and gain hands-on experience in designing user interfaces. Ideal for fresh graduates.",
@@ -62,7 +62,7 @@ const jobs = [
     location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
     experience: "3-5",
     jobType: "full-time",
-    salary: "₹8-12 LPA",
+    // salary: "₹8-12 LPA",
     workmode: ["remote", "hybrid", "onsite"],
     description:
       "Seeking an experienced Backend Developer proficient in Node.js and MongoDB. Work on scalable applications with a talented team.",
@@ -80,7 +80,7 @@ const jobs = [
     location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
     experience: "2-4",
     jobType: "full-time",
-    salary: "₹7-10 LPA",
+    // salary: "₹7-10 LPA",
     workmode: ["remote", "hybrid", "onsite"],
     description:
       "We are looking for a React Native Developer to create cross-platform mobile applications. Experience with mobile development is a plus.",
@@ -98,7 +98,7 @@ const jobs = [
     location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
     experience: "1-3",
     jobType: "full-time",
-    salary: "₹5-8 LPA",
+    // salary: "₹5-8 LPA",
     workmode: ["remote", "hybrid", "onsite"],
     description:
       "Join our creative team as a UI/UX Designer. You will be responsible for designing user-friendly interfaces and enhancing user experience.",
@@ -116,7 +116,7 @@ const jobs = [
     location: ["Delhi", "Mumbai", "Kolkata", "Bhubaneswar"],
     experience: "1-3",
     jobType: "full-time",
-    salary: "₹4-6 LPA",
+    // salary: "₹4-6 LPA",
     workmode: ["remote", "hybrid", "onsite"],
     description:
       "Creative Graphic Designer needed to design visuals for digital and print platforms.",
@@ -134,7 +134,7 @@ const jobs = [
     location: ["Bhubaneswar", "Delhi", "Mumbai"],
     experience: "0-1",
     jobType: "internship",
-    salary: "₹8K/Month",
+    // salary: "₹8K/Month",
     workmode: ["remote", "hybrid", "onsite"],
     description:
       "Support IT infrastructure and help desk operations. Good opportunity for freshers.",
@@ -152,7 +152,7 @@ const jobs = [
     location: ["Delhi", "Mumbai", "Bhubaneswar", "Kolkata"],
     experience: "0-1",
     jobType: "internship",
-    salary: "₹5K/Month",
+    // salary: "₹5K/Month",
     workmode: ["remote", "hybrid", "onsite"],
     description:
       "Assist HR team with day-to-day operations including recruitment and employee engagement.",
@@ -170,7 +170,7 @@ const jobs = [
     location: "Open to all location",
     experience: "2-4",
     jobType: "full-time",
-    salary: "₹6-9 LPA",
+    // salary: "₹6-9 LPA",
     workmode: ["remote", "hybrid", "onsite"],
     description:
       "Looking for a proactive professional to manage and grow client accounts.",
@@ -188,7 +188,7 @@ const jobs = [
     location: ["Bhubaneswar", "Delhi", "Mumbai", "Kolkata"],
     experience: "3-5",
     jobType: "full-time",
-    salary: "₹9-14 LPA",
+    // salary: "₹9-14 LPA",
     workmode: ["remote", "hybrid", "onsite"],
     description:
       "Experienced full stack developer needed for end-to-end product development.",
@@ -206,7 +206,7 @@ const jobs = [
     location: ["Delhi", "Mumbai", "Kolkata", "Bhubaneswar"],
     experience: "3-6",
     jobType: "full-time",
-    salary: "₹8-12 LPA",
+    // salary: "₹8-12 LPA",
     workmode: ["remote", "hybrid", "onsite"],
     description:
       "Oversee HR operations including payroll, compliance, and employee onboarding.",
@@ -224,7 +224,7 @@ const jobs = [
     location: ["Mumbai", "Delhi", "Bhubaneswar", "Kolkata"],
     experience: "1-3",
     jobType: "full-time",
-    salary: "₹4-7 LPA",
+    // salary: "₹4-7 LPA",
     workmode: ["remote", "hybrid", "onsite"],
     description:
       "Drive digital marketing strategies across social, SEO, and email campaigns.",

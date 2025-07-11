@@ -49,9 +49,9 @@ const CurrentOpening = () => {
               <p className="text-sm text-gray-500 mb-1">
                 <strong>Experience:</strong> {job.experience} years
               </p>
-              <p className="text-sm text-gray-500 mb-4">
+              {/* <p className="text-sm text-gray-500 mb-4">
                 <strong>Salary:</strong> {job.salary}
-              </p>
+              </p> */}
 
               {/* Buttons */}
               <div className="mt-4 flex justify-between">

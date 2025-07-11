@@ -97,9 +97,9 @@ const Jobs = () => {
                     <p className="text-sm text-gray-500">
                       Experience: {job.experience} years
                     </p>
-                    <p className="text-sm text-gray-500">
+                    {/* <p className="text-sm text-gray-500">
                       Salary: {job.salary}
-                    </p>
+                    </p> */}
                     <div className="flex justify-end mt-4">
                       <Link
                         to={`/jobs/${job.id}`}
