@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import jobs from "../data/jobs";
@@ -52,9 +50,9 @@ const JobDetails = () => {
         <p className="text-sm text-gray-500">
           <strong>Type:</strong> {job.jobType} | <strong>Experience:</strong> {job.experience} years
         </p>
-        <p className="text-sm text-gray-500">
+        {/* <p className="text-sm text-gray-500">
           <strong>Salary:</strong> {job.salary}
-        </p>
+        </p> */}
         <p className="text-sm text-gray-500">
           <strong>Work Mode:</strong> Remote / Hybrid / Onsite
         </p>

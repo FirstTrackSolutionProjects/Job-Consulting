@@ -11,7 +11,7 @@ const CareerForm = () => {
     phone: "",
     stdCode: "+91",
     dob: "",
-    gender: "Male",
+    gender: "",
     street: "",
     city: "",
     postalCode: "",
@@ -48,6 +48,18 @@ const CareerForm = () => {
     "Tele Caller",
     "Client Relationship Manager [CRM]",
     "Corporate Relationship Manager [CRM]",
+    "Frontend Developer",
+    "HR Executive",
+    "UI Intern",
+    "Backend developer",
+    "React Native Developer",
+    "UI/UX Developer",
+    "Graphic Developer",
+    "IT Intern",
+    "HR Intern",
+    "Full Stack Developer",
+    "HR OPerations Manager",
+    "Digital Marketing Executive"
   ];
 
   return (
@@ -144,9 +156,10 @@ const CareerForm = () => {
               onChange={handleChange}
               className="w-full border p-2"
             >
+              <option>Select Gender</option>
               <option>Male</option>
               <option>Female</option>
-              <option>Other</option>
+              
             </select>
           </div>
           <div>
