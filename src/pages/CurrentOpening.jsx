@@ -11,6 +11,13 @@ const CurrentOpening = () => {
         Current Openings
       </h1>
 
+      <img
+        src="/images/current-openings.jpg"
+        alt="Loan"
+        className="w-full h-100 object-cover rounded-xl mb-6"
+      />
+
+
       {jobs.length === 0 ? (
         <p className="text-center text-gray-500">No job openings available right now.</p>
       ) : (
