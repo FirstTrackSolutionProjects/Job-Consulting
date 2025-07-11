@@ -3,7 +3,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const loanTypes = [
-  { name: "Personal Loan", type: "personal" },
+  { name: "Personal Loan", type: "personal"},
   { name: "Business Loan", type: "business" },
   { name: "Home Loan", type: "home" },
   { name: "Mortgage Loan", type: "mortgage/laps" },
@@ -18,11 +18,11 @@ const LoanPage = () => {
       <h2 className="text-3xl font-bold text-blue-700 mb-5 text-center">
         Choose a Loan Type
       </h2>
-      {/* <img
+      <img
         src="/images/loan.jpg"
         alt="Loan"
         className="w-full h-85 object-cover rounded-xl mb-6"
-      /> */}
+      />
 
       <div className="grid md:grid-cols-2 gap-6 mb-10">
         {loanTypes.map((loan) => (
@@ -59,3 +59,4 @@ const LoanPage = () => {
 };
 
 export default LoanPage;
+
