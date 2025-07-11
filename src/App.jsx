@@ -11,7 +11,7 @@ import Register from "./pages/Register";
 import Position from "./pages/Position";
 import Contact from "./pages/Contact";
 
- import CareerForm from "./pages/CareerForm";
+ import Career from "./pages/Career";
 import Jobs from "./pages/Jobs";
 import JobDetails from "./pages/JobDetails";
 import CurrentOpening from "./pages/CurrentOpening";
@@ -53,7 +53,7 @@ function App() {
          
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/career-form" element={<CareerForm />} />
+          <Route path="/career" element={<Career />} />
           
           <Route path="/jobs" element={<Jobs />} />
           <Route path="/jobs/:id" element={<JobDetails />} />
@@ -83,21 +83,6 @@ function App() {
           <Route path="/loan/apply/used-car" element={<UsedCarLoanForm />} />
           <Route path="/loan/apply/education" element={<EducationLoanForm />} />
           <Route path="/loan/apply/tractor" element={<TractorLoanForm />} />
-          
-          
-          
-          
-          
-          
-          
-          
-          
-         
-          
-          
-          
-          
-          
         </Routes>
       </main>
 
