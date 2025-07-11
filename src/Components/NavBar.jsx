@@ -71,7 +71,7 @@ const NavBar = () => {
         </div>
 
 
-          {/* <a
+          <a
           href="https://firsttracksolutiontechnologies.com/career"
           target="_blank"
           rel="noopener noreferrer"
@@ -79,9 +79,9 @@ const NavBar = () => {
           className="hover:text-blue-400"
         >
           Career
-        </a> */}
+        </a>
 
-            <Link to="/career-form" className="hover:underline"  onClick={closeMenu}>Career</Link>
+            {/* <Link to="/career" className="hover:underline"  onClick={closeMenu}>Career</Link> */}
 
           <Link to="/contact" className="hover:underline" onClick={closeMenu}>Contact</Link>
           <Link to="/partner" className="hover:underline" onClick={closeMenu}>Partner</Link>

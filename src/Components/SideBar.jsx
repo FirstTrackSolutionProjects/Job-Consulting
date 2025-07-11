@@ -63,7 +63,7 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
           )}
         </div>
 
-        {/* <a
+        <a
           href="https://firsttracksolutiontechnologies.com/career"
           target="_blank"
           rel="noopener noreferrer"
@@ -71,9 +71,9 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
           className="hover:text-blue-400"
         >
           Career
-        </a> */}
+        </a>
 
-         <Link to="/career-form" onClick={toggleMenu} className="hover:text-blue-400">Career</Link>
+         {/* <Link to="/career" onClick={toggleMenu} className="hover:text-blue-400">Career</Link> */}
 
 
         <Link to="/contact" onClick={toggleMenu} className="hover:text-blue-400">
