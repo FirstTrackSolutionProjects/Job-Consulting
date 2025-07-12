@@ -76,7 +76,7 @@ const Footer = () => {
       {/* Bottom Bar */}
       <div className="text-center text-sm text-gray-400 mt-6 pb-4">
         Copyright © 2025, Developed by 
-         <a href="https://firsttracksolution.tech" className='text-blue-400 hover:underline ml-1'>
+         <a href="https://firsttracksolutiontechnologies.com" className='text-blue-400 hover:underline ml-1'>
             First Track Solution Technologies
           </a>
       </div>
