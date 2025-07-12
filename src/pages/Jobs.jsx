@@ -40,8 +40,12 @@ const Jobs = () => {
         )
       : job.location?.toLowerCase().includes(locationFilter));
 
-  const matchType =
-    !typeFilter || job.jobType?.toLowerCase() === typeFilter;
+ const matchType =
+  !typeFilter ||
+  (Array.isArray(job.jobType)
+    ? job.jobType.some((type) => type.toLowerCase() === typeFilter)
+    : job.jobType?.toLowerCase() === typeFilter);
+
 
   return matchTitle && matchLocation && matchType;
 });

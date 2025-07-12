@@ -25,7 +25,7 @@ const jobs = [
       "Ranchi", "Lucknow", "Patna", "Raipur", "Indore"
     ],
     experience: "0-2",
-    jobType: "part-time",
+    jobType: "full-time",
     // salary: "₹3-4 LPA",
     workmode: ["remote", "hybrid", "onsite"],
     description:
@@ -43,7 +43,7 @@ const jobs = [
     title: "UI Intern",
     location: ["Delhi", "Bhubaneswar", "Kolkata", "Mumbai"],
     experience: "0-1",
-    jobType: "internship",
+    jobType: ["internship", "full-time"],
     // salary: "₹10K/Month",
     workmode: ["remote", "hybrid", "onsite"],
     description:
@@ -115,7 +115,7 @@ const jobs = [
     title: "Graphic Designer",
     location: ["Delhi", "Mumbai", "Kolkata", "Bhubaneswar"],
     experience: "1-3",
-    jobType: "full-time",
+    jobType: ["full-time", "Internship"],
     // salary: "₹4-6 LPA",
     workmode: ["remote", "hybrid", "onsite"],
     description:
@@ -133,7 +133,7 @@ const jobs = [
     title: "IT Intern",
     location: ["Bhubaneswar", "Delhi", "Mumbai"],
     experience: "0-1",
-    jobType: "internship",
+    jobType: ["internship", "full-time"],
     // salary: "₹8K/Month",
     workmode: ["remote", "hybrid", "onsite"],
     description:
@@ -151,7 +151,7 @@ const jobs = [
     title: "HR Intern",
     location: ["Delhi", "Mumbai", "Bhubaneswar", "Kolkata"],
     experience: "0-1",
-    jobType: "internship",
+    jobType: ["internship", "full-time"],
     // salary: "₹5K/Month",
     workmode: ["remote", "hybrid", "onsite"],
     description:
