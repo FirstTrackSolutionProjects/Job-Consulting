@@ -220,7 +220,7 @@ const jobs = [
   },
   {
     id: 13,
-    title: "Digital Marketing Executive",
+    title: "Digital Marketing",
     location: ["Mumbai", "Delhi", "Bhubaneswar", "Kolkata"],
     experience: "1-3",
     jobType: "full-time",
@@ -236,6 +236,75 @@ const jobs = [
       "Optimize campaigns for better reach and ROI",
     ],
   },
+  {
+  id: 14,
+  title: "Relationship Manager",
+  location: ["Mumbai", "Delhi", "Bhubaneswar", "Kolkata"],
+  experience: "2-4",
+  jobType: "full-time",
+  workmode: ["onsite", "hybrid"],
+  description:
+    "Build and maintain strong client relationships, understand their financial needs, and offer appropriate solutions.",
+  education: "Bachelor's in Finance, Business, or related field",
+  skills: ["Communication", "Client Handling", "Financial Products", "CRM Tools"],
+  responsibilities: [
+    "Manage a portfolio of clients and ensure high-quality service",
+    "Understand client needs and offer suitable solutions",
+    "Achieve monthly targets and cross-sell banking products",
+    ],
+  },
+  {
+    id: 15,
+    title: "Relationship Officer",
+    location: ["Mumbai", "Delhi", "Bhubaneswar", "Kolkata"],
+    experience: "1-3",
+    jobType: "full-time",
+    workmode: ["onsite", "hybrid"],
+    description:
+      "Assist Relationship Managers in managing client accounts and ensuring customer satisfaction.",
+    education: "Bachelor's in Finance, Business, or related field",
+    skills: ["Communication", "Client Handling", "CRM Tools"],
+    responsibilities: [
+       "Support sales team with client coordination",
+    "Handle documentation and backend operations",
+    "Assist in upselling financial services",
+    ],
+  },
+  {
+    id: 16,
+    title: "Telecaller",
+    location: ["Mumbai", "Delhi", "Bhubaneswar", "Kolkata"],
+    experience: "0-2",
+    jobType: "full-time",
+    workmode: ["onsite", "hybrid"],
+    description:
+      "Conduct outbound calls to potential clients, explain products/services, and generate leads.",
+    education: "High School Diploma or equivalent",
+    skills: ["Communication", "Persuasion", "Customer Service"],
+    responsibilities: [
+      "Make outbound calls to potential clients",
+      "Explain products/services and answer queries",
+      "Generate leads and schedule appointments for sales team",
+    ],
+  },
+  {
+    id: 17,
+    title: "Sales Coordinator",
+    location: ["Mumbai", "Delhi", "Bhubaneswar", "Kolkata"],
+    experience: "1-3",
+    jobType: "full-time",
+    workmode: ["onsite", "hybrid"],
+    description:
+      "Coordinate sales activities, manage schedules, and support the sales team in achieving targets.",
+    education: "Bachelor's in Business Administration or related field",
+    skills: ["Organization", "Communication", "CRM Tools"],
+    responsibilities: [
+      "Assist the sales team with administrative tasks",
+      "Manage schedules and coordinate meetings",
+      "Track sales performance and prepare reports",
+    ],
+  },
+
 ];
 
 export default jobs;

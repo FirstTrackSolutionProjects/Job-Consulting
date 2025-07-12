@@ -68,14 +68,15 @@ const CurrentOpening = () => {
                 >
                   Read More →
                 </Link>
-                <button
-                  onClick={() =>
-                    navigate("/career-form", { state: { jobTitle: job.title } })
-                  }
-                  className="text-sm bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium"
+                <a
+                  href="https://firsttracksolutiontechnologies.com/career"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-sm bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-md font-medium inline-block text-center"
                 >
                   Apply Now
-                </button>
+                </a>
+
               </div>
             </div>
           ))}
