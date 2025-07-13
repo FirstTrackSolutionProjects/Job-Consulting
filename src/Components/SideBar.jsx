@@ -76,9 +76,15 @@ const Sidebar = ({ isOpen, toggleMenu }) => {
          {/* <Link to="/career" onClick={toggleMenu} className="hover:text-blue-400">Career</Link> */}
 
 
-        <Link to="/contact" onClick={toggleMenu} className="hover:text-blue-400">
+         <a
+          href="https://firsttracksolutiontechnologies.com/contact"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={toggleMenu}
+          className="hover:text-blue-400"
+        >
           Contact
-        </Link>
+        </a>
 
         <Link to="/partner" onClick={toggleMenu} className="hover:text-blue-400">
           Partner

@@ -86,7 +86,16 @@ const NavBar = () => {
 
             {/* <Link to="/career" className="hover:underline"  onClick={closeMenu}>Career</Link> */}
 
-          <Link to="/contact" className="hover:underline" onClick={closeMenu}>Contact</Link>
+          <a
+          href="https://firsttracksolutiontechnologies.com/contact"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={toggleMenu}
+          className="hover:text-blue-400"
+        >
+          Contact
+        </a>
+        
           <Link to="/partner" className="hover:underline" onClick={closeMenu}>Partner</Link>
         </div>
 
