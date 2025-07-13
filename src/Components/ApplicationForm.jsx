@@ -92,6 +92,7 @@ const ApplicationForm = () => {
             <option value="+1">+1 🇺🇸</option>
             <option value="+44">+44 🇬🇧</option>
             <option value="+61">+61 🇦🇺</option>
+            <option value="+49">+49 🇩🇪</option>
           </select>
 
           <input
