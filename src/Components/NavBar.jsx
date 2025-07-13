@@ -18,12 +18,15 @@ const NavBar = () => {
       <nav className="fixed top-0 left-0 w-full z-50 flex items-center justify-between px-4 py-2 shadow-md bg-white">
         {/* Logo */}
         <div className="flex items-center gap-2">
-          <Link to="/" className="flex items-center gap-2" onClick={closeMenu}>
+          {/* <Link to="/" className="flex items-center gap-2" onClick={closeMenu}> */}
+           <a href="https://firsttracksolutiontechnologies.com" target="_blank" rel="noopener noreferrer">
             <img src="/images/companylogo.jpg" alt="Logo" className="w-12 h-12 rounded-full" />
+          </a>
+
             <span className="font-bold text-md leading-tight">
               First Track <br /> Solution Technologies
             </span>
-          </Link>
+          {/* </Link> */}
         </div>
 
         {/* Desktop Navigation */}
@@ -83,7 +86,16 @@ const NavBar = () => {
 
             {/* <Link to="/career" className="hover:underline"  onClick={closeMenu}>Career</Link> */}
 
-          <Link to="/contact" className="hover:underline" onClick={closeMenu}>Contact</Link>
+          <a
+          href="https://firsttracksolutiontechnologies.com/contact"
+          target="_blank"
+          rel="noopener noreferrer"
+          onClick={toggleMenu}
+          className="hover:text-blue-400"
+        >
+          Contact
+        </a>
+        
           <Link to="/partner" className="hover:underline" onClick={closeMenu}>Partner</Link>
         </div>
 

@@ -113,7 +113,12 @@ const Filters = ({ filters, onChange, onSubmit }) => {
             <option value="hr intern">HR Intern</option>
             <option value="full stack developer">Full Stack Developer</option>
             <option value="hr operations manager">HR Operations Manager</option>
-            <option value="digital marketing executive">Digital Marketing Executive</option>
+            <option value="digital marketing">Digital Marketing</option>
+            <option value="relationship manager">Relationship Manager</option>
+            <option value="relationship officer">Relationship Officer</option>
+            <option value="telecaller">Telecaller</option>
+            <option value="sales coordinator">Sales Coordinator</option>
+            <option value="client relationship manager">Client Relationship Manager</option>
           </select>
 
           {/* Job Type Dropdown (Dynamic) */}

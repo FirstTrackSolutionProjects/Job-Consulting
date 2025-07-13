@@ -22,8 +22,33 @@ const ApplicationForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Application submitted:", formData);
-    alert("Application Submitted Successfully!");
+
+    const {
+      fullName,
+      email,
+      countryCode,
+      mobile,
+      city,
+      coverLetter,
+    } = formData;
+
+    // Construct WhatsApp message
+    const message = `Hello, I am interested in applying for a job.
+
+    Name: ${fullName}
+    Email: ${email}
+    Phone: ${countryCode} ${mobile}
+    City: ${city}
+    Cover Letter: ${coverLetter || "N/A"}`;
+
+    // Replace with your WhatsApp number (without + or spaces)
+    const phoneNumber = "919040170727"; // ← change this to your number
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    // Open WhatsApp
+    window.open(whatsappUrl, "_blank");
+
+    alert("Redirecting to WhatsApp...");
   };
 
   return (
@@ -31,7 +56,9 @@ const ApplicationForm = () => {
       onSubmit={handleSubmit}
       className="bg-white p-6 rounded-xl shadow-md space-y-4 max-w-xl mx-auto mt-10"
     >
-      <h2 className="text-2xl font-bold text-center mb-4">Job Application Form</h2>
+      <h2 className="text-2xl font-bold text-center mb-4">
+        Job Application Form
+      </h2>
 
       <input
         type="text"
@@ -89,18 +116,18 @@ const ApplicationForm = () => {
       />
 
       {selectedType === "Candidate" && (
-          <div>
-            <label className="block font-medium">Upload Resume *</label>
-            <input
-              type="file"
-              name="resume"
-              accept=".pdf,.doc,.docx"
-              required
-              onChange={handleChange}
-              className="w-full p-2 border rounded"
-            />
-          </div>
-        )}
+        <div>
+          <label className="block font-medium">Upload Resume *</label>
+          <input
+            type="file"
+            name="resume"
+            accept=".pdf,.doc,.docx"
+            required
+            onChange={handleChange}
+            className="w-full p-2 border rounded"
+          />
+        </div>
+      )}
 
       <textarea
         name="coverLetter"
