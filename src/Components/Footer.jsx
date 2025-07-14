@@ -75,14 +75,13 @@ const Footer = () => {
 
       {/* Bottom Bar */}
       <div className="text-center text-sm text-gray-400 mt-6 pb-4">
-        Copyright © 2025, Developed by 
+        Copyright © 2022, Developed by First Track Solution Technologies. 
          {/* <a href="https://firsttracksolutiontechnologies.com" className='text-blue-400 hover:underline ml-1'>
             First Track Solution Technologies
           </a> */}
-          <span className="text-blue-400 ml-1">
-            First Track Solution Technologies
-          </span>
+          
       </div>
+         
     </footer>
   );
 };
