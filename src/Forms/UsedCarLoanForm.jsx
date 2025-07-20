@@ -1,15 +1,27 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import getPutObjectUrlService from "../services/s3Services/getPutObjectUrlService";
+import putObjectService from "../services/s3Services/putObjectService";
+import applyForUsedCarLoanService from "../services/loanServices/usedCarLoanServices/applyForUsedCarLoanService";
+import { toast } from "react-toastify";
+
+const fileFields = [
+  "photo", "aadharFile", "panFile", "bankProof", "quotations", "incomeproof", "gst", "msme", "cin", "companypan", "companytan", "electricityBill", "rentagreement", "tradeLicense", "foodLicense", "drugLicense", "bankStatementsCurrentYear1", "bankStatementsCCYear1", "deedagreement", "itr1", "itr2", "itr3", "computation1", "computation2", "computation3", "bankStatementsCurrent"
+];
+const requiredFiles = [
+  "photo", "aadharFile", "panFile", "bankProof"
+];
 
 const UsedCarLoanForm = () => {
-  const [sameAddress, setSameAddress] = useState(false)
+  const [sameAddress, setSameAddress] = useState(false);
   const [formData, setFormData] = useState({
     title: "",
     fullName: "",
     email: "",
     stdCode: "+91",
     phone: "",
-    altStdCode: "+91",   
-    altPhone: "",     
+    altStdCode: "+91",
+    altPhone: "",
     dob: "",
     gender: "",
     maritalStatus: "",
@@ -81,11 +93,65 @@ const UsedCarLoanForm = () => {
     computation1: "",
     computation2: "",
     computation3: "",
+    bankStatementsCurrent: "",
   });
+
+  const [files, setFiles] = useState(
+    fileFields.reduce((acc, key) => ({ ...acc, [key]: null }), {})
+  );
+
+  const handleFileChange = (e) => {
+    const { name, files: fileList } = e.target;
+    setFiles((prev) => ({
+      ...prev,
+      [name]: fileList[0],
+    }));
+  };
+
+  const uploadFile = async (file, filetype, filename) => {
+    try {
+      const putUrl = await getPutObjectUrlService(filename, filetype, false);
+      await putObjectService(putUrl, file, filetype);
+    } catch (error) {
+      console.error("File upload error:", error);
+      throw new Error("File upload failed");
+    }
+  };
+
+  const handleFileUpload = async () => {
+    try {
+      let isMissingFile = false;
+      for (const key of requiredFiles) {
+        if (!files[key]) {
+          isMissingFile = true;
+          toast.error(`${key} is required`);
+        }
+      }
+      if (isMissingFile) return false;
+
+      const newFormData = { ...formData };
+      await Promise.all(
+        fileFields.map(async (key) => {
+          const file = files[key];
+          if (!file) return; // skip optional files if not provided
+          const filetype = file.type;
+          const filename = `loans/usedcar-loans/${key}-${uuidv4()}`;
+          await uploadFile(file, filetype, filename);
+          newFormData[key] = filename; // Store the filename in formData
+        })
+      );
+      setFormData(newFormData);
+      return newFormData;
+    } catch (error) {
+      console.error(error);
+      toast.error("File upload failed: " + error.message);
+      return false;
+    }
+  };
 
   const handleSameAddress = (e) => {
     const isChecked = e.target.checked;
-    setSameAddress(isChecked); 
+    setSameAddress(isChecked);
     if (isChecked) {
       setFormData((prev) => ({
         ...prev,
@@ -98,14 +164,21 @@ const UsedCarLoanForm = () => {
       }));
     }
   };
-  
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Used Car Loan Application:", formData);
+    const uploadedFormData = await handleFileUpload();
+    if (!uploadedFormData) return;
+    try {
+      await applyForUsedCarLoanService(uploadedFormData);
+      toast.success("Used Car Loan Application Submitted Successfully!");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error(error.message || "Failed to submit the form");
+    }
   };
 
   return (
@@ -669,7 +742,7 @@ const UsedCarLoanForm = () => {
         </div>
 
         <label className="block mt-4 mb-1">Bank Statement</label>
-        <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+        <input  onChange={handleFileChange} name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
       </div>
 
 
@@ -690,6 +763,7 @@ const UsedCarLoanForm = () => {
             accept=".jpg,.jpeg,.png"
             className="w-full p-2 border rounded"
             required
+            onChange={handleFileChange}
           />
         </div>
 
@@ -702,6 +776,7 @@ const UsedCarLoanForm = () => {
             accept=".pdf,.jpg,.jpeg,.png"
             className="w-full p-2 border rounded"
             required
+            onChange={handleFileChange}
           />
         </div>
 
@@ -714,24 +789,19 @@ const UsedCarLoanForm = () => {
             accept=".pdf,.jpg,.jpeg,.png"
             className="w-full p-2 border rounded"
             required
+            onChange={handleFileChange}
           />
         </div>
 
         {/* Quotations */}
         <div>
-          <label className="block text-gray-700 mb-1">Upload Quotations (Max 5 Photos)</label>
+          <label className="block text-gray-700 mb-1">Upload Quotations (Attach PDF with merged images)</label>
           <input
             type="file"
             name="quotations"
-            accept=".jpg,.jpeg,.png"
+            accept=".pdf"
             className="w-full p-2 border rounded"
-            multiple
-            onChange={(e) => {
-              if (e.target.files.length > 5) {
-                alert("You can upload a maximum of 5 photos.");
-                e.target.value = null;
-              }
-            }}
+            onChange={handleFileChange}
           />
         </div>
 
@@ -740,48 +810,48 @@ const UsedCarLoanForm = () => {
         <>
           <label className="block text-gray-900 mb-1 font-semibold">
             GST Certificate
-            <input
-              type="file"
-              name="gst"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded font-normal"
-            />
+              <input
+                type="file"
+                name="gst"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded font-normal"
+              />
           </label>
 
           <label className="block text-gray-900 mb-1 font-semibold">
             MSME/Udyam Certificate
-            <input
-              type="file"
-              name="msme"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded font-normal"
-            />
+              <input
+                type="file"
+                name="msme"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded font-normal"
+              />
           </label>
 
            <label className="block text-gray-900 mb-1 font-semibold">
             Electricity Bill
-            <input
-              type="file"
-              name="electricityBill"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded font-normal"
-            />
+              <input
+                type="file"
+                name="electricityBill"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded font-normal"
+              />
           </label>
 
            {/* Show rent agreement Only if business is rented */}
           {formData.businessType === "rented" && (
            <label className="block text-gray-900 mb-1 font-semibold">
             Rent Agreement
-            <input
-              type="file"
-              name="rentagreement"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded font-normal"
-            />
+              <input
+                type="file"
+                name="rentagreement"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded font-normal"
+              />
           </label>
           )}
 
@@ -789,70 +859,70 @@ const UsedCarLoanForm = () => {
           <>
           <label className="block text-gray-900 mb-1 font-semibold">
             Company Identification Number (CIN)
-            <input
-              type="file"
-              name="cin"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded font-normal"
-            />
+              <input
+                type="file"
+                name="cin"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded font-normal"
+              />
           </label>
 
           <label className="block text-gray-900 mb-1 font-semibold">
             Company PAN
-            <input
-              type="file"
-              name="companypan"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded font-normal"
-            />
+              <input
+                type="file"
+                name="companypan"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded font-normal"
+              />
           </label>
 
           <label className="block text-gray-900 mb-1 font-semibold">
             Company TAN
-            <input
-              type="file"
-              name="companytan"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded font-normal"
-            />
+              <input
+                type="file"
+                name="companytan"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded font-normal"
+              />
           </label>
           </>
         )}
 
           <label className="block text-gray-900 mb-1 font-semibold">
             Trade License
-            <input
-              type="file"
-              name="tradeLicense"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded font-normal"
-            />
+              <input
+                type="file"
+                name="tradeLicense"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded font-normal"
+              />
           </label>
 
           <label className="block text-gray-900 mb-1 font-semibold">
             Food License
-            <input
-              type="file"
-              name="foodLicense"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded font-normal"
-            />
+              <input
+                type="file"
+                name="foodLicense"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded font-normal"
+              />
           </label>
 
           <label className="block text-gray-900 mb-1 font-semibold">
             Drug License
-            <input
-              type="file"
-              name="drugLicense"
-              accept=".pdf"
-              onChange={handleChange}
-              className="w-full border p-2 rounded font-normal"
-            />
+              <input
+                type="file"
+                name="drugLicense"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded font-normal"
+              />
           </label>
 
           {/* Show deed agreement Only if organizationtype is partnership */}
@@ -863,7 +933,7 @@ const UsedCarLoanForm = () => {
             type="file"
             name="deedagreement"
             accept=".pdf"
-            onChange={handleChange}
+            onChange={handleFileChange}
             className="w-full border p-2 rounded font-normal"
           />
         </label>
@@ -872,27 +942,15 @@ const UsedCarLoanForm = () => {
             {/* Bank Statement */}
      
         <label className="block text-gray-900 mb-1 font-semibold">
-          1 Year Bank Statements (CA)
+          1 Year Bank Statements (CA) (PDF)
           <input
             type="file"
             name="bankStatementsCurrent"
-            accept=".pdf,.jpg,.jpeg,.png"
-            multiple
+            accept=".pdf"
             className="w-full p-2 border rounded font-normal"
             required
           />
         </label>
-
-          {/* <label className="block text-gray-900 mb-1 font-semibold">
-            1 Year Bank Statements (CC)
-            <input
-              type="file"
-              name="bankStatementsCC"
-              accept=".pdf,.jpg,.jpeg,.png"
-              multiple
-              className="w-full p-2 border rounded font-normal"
-            />
-          </label> */}
         </>
       )}
 
@@ -904,7 +962,7 @@ const UsedCarLoanForm = () => {
             type="file"
             name="incomeproof"
             accept=".pdf"
-            onChange={handleChange}
+            onChange={handleFileChange}
             className="w-full border p-2 rounded font-normal"
           />
         </label>
@@ -925,7 +983,7 @@ const UsedCarLoanForm = () => {
                 type="file"
                 name="itr1"
                 accept=".pdf"
-                onChange={handleChange}
+                onChange={handleFileChange}
                 className="w-full border p-2 rounded"
                 required
               />
@@ -937,7 +995,7 @@ const UsedCarLoanForm = () => {
                 type="file"
                 name="itr2"
                 accept=".pdf"
-                onChange={handleChange}
+                onChange={handleFileChange}
                 className="w-full border p-2 rounded"
                 
               />
@@ -949,7 +1007,7 @@ const UsedCarLoanForm = () => {
                 type="file"
                 name="itr3"
                 accept=".pdf"
-                onChange={handleChange}
+                onChange={handleFileChange}
                 className="w-full border p-2 rounded"
                 
               />
@@ -960,7 +1018,7 @@ const UsedCarLoanForm = () => {
               type="file"
               name="computation1"
               accept=".pdf"
-              onChange={handleChange}
+              onChange={handleFileChange}
               className="w-full border p-2 rounded"
               required
             />
@@ -971,7 +1029,7 @@ const UsedCarLoanForm = () => {
               type="file"
               name="computation2"
               accept=".pdf"
-              onChange={handleChange}
+              onChange={handleFileChange}
               className="w-full border p-2 rounded"
               
             />
@@ -982,7 +1040,7 @@ const UsedCarLoanForm = () => {
               type="file"
               name="computation3"
               accept=".pdf"
-              onChange={handleChange}
+              onChange={handleFileChange}
               className="w-full border p-2 rounded"
               
             />

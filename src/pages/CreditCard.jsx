@@ -1,5 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { v4 as uuidv4 } from "uuid";
+import getPutObjectUrlService from "../services/s3Services/getPutObjectUrlService";
+import putObjectService from "../services/s3Services/putObjectService";
+import { toast } from "react-toastify";
+import applyForCreditCardService from "../services/creditCardServices/applyForCreditCardService";
+
+// For future file uploads, keep these arrays ready
+const fileFields = [];
+const requiredFiles = [];
 
 const CreditCard = () => {
   const navigate = useNavigate();
@@ -11,15 +20,75 @@ const CreditCard = () => {
     message: "",
   });
 
+  const [files, setFiles] = useState(
+    fileFields.reduce((acc, key) => ({ ...acc, [key]: null }), {})
+  );
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = (e) => {
+  const handleFileChange = (e) => {
+    const { name, files: fileList } = e.target;
+    setFiles((prev) => ({
+      ...prev,
+      [name]: fileList[0],
+    }));
+  };
+
+  const uploadFile = async (file, filetype, filename) => {
+    try {
+      const putUrl = await getPutObjectUrlService(filename, filetype, false);
+      await putObjectService(putUrl, file, filetype);
+    } catch (error) {
+      console.error("File upload error:", error);
+      throw new Error("File upload failed");
+    }
+  };
+
+  const handleFileUpload = async () => {
+    try {
+      let isMissingFile = false;
+      for (const key of requiredFiles) {
+        if (!files[key]) {
+          isMissingFile = true;
+          toast.error(`${key} is required`);
+        }
+      }
+      if (isMissingFile) return false;
+
+      const newFormData = { ...formData };
+      await Promise.all(
+        fileFields.map(async (key) => {
+          const file = files[key];
+          if (!file) return; // skip optional files if not provided
+          const filetype = file.type;
+          const filename = `credit-card-inquiries/${key}-${uuidv4()}`;
+          await uploadFile(file, filetype, filename);
+          newFormData[key] = filename; // Store the filename in formData
+        })
+      );
+      setFormData(newFormData);
+      return newFormData;
+    } catch (error) {
+      console.error(error);
+      toast.error("File upload failed: " + error.message);
+      return false;
+    }
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Credit Card Inquiry:", formData);
-    alert("Thank you! We'll contact you soon.");
+    const uploadedFormData = await handleFileUpload();
+    if (uploadedFormData === false) return;
+    try {
+      await applyForCreditCardService(uploadedFormData || formData);
+      toast.success("Thank you! We'll contact you soon.");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error(error.message || "Failed to submit the form");
+    }
   };
 
   return (
@@ -32,7 +101,6 @@ const CreditCard = () => {
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-
         <div className="grid lg:grid-cols-2 bg-white rounded-xl shadow-lg overflow-hidden">
           {/* Left Side - Image */}
           <img
@@ -40,7 +108,7 @@ const CreditCard = () => {
             alt="creditcard"
             className="w-full h-96 object-cover lg:h-auto"
           />
-          </div>
+        </div>
 
         <input
           type="text"
@@ -80,6 +148,8 @@ const CreditCard = () => {
           rows={3}
           className="w-full border p-2 rounded"
         />
+
+        {/* For future file uploads, add file inputs here and use handleFileChange */}
 
         <button
           type="submit"

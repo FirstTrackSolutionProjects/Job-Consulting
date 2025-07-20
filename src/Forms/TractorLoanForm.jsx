@@ -1,5 +1,16 @@
 import React, { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
+import getPutObjectUrlService from "../services/s3Services/getPutObjectUrlService";
+import putObjectService from "../services/s3Services/putObjectService";
+import applyForTractorLoanService from "../services/loanServices/tractorLoanServices/applyForTractorLoanService";
+import { toast } from "react-toastify";
 
+const fileFields = [
+  "photo", "aadharFile", "panFile", "bankProof", "quotations"
+];
+const requiredFiles = [
+  "photo", "aadharFile", "panFile", "bankProof"
+];
 
 const TractorLoanForm = () => {
   const [sameAddress, setSameAddress] = useState(false);
@@ -42,12 +53,64 @@ const TractorLoanForm = () => {
     aadharFile: "",
     panFile: "",
     quotations: "",
-
   });
+
+  const [files, setFiles] = useState(
+    fileFields.reduce((acc, key) => ({ ...acc, [key]: null }), {})
+  );
+
+  const handleFileChange = (e) => {
+    const { name, files: fileList } = e.target;
+    setFiles((prev) => ({
+      ...prev,
+      [name]: fileList[0],
+    }));
+  };
+
+  const uploadFile = async (file, filetype, filename) => {
+    try {
+      const putUrl = await getPutObjectUrlService(filename, filetype, false);
+      await putObjectService(putUrl, file, filetype);
+    } catch (error) {
+      console.error("File upload error:", error);
+      throw new Error("File upload failed");
+    }
+  };
+
+  const handleFileUpload = async () => {
+    try {
+      let isMissingFile = false;
+      for (const key of requiredFiles) {
+        if (!files[key]) {
+          isMissingFile = true;
+          toast.error(`${key} is required`);
+        }
+      }
+      if (isMissingFile) return false;
+
+      const newFormData = { ...formData };
+      await Promise.all(
+        fileFields.map(async (key) => {
+          const file = files[key];
+          if (!file) return; // skip optional files if not provided
+          const filetype = file.type;
+          const filename = `loans/tractor-loans/${key}-${uuidv4()}`;
+          await uploadFile(file, filetype, filename);
+          newFormData[key] = filename; // Store the filename in formData
+        })
+      );
+      setFormData(newFormData);
+      return newFormData;
+    } catch (error) {
+      console.error(error);
+      toast.error("File upload failed: " + error.message);
+      return false;
+    }
+  };
 
   const handleSameAddress = (e) => {
     const isChecked = e.target.checked;
-    setSameAddress(isChecked); // ✅ this line was missing
+    setSameAddress(isChecked);
     if (isChecked) {
       setFormData((prev) => ({
         ...prev,
@@ -60,15 +123,22 @@ const TractorLoanForm = () => {
       }));
     }
   };
-  
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Tractor Loan Application:", formData);
+    const uploadedFormData = await handleFileUpload();
+    if (!uploadedFormData) return;
+    try {
+      await applyForTractorLoanService(uploadedFormData);
+      toast.success("Tractor Loan Application Submitted Successfully!");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error(error.message || "Failed to submit the form");
+    }
   };
 
   return (
@@ -164,7 +234,7 @@ const TractorLoanForm = () => {
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Present Address Details</h3>
 
-         <select residence="residence" value={formData.residence} onChange={handleChange} className="w-full p-2 border rounded mb-2" required>
+         <select name="residence" value={formData.residence} onChange={handleChange} className="w-full p-2 border rounded mb-2" required>
           <option value="">Residence Type</option>
           <option>Own</option>
           <option>Rented</option>
@@ -322,7 +392,7 @@ const TractorLoanForm = () => {
         </div>
 
         <label className="block mt-4 mb-1">Bank Statement</label>
-        <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+        <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
       </div>
 
        {/* Document Upload */}
@@ -338,6 +408,7 @@ const TractorLoanForm = () => {
             accept=".jpg,.jpeg,.png"
             className="w-full p-2 border rounded"
             required
+            onChange={handleFileChange}
           />
           </div>
             
@@ -349,6 +420,7 @@ const TractorLoanForm = () => {
               accept=".pdf,.jpg,.jpeg,.png"
               className="w-full p-2 border rounded"
               required
+              onChange={handleFileChange}
             />
           </div>
 
@@ -360,26 +432,21 @@ const TractorLoanForm = () => {
             accept=".pdf,.jpg,.jpeg,.png"
             className="w-full p-2 border rounded"
             required
+            onChange={handleFileChange}
           />
         </div>
 
         {/* Quotations Upload (Max 5 Photos) */}
           <div>
             <label className="block text-gray-700 mb-1">
-              Upload Quotations (Max 5 Photos)
+              Upload Quotations (Upload PDF of merged images)
             </label>
             <input
               type="file"
               name="quotations"
-              accept=".jpg,.jpeg,.png"
+              accept=".pdf"
               className="w-full p-2 border rounded"
-              multiple
-              onChange={(e) => {
-                if (e.target.files.length > 5) {
-                  alert("You can upload a maximum of 5 photos.");
-                  e.target.value = null; // Clear input if limit exceeded
-                }
-              }}
+              onChange={handleFileChange}
             />
           </div>
         </div>
