@@ -6,6 +6,8 @@ import WhyUs from "../Components/WhyUs";
 import Highlights from "../Components/Highlights";
 import Testimonials from "../Components/Testimonial";
 import TrustedPartners from "../Components/TrustedPartner";
+import StartupIndia from "../Components/StartupIndia";
+import ISO from "../Components/ISO";
 import ApplicationForm from "../Components/ApplicationForm";
 
 
@@ -20,6 +22,8 @@ const Home = () => {
         <Highlights />
         <Testimonials />
         <TrustedPartners />
+        <StartupIndia />
+        <ISO />
         <ApplicationForm />
         </div>
     );
