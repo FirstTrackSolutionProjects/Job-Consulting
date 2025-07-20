@@ -1,113 +1,196 @@
 import React, { useState } from "react";
-import { InputField, FileField } from "../Components/FormFields";
+import { v4 as uuidv4 } from "uuid";
+import getPutObjectUrlService from "../services/s3Services/getPutObjectUrlService";
+import putObjectService from "../services/s3Services/putObjectService";
+import applyForEducationLoanService from "../services/loanServices/educationLoanServices/applyForEducationLoanService";
+import { toast } from "react-toastify";
 
+const fileFields = [
+  "photoFile", "aadharFile", "panFile", "bankProof",
+  "tenthCertificate", "tenthMarksheet", "twelfthCertificate", "twelfthMarksheet",
+  "diplomaCertificate", "graduationCertificate", "postGradCertificate", "phdCertificate",
+  "clcCertificate", "appointmentLetter", "salarySlipFile", "gstFile", "msmeFile",
+  "electricityBillFile", "rentAgreementFile", "companyPanFile", "companyTanFile", "cinFile",
+  "tradeLicenseFile", "foodLicenseFile", "drugLicenseFile", "bankStatementsCurrentYear1",
+  "bankStatementsCCYear1", "deedagreementFile", "itr1File", "itr2File", "itr3File",
+  "computationFile1", "computationFile2", "computationFile3"
+];
+const requiredFiles = [
+  "photoFile", "aadharFile", "panFile", "bankProof"
+];
 
 const EducationLoanForm = () => {
-  const [sameAddress, setSameAddress] = useState(false)
+  const [sameAddress, setSameAddress] = useState(false);
   const [formData, setFormData] = useState({
-  title: "",
-  fullName: "",
-  email: "",
-  phone: "",
-  stdCode: "+91",
-  altStdCode: "+91",
-  altPhone: "",
-  dob: "",
-  gender: "",
-  maritalStatus: "",
-  spouseName: "",
-  childrenCount: "",
-  fatherName: "",
-  motherName: "",
-  state: "",
-  city: "",
-  pincode: "",
-  permanentAddress: "",
-  presentAddress: "",
-  aadhar: "",
-  pan: "",
-  studentName: "",
-  courseName: "",
-  institutionName: "",
-  duration: "",
-  loanAmount: "",
-  guardianName: "",
-  guardianPhone: "",
-  guardianStdCode: "+91",
-  guardianRelation: "",
-  organizationType: "",
-  businessType: "",
-  industry: "",
-  businessYears: "",
-  businessName: "",
-  businessAddress: "",
-  businessState: "",
-  businessCity: "",
-  businessPincode: "",
-  businessCountry: "",
-  annualturnover: "",
-  serviceType: "",
-  designation: "",
-  experience: "",
-  officeAddress: "",
-  officeState: "",
-  officeCity: "",
-  officePincode: "",
-  officeCountry: "",
-  highestQualification: "",
-  tenthCertificate: "",
-  tenthMarksheet: "",
-  tenthPercentage: "",
-  twelfthCertificate: "",
-  twelfthMarksheet: "",
-  twelfthPercentage: "",
-  diplomaCertificate: "",
-  diplomaCgpa: "",
-  graduationCertificate: "",
-  graduationCgpa: "",
-  postGradCertificate: "",
-  postGradCgpa: "",
-  phdCertificate: "",
-  phdCgpa: "",
-  clcCertificate: "",
-  appointmentLetter: "",
-  guardianOccupation: "",
-  guardianLoanAmount: "",
-  occupationDescription: "",
-  accountHolderName: "",
-  bankName: "",
-  accountNumber: "",
-  ifsc: "",
-  purpose: "",
-  photoFile: "",
-  aadharFile: "",
-  panFile: "",
-  bankStatementFile: "",
-  salarySlipFile: "",
-  gstFile: "",
-  msmeFile: "",
-  electricityBillFile: "",
-  rentAgreementFile: "",
-  companyPanFile: "",
-  companyTanFile: "",
-  cinFile: "",
-  tradeLicenseFile: "",
-  foodLicenseFile: "",
-  drugLicenseFile: "",
-  bankStatementsCurrentYear1: "",
-  bankStatementsCCYear1: "",
-  deedagreementFile: "",
-  itr1File: "",
-  itr2File: "",
-  itr3File: "",
-  computationFile1: "",
-  computationFile2: "",
-  computationFile3: "",
+    title: "",
+    fullName: "",
+    email: "",
+    phone: "",
+    stdCode: "+91",
+    altStdCode: "+91",
+    altPhone: "",
+    dob: "",
+    gender: "",
+    maritalStatus: "",
+    spouseName: "",
+    childrenCount: "",
+    fatherName: "",
+    motherName: "",
+    state: "",
+    city: "",
+    pincode: "",
+    permanentAddress: "",
+    presentAddress: "",
+    aadhar: "",
+    pan: "",
+    studentName: "",
+    courseName: "",
+    institutionName: "",
+    duration: "",
+    loanAmount: "",
+    guardianName: "",
+    guardianPhone: "",
+    guardianStdCode: "+91",
+    guardianRelation: "",
+    organizationType: "",
+    businessType: "",
+    industry: "",
+    businessYears: "",
+    businessName: "",
+    businessAddress: "",
+    businessState: "",
+    businessCity: "",
+    businessPincode: "",
+    businessCountry: "",
+    annualturnover: "",
+    serviceType: "",
+    designation: "",
+    experience: "",
+    officeAddress: "",
+    officeState: "",
+    officeCity: "",
+    officePincode: "",
+    officeCountry: "",
+    highestQualification: "",
+    tenthCertificate: "",
+    tenthMarksheet: "",
+    tenthPercent: "",
+    twelfthCertificate: "",
+    twelfthMarksheet: "",
+    twelfthPercent: "",
+    diplomaCertificate: "",
+    diplomaCgpa: "",
+    graduationCertificate: "",
+    graduationCgpa: "",
+    postGradCertificate: "",
+    postGradCgpa: "",
+    phdCertificate: "",
+    phdCgpa: "",
+    clcCertificate: "",
+    appointmentLetter: "",
+    guardianOccupation: "",
+    guardianLoanAmount: "",
+    occupationDescription: "",
+    accountHolderName: "",
+    bankName: "",
+    accountNumber: "",
+    ifsc: "",
+    purpose: "",
+    photoFile: "",
+    aadharFile: "",
+    panFile: "",
+    bankProof: "",
+    salarySlipFile: "",
+    gstFile: "",
+    msmeFile: "",
+    electricityBillFile: "",
+    rentAgreementFile: "",
+    companyPanFile: "",
+    companyTanFile: "",
+    cinFile: "",
+    tradeLicenseFile: "",
+    foodLicenseFile: "",
+    drugLicenseFile: "",
+    bankStatementsCurrentYear1: "",
+    bankStatementsCCYear1: "",
+    deedagreementFile: "",
+    itr1File: "",
+    itr2File: "",
+    itr3File: "",
+    computationFile1: "",
+    computationFile2: "",
+    computationFile3: "",
   });
+
+  const [files, setFiles] = useState(
+    fileFields.reduce((acc, key) => ({ ...acc, [key]: null }), {})
+  );
+
+  const handleFileChange = (e) => {
+    const { name, files: fileList } = e.target;
+    setFiles((prev) => ({
+      ...prev,
+      [name]: fileList[0],
+    }));
+  };
+
+  const uploadFile = async (file, filetype, filename) => {
+    try {
+      const putUrl = await getPutObjectUrlService(filename, filetype, false);
+      await putObjectService(putUrl, file, filetype);
+    } catch (error) {
+      console.error("File upload error:", error);
+      throw new Error("File upload failed");
+    }
+  };
+
+  const handleFileUpload = async () => {
+    try {
+      let isMissingFile = false;
+      for (const key of requiredFiles) {
+        if (!files[key]) {
+          isMissingFile = true;
+          toast.error(`${key} is required`);
+        }
+      }
+      if (isMissingFile) return false;
+
+      const newFormData = { ...formData };
+      await Promise.all(
+        fileFields.map(async (key) => {
+          const file = files[key];
+          if (!file) return; // skip optional files if not provided
+          const filetype = file.type;
+          const filename = `loans/education-loans/${key}-${uuidv4()}`;
+          await uploadFile(file, filetype, filename);
+          newFormData[key] = filename; // Store the filename in formData
+        })
+      );
+      setFormData(newFormData);
+      return newFormData;
+    } catch (error) {
+      console.error(error);
+      toast.error("File upload failed: " + error.message);
+      return false;
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const uploadedFormData = await handleFileUpload();
+    if (!uploadedFormData) return;
+    try {
+      await applyForEducationLoanService(uploadedFormData);
+      toast.success("Education Loan Application Submitted Successfully!");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error(error.message || "Failed to submit the form");
+    }
+  };
 
   const handleSameAddress = (e) => {
     const isChecked = e.target.checked;
-    setSameAddress(isChecked); // ✅ this line was missing
+    setSameAddress(isChecked);
     if (isChecked) {
       setFormData((prev) => ({
         ...prev,
@@ -120,20 +203,13 @@ const EducationLoanForm = () => {
       }));
     }
   };
-  
 
   const handleChange = (e) => {
-  const { name, value, files } = e.target;
-  setFormData((prev) => ({
-    ...prev,
-    [name]: files ? files[0] : value,
-  }));
-};
-
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    console.log("Education Loan Application:", formData);
+    const { name, value } = e.target;
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   return (
@@ -405,11 +481,11 @@ const EducationLoanForm = () => {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         <div>
           <label className="block text-gray-700 mb-1">10th Certificate</label>
-          <input type="file" name="tenthCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+          <input type="file" name="tenthCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
         </div>
         <div>
           <label className="block text-gray-700 mb-1">10th Marksheet</label>
-          <input type="file" name="tenthMarksheet" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+          <input type="file" name="tenthMarksheet" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
         </div>
         <div>
           <label className="block text-gray-700 mb-1">10th Percentage</label>
@@ -425,11 +501,11 @@ const EducationLoanForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-gray-700 mb-1">12th Certificate</label>
-            <input type="file" name="twelfthCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+            <input type="file" name="twelfthCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
           </div>
           <div>
             <label className="block text-gray-700 mb-1">12th Marksheet</label>
-            <input type="file" name="twelfthMarksheet" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+            <input type="file" name="twelfthMarksheet" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
           </div>
           <div>
             <label className="block text-gray-700 mb-1">12th Percentage</label>
@@ -446,7 +522,7 @@ const EducationLoanForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-gray-700 mb-1">Diploma Certificate</label>
-            <input type="file" name="diplomaCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+            <input type="file" name="diplomaCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
           </div>
           <div>
             <label className="block text-gray-700 mb-1">Diploma CGPA</label>
@@ -463,7 +539,7 @@ const EducationLoanForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-gray-700 mb-1">Graduation Certificate</label>
-            <input type="file" name="graduationCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+            <input type="file" name="graduationCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
           </div>
           <div>
             <label className="block text-gray-700 mb-1">Graduation CGPA</label>
@@ -480,7 +556,7 @@ const EducationLoanForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-gray-700 mb-1">PG Certificate</label>
-            <input type="file" name="postGradCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+            <input type="file" name="postGradCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
           </div>
           <div>
             <label className="block text-gray-700 mb-1">PG CGPA</label>
@@ -497,7 +573,7 @@ const EducationLoanForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <div>
             <label className="block text-gray-700 mb-1">PhD Certificate</label>
-            <input type="file" name="phdCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+            <input type="file" name="phdCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
           </div>
           <div>
             <label className="block text-gray-700 mb-1">PhD Grade/CGPA</label>
@@ -510,7 +586,7 @@ const EducationLoanForm = () => {
     {/* Character Certificate for All */}
     <div className="col-span-2">
       <label className="block text-gray-700 mb-1">CLC / Character Certificate</label>
-      <input type="file" name="clcCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+      <input type="file" name="clcCertificate" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
     </div>
   </div>
 )}
@@ -543,7 +619,7 @@ const EducationLoanForm = () => {
         </div>
 
         <label className="block mt-4 mb-1">Bank Statement</label>
-        <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+        <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
       </div>
 
       {/* Document Upload */}
@@ -560,6 +636,7 @@ const EducationLoanForm = () => {
         accept=".jpg,.jpeg,.png"
         className="w-full p-2 border rounded"
         required
+        onChange={handleFileChange}
       />
     </div>
 
@@ -571,6 +648,7 @@ const EducationLoanForm = () => {
         accept=".pdf,.jpg,.jpeg,.png"
         className="w-full p-2 border rounded"
         required
+        onChange={handleFileChange}
       />
     </div>
 
@@ -582,6 +660,7 @@ const EducationLoanForm = () => {
         accept=".pdf,.jpg,.jpeg,.png"
         className="w-full p-2 border rounded"
         required
+        onChange={handleFileChange}
       />
     </div>
   </div>
@@ -693,7 +772,7 @@ const EducationLoanForm = () => {
         </div>
 
         <label className="block mt-4 mb-1">Bank Statement</label>
-        <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+        <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
       </div>
 
 

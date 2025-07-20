@@ -38,13 +38,14 @@ import MortgageLoanForm from "./Forms/MortgageLoanForm";
 import UsedCarLoanForm from "./Forms/UsedCarLoanForm";
 import EducationLoanForm from "./Forms/EducationLoanForm";
 import TractorLoanForm from "./Forms/TractorLoanForm";
+import { ToastContainer } from "react-toastify";
 
 
 function App() {
   return (
     <>
       <NavBar />
-      
+      <ToastContainer />
       <main className="min-h-screen pt-4">
         <Routes>
           <Route path="/" element={<Home />} />
