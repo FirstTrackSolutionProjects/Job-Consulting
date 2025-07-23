@@ -4,6 +4,7 @@ import getPutObjectUrlService from "../services/s3Services/getPutObjectUrlServic
 import putObjectService from "../services/s3Services/putObjectService";
 import applyForEducationLoanService from "../services/loanServices/educationLoanServices/applyForEducationLoanService";
 import { toast } from "react-toastify";
+import { FileField, InputField } from "../Components/FormFields";
 
 const fileFields = [
   "photoFile", "aadharFile", "panFile", "bankProof",
