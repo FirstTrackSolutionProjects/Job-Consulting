@@ -1,4 +1,9 @@
 import React, { useState } from "react";
+import { toast } from "react-toastify";
+import { v4 } from "uuid";
+import getPutObjectUrlService from "../services/s3Services/getPutObjectUrlService";
+import putObjectService from "../services/s3Services/putObjectService";
+import applyForPersonalLoanService from "../services/loanServices/personalLoanServices/applyForPersonalLoanService";
 
 const PersonalLoanForm = () => {
   const [sameAddress, setSameAddress] = useState(false);
@@ -35,7 +40,6 @@ const PersonalLoanForm = () => {
     profession: "",
     experienceYears: "",
     experienceMonths: "",
-    experience: "",
     salarySlip: "",
     loanAmount: "",
     purpose: "",
@@ -56,11 +60,23 @@ const PersonalLoanForm = () => {
     bankProof: "",
   });
 
+  const [files, setFiles] = useState({
+    aadharFile: "",
+    panFile: "",
+    photo: "",
+    bankProof: "",
+    salarySlip: "",
+  })
+
   const [showExperienceDropdown, setShowExperienceDropdown] = useState(false);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
+  const handleFileChange = (e) => {
+    setFiles({ ...files, [e.target.name]: e.target.files[0] });
+  }
 
    const handleSameAddress = (e) => {
     const isChecked = e.target.checked;
@@ -78,9 +94,56 @@ const PersonalLoanForm = () => {
     }
   };
 
-  const handleSubmit = (e) => {
+  const uploadFile = async (file, filetype, filename) => {
+    try {
+      const putUrl = await getPutObjectUrlService(filename, filetype, false);
+      await putObjectService(putUrl, file, filetype);
+    } catch (error) {
+      console.error("File upload error:", error);
+      throw new Error("File upload failed");
+    }
+  }
+  
+  const handleFileUpload = async () => {
+    try{
+      let isMissingFile = false;
+      Object.keys(files).forEach((key) => {
+        if (!files[key]) {
+          isMissingFile = true;
+          toast.error(`${key} is required`);
+        }
+      })
+      if (isMissingFile) return;
+
+      await Promise.all(
+        Object.keys(files).map(async (key) => {
+          const file = files[key];
+          const filetype = file.type;
+          const filename = `loans/personal-loans/${key}-${v4()}`;
+          await uploadFile(file, filetype, filename);
+          setFormData((prev) => ({
+            ...prev,
+            [key]: filename, // Store the filename in formData
+          }));
+        })
+      )
+    } catch (error) {
+      console.error(error);
+      toast.error("File upload failed: " + error.message);
+    }
+  }
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Personal Loan Application:", formData);
+    try{
+      await handleFileUpload();
+      console.log("Personal Loan Application:", formData);
+      await applyForPersonalLoanService(formData);
+      toast.success("Personal Loan Application Submitted Successfully!");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      toast.error(error.message || "Failed to submit the form");
+    }
   };
 
   return (
@@ -172,7 +235,7 @@ const PersonalLoanForm = () => {
       {/* Address Details */}
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Present Address Details</h3>
-         <select residence="residence" value={formData.residence} onChange={handleChange} className="w-full p-2 border rounded mb-2" required>
+         <select name="residence" value={formData.residence} onChange={handleChange} className="w-full p-2 border rounded mb-2" required>
           <option value="">Residence Type</option>
           <option>Own</option>
           <option>Rented</option>
@@ -278,7 +341,7 @@ const PersonalLoanForm = () => {
             required
           >
             <option value="">Employment Type</option>
-            <option value="Govt">Government</option>
+            <option value="Government">Government</option>
             <option value="Private">Private Sector</option>
           </select>
 
@@ -290,7 +353,7 @@ const PersonalLoanForm = () => {
               name="organization"
               value={formData.organization || ""}
               onChange={handleChange}
-              placeholder={formData.employmentType === "Govt" ? "Organization Name" : "Company Name"}
+              placeholder={formData.employmentType === "Government" ? "Organization Name" : "Company Name"}
               className="p-2 border rounded"
               required
             />
@@ -305,7 +368,7 @@ const PersonalLoanForm = () => {
               required
             />
 
-              {formData.employmentType === "Govt" ? (
+              {formData.employmentType === "Government" ? (
                 <select
                   name="department"
                   value={formData.department || ""}
@@ -314,13 +377,13 @@ const PersonalLoanForm = () => {
                   required
                 >
                   <option value="">Select Department</option>
-                  <option>Railways</option>
-                  <option>PSU</option>
-                  <option>Defense</option>
-                  <option>Police</option>
-                  <option>State Govt</option>
-                  <option>Central Govt</option>
-                  <option>Other</option>
+                  <option value="Railways">Railways</option>
+                  <option value="PSU">PSU</option>
+                  <option value="Defense">Defense</option>
+                  <option value="Police">Police</option>
+                  <option value="State Govt">State Govt</option>
+                  <option value="Central Govt">Central Govt</option>
+                  <option value="Other">Other</option>
                 </select>
               ) : (
                 <select
@@ -331,11 +394,11 @@ const PersonalLoanForm = () => {
                   required
                 >
                   <option value="">Select Profession</option>
-                  <option>Engineer</option>
-                  <option>Doctor</option>
-                  <option>Chartered Accountant</option>
-                  <option>Lawyer</option>
-                  <option>Other</option>
+                  <option value="Engineer">Engineer</option>
+                  <option value="Doctor">Doctor</option>
+                  <option value="Chartered Accountant">Chartered Accountant</option>
+                  <option value="Lawyer">Lawyer</option>
+                  <option value="Other">Other</option>
                 </select>
               )}
 
@@ -487,6 +550,7 @@ const PersonalLoanForm = () => {
               <input
                 type="file"
                 name="salarySlip"
+                onChange={handleFileChange}
                 accept=".pdf,.jpg,.jpeg,.png"
                 className="w-full p-2 border rounded"
                 required
@@ -533,7 +597,7 @@ const PersonalLoanForm = () => {
         </div>
 
         <label className="block mt-4 mb-1">Bank Statement(6 Month)</label>
-        <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+        <input type="file" name="bankProof" onChange={handleFileChange} accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
       </div>
 
       {/* Upload Documents */}
@@ -542,15 +606,15 @@ const PersonalLoanForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label className="block mb-1">Aadhaar Card</label>
-            <input type="file" name="aadharFile" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+            <input type="file" name="aadharFile" onChange={handleFileChange} accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
           </div>
           <div>
             <label className="block mb-1">PAN Card</label>
-            <input type="file" name="panFile" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+            <input type="file" name="panFile" onChange={handleFileChange} accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
           </div>
           <div>
             <label className="block mb-1">Photograph</label>
-            <input type="file" name="photo" accept=".jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+            <input type="file" name="photo" onChange={handleFileChange} accept=".jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
           </div>
         </div>
       </div>
