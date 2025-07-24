@@ -78,7 +78,7 @@ const HomeLoanForm = () => {
     tradeLicense: "",
     foodLicense: "",
     drugLicense: "",
-    beedagreement: "",
+    deedagreement: "",
     bankStatementsCurrentYear1: "",
     bankStatementsCCYear1: "",
     itr1: "",
