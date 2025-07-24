@@ -8,12 +8,18 @@ const CreditCard = () => {
     name: "",
     email: "",
     phone: "",
+    stdCode: "+91",
     message: "",
+    profession: "",
   });
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    const { name, value, files } = e.target;
+    if (files) {
+      setFormData((prev) => ({ ...prev, [name]: files[0] }));
+    } else {
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    }
   };
 
   const handleSubmit = (e) => {
@@ -23,7 +29,7 @@ const CreditCard = () => {
   };
 
   return (
-    <div className="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg ">
+    <div className="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-bold text-center text-blue-700 mb-4">
         Credit Card – Coming Soon!
       </h2>
@@ -32,16 +38,16 @@ const CreditCard = () => {
       </p>
 
       <form onSubmit={handleSubmit} className="space-y-4">
-
-        <div className="grid lg:grid-cols-2 bg-white rounded-xl shadow-lg overflow-hidden">
-          {/* Left Side - Image */}
+        {/* Banner Image */}
+        <div className="rounded-lg overflow-hidden shadow">
           <img
             src="/images/credit-card.jpg"
             alt="creditcard"
-            className="w-full h-96 object-cover lg:h-auto"
+            className="w-full h-60 object-cover"
           />
-          </div>
+        </div>
 
+        {/* Name */}
         <input
           type="text"
           name="name"
@@ -52,6 +58,7 @@ const CreditCard = () => {
           className="w-full border p-2 rounded"
         />
 
+        {/* Email */}
         <input
           type="email"
           name="email"
@@ -62,16 +69,160 @@ const CreditCard = () => {
           className="w-full border p-2 rounded"
         />
 
-        <input
-          type="tel"
-          name="phone"
-          placeholder="Phone Number"
-          value={formData.phone}
+        {/* Phone */}
+        <div className="flex gap-2">
+          <select
+            name="stdCode"
+            value={formData.stdCode}
+            onChange={handleChange}
+            className="p-2 border rounded w-1/3"
+          >
+            <option value="+91">+91 🇮🇳</option>
+          </select>
+          <input
+            type="tel"
+            name="phone"
+            value={formData.phone}
+            onChange={handleChange}
+            placeholder="Phone Number"
+            className="p-2 border rounded w-full"
+            required
+          />
+        </div>
+
+        {/* Profession */}
+        <select
+          name="profession"
+          value={formData.profession}
           onChange={handleChange}
           required
           className="w-full border p-2 rounded"
-        />
+        >
+          <option value="">Select Profession</option>
+          <option value="Business">Business</option>
+          <option value="Service">Service</option>
+        </select>
 
+        {/* Conditional Business or Service Details */}
+        {formData.profession === "Business" && (
+          <>
+            <h3 className="text-lg font-semibold mt-4">Business Details</h3>
+            <input
+              type="text"
+              name="businessName"
+              placeholder="Business Name"
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
+            <input
+              type="text"
+              name="yearsInBusiness"
+              placeholder="Years in Business"
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
+
+            <h3 className="text-lg font-semibold mt-4">Upload Documents</h3>
+          <div>
+            <label className="block mb-1 text-gray-700 font-bold">Photo</label>
+            <input type="file" name="photo" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
+          </div>
+           <div>
+            <label className="block mb-1 text-gray-700 font-bold">Aadhar Card</label>
+            <input type="file" name="aadhar" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
+          </div>
+            <div>
+            <label className="block mb-1 text-gray-700 font-bold">Pan Card</label>
+            <input type="file" name="pan" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
+          </div>
+           <div>
+          <label className="block  mb-1 font-bold mt-3">Upload Last 2 Years of ITR/Computation</label>
+
+          <div className="space-y-2 mt-2">
+            <div>
+              <label className="text-sm font-semibold">ITR - Year 1</label>
+              <input
+                type="file"
+                name="itr1"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-semibold">ITR - Year 2</label>
+              <input
+                type="file"
+                name="itr2"
+                accept=".pdf"
+                onChange={handleChange}
+                className="w-full border p-2 rounded"
+                
+              />
+            </div>
+
+            <div>
+            <label className="text-sm font-semibold">Computation - Year 1</label>
+            <input
+              type="file"
+              name="computation1"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+              required
+            />
+          </div>
+          <div>
+            <label className="text-sm font-semibold">Computation - Year 2</label>
+            <input
+              type="file"
+              name="computation2"
+              accept=".pdf"
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+              
+            />
+          </div>
+          </div>
+        </div>
+          </>
+        )}
+
+        {formData.profession === "Service" && (
+          <>
+            <h3 className="text-lg font-semibold mt-4">Service Details</h3>
+            <input
+              type="text"
+              name="companyName"
+              placeholder="Company Name"
+              onChange={handleChange}
+              className="w-full border p-2 rounded"
+            />
+
+            <h3 className="text-lg font-semibold mt-4">Upload Documents</h3>
+             <div>
+            <label className="block mb-1 text-gray-700 font-bold">Photo</label>
+            <input type="file" name="photo" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
+          </div>
+           <div>
+            <label className="block mb-1 text-gray-700 font-bold">Aadhar Card</label>
+            <input type="file" name="aadhar" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
+          </div>
+            <div>
+            <label className="block mb-1 text-gray-700 font-bold">Pan Card</label>
+            <input type="file" name="pan" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
+          </div>
+          <div>
+            <label className="block mb-1 text-gray-700 font-bold">Salary Slip (2 Months)</label>
+            <input type="file" name="salaryslip" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
+          </div>
+            
+          </>
+        )}
+
+        {/* Message */}
         <textarea
           name="message"
           placeholder="Any message or inquiry"
