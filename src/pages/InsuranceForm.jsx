@@ -113,6 +113,22 @@ const InsuranceForm = () => {
     }
   };
 
+  const handleSameAddress = (e) => {
+    const isChecked = e.target.checked;
+    setSameAddress(isChecked);
+    if (isChecked) {
+      setFormData((prev) => ({
+        ...prev,
+        permanentAddress: prev.presentAddress,
+      }));
+    } else {
+      setFormData((prev) => ({
+        ...prev,
+        permanentAddress: "",
+      }));
+    }
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const uploadedFormData = await handleFileUpload();
