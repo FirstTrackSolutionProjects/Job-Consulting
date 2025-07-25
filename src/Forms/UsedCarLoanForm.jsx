@@ -30,17 +30,20 @@ const UsedCarLoanForm = () => {
     fatherName: "",
     motherName: "",
     residence: "",
+    presentAddress: "",
+    landmark: "",
     state: "",
     city: "",
     pincode: "",
     country: "",
     permanentAddress: "",
-    presentAddress: "",
     aadhar: "",
     pan: "",
     profession: "",
     professionType: "",
+    organizationType: "",
     businessType: "",
+    industry: "",
     businessName: "",
     businessYears: "",
     businessannualturnover: "",
@@ -49,7 +52,6 @@ const UsedCarLoanForm = () => {
     businessPincode: "",
     businessState: "",
     businessCountry: "",
-    businessProof: "",
     companyName: "",
     jobYears: "",
     officeAddress: "",
@@ -57,23 +59,20 @@ const UsedCarLoanForm = () => {
     officePincode: "",
     officeState: "",
     officeCountry: "",
-    industry: "",
-    organizationType: "",
     carModel: "",
     carYear: "",
     carPrice: "",
     loanAmount: "",
+    purpose: "",
     accountHolderName: "",
     bankName: "",
     accountNumber: "",
     ifsc: "",
-    purpose: "",
     bankProof: "",
     photo: "",
     aadharFile: "",
     panFile: "",
     quotations: "",
-    incomeproof: "",
     gst: "",
     msme: "",
     cin: "",
@@ -84,8 +83,7 @@ const UsedCarLoanForm = () => {
     tradeLicense: "",
     foodLicense: "",
     drugLicense: "",
-    bankStatementsCurrentYear1: "",
-    bankStatementsCCYear1: "",
+    bankStatementsCurrent: "",
     deedagreement: "",
     itr1: "",
     itr2: "",
@@ -93,7 +91,8 @@ const UsedCarLoanForm = () => {
     computation1: "",
     computation2: "",
     computation3: "",
-    bankStatementsCurrent: "",
+    incomeproof: "",
+    
   });
 
   const [files, setFiles] = useState(
@@ -942,7 +941,7 @@ const UsedCarLoanForm = () => {
             {/* Bank Statement */}
      
         <label className="block text-gray-900 mb-1 font-semibold">
-          1 Year Bank Statements (CA) (PDF)
+          1 Year Bank Statements (CA)
           <input
             type="file"
             name="bankStatementsCurrent"
