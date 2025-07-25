@@ -158,25 +158,81 @@ const InsuranceForm = () => {
       {/* Applicant Details */}
       <div>
         <h3 className="text-xl font-semibold mb-2">Applicant Details</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" name="fullName" value={formData.fullName} onChange={handleChange} placeholder="Full Name" className="p-2 border rounded" required />
-          <input type="date" name="dob" value={formData.dob} onChange={handleChange} className="p-2 border rounded" required />
-          <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" className="p-2 border rounded" required />
-          
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="flex gap-2">
-            <select name="stdCode" value={formData.stdCode} onChange={handleChange} className="p-2 border rounded w-1/3">
-              <option value="+91">+91 🇮🇳</option>
-            </select>
-            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} placeholder="Phone Number" className="p-2 border rounded w-full" required />
-          </div>
-          <select name="gender" value={formData.gender} onChange={handleChange} className="p-2 border rounded" required>
-            <option value="">Select Gender</option>
-            <option>Male</option>
-            <option>Female</option>
-          </select>
-        </div>
-      </div>
+       <div className="flex flex-wrap gap-4 mb-4">
+  {/* Full Name */}
+  <div className="w-full md:w-[48%]">
+    <input
+      type="text"
+      name="fullName"
+      placeholder="Full Name"
+      value={formData.fullName}
+      onChange={handleChange}
+      className="w-full border p-2 rounded"
+    />
+  </div>
+
+  {/* Date of Birth */}
+  <div className="w-full md:w-[48%]">
+    <input
+      type="date"
+      name="dob"
+      value={formData.dob}
+      onChange={handleChange}
+      className="w-full border p-2 rounded"
+    />
+  </div>
+
+  {/* Email */}
+  <div className="w-full md:w-[48%]">
+    <input
+      type="email"
+      name="email"
+      placeholder="Email"
+      value={formData.email}
+      onChange={handleChange}
+      className="w-full border p-2 rounded"
+    />
+  </div>
+
+  {/* Country Code & Phone */}
+  <div className="w-full md:w-[48%] flex gap-2">
+    <select
+      name="countryCode"
+      value={formData.countryCode}
+      onChange={handleChange}
+      className="w-1/4 border p-2 rounded"
+    >
+      <option value="+91">+91</option>
+      <option value="+1">+1</option>
+      {/* Add more codes if needed */}
+    </select>
+
+    <input
+      type="tel"
+      name="phone"
+      placeholder="Phone Number"
+      value={formData.phone}
+      onChange={handleChange}
+      className="w-3/4 border p-2 rounded"
+    />
+  </div>
+
+  {/* Gender */}
+  <div className="w-full md:w-[48%]">
+    <select
+      name="gender"
+      value={formData.gender}
+      onChange={handleChange}
+      className="w-full border p-2 rounded"
+    >
+      <option value="">Select Gender</option>
+      <option value="male">Male</option>
+      <option value="female">Female</option>
+      <option value="other">Other</option>
+    </select>
+  </div>
+</div>
+
       </div>
 
       {/* Address Details */}
@@ -513,7 +569,7 @@ const InsuranceForm = () => {
           <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
         </div>
 
-        <label className="block mt-4 mb-1">Bank Statement</label>
+        <label className="block mt-4 mb-1 font-semibold">Bank Statement</label>
         <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
       </div>
 
@@ -522,12 +578,16 @@ const InsuranceForm = () => {
         <h3 className="text-xl font-semibold mb-2">Document Upload</h3>
         <div className="space-y-4">
           <div>
-            <label className="block mb-1 text-gray-700">Upload ID Proof (Aadhaar, PAN, etc.)</label>
-            <input type="file" name="idProof" accept=".pdf,.jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
+            <label className="block mb-1 text-gray-700 font-semibold">Upload Passport Size Photo</label>
+            <input type="file" name="photo" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
           </div>
           <div>
-            <label className="block mb-1 text-gray-700">Upload Passport Size Photo</label>
-            <input type="file" name="photo" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
+            <label className="block mb-1 text-gray-700 font-semibold">Upload Aadhar Card</label>
+            <input type="file" name="aadhar" accept=".pdf,.jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
+          </div>
+          <div>
+            <label className="block mb-1 text-gray-700 font-semibold">Upload Pan Card</label>
+            <input type="file" name="pan" accept=".pdf,.jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
           </div>
         </div>
       </div>

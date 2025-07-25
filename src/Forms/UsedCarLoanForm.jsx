@@ -741,7 +741,7 @@ const UsedCarLoanForm = () => {
         </div>
 
         <label className="block mt-4 mb-1">Bank Statement</label>
-        <input  onChange={handleFileChange} name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+        <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
       </div>
 
 
