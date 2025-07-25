@@ -31,23 +31,24 @@ const TractorLoanForm = () => {
     fatherName: "",
     motherName: "",
     residence: "",
+    presentAddress: "",
+    landmark: "",
     state: "",
     city: "",
     pincode: "",
     country: "",
     permanentAddress: "",
-    presentAddress: "",
     aadhar: "",
     pan: "",
     tractorModel: "",
     tractorPrice: "",
     landSize: "",
     loanAmount: "",
+    purpose: "",
     accountHolderName: "",
     bankName: "",
     accountNumber: "",
     ifsc: "",
-    purpose: "",
     bankProof: "",
     photo: "",
     aadharFile: "",
@@ -344,7 +345,7 @@ const TractorLoanForm = () => {
       <div>
         <label className="block text-gray-700 mb-1">Farming Land Size (acres)</label>
         <input
-          type="text"
+          type="number"
           name="landSize"
           value={formData.landSize}
           onChange={handleChange}

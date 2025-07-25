@@ -24,25 +24,24 @@ const HomeLoanForm = () => {
     fatherName: "",
     motherName: "",
     residence: "",
+    presentAddress: "",
+    landmark: "",
     state: "",
     city: "",
     pincode: "",
     country: "",
     permanentAddress: "",
-    presentAddress: "",
     aadhar: "",
     pan: "",
-    landmark: "",
-    income: "",
     location: "",
     propertyValue: "",
     loanAmount: "",
+    purpose: "",
     accountHolderName: "",
     bankName: "",
     accountNumber: "",
     ifsc: "",
     bankProof: "",
-    purpose: "",
     profession: "",
     professionType: "",
     organizationType: "",
@@ -56,7 +55,6 @@ const HomeLoanForm = () => {
     businessPincode: "",
     businessState: "",
     businessCountry: "",
-    businessProof: "",
     companyName: "",
     jobYears: "",
     officeAddress: "",
@@ -67,7 +65,6 @@ const HomeLoanForm = () => {
     photo: "",
     aadharFile: "",
     panFile: "",
-    incomeproof: "",
     companypan: "",
     companytan: "",
     cin: "",
@@ -79,23 +76,23 @@ const HomeLoanForm = () => {
     foodLicense: "",
     drugLicense: "",
     deedagreement: "",
-    bankStatementsCurrentYear1: "",
-    bankStatementsCCYear1: "",
+    bankStatementsCurrent: "",
     itr1: "",
     itr2: "",
     itr3: "",
     computation1: "",
     computation2: "",
     computation3: "",
+    incomeproof: "",
   });
 
   // List all file fields here (update as needed)
   const fileFields = [
-    "photo", "aadharFile", "panFile", "incomeproof", "companypan", "companytan", "cin", "gst", "msme", "electricityBill", "rentagreement", "tradeLicense", "foodLicense", "drugLicense", "beedagreement", "bankStatementsCurrentYear1", "bankStatementsCCYear1", "itr1", "itr2", "itr3", "computation1", "computation2", "computation3", "bankProof", "businessProof"
+    "photo", "aadharFile", "panFile", "incomeproof", "companypan", "companytan", "cin", "gst", "msme", "electricityBill", "rentagreement", "tradeLicense", "foodLicense", "drugLicense", "deedagreement", "bankStatementsCurrentYear1", "itr1", "itr2", "itr3", "computation1", "computation2", "computation3", "bankProof"
   ];
   // List only required file fields here (update as needed)
   const requiredFiles = [
-    "photo", "aadharFile", "panFile", "bankProof"
+    "photo", "aadharFile", "panFile", "incomeproof"
   ];
 
   const [files, setFiles] = useState(
