@@ -61,7 +61,7 @@ const MortgageLoanForm = () => {
     officePincode: "",
     officeState: "",
     officeCountry: "",
-    income: "",
+    // income: "",
     mortgageProperty: "",
     propertyValue: "",
     loanAmount: "",
@@ -607,7 +607,7 @@ const MortgageLoanForm = () => {
         <h2 className="text-xl font-semibold text-gray-700 mb-2">Financial Details</h2>
 
         <div className="space-y-4">
-          <div>
+          {/* <div>
             <input
               type="number"
               name="income"
@@ -617,7 +617,7 @@ const MortgageLoanForm = () => {
               required
               className="w-full p-2 border rounded"
             />
-          </div>
+          </div> */}
 
           <div>
             <input

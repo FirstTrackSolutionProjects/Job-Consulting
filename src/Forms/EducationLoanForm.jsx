@@ -56,6 +56,7 @@ const EducationLoanForm = () => {
     guardianPhone: "",
     guardianStdCode: "+91",
     guardianRelation: "",
+    guardianOccupation: "",
     organizationType: "",
     businessType: "",
     industry: "",
@@ -93,7 +94,6 @@ const EducationLoanForm = () => {
     phdCgpa: "",
     clcCertificate: "",
     appointmentLetter: "",
-    guardianOccupation: "",
     guardianLoanAmount: "",
     occupationDescription: "",
     accountHolderName: "",
@@ -105,7 +105,9 @@ const EducationLoanForm = () => {
     aadharFile: "",
     panFile: "",
     bankProof: "",
-    salarySlipFile: "",
+    guardianphotoFile: "",
+    guardianaadharFile: "",
+    guardianpanFile: "",
     gstFile: "",
     msmeFile: "",
     electricityBillFile: "",
@@ -125,6 +127,8 @@ const EducationLoanForm = () => {
     computationFile1: "",
     computationFile2: "",
     computationFile3: "",
+    salarySlipFile: "",
+    loanAmountFile: "",
   });
 
   const [files, setFiles] = useState(
@@ -851,45 +855,6 @@ const EducationLoanForm = () => {
             <label className="block mt-4 mb-1">Bank Statement</label>
             <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
           </div>
-
-
-         {/* Upload Section */}
-        {/* <FileField label="Upload Photo" name="photoFile" />
-        <FileField label="Aadhar Card" name="aadharFile" />
-        <FileField label="PAN Card" name="panFile" /> */}
-        <FileField label="GST Certificate" name="gstFile" />
-        <FileField label="MSME/Udyam Certificate" name="msmeFile" />
-        <FileField label="Electricity Bill" name="electricityBillFile" />
-
-        {/* Conditionally show Rent Agreement */}
-        {formData.businessType === "Rented" && (
-          <FileField label="Rent Agreement" name="rentAgreementFile" />
-        )}
-        {formData.organizationType === "Private Limited" && (
-          <>
-         <FileField label="Company PAN" name="companyPanFile" />
-          <FileField label="Company TAN" name="companyTanFile" />
-          <FileField label="CIN (Company Identification Number)" name="cinFile" />
-          </>
-        )}
-          <FileField label="Trade License" name="tradeLicenseFile" />
-          <FileField label="Food License" name="foodLicenseFile" />
-          <FileField label="Drug License" name="drugLicenseFile" />
-          <FileField label="1 Year Bank Statement (CA)" name="bankStatementsFile" />
-          {/* <FileField label="1 Year Bank Statement (CC)" name="bankStatementsCCFile" /> */}
-
-          {/* Conditionally show Deed Agreement */}
-          {formData.organizationType === "Partnership" && (
-            <FileField label="Deed Agreement" name="deedAgreementFile" />
-          )}
-
-          {/* ITR and Computation Files */}
-          <FileField label="ITR Year 1" name="itr1File" />
-          <FileField label="ITR Year 2" name="itr2File" />
-          <FileField label="ITR Year 3" name="itr3File" />
-          <FileField label="Computation Year 1" name="computationFile1" />
-          <FileField label="Computation Year 2" name="computationFile2" />
-          <FileField label="Computation Year 3" name="computationFile3" />
         </>
       )}
 
@@ -949,13 +914,7 @@ const EducationLoanForm = () => {
             </div>
             <label className="block mt-4 mb-1">Bank Statement</label>
             <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
-          </div>
-
-        {/* Upload Section */}
-        <FileField label="Upload Photo" name="photoFile" />
-        <FileField label="Aadhar Card" name="aadharFile" />
-        <FileField label="PAN Card" name="panFile" />
-        <FileField label="Salary Slip (Last 3 Months)" name="salarySlipFile" />
+          </div>   
       </>
     )}
 
@@ -986,46 +945,49 @@ const EducationLoanForm = () => {
 
           <div className="mt-6">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Upload Documents</h3>
-            <FileField label="Upload Photo" name="photoFile" />
-            <FileField label="Aadhar Card" name="aadharFile" />
-            <FileField label="PAN Card" name="panFile" />
+            <FileField label="Upload Photo" name="guardianphotoFile" />
+            <FileField label="Aadhar Card" name="guardianaadharFile" />
+            <FileField label="PAN Card" name="guardianpanFile" />
            
-            {formData.guardianOccupation === 'Service' && (
-              <FileField label="Salary Slip (Last 3 Months)" name="salarySlipFile" />
-            )}
-
-              {formData.guardianOccupation === 'Business' && (
-    <>
-      <FileField label="Electricity Bill" name="electricityBillFile" />
-      <FileField label="ITR 1" name="itr1File" />
-      <FileField label="ITR 2" name="itr2File" />
-      <FileField label="ITR 3" name="itr2File" />
-      <FileField label="Computation 1" name="computation1File" />
-      <FileField label="Computation 2" name="computation2File" />
-      <FileField label="Computation 3" name="computation3File" />
-
-      {formData.businessType === 'Rented' && (
-        <FileField label="Rent Agreement" name="rentAgreementFile" />
-      )}
-
-      {formData.organizationType === 'Private Limited' && (
+           {formData.guardianOccupation === 'Business' && (
         <>
-          <FileField label="Company PAN" name="companyPanFile" />
-          <FileField label="Company TAN" name="companyTanFile" />
-          <FileField label="CIN" name="cinFile" />
-          <FileField label="Trade License" name="tradeLicenseFile" />
-          <FileField label="Food License" name="foodLicenseFile" />
-          <FileField label="Drug License" name="drugLicenseFile" />
-          <FileField label="1 Year Bank Statement (CA)" name="bankStatementCAFile" />
-          <FileField label="1 Year Bank Statement (CC)" name="bankStatementCCFile" />
+          <FileField label="GST Certificate" name="gstFile" />
+          <FileField label="MSME/Udyam Certificate" name="msmeFile" />
+          <FileField label="Electricity Bill" name="electricityBillFile" />
+          <FileField label="ITR 1" name="itr1File" />
+          <FileField label="ITR 2" name="itr2File" />
+          <FileField label="ITR 3" name="itr2File" />
+          <FileField label="Computation 1" name="computation1File" />
+          <FileField label="Computation 2" name="computation2File" />
+          <FileField label="Computation 3" name="computation3File" />
+
+          {formData.businessType === 'Rented' && (
+            <FileField label="Rent Agreement" name="rentAgreementFile" />
+          )}
+
+          {formData.organizationType === 'Private Limited' && (
+            <>
+              <FileField label="Company PAN" name="companyPanFile" />
+              <FileField label="Company TAN" name="companyTanFile" />
+              <FileField label="CIN" name="cinFile" />
+              <FileField label="Trade License" name="tradeLicenseFile" />
+              <FileField label="Food License" name="foodLicenseFile" />
+              <FileField label="Drug License" name="drugLicenseFile" />
+              <FileField label="1 Year Bank Statement (CA)" name="bankStatementCAFile" />
+              <FileField label="1 Year Bank Statement (CC)" name="bankStatementCCFile" />
+            </>
+          )}
+
+          {formData.organizationType === 'Partnership' && (
+            <FileField label="Deed Agreement" name="deedAgreementFile" />
+          )}
         </>
       )}
-
-      {formData.organizationType === 'Partnership' && (
-        <FileField label="Deed Agreement" name="deedAgreementFile" />
-      )}
-    </>
-  )}
+      </div>
+    <div>
+     {formData.guardianOccupation === 'Service' && (
+              <FileField label="Salary Slip (Last 3 Months)" name="salarySlipFile" />
+            )}
   </div>
   <div>
   {formData.guardianOccupation === 'Other' && (
@@ -1033,9 +995,6 @@ const EducationLoanForm = () => {
   )}
 </div>
 
-          
-        
-    
       <button
         type="submit"
         className="w-full bg-blue-600 text-white p-2 rounded hover:bg-blue-700"
