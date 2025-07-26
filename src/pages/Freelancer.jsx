@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from "uuid";
 import getPutObjectUrlService from "../services/s3Services/getPutObjectUrlService";
 import putObjectService from "../services/s3Services/putObjectService";
 import { toast } from "react-toastify";
-import applyForFreelancerService from "../services/creditCardServices/applyForCreditCardService";
+import applyForFreelancerService from "../services/partnerServices/applyForFreelancerService";
 
 const fileFields = [
   "resume",
@@ -132,6 +132,7 @@ const Freelancer = () => {
     const uploadedFormData = await handleFileUpload();
     if (uploadedFormData === false) return;
     try {
+      console.log("Submitting form data:", uploadedFormData);
       await applyForFreelancerService(uploadedFormData);
       toast.success("Freelancer Registration Submitted Successfully!");
     } catch (error) {
