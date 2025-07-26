@@ -70,6 +70,7 @@ const EducationLoanForm = () => {
     serviceType: "",
     designation: "",
     experience: "",
+    monthlyIncome: "",
     officeAddress: "",
     officeState: "",
     officeCity: "",
@@ -763,7 +764,7 @@ const EducationLoanForm = () => {
         </div>
       )}
        {/* Bank Details */}
-      <div>
+      {/* <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank Details</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input type="text" name="accountHolderName" value={formData.accountHolderName} onChange={handleChange} placeholder="Account Holder Name" className="p-2 border rounded" required />
@@ -774,7 +775,7 @@ const EducationLoanForm = () => {
 
         <label className="block mt-4 mb-1">Bank Statement</label>
         <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
-      </div>
+      </div> */}
 
 
       {/* Business Fields */}
@@ -838,11 +839,24 @@ const EducationLoanForm = () => {
             </select>
           </div>
 
+           {/* Bank Details */}
+          <div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank Details</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input type="text" name="accountHolderName" value={formData.accountHolderName} onChange={handleChange} placeholder="Account Holder Name" className="p-2 border rounded" required />
+              <input type="text" name="bankName" value={formData.bankName} onChange={handleChange} placeholder="Bank Name" className="p-2 border rounded" required />
+              <input type="text" name="accountNumber" value={formData.accountNumber} onChange={handleChange} placeholder="Account Number" className="p-2 border rounded" required />
+              <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
+            </div>
+            <label className="block mt-4 mb-1">Bank Statement</label>
+            <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+          </div>
+
 
          {/* Upload Section */}
-        <FileField label="Upload Photo" name="photoFile" />
+        {/* <FileField label="Upload Photo" name="photoFile" />
         <FileField label="Aadhar Card" name="aadharFile" />
-        <FileField label="PAN Card" name="panFile" />
+        <FileField label="PAN Card" name="panFile" /> */}
         <FileField label="GST Certificate" name="gstFile" />
         <FileField label="MSME/Udyam Certificate" name="msmeFile" />
         <FileField label="Electricity Bill" name="electricityBillFile" />
@@ -903,6 +917,7 @@ const EducationLoanForm = () => {
       <InputField label="Company/Organization Name" name="businessName" />
       <InputField label="Designation" name="designation" />
       <InputField label="Years in Job" name="experience" type="number" />
+      <InputField label="Monthly Income" name="monthlyIncome" type="number" />
       <InputField label="Office Address" name="officeAddress" />
       <InputField label="City" name="officeCity" />
       <InputField label="Pincode" name="officePincode" />
@@ -922,6 +937,19 @@ const EducationLoanForm = () => {
             <option value="India">India</option>
           </select>
         </div>
+
+         {/* Bank Details */}
+          <div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank Details</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input type="text" name="accountHolderName" value={formData.accountHolderName} onChange={handleChange} placeholder="Account Holder Name" className="p-2 border rounded" required />
+              <input type="text" name="bankName" value={formData.bankName} onChange={handleChange} placeholder="Bank Name" className="p-2 border rounded" required />
+              <input type="text" name="accountNumber" value={formData.accountNumber} onChange={handleChange} placeholder="Account Number" className="p-2 border rounded" required />
+              <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
+            </div>
+            <label className="block mt-4 mb-1">Bank Statement</label>
+            <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+          </div>
 
         {/* Upload Section */}
         <FileField label="Upload Photo" name="photoFile" />
@@ -954,17 +982,7 @@ const EducationLoanForm = () => {
             </>
           )}
 
-          <div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank Details</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input type="text" name="accountHolderName" value={formData.accountHolderName} onChange={handleChange} placeholder="Account Holder Name" className="p-2 border rounded" required />
-              <input type="text" name="bankName" value={formData.bankName} onChange={handleChange} placeholder="Bank Name" className="p-2 border rounded" required />
-              <input type="text" name="accountNumber" value={formData.accountNumber} onChange={handleChange} placeholder="Account Number" className="p-2 border rounded" required />
-              <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
-            </div>
-            <label className="block mt-4 mb-1">Bank Statement</label>
-            <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
-          </div>
+           
 
           <div className="mt-6">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Upload Documents</h3>
@@ -1008,7 +1026,8 @@ const EducationLoanForm = () => {
       )}
     </>
   )}
-
+  </div>
+  <div>
   {formData.guardianOccupation === 'Other' && (
     <FileField label="Loan Amount Proof" name="loanAmountFile" />
   )}

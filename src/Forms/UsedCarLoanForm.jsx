@@ -54,6 +54,7 @@ const UsedCarLoanForm = () => {
     businessCountry: "",
     companyName: "",
     jobYears: "",
+    monthlyIncome: "",
     officeAddress: "",
     officeCity: "",
     officePincode: "",
@@ -611,6 +612,16 @@ const UsedCarLoanForm = () => {
               value={formData.jobYears}
               onChange={handleChange}
               placeholder="Years in Job"
+              className="w-full p-2 border rounded"
+              required
+            />
+
+             <input
+              type="number"
+              name="monthlyIncome"
+              value={formData.monthlyIncome}
+              onChange={handleChange}
+              placeholder="Monthly Income"
               className="w-full p-2 border rounded"
               required
             />

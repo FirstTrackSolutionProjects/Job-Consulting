@@ -57,6 +57,7 @@ const HomeLoanForm = () => {
     businessCountry: "",
     companyName: "",
     jobYears: "",
+    monthlyIncome: "",
     officeAddress: "",
     officeCity: "",
     officePincode: "",
@@ -541,6 +542,16 @@ const HomeLoanForm = () => {
             className="w-full p-2 border rounded"
             required
           />
+
+           <input
+              type="number"
+              name="monthlyIncome"
+              value={formData.monthlyIncome}
+              onChange={handleChange}
+              placeholder="Monthly Income"
+              className="w-full p-2 border rounded"
+              required
+            />
 
           <input
             type="text"
