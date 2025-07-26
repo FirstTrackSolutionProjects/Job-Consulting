@@ -55,12 +55,13 @@ const MortgageLoanForm = () => {
     businessCountry: "",
     companyName: "",
     jobYears: "",
+    monthlyIncome: "",
     officeAddress: "",
     officeCity: "",
     officePincode: "",
     officeState: "",
     officeCountry: "",
-    income: "",
+    // income: "",
     mortgageProperty: "",
     propertyValue: "",
     loanAmount: "",
@@ -539,6 +540,16 @@ const MortgageLoanForm = () => {
             required
           />
 
+           <input
+            type="number"
+            name="monthlyIncome"
+            value={formData.monthlyIncome}
+            onChange={handleChange}
+            placeholder="Monthly Income"
+            className="w-full p-2 border rounded"
+            required
+          />
+
           <input
             type="text"
             name="officeAddress"
@@ -596,7 +607,7 @@ const MortgageLoanForm = () => {
         <h2 className="text-xl font-semibold text-gray-700 mb-2">Financial Details</h2>
 
         <div className="space-y-4">
-          <div>
+          {/* <div>
             <input
               type="number"
               name="income"
@@ -606,7 +617,7 @@ const MortgageLoanForm = () => {
               required
               className="w-full p-2 border rounded"
             />
-          </div>
+          </div> */}
 
           <div>
             <input
