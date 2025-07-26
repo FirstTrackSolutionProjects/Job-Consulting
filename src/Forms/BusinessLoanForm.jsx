@@ -125,16 +125,21 @@ const BusinessLoanForm = () => {
       if (isMissingFile) return false;
 
       const newFormData = { ...formData };
-      await Promise.all(
-        fileFields.map(async (key) => {
-          const file = files[key];
-          if (!file) return; // skip optional files if not provided
-          const filetype = file.type;
-          const filename = `loans/business-loans/${key}-${uuidv4()}`;
-          await uploadFile(file, filetype, filename);
-          newFormData[key] = filename; // Store the filename in formData
-        })
-      );
+      // Throttle uploads in batches of 5
+      const keysToUpload = fileFields.filter((key) => files[key]);
+      for (let i = 0; i < keysToUpload.length; i += 5) {
+        const batch = keysToUpload.slice(i, i + 5);
+        await Promise.all(
+          batch.map(async (key) => {
+            const file = files[key];
+            if (!file) return;
+            const filetype = file.type;
+            const filename = `loans/business-loans/${key}-${uuidv4()}`;
+            await uploadFile(file, filetype, filename);
+            newFormData[key] = filename;
+          })
+        );
+      }
       setFormData(newFormData);
       return newFormData;
     } catch (error) {
@@ -162,6 +167,7 @@ const BusinessLoanForm = () => {
     const uploadedFormData = await handleFileUpload();
     if (!uploadedFormData) return;
     try {
+      console.log("Submitting form data:", uploadedFormData);
       await applyForBusinessLoanService(uploadedFormData);
       toast.success("Business Loan Application Submitted Successfully!");
     } catch (error) {
@@ -396,48 +402,40 @@ const BusinessLoanForm = () => {
             className="w-full p-2 border rounded mb-2"
             required
           />
-          <input 
-            type="text"
-            name="landmark"
-            value={formData.landmark || ""}
-            onChange={handleChange}
-            placeholder="Landmark"
-            className="w-full p-2 border rounded mb-2"
-            required
-          />
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-2">
             <input
               type="text"
-              name="city"
-              value={formData.city || ""}
+              name="businessCity"
+              value={formData.businessCity || ""}
               onChange={handleChange}
-              placeholder="City"
+              placeholder="Business City"
               className="p-2 border rounded"
               required
             />
             <input
               type="text"
-              name="pincode"
-              value={formData.pincode || ""}
+              name="businessPincode"
+              value={formData.businessPincode || ""}
               onChange={handleChange}
-              placeholder="Pincode"
+              placeholder="Business Pincode"
               className="p-2 border rounded"
               required
             />
             <input
               type="text"
-              name="state"
-              value={formData.state || ""}
+              name="businessState"
+              value={formData.businessState || ""}
               onChange={handleChange}
-              placeholder="State"
+              placeholder="Business State"
               className="p-2 border rounded"
               required
             />
             <select
-              name="country"
-              value={formData.country || ""}
+              name="businessCountry"
+              value={formData.businessCountry || ""}
               onChange={handleChange}
+              placeholder="Business Country"
               className="p-2 border rounded"
               required
             >
