@@ -319,11 +319,11 @@ const UsedCarLoanForm = () => {
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Present Address Details</h3>
 
-         <select residence="residence" value={formData.residence} onChange={handleChange} className="w-full p-2 border rounded mb-2" required>
+        <select residence="residence" value={formData.residence} onChange={handleChange} className="w-full p-2 border rounded mb-2" required>
           <option value="">Residence Type</option>
-          <option>Own</option>
-          <option>Rented</option>
-         </select>
+          <option value="Own">Own</option>
+          <option value="Rented">Rented</option>
+        </select>
 
         <input type="text" name="presentAddress" value={formData.presentAddress} onChange={handleChange} placeholder="Present Address" className="w-full p-2 border rounded mb-2" required />
         <input type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" className="w-full p-2 border rounded mb-2" />
