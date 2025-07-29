@@ -81,6 +81,7 @@ const Filters = ({ filters, onChange, onSubmit }) => {
       className="relative bg-cover bg-center min-h-[600px] flex items-center justify-center"
       style={{ backgroundImage: `url('/images/your-background.jpg')` }}
     >
+    
       {/* Overlay */}
       <div className="absolute inset-0 bg-amber-400 bg-opacity-50 z-0" />
 

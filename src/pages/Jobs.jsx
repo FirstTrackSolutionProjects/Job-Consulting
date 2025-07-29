@@ -54,6 +54,7 @@ const Jobs = () => {
   return (
     <div className="max-w-7xl mx-auto px-4 py-8 mt-12">
       {/* ✅ Banner Image */}
+    
       <img
         src="/images/jobs-banner.jpg"
         alt="Job Opportunities"
