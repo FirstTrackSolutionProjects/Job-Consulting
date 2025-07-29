@@ -170,6 +170,9 @@ const MortgageLoanForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("Form data before upload:", formData);
+    
     const uploadedFormData = await handleFileUpload();
     if (!uploadedFormData) return;
     try {
