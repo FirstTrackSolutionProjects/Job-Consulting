@@ -7,8 +7,21 @@ import { toast } from "react-toastify";
 import applyForCreditCardService from "../services/creditCardServices/applyForCreditCardService";
 
 // For future file uploads, keep these arrays ready
-const fileFields = [];
-const requiredFiles = [];
+const fileFields = [
+  "photo",
+  "aadhaar",
+  "pan",
+  "salaryslip",
+  "itr1",
+  "itr2",
+  "computation1",
+  "computation2"
+];
+const requiredFiles = [
+  "photo",
+  "aadhaar",
+  "pan",
+];
 
 const CreditCard = () => {
   const navigate = useNavigate();
@@ -20,6 +33,17 @@ const CreditCard = () => {
     stdCode: "+91",
     message: "",
     profession: "",
+    businessName: "",
+    yearsInBusiness: "",
+    photo: "",
+    aadhaar: "",
+    pan: "",
+    salaryslip: "",
+    companyName: "",
+    itr1: "",
+    itr2: "",
+    computation1: "",
+    computation2: "",
   });
 
   const [files, setFiles] = useState(
@@ -173,6 +197,18 @@ const CreditCard = () => {
         </select>
 
         {/* Conditional Business or Service Details */}
+        <div>
+            <label className="block mb-1 text-gray-700 font-bold">Photo</label>
+            <input type="file" name="photo" accept=".jpg,.jpeg,.png" onChange={handleFileChange} className="w-full p-2 border rounded" required />
+          </div>
+           <div>
+            <label className="block mb-1 text-gray-700 font-bold">Aadhaar Card</label>
+            <input type="file" name="aadhaar" accept=".jpg,.jpeg,.png" onChange={handleFileChange} className="w-full p-2 border rounded" required />
+          </div>
+            <div>
+            <label className="block mb-1 text-gray-700 font-bold">Pan Card</label>
+            <input type="file" name="pan" accept=".jpg,.jpeg,.png" onChange={handleFileChange} className="w-full p-2 border rounded" required />
+          </div>
         {formData.profession === "Business" && (
           <>
             <h3 className="text-lg font-semibold mt-4">Business Details</h3>
@@ -192,18 +228,7 @@ const CreditCard = () => {
             />
 
             <h3 className="text-lg font-semibold mt-4">Upload Documents</h3>
-          <div>
-            <label className="block mb-1 text-gray-700 font-bold">Photo</label>
-            <input type="file" name="photo" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
-          </div>
-           <div>
-            <label className="block mb-1 text-gray-700 font-bold">Aadhar Card</label>
-            <input type="file" name="aadhar" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
-          </div>
-            <div>
-            <label className="block mb-1 text-gray-700 font-bold">Pan Card</label>
-            <input type="file" name="pan" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
-          </div>
+          
            <div>
           <label className="block  mb-1 font-bold mt-3">Upload Last 2 Years of ITR/Computation</label>
 
@@ -214,7 +239,7 @@ const CreditCard = () => {
                 type="file"
                 name="itr1"
                 accept=".pdf"
-                onChange={handleChange}
+                onChange={handleFileChange}
                 className="w-full border p-2 rounded"
                 required
               />
@@ -226,7 +251,7 @@ const CreditCard = () => {
                 type="file"
                 name="itr2"
                 accept=".pdf"
-                onChange={handleChange}
+                onChange={handleFileChange}
                 className="w-full border p-2 rounded"
                 
               />
@@ -238,7 +263,7 @@ const CreditCard = () => {
               type="file"
               name="computation1"
               accept=".pdf"
-              onChange={handleChange}
+              onChange={handleFileChange}
               className="w-full border p-2 rounded"
               required
             />
@@ -249,7 +274,7 @@ const CreditCard = () => {
               type="file"
               name="computation2"
               accept=".pdf"
-              onChange={handleChange}
+              onChange={handleFileChange}
               className="w-full border p-2 rounded"
               
             />
@@ -271,21 +296,10 @@ const CreditCard = () => {
             />
 
             <h3 className="text-lg font-semibold mt-4">Upload Documents</h3>
-             <div>
-            <label className="block mb-1 text-gray-700 font-bold">Photo</label>
-            <input type="file" name="photo" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
-          </div>
-           <div>
-            <label className="block mb-1 text-gray-700 font-bold">Aadhar Card</label>
-            <input type="file" name="aadhar" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
-          </div>
-            <div>
-            <label className="block mb-1 text-gray-700 font-bold">Pan Card</label>
-            <input type="file" name="pan" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
-          </div>
+             
           <div>
             <label className="block mb-1 text-gray-700 font-bold">Salary Slip (2 Months)</label>
-            <input type="file" name="salaryslip" accept=".jpg,.jpeg,.png" onChange={handleChange} className="w-full p-2 border rounded" required />
+            <input type="file" name="salaryslip" accept=".jpg,.jpeg,.png" onChange={handleFileChange} className="w-full p-2 border rounded" required />
           </div>
             
           </>
