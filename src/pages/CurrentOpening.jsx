@@ -14,7 +14,7 @@ const CurrentOpening = () => {
       <img
         src="/images/current-openings.jpg"
         alt="Loan"
-        className="w-full h-100 object-cover rounded-xl mb-6"
+        className="w-full h-110 object-cover rounded-xl mb-6"
       />
 
 
