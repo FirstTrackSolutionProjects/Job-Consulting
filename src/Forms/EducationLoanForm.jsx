@@ -822,7 +822,7 @@ const EducationLoanForm = () => {
 
           <InputField label="Industry" name="industry" />
           <InputField label="Business Name" name="businessName" />
-          <InputField label="Years in Business" name="yearsInBusiness" type="number" />
+          <InputField label="Years in Business" name="businessYears" type="number" />
           <InputField label="Annual Turnover (₹)" name="annualTurnover" type="number" />
           <InputField label="Business Address" name="businessAddress" />
           <InputField label="City" name="businessCity" />
