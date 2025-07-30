@@ -52,6 +52,12 @@ const EducationLoanForm = () => {
     institutionName: "",
     duration: "",
     loanAmount: "",
+    purpose: "",
+    accountHolderName: "",
+    bankName: "",
+    accountNumber: "",
+    ifsc: "",
+    bankProof: "",
     guardianName: "",
     guardianPhone: "",
     guardianStdCode: "+91",
@@ -77,6 +83,11 @@ const EducationLoanForm = () => {
     officeCity: "",
     officePincode: "",
     officeCountry: "",
+    guardianAccountHolderName: "",
+    guardianBankName: "",
+    guardianAccountNumber: "",
+    guardianIfsc: "",
+    guardianBankproof: "",
     highestQualification: "",
     tenthCertificate: "",
     tenthMarksheet: "",
@@ -96,39 +107,33 @@ const EducationLoanForm = () => {
     appointmentLetter: "",
     guardianLoanAmount: "",
     occupationDescription: "",
-    accountHolderName: "",
-    bankName: "",
-    accountNumber: "",
-    ifsc: "",
-    purpose: "",
-    photoFile: "",
+    photo: "",
     aadharFile: "",
     panFile: "",
-    bankProof: "",
-    guardianphotoFile: "",
-    guardianaadharFile: "",
-    guardianpanFile: "",
-    gstFile: "",
-    msmeFile: "",
-    electricityBillFile: "",
-    rentAgreementFile: "",
-    companyPanFile: "",
-    companyTanFile: "",
-    cinFile: "",
-    tradeLicenseFile: "",
-    foodLicenseFile: "",
-    drugLicenseFile: "",
+   
+    guardianphoto: "",
+    guardianaadhar: "",
+    guardianpan: "",
+    gst: "",
+    msme: "",
+    electricityBill: "",
+    rentAgreement: "",
+    companyPan: "",
+    companyTan: "",
+    cin: "",
+    tradeLicense: "",
+    foodLicense: "",
+    drugLicense: "",
     bankStatementsCurrentYear1: "",
-    bankStatementsCCYear1: "",
-    deedagreementFile: "",
-    itr1File: "",
-    itr2File: "",
-    itr3File: "",
-    computationFile1: "",
-    computationFile2: "",
-    computationFile3: "",
-    salarySlipFile: "",
-    loanAmountFile: "",
+    deedagreement: "",
+    itr1: "",
+    itr2: "",
+    itr3: "",
+    computation1: "",
+    computation2: "",
+    computation3: "",
+    salarySlip: "",
+    guardianloanAmount: "",
   });
 
   const [files, setFiles] = useState(
@@ -313,11 +318,17 @@ const EducationLoanForm = () => {
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">Present Address Details</h3>
 
-         <select residence="residence" value={formData.residence} onChange={handleChange} className="w-full p-2 border rounded mb-2" required>
-          <option value="">Residence Type</option>
+          <select
+          name="residence"
+          value={formData.residence}
+          onChange={handleChange}
+          className="w-full p-2 border rounded mb-2"
+          required
+        >
+          <option value="">Residence</option>
           <option value="Own">Own</option>
-         <option value="Rented">Rented</option>
-         </select>
+          <option value="Rented">Rented</option>
+        </select>
 
         <input type="text" name="presentAddress" value={formData.presentAddress} onChange={handleChange} placeholder="Present Address" className="w-full p-2 border rounded mb-2" required />
         <input type="text" name="landmark" value={formData.landmark} onChange={handleChange} placeholder="Landmark" className="w-full p-2 border rounded mb-2" />
@@ -767,19 +778,7 @@ const EducationLoanForm = () => {
           </select>
         </div>
       )}
-       {/* Bank Details */}
-      {/* <div>
-        <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank Details</h3>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" name="accountHolderName" value={formData.accountHolderName} onChange={handleChange} placeholder="Account Holder Name" className="p-2 border rounded" required />
-          <input type="text" name="bankName" value={formData.bankName} onChange={handleChange} placeholder="Bank Name" className="p-2 border rounded" required />
-          <input type="text" name="accountNumber" value={formData.accountNumber} onChange={handleChange} placeholder="Account Number" className="p-2 border rounded" required />
-          <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
-        </div>
-
-        <label className="block mt-4 mb-1">Bank Statement</label>
-        <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required onChange={handleFileChange} />
-      </div> */}
+      
 
 
       {/* Business Fields */}
@@ -820,40 +819,98 @@ const EducationLoanForm = () => {
             </select>
           </div>
 
-          <InputField label="Industry" name="industry" />
-          <InputField label="Business Name" name="businessName" />
-          <InputField label="Years in Business" name="businessYears" type="number" />
-          <InputField label="Annual Turnover (₹)" name="annualTurnover" type="number" />
-          <InputField label="Business Address" name="businessAddress" />
-          <InputField label="City" name="businessCity" />
-          <InputField label="Pincode" name="businessPincode" />
-          <InputField label="State" name="businessState" />
+            {/* Industry */}
+          <label className="block mb-2 font-medium">Industry</label>
+          <input
+            type="text"
+            name="industry"
+            value={formData.industry}
+            onChange={handleChange}
+            placeholder="Enter Industry"
+            className="w-full border px-3 py-2 mb-4"
+          />
 
-           <div className="mb-4">
-            <label className="block font-medium mb-1">Country</label>
-            <select
-              name="country"
-              value={formData.country}
+          {/* Business Name */}
+          <div>
+            <label className="block text-gray-700 mb-1">Business Name</label>
+            <input
+              type="text"
+              name="businessName"
+              value={formData.businessName}
               onChange={handleChange}
-              className="w-full p-2 border rounded"
+              placeholder="Business Name"
               required
-            > 
+              className="w-full p-2 border rounded mb-2"
+            />
+          </div>
+
+          <input
+            type="number"
+            name="businessYears"
+            value={formData.businessYears}
+            onChange={handleChange}
+            placeholder="Years in Business"
+            className="w-full p-2 border rounded mb-4"
+            required
+          />
+          <input
+            type="text"
+            name="businessannualturnover"
+            value={formData.businessannualturnover}
+            onChange={handleChange}
+            placeholder="Annual Turnover"
+            className="w-full p-2 border rounded mb-4"
+            required
+          />
+
+          <input
+            type="text"
+            name="businessAddress"
+            value={formData.businessAddress}
+            onChange={handleChange}
+            placeholder="Business Address"
+            className="w-full p-2 border rounded mb-4"
+            required
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <input
+              type="text"
+              name="businessCity"
+              value={formData.businessCity}
+              onChange={handleChange}
+              placeholder="City"
+              className="p-2 border rounded"
+              required
+            />
+            <input
+              type="text"
+              name="businessPincode"
+              value={formData.businessPincode}
+              onChange={handleChange}
+              placeholder="Pincode"
+              className="p-2 border rounded"
+              required
+            />
+            <input
+              type="text"
+              name="businessState"
+              value={formData.businessState}
+              onChange={handleChange}
+              placeholder="State"
+              className="p-2 border rounded"
+              required
+            />
+            <select
+              name="businessCountry"
+              value={formData.businessCountry}
+              onChange={handleChange}
+              className="p-2 border rounded"
+              required
+            >
               <option value="">Select Country</option>
               <option value="India">India</option>
             </select>
-          </div>
-
-           {/* Bank Details */}
-          <div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank Details</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input type="text" name="accountHolderName" value={formData.accountHolderName} onChange={handleChange} placeholder="Account Holder Name" className="p-2 border rounded" required />
-              <input type="text" name="bankName" value={formData.bankName} onChange={handleChange} placeholder="Bank Name" className="p-2 border rounded" required />
-              <input type="text" name="accountNumber" value={formData.accountNumber} onChange={handleChange} placeholder="Account Number" className="p-2 border rounded" required />
-              <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
-            </div>
-            <label className="block mt-4 mb-1">Bank Statement</label>
-            <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
           </div>
         </>
       )}
@@ -879,42 +936,85 @@ const EducationLoanForm = () => {
       </div>
 
       {/* Company Info */}
-      <InputField label="Company/Organization Name" name="businessName" />
-      <InputField label="Designation" name="designation" />
-      <InputField label="Years in Job" name="experience" type="number" />
-      <InputField label="Monthly Income" name="monthlyIncome" type="number" />
-      <InputField label="Office Address" name="officeAddress" />
-      <InputField label="City" name="officeCity" />
-      <InputField label="Pincode" name="officePincode" />
-      <InputField label="State" name="officeState" />
-
-        {/* Country Dropdown */}
-        <div className="mb-4">
-          <label className="block font-medium mb-1">Country</label>
-          <select
-            name="officeCountry"
-            value={formData.officeCountry}
+        <input
+            type="text"
+            name="companyName"
+            value={formData.companyName}
             onChange={handleChange}
+            placeholder="Company Name"
             className="w-full p-2 border rounded"
             required
-          >
-            <option value="">Select Country</option>
-            <option value="India">India</option>
-          </select>
-        </div>
+          />
 
-         {/* Bank Details */}
-          <div>
-            <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank Details</h3>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <input type="text" name="accountHolderName" value={formData.accountHolderName} onChange={handleChange} placeholder="Account Holder Name" className="p-2 border rounded" required />
-              <input type="text" name="bankName" value={formData.bankName} onChange={handleChange} placeholder="Bank Name" className="p-2 border rounded" required />
-              <input type="text" name="accountNumber" value={formData.accountNumber} onChange={handleChange} placeholder="Account Number" className="p-2 border rounded" required />
-              <input type="text" name="ifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
-            </div>
-            <label className="block mt-4 mb-1">Bank Statement</label>
-            <input type="file" name="bankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
-          </div>   
+          <input
+            type="number"
+            name="jobYears"
+            value={formData.jobYears}
+            onChange={handleChange}
+            placeholder="Years in Job"
+            className="w-full p-2 border rounded"
+            required
+          />
+
+           <input
+              type="number"
+              name="monthlyIncome"
+              value={formData.monthlyIncome}
+              onChange={handleChange}
+              placeholder="Monthly Income"
+              className="w-full p-2 border rounded"
+              required
+            />
+
+          <input
+            type="text"
+            name="officeAddress"
+            value={formData.officeAddress}
+            onChange={handleChange}
+            placeholder="Office Address"
+            className="w-full p-2 border rounded"
+            required
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+            <input
+              type="text"
+              name="officeCity"
+              value={formData.officeCity}
+              onChange={handleChange}
+              placeholder="City"
+              className="p-2 border rounded"
+              required
+            />
+            <input
+              type="text"
+              name="officePincode"
+              value={formData.officePincode}
+              onChange={handleChange}
+              placeholder="Pincode"
+              className="p-2 border rounded"
+              required
+            />
+            <input
+              type="text"
+              name="officeState"
+              value={formData.officeState}
+              onChange={handleChange}
+              placeholder="State"
+              className="p-2 border rounded"
+              required
+            />
+            <select
+              name="officeCountry"
+              value={formData.officeCountry}
+              onChange={handleChange}
+              className="p-2 border rounded"
+              required
+            >
+              <option value="">Select Country</option>
+              <option value="India">India</option>
+            </select>
+          </div>
       </>
     )}
 
@@ -941,59 +1041,311 @@ const EducationLoanForm = () => {
             </>
           )}
 
-           
+             {/* Bank Details */}
+          <div>
+            <h3 className="text-xl font-semibold text-gray-900 mb-4">Bank Details</h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <input type="text" name="guardianaccountHolderName" value={formData.accountHolderName} onChange={handleChange} placeholder="Account Holder Name" className="p-2 border rounded" required />
+              <input type="text" name="guardianbankName" value={formData.bankName} onChange={handleChange} placeholder="Bank Name" className="p-2 border rounded" required />
+              <input type="text" name="guardianaccountNumber" value={formData.accountNumber} onChange={handleChange} placeholder="Account Number" className="p-2 border rounded" required />
+              <input type="text" name="guardianifsc" value={formData.ifsc} onChange={handleChange} placeholder="IFSC Code" className="p-2 border rounded" required />
+            </div>
+            <label className="block mt-4 mb-1">Bank Statement</label>
+            <input type="file" name="guardianbankProof" accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+          </div>   
 
           <div className="mt-6">
             <h3 className="text-xl font-semibold text-gray-900 mb-4">Upload Documents</h3>
-            <FileField label="Upload Photo" name="guardianphotoFile" />
-            <FileField label="Aadhar Card" name="guardianaadharFile" />
-            <FileField label="PAN Card" name="guardianpanFile" />
-           
+             <div>
+            <label className="block text-gray-700 mb-1 font-bold">Your Photo (Passport Size)</label>
+            <input
+              type="file"
+              name="photo"
+              accept=".jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+              onChange={handleFileChange}
+            />
+          </div>
+
+          {/* Aadhaar */}
+          <div>
+            <label className="block text-gray-700 mb-1 mt-2 font-bold">Aadhaar Card</label>
+            <input
+              type="file"
+              name="aadharFile"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+              onChange={handleFileChange}
+            />
+          </div>
+
+          {/* PAN */}
+          <div>
+            <label className="block text-gray-700 mb-1 mt-2 font-bold">PAN Card</label>
+            <input
+              type="file"
+              name="panFile"
+              accept=".pdf,.jpg,.jpeg,.png"
+              className="w-full p-2 border rounded"
+              required
+              onChange={handleFileChange}
+            />
+          </div>
+          
            {formData.guardianOccupation === 'Business' && (
         <>
-          <FileField label="GST Certificate" name="gstFile" />
-          <FileField label="MSME/Udyam Certificate" name="msmeFile" />
-          <FileField label="Electricity Bill" name="electricityBillFile" />
-          <FileField label="ITR 1" name="itr1File" />
-          <FileField label="ITR 2" name="itr2File" />
-          <FileField label="ITR 3" name="itr2File" />
-          <FileField label="Computation 1" name="computation1File" />
-          <FileField label="Computation 2" name="computation2File" />
-          <FileField label="Computation 3" name="computation3File" />
+          <label className="block text-gray-900 mb-1 font-semibold mt-2">
+                GST Certificate
+                <input
+                  type="file"
+                  name="gst"
+                  accept=".pdf"
+                  onChange={handleFileChange}
+                  className="w-full border p-2 rounded font-normal"
+                />
+              </label>
 
-          {formData.businessType === 'Rented' && (
-            <FileField label="Rent Agreement" name="rentAgreementFile" />
-          )}
+              <label className="block text-gray-900 mb-1 font-semibold mt-2">
+                MSME/Udyam Certificate
+                <input
+                  type="file"
+                  name="msme"
+                  accept=".pdf"
+                  onChange={handleFileChange}
+                  className="w-full border p-2 rounded font-normal"
+                />
+              </label>
 
-          {formData.organizationType === 'Private Limited' && (
-            <>
-              <FileField label="Company PAN" name="companyPanFile" />
-              <FileField label="Company TAN" name="companyTanFile" />
-              <FileField label="CIN" name="cinFile" />
-              <FileField label="Trade License" name="tradeLicenseFile" />
-              <FileField label="Food License" name="foodLicenseFile" />
-              <FileField label="Drug License" name="drugLicenseFile" />
-              <FileField label="1 Year Bank Statement (CA)" name="bankStatementCAFile" />
-              <FileField label="1 Year Bank Statement (CC)" name="bankStatementCCFile" />
-            </>
-          )}
+              <label className="block text-gray-900 mb-1 font-semibold mt-2">
+                Electricity Bill
+                <input
+                  type="file"
+                  name="electricityBill"
+                  accept=".pdf"
+                  onChange={handleFileChange}
+                  className="w-full border p-2 rounded font-normal"
+                />
+              </label>
 
-          {formData.organizationType === 'Partnership' && (
-            <FileField label="Deed Agreement" name="deedAgreementFile" />
-          )}
-        </>
+              {/* Show rent agreement Only if businesstype is rented */}
+              {formData.businessType === "rented" && (
+                <label className="block text-gray-900 mb-1 font-semibold mt-2">
+                  Rent Agreement
+                  <input
+                    type="file"
+                    name="rentagreement"
+                    accept=".pdf"
+                    onChange={handleFileChange}
+                    className="w-full border p-2 rounded font-normal"
+                  />
+                </label>
+              )}
+
+              {formData.organizationType === "private_limited" && (
+                <>
+                  <label className="block text-gray-900 mb-1 font-semibold mt-2">
+                    Company Identification Number (CIN)
+                    <input
+                      type="file"
+                      name="cin"
+                      accept=".pdf"
+                      onChange={handleFileChange}
+                      className="w-full border p-2 rounded font-normal"
+                    />
+                  </label>
+
+                  <label className="block text-gray-900 mb-1 font-semibold mt-2">
+                    Company PAN
+                    <input
+                      type="file"
+                      name="companypan"
+                      accept=".pdf"
+                      onChange={handleFileChange}
+                      className="w-full border p-2 rounded font-normal"
+                    />
+                  </label>
+
+                  <label className="block text-gray-900 mb-1 font-semibold mt-2">
+                    Company TAN
+                    <input
+                      type="file"
+                      name="companytan"
+                      accept=".pdf"
+                      onChange={handleFileChange}
+                      className="w-full border p-2 rounded font-normal"
+                    />
+                  </label>
+                </>
+              )}
+
+              <label className="block text-gray-900 mb-1 font-semibold mt-2">
+                Trade License
+                <input
+                  type="file"
+                  name="tradeLicense"
+                  accept=".pdf"
+                  onChange={handleFileChange}
+                  className="w-full border p-2 rounded font-normal"
+                />
+              </label>
+
+              <label className="block text-gray-900 mb-1 font-semibold mt-2">
+                Food License
+                <input
+                  type="file"
+                  name="foodLicense"
+                  accept=".pdf"
+                  onChange={handleFileChange}
+                  className="w-full border p-2 rounded font-normal"
+                />
+              </label>
+
+              <label className="block text-gray-900 mb-1 font-semibold mt-2">
+                Drug License
+                <input
+                  type="file"
+                  name="drugLicense"
+                  accept=".pdf"
+                  onChange={handleFileChange}
+                  className="w-full border p-2 rounded font-normal"
+                />
+              </label>
+
+              {/* Show deed agreement Only if organizationtype is partnership */}
+              {formData.organizationType === "partnership" && (
+                <label className="block text-gray-900 mb-1 font-semibold mt-2">
+                  Partnership Deed
+                  <input
+                    type="file"
+                    name="deedagreement"
+                    accept=".pdf"
+                    onChange={handleFileChange}
+                    className="w-full border p-2 rounded font-normal"
+                  />
+                </label>
+              )}
+
+              {/* Bank Statement */}
+              <label className="block text-gray-900 mb-1 font-semibold mt-2">
+                1 Year Bank Statements (CA) (PDF)
+                <input
+                  type="file"
+                  name="bankStatementsCurrent"
+                  accept=".pdf"
+                  className="w-full p-2 border rounded font-normal"
+                  required
+                  onChange={handleFileChange}
+                />
+              </label>
+          
+        <div>
+          <label className="block  mb-1 font-bold mt-3">Upload Last 3 Years of ITR/Computation</label>
+
+          <div className="space-y-2 mt-2">
+            <div>
+              <label className="text-sm font-semibold">ITR - Year 1</label>
+              <input
+                type="file"
+                name="itr1"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded"
+                required
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-semibold">ITR - Year 2</label>
+              <input
+                type="file"
+                name="itr2"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded"
+              />
+            </div>
+
+            <div>
+              <label className="text-sm font-semibold">ITR - Year 3</label>
+              <input
+                type="file"
+                name="itr3"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-semibold">Computation - Year 1</label>
+              <input
+                type="file"
+                name="computation1"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded"
+                required
+              />
+            </div>
+            <div>
+              <label className="text-sm font-semibold">Computation - Year 2</label>
+              <input
+                type="file"
+                name="computation2"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded"
+              />
+            </div>
+            <div>
+              <label className="text-sm font-semibold">Computation - Year 3</label>
+              <input
+                type="file"
+                name="computation3"
+                accept=".pdf"
+                onChange={handleFileChange}
+                className="w-full border p-2 rounded"
+              />
+            </div>
+          </div>
+        </div>
+      </>
+    )}
+    
+          
+    
+      
+    
+     {/* Show Salary Slip Only if Profession is Service */}
+      {formData.guardianOccupation === "Service" && (
+        <label className="block text-gray-900 mb-1 font-semibold mt-2">
+          Salary Slip (Last 3 Months)
+          <input
+            type="file"
+            name="incomeproof"
+            accept=".pdf"
+            onChange={handleFileChange}
+            className="w-full border p-2 rounded font-normal"
+          />
+        </label>
       )}
-      </div>
-    <div>
-     {formData.guardianOccupation === 'Service' && (
-              <FileField label="Salary Slip (Last 3 Months)" name="salarySlipFile" />
-            )}
-  </div>
-  <div>
+
   {formData.guardianOccupation === 'Other' && (
-    <FileField label="Loan Amount Proof" name="loanAmountFile" />
+     <label className="block text-gray-900 mb-1 font-semibold">
+        Loan Amount Proof
+        <input
+          type="file"
+          name="guardianloanAmount"
+          accept=".pdf,.jpg,.jpeg,.png"
+          className="w-full border p-2 rounded font-normal"
+          onChange={handleFileChange}
+        />
+     </label>
+  
   )}
-</div>
+      </div>
+
 
       <button
         type="submit"
