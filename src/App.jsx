@@ -31,7 +31,7 @@ import InsuranceForm from "./pages/InsuranceForm";
 import CreditCard from "./pages/CreditCard";
 import LoanPage from "./pages/Loan";
 import LoanDetails from "./pages/LoanDetails";
- import LoanApply from "./pages/LoanApply";
+import LoanApply from "./pages/LoanApply";
 import PersonalLoanForm from "./Forms/PersonalLoanForm";
 import BusinessLoanForm from "./Forms/BusinessLoanForm";
 import HomeLoanForm from "./Forms/HomeLoanForm";
@@ -81,9 +81,9 @@ function App() {
           <Route path="/loan/apply/personal" element={<PersonalLoanForm />} />
           <Route path="/loan/apply/business" element={<BusinessLoanForm />} />
           <Route path="/loan/apply/home" element={<HomeLoanForm />} />
-          <Route path="/loan/apply/mortgage" element={<MortgageLoanForm />} />
+           <Route path="/loan/apply/mortgage" element={<MortgageLoanForm />} />
           <Route path="/loan/apply/used-car" element={<UsedCarLoanForm />} />
-          <Route path="/loan/apply/education" element={<EducationLoanForm />} />
+          <Route path="/loan/apply/education" element={<EducationLoanForm />} /> 
           <Route path="/loan/apply/tractor" element={<TractorLoanForm />} />
         </Routes>
       </main>

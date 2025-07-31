@@ -93,7 +93,7 @@ const HomeLoanForm = () => {
   ];
   // List only required file fields here (update as needed)
   const requiredFiles = [
-    "photo", "aadharFile", "panFile", "incomeproof"
+    "photo", "aadharFile", "panFile", "bankProof" 
   ];
 
   const [files, setFiles] = useState(
