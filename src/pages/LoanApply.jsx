@@ -5,7 +5,7 @@ import { useLocation } from "react-router-dom";
 import PersonalLoanForm from "../Forms/PersonalLoanForm";
 import BusinessLoanForm from "../Forms/BusinessLoanForm";
 import HomeLoanForm from "../Forms/HomeLoanForm";
-import MortgageLoanForm from "../Forms/MortgageLoanForm";
+ import MortgageLoanForm from "../Forms/MortgageLoanForm";
 import UsedCarLoanForm from "../Forms/UsedCarLoanForm";
 import EducationLoanForm from "../Forms/EducationLoanForm";
 import TractorLoanForm from "../Forms/TractorLoanForm";
@@ -14,7 +14,7 @@ import TractorLoanForm from "../Forms/TractorLoanForm";
 const formComponents = {
   personal: PersonalLoanForm,
   business: BusinessLoanForm,
-  home: HomeLoanForm,
+   home: HomeLoanForm,
   "mortgage/laps": MortgageLoanForm,
   "used-car": UsedCarLoanForm,
   education: EducationLoanForm,

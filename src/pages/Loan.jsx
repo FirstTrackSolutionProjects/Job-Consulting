@@ -6,7 +6,7 @@ const loanTypes = [
   { name: "Personal Loan", type: "personal"},
   { name: "Business Loan", type: "business" },
   { name: "Home Loan", type: "home" },
-  { name: "Mortgage Loan", type: "mortgage/laps" },
+   { name: "Mortgage Loan", type: "mortgage/laps" },
   { name: "Used Car Loan", type: "used-car" },
   { name: "Education Loan", type: "education" },
   { name: "Tractor Loan", type: "tractor" },
