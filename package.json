@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@mui/icons-material": "^6.4.2",
+    "@mui/material": "^6.4.12",
     "@tailwindcss/vite": "^4.1.7",
     "dotenv": "^17.2.0",
     "lucide-react": "^0.511.0",
+    "mui-file-input": "^7.0.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-fast-marquee": "^1.6.5",

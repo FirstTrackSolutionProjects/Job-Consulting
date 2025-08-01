@@ -24,5 +24,10 @@ export const FileField = ({ label, name, onChange }) => (
   </div>
 );
 
+export const SelectField = ({ label, name, value, onChange, options }) => (
+  <div className="mb-4">
+    
+  </div>
+);
 
 
