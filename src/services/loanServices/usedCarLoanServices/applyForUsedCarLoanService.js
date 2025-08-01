@@ -3,11 +3,8 @@ import applyForUsedCarLoanSchema from "../../../schemas/loanSchemas/applyForUsed
 const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
 const applyForUsedCarLoanService = async (loanData) => {
-    const result = applyForUsedCarLoanSchema.safeParse(loanData);
-    if (!result.success) {
-        const zodErrors = JSON.parse(result.error);
-        throw new Error(zodErrors?.[0]?.message || 'Validation failed');
-    }
+    console.log(loanData)
+    // return;
     let data;
     try{
         const response = await fetch(`${BACKEND_URL}/loans/apply-for-used-car-loan`, {
