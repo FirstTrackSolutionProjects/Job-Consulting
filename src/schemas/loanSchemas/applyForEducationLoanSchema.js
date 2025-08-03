@@ -15,7 +15,7 @@ const EducationLoanServiceTypeEnum = z.enum(['Private Job', 'Government Job', 'O
 const EducationLoanGuardianRelationEnum = z.enum(['Father', 'Mother', 'Brother', 'Sister'], { error: 'Guardian relation is required' });
 const EducationLoanGuardianOccupationEnum = z.enum(['Business', 'Service', 'Other'], { error: 'Guardian occupation is required' });
 const EducationLoanOccupationDescriptionEnum = z.enum(['Homemaker', 'Farmer', 'Self-employed', 'Freelancer', 'Retired', 'Other'], { error: 'Occupation description is required' });
-const EducationLoanHighestQualificationEnum = z.enum(['10th', '12th', 'Diploma', 'Graduate', 'Post Graduate', 'PhD'], { error: 'Highest qualification is required' });
+const EducationLoanHighestQualificationEnum = z.enum(['12th', 'Graduate', 'Post Graduate'], { error: 'Highest qualification is required' });
 const EducationLoanPurposeEnum = z.enum(['Education'], { error: 'Purpose is required' });
 
 const educationLoanSchema = z.object({
@@ -139,7 +139,7 @@ const educationLoanSchema = z.object({
         ? 'Present address must be string'
         : undefined
   }).min(5, { error: 'Present address must be at least 5 characters' }),
-  aadhar: z.string({
+  aadhaar: z.string({
     error: issue =>
       issue.input === undefined
         ? 'Aadhaar is required'
@@ -235,23 +235,29 @@ const educationLoanSchema = z.object({
   officePincode: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Office pincode must be string' : undefined }).optional(),
   officeCountry: EducationLoanCountryEnum.optional(),
   highestQualification: EducationLoanHighestQualificationEnum.optional(),
-  tenthCertificate: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Tenth certificate must be string' : undefined }).optional(),
-  tenthMarksheet: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Tenth marksheet must be string' : undefined }).optional(),
-  tenthPercent: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Tenth percentage must be string' : undefined }).optional(),
-  twelfthCertificate: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Twelfth certificate must be string' : undefined }).optional(),
-  twelfthMarksheet: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Twelfth marksheet must be string' : undefined }).optional(),
-  twelfthPercent: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Twelfth percentage must be string' : undefined }).optional(),
-  diplomaCertificate: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Diploma certificate must be string' : undefined }).optional(),
-  diplomaCgpa: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Diploma CGPA must be string' : undefined }).optional(),
+  // 12th
+  twelfthStream: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? '12th stream must be string' : undefined }).optional(),
+  twelfthCollege: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? '12th college must be string' : undefined }).optional(),
+  twelfthUniversity: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? '12th university must be string' : undefined }).optional(),
+  twelfthCertificate: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? '12th certificate must be string' : undefined }).optional(),
+  twelfthMarksheet: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? '12th marksheet must be string' : undefined }).optional(),
+  twelfthPercent: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? '12th percentage must be string' : undefined }).optional(),
+  twelfthclcCertificate: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'CLC certificate must be string' : undefined }).optional(),
+  // Graduation
+  graduationStream: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Graduation stream must be string' : undefined }).optional(),
+  graduationCollege: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Graduation college must be string' : undefined }).optional(),
+  graduationUniversity: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Graduation university must be string' : undefined }).optional(),
   graduationCertificate: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Graduation certificate must be string' : undefined }).optional(),
   graduationCgpa: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Graduation CGPA must be string' : undefined }).optional(),
+  graduationclcCertificate: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'CLC certificate must be string' : undefined }).optional(),
+  // Post Graduation
+  postGradStream: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Post grad stream must be string' : undefined }).optional(),
+  postGradCollege: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Post grad college must be string' : undefined }).optional(),
+  postGradUniversity: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Post grad university must be string' : undefined }).optional(),
   postGradCertificate: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Post grad certificate must be string' : undefined }).optional(),
   postGradCgpa: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Post grad CGPA must be string' : undefined }).optional(),
-  phdCertificate: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'PhD certificate must be string' : undefined }).optional(),
-  phdCgpa: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'PhD CGPA must be string' : undefined }).optional(),
-  clcCertificate: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'CLC certificate must be string' : undefined }).optional(),
-  appointmentLetter: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Appointment letter must be string' : undefined }).optional(),
-  guardianOccupation: EducationLoanGuardianOccupationEnum.optional(),
+  postGradclcCertificate: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'CLC certificate must be string' : undefined }).optional(),
+
   guardianLoanAmount: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian loan amount must be string' : undefined }).optional(),
   occupationDescription: EducationLoanOccupationDescriptionEnum.optional(),
   accountHolderName: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Account holder name must be string' : undefined }).optional(),
@@ -261,7 +267,7 @@ const educationLoanSchema = z.object({
   purpose: EducationLoanPurposeEnum.optional(),
   // All file fields (store S3 key as string)
   photoFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Photo file must be string' : undefined }).optional(),
-  aadharFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Aadhaar file must be string' : undefined }).optional(),
+  aadhaarFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Aadhaar file must be string' : undefined }).optional(),
   panFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'PAN file must be string' : undefined }).optional(),
   bankProof: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Bank proof must be string' : undefined }).optional(),
   salarySlipFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Salary slip file must be string' : undefined }).optional(),
@@ -276,7 +282,6 @@ const educationLoanSchema = z.object({
   foodLicenseFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Food license file must be string' : undefined }).optional(),
   drugLicenseFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Drug license file must be string' : undefined }).optional(),
   bankStatementsCurrentYear1: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Bank statement (current year) must be string' : undefined }).optional(),
-  bankStatementsCCYear1: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Bank statement (CC year) must be string' : undefined }).optional(),
   deedagreementFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Deed agreement file must be string' : undefined }).optional(),
   itr1File: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'ITR 1 file must be string' : undefined }).optional(),
   itr2File: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'ITR 2 file must be string' : undefined }).optional(),
@@ -284,10 +289,17 @@ const educationLoanSchema = z.object({
   computationFile1: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Computation file 1 must be string' : undefined }).optional(),
   computationFile2: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Computation file 2 must be string' : undefined }).optional(),
   computationFile3: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Computation file 3 must be string' : undefined }).optional(),
+  //Guardian Bank file fields
+  guardianAccountHolderName: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian account holder name must be string' : undefined }).optional(),
+  guardianBankName: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian bank name must be string' : undefined }).optional(),
+  guardianAccountNumber: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian account number must be string' : undefined }).optional(),
+  guardianIfsc: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian IFSC must be string' : undefined }).optional(),
+
   // Guardian file fields
   guardianphotoFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian photo file must be string' : undefined }).optional(),
-  guardianaadharFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian Aadhaar file must be string' : undefined }).optional(),
+  guardianaadhaarFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian Aadhaar file must be string' : undefined }).optional(),
   guardianpanFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian PAN file must be string' : undefined }).optional(),
+  guardianBankProof: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian bank proof must be string' : undefined }).optional(),
   loanAmountFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Loan amount file must be string' : undefined }).optional(),
 })
 .refine(
@@ -363,33 +375,20 @@ const educationLoanSchema = z.object({
   { message: 'Occupation description is required for other occupation', path: ['occupationDescription'] }
 )
 // Highest qualification-based file validations
+
 .refine(
-  data => !data.highestQualification || (data.tenthCertificate?.trim() && data.tenthMarksheet?.trim() && data.tenthPercent?.trim()),
-  { message: '10th certificate, marksheet and percentage are required when highest qualification is provided', path: ['tenthCertificate'] }
-)
-.refine(
-  data => !['12th', 'Diploma', 'Graduate', 'Post Graduate', 'PhD'].includes(data.highestQualification) || 
+  data => !['12th', 'Graduate', 'Post Graduate'].includes(data.highestQualification) ||
          (data.twelfthCertificate?.trim() && data.twelfthMarksheet?.trim() && data.twelfthPercent?.trim()),
   { message: '12th certificate, marksheet and percentage are required for 12th and above qualifications', path: ['twelfthCertificate'] }
 )
 .refine(
-  data => !['Diploma', 'Graduate', 'Post Graduate', 'PhD'].includes(data.highestQualification) || 
-         (data.diplomaCertificate?.trim() && data.diplomaCgpa?.trim()),
-  { message: 'Diploma certificate and CGPA are required for Diploma and above qualifications', path: ['diplomaCertificate'] }
-)
-.refine(
-  data => !['Graduate', 'Post Graduate', 'PhD'].includes(data.highestQualification) || 
+  data => !['Graduate', 'Post Graduate'].includes(data.highestQualification) ||
          (data.graduationCertificate?.trim() && data.graduationCgpa?.trim()),
   { message: 'Graduation certificate and CGPA are required for Graduate and above qualifications', path: ['graduationCertificate'] }
 )
 .refine(
-  data => !['Post Graduate', 'PhD'].includes(data.highestQualification) || 
+  data => data.highestQualification !== 'Post Graduate' ||
          (data.postGradCertificate?.trim() && data.postGradCgpa?.trim()),
-  { message: 'Post graduation certificate and CGPA are required for Post Graduate and above qualifications', path: ['postGradCertificate'] }
+  { message: 'Post graduation certificate and CGPA are required for Post Graduate qualification', path: ['postGradCertificate'] }
 )
-.refine(
-  data => data.highestQualification !== 'PhD' || (data.phdCertificate?.trim() && data.phdCgpa?.trim()),
-  { message: 'PhD certificate and CGPA are required for PhD qualification', path: ['phdCertificate'] }
-);
-
 export default educationLoanSchema;

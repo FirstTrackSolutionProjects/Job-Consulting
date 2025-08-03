@@ -7,13 +7,13 @@ import { toast } from "react-toastify";
 
 const fileFields = [
   "photo", "officePhoto1", "officePhoto2", "officePhoto3", "officePhoto4",
-  "aadharFile", "panFile", "gst", "msme", "rentAgreement", "electricityBill",
+  "aadhaarFile", "panFile", "gst", "msme", "rentAgreement", "electricityBill",
   "cin", "companyPan", "companyTan", "tradeLicense", "foodLicense", "drugLicense",
   "bankStatements", "bankStatementsCurrentYear1", "bankStatementsCCYear1",
   "deedagreement", "itr1", "itr2", "itr3", "computation1", "computation2", "computation3", "bankProof"
 ];
 const requiredFiles = [
-  "photo", "officePhoto1", "officePhoto2", "officePhoto3", "officePhoto4", "aadharFile", "panFile", "bankProof"
+  "photo", "officePhoto1", "officePhoto2", "officePhoto3", "officePhoto4", "aadhaarFile", "panFile", "bankProof"
 ];
 
 const BusinessLoanForm = () => {
@@ -42,7 +42,7 @@ const BusinessLoanForm = () => {
     city: "",
     pincode: "",
     country: "",
-    aadhar: "",
+    aadhaar: "",
     pan: "",
     organizationType: "",
     industry: "",
@@ -67,7 +67,7 @@ const BusinessLoanForm = () => {
     officePhoto2: "",
     officePhoto3: "",
     officePhoto4: "",
-    aadharFile: "",
+    aadhaarFile: "",
     panFile: "",
     gst: "",
     msme: "",
@@ -327,7 +327,7 @@ const BusinessLoanForm = () => {
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">KYC Details</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" name="aadhar" value={formData.aadhar} onChange={handleChange} placeholder="Aadhaar Number" className="p-2 border rounded" required />
+          <input type="text" name="aadhaar" value={formData.aadhaar} onChange={handleChange} placeholder="Aadhaar Number" className="p-2 border rounded" required />
           <input type="text" name="pan" value={formData.pan} onChange={handleChange} placeholder="PAN Number" className="p-2 border rounded" required />
         </div>
       </div>
@@ -587,7 +587,7 @@ const BusinessLoanForm = () => {
             <label className="block text-gray-700 mb-1">Aadhaar Card (PDF/Image)</label>
             <input
               type="file"
-              name="aadharFile"
+              name="aadhaarFile"
               accept=".pdf,.jpg,.jpeg,.png"
               className="w-full p-2 border rounded"
               required

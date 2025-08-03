@@ -38,3 +38,40 @@ export const USED_CAR_LOAN_STD_CODES = Object.freeze(['+91']);
 export const USED_CAR_LOAN_COUNTRIES = Object.freeze(['India']);
 
 export const USED_CAR_LOAN_PROFESSIONS = Object.freeze(['Business', 'Service']);
+
+////////////MORTGAGE LOAN ENUMS////////////
+
+export const MORTGAGE_LOAN_STD_CODES = Object.freeze(['+91']);
+
+export const MORTGAGE_LOAN_COUNTRIES = Object.freeze(['India']);
+
+export const MORTGAGE_LOAN_PROFESSIONS = Object.freeze(['Business', 'Service']);
+
+///////////////HOME LOAN ENUMS////////////
+
+export const HOME_LOAN_STD_CODES = Object.freeze(['+91']);
+
+export const HOME_LOAN_COUNTRIES = Object.freeze(['India']);
+
+export const HOME_LOAN_PROFESSIONS = Object.freeze(['Business', 'Service']);
+
+///////////////EDUCATION LOAN ENUMS////////////
+
+export const EDUCATION_LOAN_STD_CODES = Object.freeze(['+91']);
+
+export const EDUCATION_LOAN_COUNTRIES = Object.freeze(['India']);
+
+export const EDUCATION_LOAN_HIGHEST_QUALIFICATIONS = Object.freeze(['12th', 'Graduate', 'Post Graduate',]);
+
+export const EDUCATION_LOAN_TWELFTH_STREAMS = Object.freeze(['Science', 'Commerce', 'Arts']);
+
+export const EDUCATION_LOAN_GRADUATION_STREAMS = Object.freeze(['B.Sc', 'B.Com', 'B.A', 'BBA', 'B.Tech', 'Other']);
+
+export const EDUCATION_LOAN_POST_GRADUATION_STREAMS = Object.freeze(['M.Sc', 'M.Com', 'M.A', 'MBA', 'M.Tech', 'Other']);
+
+export const EDUCATION_LOAN_GUARDIAN_STD_CODES = Object.freeze(['+91']);
+
+export const EDUCATION_LOAN_GUARDIAN_RELATION= Object.freeze(['Father', 'Mother', 'Brother', 'Sister']);
+
+export const EDUCATION_LOAN_GUARDIAN_OCCUPATIONS = Object.freeze(['Business', 'Service']);
+

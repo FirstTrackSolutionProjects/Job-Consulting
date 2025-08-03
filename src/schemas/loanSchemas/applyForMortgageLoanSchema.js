@@ -114,7 +114,7 @@ const mortgageLoanSchema = z.object({
         ? 'Permanent address must be string'
         : undefined
   }).min(5, { error: 'Permanent address must be at least 5 characters' }),
-  aadhar: z.string({
+  aadhaar: z.string({
     error: issue =>
       issue.input === undefined
         ? 'Aadhaar is required'
@@ -210,7 +210,7 @@ const mortgageLoanSchema = z.object({
         : issue.code === 'invalid_type'
         ? 'Purpose must be string'
         : undefined
-  }).min(3, { error: 'Purpose must be at least 3 characters' }),
+  }).min(5, { error: 'Purpose must be at least 5 characters' }),
   accountHolderName: z.string({
     error: issue =>
       issue.input === undefined
@@ -245,7 +245,7 @@ const mortgageLoanSchema = z.object({
   }).min(5, { error: 'IFSC code must be at least 5 characters' }),
   // File fields
   photo: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Photo must be string' : undefined }).optional(),
-  aadharFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Aadhaar file must be string' : undefined }).optional(),
+  aadhaarFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Aadhaar file must be string' : undefined }).optional(),
   panFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'PAN file must be string' : undefined }).optional(),
   bankProof: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Bank proof must be string' : undefined }).optional(),
   incomeproof: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Income proof must be string' : undefined }).optional(),
