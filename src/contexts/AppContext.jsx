@@ -2,7 +2,11 @@
 import React, { createContext, useState, useEffect, useContext } from "react";
 import z from "zod";
 import { v4 } from "uuid";
-import { USED_CAR_LOAN_STD_CODES, TITLES, GENDERS, MARITAL_STATUS, RESIDENCE_OWNERSHIP_TYPES, USED_CAR_LOAN_COUNTRIES, USED_CAR_LOAN_PROFESSIONS, BUSINESS_PROFESSION_TYPES, BUSINESS_ORGANIZATION_TYPES, BUSINESS_OWNERSHIP_TYPES, GET_PROFESSION_TYPES, GET_PROFESSION_TYPES_VALIDATION, MORTGAGE_LOAN_COUNTRIES, MORTGAGE_LOAN_STD_CODES, MORTGAGE_LOAN_PROFESSIONS, HOME_LOAN_COUNTRIES, HOME_LOAN_STD_CODES, HOME_LOAN_PROFESSIONS, EDUCATION_LOAN_STD_CODES, EDUCATION_LOAN_COUNTRIES, EDUCATION_LOAN_HIGHEST_QUALIFICATIONS, EDUCATION_LOAN_GUARDIAN_STD_CODES, EDUCATION_LOAN_GUARDIAN_RELATION, EDUCATION_LOAN_GUARDIAN_OCCUPATIONS } from "../constants";
+import { USED_CAR_LOAN_STD_CODES, TITLES, GENDERS, MARITAL_STATUS, RESIDENCE_OWNERSHIP_TYPES, USED_CAR_LOAN_COUNTRIES, USED_CAR_LOAN_PROFESSIONS, BUSINESS_PROFESSION_TYPES, BUSINESS_ORGANIZATION_TYPES, BUSINESS_OWNERSHIP_TYPES, GET_PROFESSION_TYPES, GET_PROFESSION_TYPES_VALIDATION, MORTGAGE_LOAN_COUNTRIES, MORTGAGE_LOAN_STD_CODES, MORTGAGE_LOAN_PROFESSIONS, HOME_LOAN_COUNTRIES, HOME_LOAN_STD_CODES, HOME_LOAN_PROFESSIONS, EDUCATION_LOAN_STD_CODES, EDUCATION_LOAN_COUNTRIES, EDUCATION_LOAN_HIGHEST_QUALIFICATIONS,
+    EDUCATION_LOAN_TWELFTH_STREAMS, 
+    EDUCATION_LOAN_GRADUATION_STREAMS,
+    EDUCATION_LOAN_POST_GRADUATION_STREAMS,
+    EDUCATION_LOAN_GUARDIAN_STD_CODES, EDUCATION_LOAN_GUARDIAN_RELATION, EDUCATION_LOAN_GUARDIAN_OCCUPATIONS } from "../constants";
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
@@ -3882,59 +3886,67 @@ const [mortgageLoanFormFields, setMortgageLoanFormFields] = useState({
             validation: z.enum(EDUCATION_LOAN_HIGHEST_QUALIFICATIONS, { error: 'Highest qualification is required' }),
             colSpan: 6
         },
-        tenthCertificate: {
-            label: "10th Certificate",
-            inputType: 'file',
+        twelfthStream: {
+            label: "12th Stream",
+            inputType: "select",
             required: true,
             conditions: (formData) => {
-                return formData.highestQualification === "10th";
+                return formData.highestQualification === "12th";
             },
-            key: `loans/educationLoans/${formUuid}/tenthCertificate-${v4()}`,
-            allowedTypes: ['application/pdf'],
-            unsupportedTypeMessages: "Only PDF files are supported",
-            validation: z.string({
-                error: issue =>
-                issue.input
-                ? "10th Certificate is required"
-                : issue.code === "invalid_type"
-                ? "Invalid 10th Certificate"
-                : undefined
-            }).min(1, {error: "10th Certificate is required"})
+            options: [],
+            getOptions: () => EDUCATION_LOAN_TWELFTH_STREAMS,
+            validation: z.enum(EDUCATION_LOAN_TWELFTH_STREAMS, { error: '12th Stream is required' }),
+            colSpan: 6
         },
-        tenthMarksheet: {
-            label: "10th Marksheet",
-            inputType: 'file',
-            required: true,
-            conditions: (formData) => {
-                return formData.highestQualification === "10th";
-            },
-            key: `loans/educationLoans/${formUuid}/tenthMarksheet-${v4()}`,
-            allowedTypes: ['application/pdf'],
-            unsupportedTypeMessages: "Only PDF files are supported",
-            validation: z.string({
-                error: issue =>
-                issue.input
-                ? "10th Marksheet is required"
-                : issue.code === "invalid_type"
-                ? "Invalid 10th Marksheet"
-                : undefined
-            }).min(1, {error: "10th Marksheet is required"})
-        },
-        tenthPercent: {
-            label: "10th Percentage",
+        twelfthCollege: {
+            label: "12th College",
             inputType: "text",
             required: true,
             conditions: (formData) => {
-                return formData.highestQualification === "10th";
+                return formData.highestQualification === "12th";
             },
             validation: z.string({
                 error: issue =>
                 issue.input === undefined
-                ? "10th Percentage is required"
+                ? "12th College is required"
                 : issue.code === "invalid_type"
-                ? "10th Percentage must be string"
+                ? "12th College must be string"
                 : undefined
-            }).regex(/^\d+(\.\d{1,2})?$/, { error: '10th Percentage must be a valid number' }),
+            }).min(3, { error: '12th College must be at least 3 characters' }),
+            colSpan: 6
+        },
+         twelfthUniversity: {
+            label: "12th University",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.highestQualification === "12th";
+            },
+            validation: z.string({
+                error: issue =>
+                issue.input === undefined
+                ? "12th University is required"
+                : issue.code === "invalid_type"
+                ? "12th University must be string"
+                : undefined
+            }).min(3, { error: '12th University must be at least 3 characters' }),
+            colSpan: 6
+        },
+         twelfthPercent: {
+            label: "12th Percentage",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.highestQualification === "12th";
+            },
+            validation: z.string({
+                error: issue =>
+                issue.input === undefined
+                ? "12th Percentage is required"
+                : issue.code === "invalid_type"
+                ? "12th Percentage must be string"
+                : undefined
+            }).regex(/^\d+(\.\d{1,2})?$/, { error: '12th Percentage must be a valid number' }),
             colSpan: 6
         },
         twelfthCertificate: {
@@ -3975,179 +3987,17 @@ const [mortgageLoanFormFields, setMortgageLoanFormFields] = useState({
                 : undefined
             }).min(1, {error: "12th Marksheet is required"})
         },
-        twelfthPercent: {
-            label: "12th Percentage",
-            inputType: "text",
-            required: true,
-            conditions: (formData) => {
-                return formData.highestQualification === "12th";
-            },
-            validation: z.string({
-                error: issue =>
-                issue.input === undefined
-                ? "12th Percentage is required"
-                : issue.code === "invalid_type"
-                ? "12th Percentage must be string"
-                : undefined
-            }).regex(/^\d+(\.\d{1,2})?$/, { error: '12th Percentage must be a valid number' }),
-            colSpan: 6
-        },
-        diplomaCertificate: {
-            label: "Diploma Certificate",
-            inputType: 'file',
-            required: true,
-             conditions: (formData) => {
-                return formData.highestQualification === "diploma";
-            },
-            key: `loans/educationLoans/${formUuid}/diplomaCertificate-${v4()}`,
-            allowedTypes: ['application/pdf'],
-            unsupportedTypeMessages: "Only PDF files are supported",
-            validation: z.string({
-                error: issue =>
-                issue.input
-                ? "Diploma Certificate is required"
-                : issue.code === "invalid_type"
-                ? "Invalid Diploma Certificate"
-                : undefined
-            }).min(1, {error: "Diploma Certificate is required"})
-        },
-        diplomaCgpa: {
-            label: "Diploma CGPA",
-            inputType: "text",
-            required: true,
-             conditions: (formData) => {
-                return formData.highestQualification === "diploma";
-            },
-            key: `loans/educationLoans/${formUuid}/diplomaCgpa-${v4()}`,
-            validation: z.string({
-                error: issue =>
-                issue.input === undefined
-                ? "Diploma CGPA is required"
-                : issue.code === "invalid_type"
-                ? "Diploma CGPA must be string"
-                : undefined
-            }).regex(/^\d+(\.\d{1,2})?$/, { error: 'Diploma CGPA must be a valid number' }),
-            colSpan: 6
-        },
-        graduationCertificate: {
-            label: "Graduation Certificate",
-            inputType: 'file',
-            required: true,
-            conditions: (formData) => {
-                return formData.highestQualification === "graduation";
-            },
-            key: `loans/educationLoans/${formUuid}/graduationCertificate-${v4()}`,
-            validation: z.string({
-                error: issue =>
-                issue.input === undefined
-                ? "Graduation Certificate is required"
-                : issue.code === "invalid_type"
-                ? "Invalid Graduation Certificate"
-                : undefined
-            }).min(1, {error: "Graduation Certificate is required"}),
-            allowedTypes: ['application/pdf'],
-            unsupportedTypeMessages: "Only PDF files are supported"
-        },
-        graduationCgpa: {
-            label: "Graduation CGPA",
-            inputType: "text",
-            required: true,
-            conditions: (formData) => {
-                return formData.highestQualification === "graduation";
-            },
-            key: `loans/educationLoans/${formUuid}/graduationCgpa-${v4()}`,
-            validation: z.string({
-                error: issue =>
-                issue.input === undefined
-                ? "Graduation CGPA is required"
-                : issue.code === "invalid_type"
-                ? "Graduation CGPA must be string"
-                : undefined
-            }).regex(/^\d+(\.\d{1,2})?$/, { error: 'Graduation CGPA must be a valid number' }),
-            colSpan: 6
-        },
-        postGradCertificate: {
-            label: "Post Graduation Certificate",
-            inputType: 'file',
-            required: true,
-            conditions: (formData) => {
-                return formData.highestQualification === "postGraduation";
-            },
-            key: `loans/educationLoans/${formUuid}/postGradCertificate-${v4()}`,
-            validation: z.string({
-                error: issue =>
-                issue.input === undefined
-                ? "Post Graduation Certificate is required"
-                : issue.code === "invalid_type"
-                ? "Invalid Post Graduation Certificate"
-                : undefined
-            }).min(1, {error: "Post Graduation Certificate is required"}),
-            allowedTypes: ['application/pdf'],
-            unsupportedTypeMessages: "Only PDF files are supported"
-        },
-        postGradCgpa: {
-            label: "Post Graduation CGPA",
-            inputType: "text",
-            required: true,
-            conditions: (formData) => {
-                return formData.highestQualification === "postGraduation";
-            },
-            key: `loans/educationLoans/${formUuid}/postGradCgpa-${v4()}`,
-            validation: z.string({
-                error: issue =>
-                issue.input === undefined
-                ? "Post Graduation CGPA is required"
-                : issue.code === "invalid_type"
-                ? "Post Graduation CGPA must be string"
-                : undefined
-            }).regex(/^\d+(\.\d{1,2})?$/, { error: 'Post Graduation CGPA must be a valid number' }),
-            colSpan: 6
-        },
-        phdCertificate: {
-            label: "PhD Certificate",
-            inputType: 'file',
-            required: true,
-            conditions: (formData) => {
-                return formData.highestQualification === "phd";
-            },
-            key: `loans/educationLoans/${formUuid}/phdCertificate-${v4()}`,
-            validation: z.string({
-                error: issue =>
-                issue.input === undefined
-                ? "PhD Certificate is required"
-                : issue.code === "invalid_type"
-                ? "Invalid PhD Certificate"
-                : undefined
-            }).min(1, {error: "PhD Certificate is required"}),
-            allowedTypes: ['application/pdf'],
-            unsupportedTypeMessages: "Only PDF files are supported"
-        },
-        phdCgpa: {
-            label: "PhD CGPA",
-            inputType: "text",
-            required: true,
-            conditions: (formData) => {
-                return formData.highestQualification === "phd";
-            },
-            key: `loans/educationLoans/${formUuid}/phdCgpa-${v4()}`,
-            validation: z.string({
-                error: issue =>
-                issue.input === undefined
-                ? "PhD CGPA is required"
-                : issue.code === "invalid_type"
-                ? "PhD CGPA must be string"
-                : undefined
-            }).regex(/^\d+(\.\d{1,2})?$/, { error: 'PhD CGPA must be a valid number' }),
-            colSpan: 6
-        },
-        clcCertificate: {
+       
+        twelthclcCertificate: {
             label: "CLC Certificate",
             inputType: 'file',
             required: true,
             conditions: (formData) => {
-                return formData.highestQualification === "phd";
+                return formData.highestQualification === "12th";
             },
             key: `loans/educationLoans/${formUuid}/clcCertificate-${v4()}`,
+            allowedTypes: ['application/pdf'],
+            unsupportedTypeMessages: "Only PDF files are supported",
             validation: z.string({
                 error: issue =>
                 issue.input === undefined
@@ -4155,10 +4005,212 @@ const [mortgageLoanFormFields, setMortgageLoanFormFields] = useState({
                 : issue.code === "invalid_type"
                 ? "Invalid CLC Certificate"
                 : undefined
-            }).min(1, {error: "CLC Certificate is required"}),
-            allowedTypes: ['application/pdf'],
-            unsupportedTypeMessages: "Only PDF files are supported"
+            }).min(1, {error: "CLC Certificate is required"})
         },
+        graduationStream: {
+        label: "Graduation Stream",
+        inputType: "select",
+        required: true,
+        conditions: (formData) => {
+            return formData.highestQualification === "Graduate";
+        },
+        options: [],
+        getOptions: () => EDUCATION_LOAN_GRADUATION_STREAMS,
+        validation: z.enum(EDUCATION_LOAN_GRADUATION_STREAMS, { error: 'Graduation Stream is required' }),
+        colSpan: 6
+    },
+       graduationCollege: {
+        label: "Graduation College",
+        inputType: "text",
+        required: true,
+        conditions: (formData) => {
+            return formData.highestQualification === "Graduate";
+        },
+        validation: z.string({
+            error: issue =>
+            issue.input === undefined
+            ? "Graduation College is required"
+            : issue.code === "invalid_type"
+            ? "Graduation College must be string"
+            : undefined
+        }).min(3, { error: 'Graduation College must be at least 3 characters' }),
+        colSpan: 6
+    },
+        graduationUniversity: {
+        label: "Graduation University",
+        inputType: "text",
+        required: true,
+        conditions: (formData) => {
+            return formData.highestQualification === "Graduate";
+        },
+        validation: z.string({
+            error: issue =>
+            issue.input === undefined
+            ? "Graduation University is required"
+            : issue.code === "invalid_type"
+            ? "Graduation University must be string"
+            : undefined
+        }).min(3, { error: 'Graduation University must be at least 3 characters' }),
+        colSpan: 6
+    },
+        graduationCgpa: {
+        label: "Graduation CGPA",
+        inputType: "text",
+        required: true,
+        conditions: (formData) => {
+            return formData.highestQualification === "Graduate";
+        },
+        validation: z.string({
+            error: issue =>
+                issue.input === undefined
+            ? "Graduation CGPA is required"
+            : issue.code === "invalid_type"
+            ? "Graduation CGPA must be string"
+            : undefined
+        }).regex(/^\d+(\.\d{1,2})?$/, { error: 'Graduation CGPA must be a valid number' }),
+        colSpan: 6
+    },
+        graduationCertificate: {
+        label: "Graduation Certificate",
+        inputType: 'file',
+        required: true,
+        conditions: (formData) => {
+            return formData.highestQualification === "Graduate";
+        },
+        key: `loans/educationLoans/${formUuid}/graduationCertificate-${v4()}`,
+        validation: z.string({
+            error: issue =>
+            issue.input === undefined
+            ? "Graduation Certificate is required"
+            : issue.code === "invalid_type"
+            ? "Invalid Graduation Certificate"
+            : undefined
+        }).min(1, {error: "Graduation Certificate is required"}),
+        allowedTypes: ['application/pdf'],
+        unsupportedTypeMessages: "Only PDF files are supported"
+    },
+        graduationclcCertificate: {
+        label: "CLC Certificate",
+        inputType: 'file',
+        required: true,
+        conditions: (formData) => {
+            return formData.highestQualification === "Graduate";
+        },
+        key: `loans/educationLoans/${formUuid}/graduationclcCertificate-${v4()}`,
+        validation: z.string({
+            error: issue =>
+            issue.input === undefined
+            ? "CLC Certificate is required"
+            : issue.code === "invalid_type"
+            ? "Invalid CLC Certificate"
+            : undefined
+        }).min(1, {error: "CLC Certificate is required"}),
+        allowedTypes: ['application/pdf'],
+        unsupportedTypeMessages: "Only PDF files are supported"
+    },
+        postGradStream: {
+            label: "Post Graduation Stream",
+            inputType: "select",
+            required: true,
+            conditions: (formData) => {
+                return formData.highestQualification === "Post Graduate";
+            },
+            options: [],
+            getOptions: () => 
+            EDUCATION_LOAN_POST_GRADUATION_STREAMS,
+            validation: z.enum(EDUCATION_LOAN_POST_GRADUATION_STREAMS, { error: 'Post Graduation Stream is required' }),
+            colSpan: 6
+            },
+            postGradCollege: {
+            label: "Post Graduation College",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.highestQualification === "Post Graduate";
+            },
+            validation: z.string({
+                error: issue =>
+                issue.input === undefined
+                    ? "Post Graduation College is required"
+                    : issue.code === "invalid_type"
+                    ? "Post Graduation College must be string"
+                    : undefined
+            }).min(3, { error: "Post Graduation College must be at least 3 characters" }),
+            colSpan: 6
+            },
+            postGradUniversity: {
+            label: "Post Graduation University",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.highestQualification === "Post Graduate";
+            },
+            validation: z.string({
+                error: issue =>
+                issue.input === undefined
+                    ? "Post Graduation University is required"
+                    : issue.code === "invalid_type"
+                    ? "Post Graduation University must be string"
+                    : undefined
+            }).min(3, { error: "Post Graduation University must be at least 3 characters" }),
+            colSpan: 6
+            },
+            postGradCgpa: {
+            label: "Post Graduation CGPA",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.highestQualification === "Post Graduate";
+            },
+            validation: z.string({
+                error: issue =>
+                issue.input === undefined
+                    ? "Post Graduation CGPA is required"
+                    : issue.code === "invalid_type"
+                    ? "Post Graduation CGPA must be string"
+                    : undefined
+            }).regex(/^\d+(\.\d{1,2})?$/, { error: "Post Graduation CGPA must be a valid number" }),
+            colSpan: 6
+            },
+            postGradCertificate: {
+            label: "Post Graduation Certificate",
+            inputType: "file",
+            required: true,
+            conditions: (formData) => {
+                return formData.highestQualification ==="Post Graduate";
+            },
+            key: `loans/educationLoans/${formUuid}/postGradCertificate-${v4()}`,
+            validation: z.string({
+                error: issue =>
+                issue.input === undefined
+                    ? "Post Graduation Certificate is required"
+                    : issue.code === "invalid_type"
+                    ? "Invalid Post Graduation Certificate"
+                    : undefined
+            }).min(1, { error: "Post Graduation Certificate is required" }),
+            allowedTypes: ["application/pdf"],
+            unsupportedTypeMessages: "Only PDF files are supported"
+            },
+            postGradClcCertificate: {
+            label: "CLC Certificate",
+            inputType: "file",
+            required: true,
+            conditions: (formData) => {
+                return formData.highestQualification === "Post Graduate";
+            },
+            key: `loans/educationLoans/${formUuid}/postGradClcCertificate-${v4()}`,
+            validation: z.string({
+                error: issue =>
+                issue.input === undefined
+                    ? "CLC Certificate is required"
+                    : issue.code === "invalid_type"
+                    ? "Invalid CLC Certificate"
+                    : undefined
+            }).min(1, { error: "CLC Certificate is required" }),
+            allowedTypes: ["application/pdf"],
+            unsupportedTypeMessages: "Only PDF files are supported"
+            },
+
         purpose: {
             label: "Enter purpose of the loan",
             inputType: 'textField',

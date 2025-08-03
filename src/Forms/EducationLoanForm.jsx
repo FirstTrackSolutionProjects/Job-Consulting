@@ -1,5 +1,3 @@
-
-
 import CustomButton from "@/Components/CustomComponents/CustomButton";
 import CustomForm from "@/Components/CustomComponents/CustomForm"
 import { useApp } from "@/contexts/AppContext"
@@ -8,7 +6,7 @@ import { useRef } from "react"
 import { toast } from "react-toastify";
 
 const EducationLoanForm = () => {
-  const { educationLoanFormFields, setEducationLoanFormFields, refreshFormUuid } = useApp();
+  const { educationLoanFormFields, setEducationLoanFormFields} = useApp();
   const formRef = useRef(null);
 
   const handleSubmit = async (e) => {
@@ -17,8 +15,8 @@ const EducationLoanForm = () => {
     try {
       await applyForEducationLoanService(formData);
       toast.success("Education Loan Application Submitted Successfully");
-      setEducationLoanFormFields({});
-      refreshFormUuid();
+     
+     
     } catch (error) {
       toast.error("Failed to submit Education Loan Application");
     }

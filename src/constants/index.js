@@ -61,7 +61,13 @@ export const EDUCATION_LOAN_STD_CODES = Object.freeze(['+91']);
 
 export const EDUCATION_LOAN_COUNTRIES = Object.freeze(['India']);
 
-export const EDUCATION_LOAN_HIGHEST_QUALIFICATIONS = Object.freeze(['10th', '12th', 'Diploma', 'Graduation', 'Post Graduation', 'PhD']);
+export const EDUCATION_LOAN_HIGHEST_QUALIFICATIONS = Object.freeze(['12th', 'Graduate', 'Post Graduate',]);
+
+export const EDUCATION_LOAN_TWELFTH_STREAMS = Object.freeze(['Science', 'Commerce', 'Arts']);
+
+export const EDUCATION_LOAN_GRADUATION_STREAMS = Object.freeze(['B.Sc', 'B.Com', 'B.A', 'BBA', 'B.Tech', 'Other']);
+
+export const EDUCATION_LOAN_POST_GRADUATION_STREAMS = Object.freeze(['M.Sc', 'M.Com', 'M.A', 'MBA', 'M.Tech', 'Other']);
 
 export const EDUCATION_LOAN_GUARDIAN_STD_CODES = Object.freeze(['+91']);
 
