@@ -6,10 +6,10 @@ import applyForTractorLoanService from "../services/loanServices/tractorLoanServ
 import { toast } from "react-toastify";
 
 const fileFields = [
-  "photo", "aadharFile", "panFile", "bankProof", "quotations"
+  "photo", "aadhaarFile", "panFile", "bankProof", "quotations"
 ];
 const requiredFiles = [
-  "photo", "aadharFile", "panFile", "bankProof"
+  "photo", "aadhaarFile", "panFile", "bankProof"
 ];
 
 const TractorLoanForm = () => {
@@ -38,7 +38,7 @@ const TractorLoanForm = () => {
     pincode: "",
     country: "",
     permanentAddress: "",
-    aadhar: "",
+    aadhaar: "",
     pan: "",
     tractorModel: "",
     tractorPrice: "",
@@ -51,7 +51,7 @@ const TractorLoanForm = () => {
     ifsc: "",
     bankProof: "",
     photo: "",
-    aadharFile: "",
+    aadhaarFile: "",
     panFile: "",
     quotations: "",
   });
@@ -306,7 +306,7 @@ const TractorLoanForm = () => {
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">KYC Details</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" name="aadhar" value={formData.aadhar} onChange={handleChange} placeholder="Aadhaar Number" className="p-2 border rounded" required />
+          <input type="text" name="aadhaar" value={formData.aadhaar} onChange={handleChange} placeholder="Aadhaar Number" className="p-2 border rounded" required />
           <input type="text" name="pan" value={formData.pan} onChange={handleChange} placeholder="PAN Number" className="p-2 border rounded" required />
         </div>
       </div>
@@ -417,7 +417,7 @@ const TractorLoanForm = () => {
             <label className="block text-gray-700 mb-1">Aadhaar Card (PDF/Image)</label>
             <input
               type="file"
-              name="aadharFile"
+              name="aadhaarFile"
               accept=".pdf,.jpg,.jpeg,.png"
               className="w-full p-2 border rounded"
               required

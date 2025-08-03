@@ -117,7 +117,7 @@ const homeLoanSchema = z.object({
         ? 'Present address must be string'
         : undefined
   }).min(5, { error: 'Present address must be at least 5 characters' }),
-  aadhar: z.string({
+  aadhaar: z.string({
     error: issue =>
       issue.input === undefined
         ? 'Aadhaar is required'
@@ -265,7 +265,7 @@ const homeLoanSchema = z.object({
   officePincode: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Office pincode must be string' : undefined }).optional(),
   officeCountry: HomeLoanCountryEnum.optional(),
   photo: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Photo must be string' : undefined }).optional(),
-  aadharFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Aadhaar file must be string' : undefined }).optional(),
+  aadhaarFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Aadhaar file must be string' : undefined }).optional(),
   panFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'PAN file must be string' : undefined }).optional(),
   incomeproof: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Income proof must be string' : undefined }).optional(),
   companypan: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Company PAN must be string' : undefined }).optional(),

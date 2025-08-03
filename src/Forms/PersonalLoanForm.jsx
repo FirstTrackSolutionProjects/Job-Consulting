@@ -30,7 +30,7 @@ const PersonalLoanForm = () => {
     country: "",
     permanentAddress: "",
     presentAddress: "",
-    aadhar: "",
+    aadhaar: "",
     pan: "",
     income: "",
     employmentType: "",
@@ -54,14 +54,14 @@ const PersonalLoanForm = () => {
     officialState: "",
     officialCountry: "",
     officialEmail: "",
-    aadharFile: "",
+    aadhaarFile: "",
     panFile: "",
     photo: "",
     bankProof: "",
   });
 
   const [files, setFiles] = useState({
-    aadharFile: "",
+    aadhaarFile: "",
     panFile: "",
     photo: "",
     bankProof: "",
@@ -314,7 +314,7 @@ const PersonalLoanForm = () => {
       <div>
         <h3 className="text-xl font-semibold text-gray-900 mb-4">KYC Details</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="text" name="aadhar" value={formData.aadhar} onChange={handleChange} placeholder="Aadhaar Number" className="p-2 border rounded" required />
+          <input type="text" name="aadhaar" value={formData.aadhaar} onChange={handleChange} placeholder="Aadhaar Number" className="p-2 border rounded" required />
           <input type="text" name="pan" value={formData.pan} onChange={handleChange} placeholder="PAN Number" className="p-2 border rounded" required />
         </div>
       </div>
@@ -606,7 +606,7 @@ const PersonalLoanForm = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <div>
             <label className="block mb-1">Aadhaar Card</label>
-            <input type="file" name="aadharFile" onChange={handleFileChange} accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
+            <input type="file" name="aadhaarFile" onChange={handleFileChange} accept=".pdf,.jpg,.jpeg,.png" className="w-full p-2 border rounded" required />
           </div>
           <div>
             <label className="block mb-1">PAN Card</label>

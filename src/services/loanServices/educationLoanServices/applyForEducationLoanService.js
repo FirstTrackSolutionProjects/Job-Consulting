@@ -3,11 +3,7 @@ import applyForEducationLoanSchema from "../../../schemas/loanSchemas/applyForEd
 const BACKEND_URL = import.meta.env.VITE_APP_BACKEND_URL;
 
 const applyForEducationLoanService = async (loanData) => {
-    const result = applyForEducationLoanSchema.safeParse(loanData);
-    if (!result.success) {
-        const zodErrors = JSON.parse(result.error);
-        throw new Error(zodErrors?.[0]?.message || 'Validation failed');
-    }
+   
     let data;
     try{
         const response = await fetch(`${BACKEND_URL}/loans/apply-for-education-loan`, {

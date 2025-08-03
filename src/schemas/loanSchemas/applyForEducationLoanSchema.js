@@ -139,7 +139,7 @@ const educationLoanSchema = z.object({
         ? 'Present address must be string'
         : undefined
   }).min(5, { error: 'Present address must be at least 5 characters' }),
-  aadhar: z.string({
+  aadhaar: z.string({
     error: issue =>
       issue.input === undefined
         ? 'Aadhaar is required'
@@ -261,7 +261,7 @@ const educationLoanSchema = z.object({
   purpose: EducationLoanPurposeEnum.optional(),
   // All file fields (store S3 key as string)
   photoFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Photo file must be string' : undefined }).optional(),
-  aadharFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Aadhaar file must be string' : undefined }).optional(),
+  aadhaarFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Aadhaar file must be string' : undefined }).optional(),
   panFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'PAN file must be string' : undefined }).optional(),
   bankProof: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Bank proof must be string' : undefined }).optional(),
   salarySlipFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Salary slip file must be string' : undefined }).optional(),
@@ -276,7 +276,6 @@ const educationLoanSchema = z.object({
   foodLicenseFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Food license file must be string' : undefined }).optional(),
   drugLicenseFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Drug license file must be string' : undefined }).optional(),
   bankStatementsCurrentYear1: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Bank statement (current year) must be string' : undefined }).optional(),
-  bankStatementsCCYear1: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Bank statement (CC year) must be string' : undefined }).optional(),
   deedagreementFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Deed agreement file must be string' : undefined }).optional(),
   itr1File: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'ITR 1 file must be string' : undefined }).optional(),
   itr2File: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'ITR 2 file must be string' : undefined }).optional(),
@@ -284,10 +283,17 @@ const educationLoanSchema = z.object({
   computationFile1: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Computation file 1 must be string' : undefined }).optional(),
   computationFile2: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Computation file 2 must be string' : undefined }).optional(),
   computationFile3: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Computation file 3 must be string' : undefined }).optional(),
+  //Guardian Bank file fields
+  guardianAccountHolderName: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian account holder name must be string' : undefined }).optional(),
+  guardianBankName: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian bank name must be string' : undefined }).optional(),
+  guardianAccountNumber: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian account number must be string' : undefined }).optional(),
+  guardianIfsc: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian IFSC must be string' : undefined }).optional(),
+
   // Guardian file fields
   guardianphotoFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian photo file must be string' : undefined }).optional(),
-  guardianaadharFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian Aadhaar file must be string' : undefined }).optional(),
+  guardianaadhaarFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian Aadhaar file must be string' : undefined }).optional(),
   guardianpanFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian PAN file must be string' : undefined }).optional(),
+  guardianBankProof: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Guardian bank proof must be string' : undefined }).optional(),
   loanAmountFile: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Loan amount file must be string' : undefined }).optional(),
 })
 .refine(
