@@ -75,3 +75,11 @@ export const EDUCATION_LOAN_GUARDIAN_RELATION= Object.freeze(['Father', 'Mother'
 
 export const EDUCATION_LOAN_GUARDIAN_OCCUPATIONS = Object.freeze(['Business', 'Service']);
 
+///////////////INSURANCE ENUMS////////////
+// export const INSURANCE_STD_CODES = Object.freeze(['+91']);
+
+export const INSURANCE_COUNTRIES = Object.freeze(['India']);
+
+export const INSURANCE_TYPES = Object.freeze(['Health Insurance', 'Life Insurance', 'Vehicle Insurance', 'Travel Insurance']);
+
+export const INSURANCE_PROFESSIONS = Object.freeze(['Business', 'Service']);
