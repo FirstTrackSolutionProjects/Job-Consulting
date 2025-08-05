@@ -6,7 +6,7 @@ import { USED_CAR_LOAN_STD_CODES, TITLES, GENDERS, MARITAL_STATUS, RESIDENCE_OWN
     EDUCATION_LOAN_TWELFTH_STREAMS, 
     EDUCATION_LOAN_GRADUATION_STREAMS,
     EDUCATION_LOAN_POST_GRADUATION_STREAMS,
-    EDUCATION_LOAN_GUARDIAN_STD_CODES, EDUCATION_LOAN_GUARDIAN_RELATION, EDUCATION_LOAN_GUARDIAN_OCCUPATIONS } from "../constants";
+    EDUCATION_LOAN_GUARDIAN_STD_CODES, EDUCATION_LOAN_GUARDIAN_RELATION, EDUCATION_LOAN_GUARDIAN_OCCUPATIONS, INSURANCE_COUNTRIES, INSURANCE_TYPES, INSURANCE_PROFESSIONS } from "../constants";
 export const AppContext = createContext();
 
 export const AppProvider = ({ children }) => {
@@ -5142,26 +5142,732 @@ const [mortgageLoanFormFields, setMortgageLoanFormFields] = useState({
                 : undefined
             }).optional()
         },
+    });
 
-
-
-        
-
-
-
+///////INSURANCE LOAN FORM FIELDS/////////////////////////////////////
+const[insuranceLoanFormFields, setInsuranceLoanFormFields] = useState({
+    photo: {
+            category: "PERSONAL DETAILS",
+            inputType: 'photo',
+            required: true,
+            label: "Photo",
+            key: `loans/insuranceLoans/${formUuid}/photo-${v4()}`,
+            allowedTypes: ['image/jpeg', 'image/png'],
+            unsupportedTypeMessages: "Only PNG and JPG files are supported",
+            validation: z.string({
+                error: issue =>
+                issue.input
+                ? "Photo is required"
+                : issue.code === "invalid_type"
+                ? "Invalid Photo"
+                : undefined
+            }).min(1, {error: "Photo is required"})
+        },
+        fullname: {
+            category: "APPLICANT DETAILS",
+            label: "Full Name",
+            inputType: 'text',
+            required: true,
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Full name is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Full name must be string'
+                    : undefined
+              }).min(3, { error: 'Full name must be at least 3 characters' }),
+        },
+        dob: {
+            label: "Date of Birth",
+            inputType: 'date',
+            required: true,
+            validation: z.date({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Date of birth is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Date of birth must be a valid date'
+                    : undefined
+              }).max(new Date(), { error: 'Date of birth cannot be in the future' }),
+        },
+        email: {
+            label: "Email",
+            inputType: 'email',
+            required: true,
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Email is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Email must be string'
+                    : undefined
+              }).email({ error: 'Invalid email address' }),
+        },
+        phone: {
+            label: "Phone Number",
+            inputType: 'text',
+            required: true,
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Phone number is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Phone must be string'
+                    : undefined
+              }).regex(/^[6-9]\d{9}$/, { error: 'Enter valid 10‑digit Indian mobile number' }),
+        },
+       gender: {
+            label: "Gender",
+            inputType: "select",
+            required: true,
+            options: [],
+            getOptions: () => GENDERS,
+            validation: z.enum(GENDERS, { error: 'Gender is required' }),
+            colSpan: 4
+        },
+         residence: {
+            category: "PRESENT ADDRESS DETAILS",
+            label: "Residence",
+            inputType: "select",
+            required: true,
+            options: [],
+            getOptions: () => RESIDENCE_OWNERSHIP_TYPES,
+            validation: z.enum(RESIDENCE_OWNERSHIP_TYPES, { error: 'Residence type is required' }),
+            colSpan: 12
+        },
+        presentAddress: {
+            label: "Present Address",
+            inputType: "textField",
+            maxLength:200,
+            required: true,
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Present address is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Present address must be string'
+                    : undefined
+              }).min(5, { error: 'Present address must be at least 5 characters' })
+              .max(200, "Present address must be less than 200 characters"),
+            colSpan: 12
+        },
+        landmark: {
+            label: "Landmark",
+            inputType: "text",
+            required: true,
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Landmark is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Landmark must be string'
+                    : undefined
+              }).min(3, { error: 'Landmark must be at least 3 characters' }),
+            colSpan: 12
+        },
+        city: {
+            label: "City",
+            inputType: "text",
+            required: true,
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'City is required'
+                    : issue.code === 'invalid_type'
+                    ? 'City must be string'
+                    : undefined
+              }).min(2, { error: 'City must be at least 2 characters' }),
+            colSpan: 3
+        },
+        state: {
+            label: "State",
+            inputType: "text",
+            required: true,
+            validation: z.string({
+                error: issue =>
+                    issue.input === undefined
+                        ? 'State is required'
+                        : issue.code === 'invalid_type'
+                        ? 'State must be string'
+                        : undefined
+                }).min(2, { error: 'State must be at least 2 characters' }),
+            colSpan: 3
+        },
+        pincode: {
+            label: "Pincode",
+            inputType: "text",
+            required: true,
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                ? 'Pincode is required'
+                : issue.code === 'invalid_type'
+                ? 'Pincode must be string'
+                : undefined
+            }).regex(/^[1-9][0-9]{5}$/, { error: 'Enter a valid 6-digit Indian pincode' }),
+            colSpan: 3
+        },
+        country: {
+            label: "Country",
+            inputType: "select",
+            required: true,
+            options: [],
+            getOptions: () => INSURANCE_COUNTRIES,
+            validation: z.enum(INSURANCE_COUNTRIES, { error: 'Country is required' }),
+            colSpan: 3
+        },
+        InsuranceType: {
+            category : "INSURANCE DETAILS",
+            label: "Insurance Type",
+            inputType: "select",
+            required: true,
+            options: [],
+            getOptions: () => INSURANCE_TYPES,
+            validation: z.enum(INSURANCE_TYPES, { error: 'Insurance type is required' }),
+            colSpan: 12
+        },
+        nomineeName: {
+            category: "NOMINEE DETAILS",
+            label: "Nominee Name",
+            inputType: "text",
+            required: true,
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Nominee name is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Nominee name must be string'
+                    : undefined
+              }).min(3, { error: 'Nominee name must be at least 3 characters' }),
+            colSpan: 6
+        },
+        nomineeRelation: {
+            label: "Nominee Relation",
+            inputType: "text",
+            required: true,
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Nominee relation is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Nominee relation must be string'
+                    : undefined
+              }).min(2, { error: 'Nominee relation must be at least 2 characters' }),
+            colSpan: 6
+        },
+        profession: {
+            category: "PROFESSION",
+            label: "Profession",
+            inputType: "select",
+            required: true,
+            options: [],
+            getOptions: () => INSURANCE_PROFESSIONS,
+            validation: z.enum(INSURANCE_PROFESSIONS, { error: 'Profession is required' }),
+            colSpan: 12
+        },
+        professionType: {
+            label: "Profession Type",
+            inputType: "select",
+            required: true,
+            dependOn: ['profession'],
+            options: [],
+            getOptions: GET_PROFESSION_TYPES,
+            validation: GET_PROFESSION_TYPES_VALIDATION,
+            conditions: (formData) => {
+                return formData.profession;
+            },
+        },
+        organizationType: {
+            label: "Organization Type",
+            inputType: "select",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Business";
+            },
+            options: [],
+            getOptions: () => BUSINESS_ORGANIZATION_TYPES,
+            validation: z.enum(BUSINESS_ORGANIZATION_TYPES, { error: 'Organization type is required' }),
+        },
+        businessType: {
+            label: "Business Ownership Type",
+            inputType: "select",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Business";
+            },
+            options: [],
+            getOptions: () => BUSINESS_OWNERSHIP_TYPES,
+            validation: z.enum(BUSINESS_OWNERSHIP_TYPES, { error: 'Ownership type is required' }),
+        },
+        industry: {
+            label: "Industry",
+            inputType: 'text',
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Business";
+            },
+            validation: z.string({
+                error: issue => 
+                    issue.input == undefined ?
+                    "Industry is required":
+                    issue.code === "invalid_type"?
+                    "Industry must be string":
+                    undefined
+            }).min(3, {error: "Industry must be atleast 3 characters long"})
+        },
+        businessName: {
+            label: "Business Name",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Business"
+            },
+            validation: z.string({
+                error: issue => 
+                    issue.input == undefined ?
+                    "Business Name is required":
+                    issue.code === "invalid_type"?
+                    "Business Name must be string":
+                    undefined
+            }).min(3, {error: "Business Name must be atleast 3 characters long"})
+        },
+        businessYears: {
+            label: "Years in Business",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Business"
+            },
+            validation: z.coerce.number({
+                error: issue => 
+                    issue.input == undefined ?
+                    "Years in Business is required":
+                    issue.code === "invalid_type"?
+                    "Years in Business must be number":
+                    undefined
+            }).min(1, {error: "Years in Business must be atleast 1 year"})
+        },
+        businessannualturnover: {
+            label: "Annual Turnover",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Business"
+            },
+            validation: z.coerce.number({
+                error: issue => 
+                    issue.input == undefined ?
+                    "Annual Turnover is required":
+                    issue.code === "invalid_type"?
+                    "Annual Turnover must be number":
+                    undefined
+            }).min(1000, {error: "Annual Turnover must be atleast 1000"})
+        },
+        businessAddress: {
+            label: "Business Address",
+            inputType: "textField",
+            conditions: (formData) => {
+                return formData.profession === "Business"
+            },
+            maxLength: 200,
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Business address is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Business address must be string'
+                    : undefined
+              }).min(5, { error: 'Business address must be at least 5 characters' })
+              .max(200, "Business address must be less than 200 characters"),
+            colSpan:12
+        },
+        businessCity: {
+            label: "City",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Business"
+            },
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Business City is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Business City must be string'
+                    : undefined
+              }).min(2, { error: 'Business City must be at least 2 characters' }),
+            colSpan: 3
+        },
+        businessState: {
+            label: "State",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Business"
+            },
+            validation: z.string({
+                error: issue =>
+                    issue.input === undefined
+                        ? 'Business State is required'
+                        : issue.code === 'invalid_type'
+                        ? 'Business State must be string'
+                        : undefined
+                }).min(2, { error: 'Business State must be at least 2 characters' }),
+            colSpan: 3
+        },
+        businessPincode: {
+            label: "Pincode",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Business"
+            },
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                ? 'Business Pincode is required'
+                : issue.code === 'invalid_type'
+                ? 'Business Pincode must be string'
+                : undefined
+            }).regex(/^[1-9][0-9]{5}$/, { error: 'Enter a valid 6-digit business pincode' }),
+            colSpan: 3
+        },
+        businessCountry: {
+            label: "Country",
+            inputType: "select",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Business"
+            },
+            options: [],
+            getOptions: () => INSURANCE_COUNTRIES,
+            validation: z.enum(INSURANCE_COUNTRIES, { error: 'Business Country is required' }),
+            colSpan: 3
+        },
+        companyName: {
+            label: "Company Name",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Service"
+            },
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Company Name is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Company Name must be string'
+                    : undefined
+              }).min(2, { error: 'Company Name must be at least 2 characters' }),
+            colSpan: 6
+        },
+        jobYears: {
+            label: "Years in Job",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Service"
+            },
+            validation: z.coerce.number({
+                error: issue =>
+                    issue.input === undefined
+                ? 'Years in Job is required'
+                : issue.code === 'invalid_type'
+                ? 'Years in Job must be a number'
+                : undefined
+            }).min(1, { error: 'Years in Job must be at least 1 year' })
+        },
+        monthlyIncome: {
+            label: "Monthly Income",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Service";
+            },
+            validation: z.coerce.number({
+                error: issue =>
+                    issue.input === undefined
+                ? 'Monthly Income is required'
+                : issue.code === "invalid_type"
+                ? 'Monthly Income must be a number'
+                : undefined
+            }).min(1000, { error: 'Monthly Income must be at least ₹1000' })
+        },
+        officeAddress: {
+            label: "Office Address",
+            inputType: "textField",
+            maxLength: 200,
+            conditions: (formData) => {
+                return formData.profession === "Service"
+            },
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Office address is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Office address must be string'
+                    : undefined
+              }).min(5, { error: 'Office address must be at least 5 characters' })
+              .max(200, "Office address must be less than 200 characters"),
+            colSpan:12
+        },
+        officeCity: {
+            label: "City",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Service"
+            },
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Office City is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Office City must be string'
+                    : undefined
+              }).min(2, { error: 'Office City must be at least 2 characters' }),
+            colSpan: 3
+        },
+        officeState: {
+            label: "State",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Service"
+            },
+            validation: z.string({
+                error: issue =>
+                    issue.input === undefined
+                        ? 'Office State is required'
+                        : issue.code === 'invalid_type'
+                        ? 'Office State must be string'
+                        : undefined
+                }).min(2, { error: 'Office State must be at least 2 characters' }),
+            colSpan: 3
+        },
+        officePincode: {
+            label: "Pincode",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Service"
+            },
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                ? 'Office Pincode is required'
+                : issue.code === 'invalid_type'
+                ? 'Office Pincode must be string'
+                : undefined
+            }).regex(/^[1-9][0-9]{5}$/, { error: 'Enter a valid 6-digit office pincode' }),
+            colSpan: 3
+        },
+        officeCountry: {
+            label: "Country",
+            inputType: "select",
+            required: true,
+            conditions: (formData) => {
+                return formData.profession === "Service"
+            },
+            options: [],
+            getOptions: () => INSURANCE_COUNTRIES,
+            validation: z.enum(INSURANCE_COUNTRIES, { error: 'Office Country is required' }),
+            colSpan: 3
+        },
+         accountHolderName: {
+            category: "BANK DETAILS",
+            label: "Account Holder Name",
+            inputType: 'text',
+            required: true,
+            validation: z.string({
+                error: issue =>
+                  issue.input === undefined
+                    ? 'Account Holder Name is required'
+                    : issue.code === 'invalid_type'
+                    ? 'Account Holder Name must be string'
+                    : undefined
+              }).min(3, { error: 'Account Holder Name must be at least 3 characters' }),
+        },
+        bankName: {
+            label: "Bank Name",
+            inputType: 'text',
+            required: true,
+            validation: z.string({
+                error: issue =>
+                    issue.input === undefined
+                ? 'Bank Name is required'
+                : issue.code === 'invalid_type'
+                ? 'Bank Name must be string'
+                : undefined
+            }).min(3, { error: 'Bank Name must be at least 3 characters' }),
+        },
+        accountNumber: {
+            label: "Account Number",
+            inputType: "text",
+            required: true,
+            validation: z.string({
+                error: issue => 
+                issue.input === undefined
+                ? 'Account Number is required'
+                : issue.code === "invalid_type"
+                ? 'Account Number must be string'
+                : undefined
+            }).min(5, "Account Number must at least 5 digits")
+        },
+        ifsc: {
+            label: "IFSC",
+            inputType: "text",
+            required: true,
+            validation: z.string({
+                error: issue => 
+                issue.input === undefined
+                ? 'IFSC is required'
+                : issue.code === "invalid_type"
+                ? 'IFSC must be string'
+                : undefined
+            }).min(5, "IFSC must at least 5 digits")
+        },
+        bankProof: {
+            label: "Bank Statement",
+            inputType: 'file',
+            required: true,
+            key: `loans/insuranceLoans/${formUuid}/bankProof-${v4()}`,
+            allowedTypes: ['application/pdf'],
+            unsupportedTypeMessages: "Only PDF files are supported",
+            validation: z.string({
+                error: issue =>
+                issue.input
+                ? "Bank Statement is required"
+                : issue.code === "invalid_type"
+                ? "Invalid Bank Statement"
+                : undefined
+            }).min(1, {error: "Bank Statement is required"})
+        },
+        aadhaarFile: {
+            category: "Upload Documents",
+            label: "Aadhaar Card",
+            inputType: 'file',
+            required: true,
+            key: `loans/insuranceLoans/${formUuid}/aadhaarFile-${v4()}`,
+            allowedTypes: ['application/pdf'],
+            unsupportedTypeMessages: "Only PDF files are supported",
+            validation: z.string({
+                error: issue =>
+                issue.input
+                ? "Aadhaar Card is required"
+                : issue.code === "invalid_type"
+                ? "Invalid Aadhaar Card"
+                : undefined
+            }).min(1, {error: "Aadhaar Card is required"})
+        },
+        panFile: {
+            label: "PAN Card",
+            inputType: 'file',
+            required: true,
+            key: `loans/insuranceLoans/${formUuid}/panFile-${v4()}`,
+            allowedTypes: ['application/pdf'],
+            unsupportedTypeMessages: "Only PDF files are supported",
+            validation: z.string({
+                error: issue =>
+                issue.input
+                ? "PAN Card is required"
+                : issue.code === "invalid_type"
+                ? "Invalid PAN Card"
+                : undefined
+            }).min(1, {error: "PAN Card is required"})
+        },
+         // ITR fields for Business
+        itr1: {
+            category: "ITR/Computation Documents",
+            label: "ITR - Year 1",
+            inputType: 'file',
+            required: true,
+            conditions: (formData) => formData.profession === "Business",
+            key: `loans/insuranceLoans/${formUuid}/itr1-${v4()}`,
+            allowedTypes: ['application/pdf'],
+            unsupportedTypeMessages: "Only PDF files are supported",
+            validation: z.string({
+                error: issue =>
+                issue.input
+                ? "ITR - Year 1 is required"
+                : issue.code === "invalid_type"
+                ? "Invalid ITR - Year 1"
+                : undefined
+            }).min(1, {error: "ITR - Year 1 is required"})
+        },
+        itr2: {
+            label: "ITR - Year 2",
+            inputType: 'file',
+            required: false,
+            conditions: (formData) => formData.profession === "Business",
+            key: `loans/insuranceLoans/${formUuid}/itr2-${v4()}`,
+            allowedTypes: ['application/pdf'],
+            unsupportedTypeMessages: "Only PDF files are supported",
+            validation: z.string({
+                error: issue =>
+                issue.input
+                ? undefined
+                : issue.code === "invalid_type"
+                ? "Invalid ITR - Year 2"
+                : undefined
+            }).optional()
+        },
+       
+        computation1: {
+            label: "Computation - Year 1",
+            inputType: 'file',
+            required: true,
+            conditions: (formData) => formData.profession === "Business",
+            key: `loans/insuranceLoans/${formUuid}/computation1-${v4()}`,
+            allowedTypes: ['application/pdf'],
+            unsupportedTypeMessages: "Only PDF files are supported",
+            validation: z.string({
+                error: issue =>
+                issue.input
+                ? "Computation - Year 1 is required"
+                : issue.code === "invalid_type"
+                ? "Invalid Computation - Year 1"
+                : undefined
+            }).min(1, {error: "Computation - Year 1 is required"})
+        },
+        computation2: {
+            label: "Computation - Year 2",
+            inputType: 'file',
+            required: false,
+            conditions: (formData) => formData.profession === "Business",
+            key: `loans/insuranceLoans/${formUuid}/computation2-${v4()}`,
+            allowedTypes: ['application/pdf'],
+            unsupportedTypeMessages: "Only PDF files are supported",
+            validation: z.string({
+                error: issue =>
+                issue.input
+                ? undefined
+                : issue.code === "invalid_type"
+                ? "Invalid Computation - Year 2"
+                : undefined
+            }).optional()
+        },
+         // Service-specific fields
+        incomeproof: {
+            label: "Salary Slip (Last 3 Months)",
+            inputType: 'file',
+            required: true,
+            conditions: (formData) => formData.profession === "Service",
+            key: `loans/insuranceLoans/${formUuid}/incomeproof-${v4()}`,
+            allowedTypes: ['application/pdf'],
+            unsupportedTypeMessages: "Only PDF files are supported",
+            validation: z.string({
+                error: issue =>
+                issue.input
+                ? "Salary Slip is required"
+                : issue.code === "invalid_type"
+                ? "Invalid Salary Slip"
+                : undefined
+            }).min(1, "Salary Slip is required")
+        },
     });
 
 
-
-
-
-
-
-
-
-        
-    
-        
 ///////////////////////////////////FORM FIELDS ENDS///////////////////////////////////////////
 
     
@@ -5175,6 +5881,8 @@ const [mortgageLoanFormFields, setMortgageLoanFormFields] = useState({
     setHomeLoanFormFields,
     educationLoanFormFields,
     setEducationLoanFormFields,
+    insuranceLoanFormFields,
+    setInsuranceLoanFormFields,
     refreshFormUuid,
   }}>
     {children}
