@@ -44,5 +44,3 @@ const UsedCarLoanForm = () => {
 }
 
 export default UsedCarLoanForm
-
-// THIS IS A SECOND CHANGE
