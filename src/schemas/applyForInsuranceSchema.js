@@ -7,6 +7,9 @@ const InsuranceTypeEnum = z.enum(
   ['Health Insurance', 'Life Insurance', 'Vehicle Insurance', 'Travel Insurance'],
   { error: 'Insurance type is required' });
 const InsuranceProfessionEnum = z.enum(['Business', 'Service'], { error: 'Profession is required' });
+const InsuranceOrganizationTypeEnum = z.enum(['Proprietor', 'Partnership', 'Private Limited', 'Other'], {
+  error: 'organization is required' });
+const InsuranceBusinessTypeEnum =  z.enum(['Own', 'Rented'], { error: 'business type is required' });
 
 
 const applyForInsuranceSchema = z.object({
@@ -118,8 +121,8 @@ const applyForInsuranceSchema = z.object({
 
     profession: InsuranceProfessionEnum,
     professionType: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Profession type must be string' : undefined }).optional(),
-    organizationType: UsedCarLoanOrganizationTypeEnum.optional(),
-    businessType: UsedCarLoanBusinessTypeEnum.optional(),
+    organizationType: InsuranceOrganizationTypeEnum.optional(),
+    businessType: InsuranceBusinessTypeEnum.optional(),
     industry: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Industry must be string' : undefined }).optional(),
     businessName: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Business name must be string' : undefined }).optional(),
     businessYears: z.string({ error: issue => issue.input === undefined ? undefined : issue.code === 'invalid_type' ? 'Business years must be string' : undefined }).optional(),
