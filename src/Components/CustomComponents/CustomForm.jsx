@@ -369,29 +369,16 @@ const CustomForm = forwardRef(({ fields, setFields, handleSubmit = ()=>{}, exist
           const fieldRef = fieldRefs.current[key];
             // Skip hidden fields and handle conditional rendering
           if (fields[key].hidden || (typeof fields[key].conditions === 'function' && !fields[key].conditions(formData))) {
-            // If field is hidden by condition, restore its default value
-            if (fields[key].conditions && !fields[key].conditions(formData)) {
-                const defaultValue = fields[key].defaultValue !== undefined
-                  ? fields[key].defaultValue
-                  : fields[key].inputType === "multiselect" || fields[key].inputType === "array" ? []
-                  : fields[key].inputType === "number" ? 0
-                  : fields[key].inputType === "switch" ? false
-                  : "";
-                          
-                // Only update if value is actually different (deep compare for arrays)
-                const isDifferent = Array.isArray(formData[key])
-                  ? JSON.stringify(formData[key]) !== JSON.stringify(defaultValue)
-                  : formData[key] !== defaultValue;
-                          
-                if (isDifferent) {
-                  setTimeout(() => {
-                    setFormData(prev => ({
-                      ...prev,
-                      [key]: defaultValue
-                    }));
-                  }, 0);
-                }
-              }
+            // If field is hidden by condition, remove it from formData
+            if (formData[key] !== undefined) {
+              setTimeout(() => {
+                setFormData(prev => {
+                  const newData = { ...prev };
+                  delete newData[key];
+                  return newData;
+                });
+              }, 0);
+            }
             return null;
           }
 
