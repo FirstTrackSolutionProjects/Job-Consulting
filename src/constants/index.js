@@ -55,7 +55,7 @@ export const HOME_LOAN_COUNTRIES = Object.freeze(['India']);
 
 export const HOME_LOAN_PROFESSIONS = Object.freeze(['Business', 'Service']);
 
-///////////////EDUCATION LOAN ENUMS////////////
+///////////////EDUCATION LOAN ENUMS//////////////
 
 export const EDUCATION_LOAN_STD_CODES = Object.freeze(['+91']);
 
