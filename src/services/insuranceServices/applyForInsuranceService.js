@@ -11,7 +11,7 @@ const applyForInsuranceService = async (formData) => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify(result.data),
+            body: JSON.stringify(formData),
         });
 
         data = await response.json();

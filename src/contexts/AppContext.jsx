@@ -3988,7 +3988,7 @@ const [mortgageLoanFormFields, setMortgageLoanFormFields] = useState({
             }).min(1, {error: "12th Marksheet is required"})
         },
        
-        twelthclcCertificate: {
+        twelfthclcCertificate: {
             label: "CLC Certificate",
             inputType: 'file',
             required: true,
@@ -4329,23 +4329,7 @@ const [mortgageLoanFormFields, setMortgageLoanFormFields] = useState({
                 : undefined
             }).min(1, {error: "PAN Card is required"})
         },
-        appointmentLetter: {
-            label: "Appointment Letter",
-            inputType: 'file',
-            required: false,
-            conditions: (formData) => formData.highestQualification === "10th",
-            key: `loans/educationLoans/${formUuid}/appointmentLetter-${v4()}`,
-            allowedTypes: ['application/pdf'],
-            unsupportedTypeMessages: "Only PDF files are supported",
-            validation: z.string({
-                error: issue =>
-                issue.input
-                ? "Appointment Letter is required"
-                : issue.code === "invalid_type"
-                ? "Invalid Appointment Letter"
-                : undefined
-            }).optional()
-        },
+       
         guardianName: {
             category: "GUARDIAN DETAILS",
             label: "Guardian's Name",
@@ -4568,6 +4552,22 @@ const [mortgageLoanFormFields, setMortgageLoanFormFields] = useState({
             validation: z.enum(EDUCATION_LOAN_COUNTRIES, { error: 'Business Country is required' }),
             colSpan: 3
         },
+        companyName: {
+            label: "Company Name",
+            inputType: "text",
+            required: true,
+            conditions: (formData) => {
+                return formData.guardianOccupation === "Service"
+            },
+            validation: z.string({
+                error: issue => 
+                    issue.input == undefined ?
+                    "Company Name is required":
+                    issue.code === "invalid_type"?
+                    "Company Name must be string":
+                    undefined
+            }).min(3, {error: "Company Name must be atleast 3 characters long"})
+        },
         designation: {
             label: "Designation",
             inputType: "text",
@@ -4769,7 +4769,7 @@ const [mortgageLoanFormFields, setMortgageLoanFormFields] = useState({
         },
         guardianphoto: {
             label: "Guardian's Photo",
-            inputType: 'photo',
+            inputType: 'file',
             required: true,
             key: `loans/educationLoans/${formUuid}/guardianphoto-${v4()}`,
             allowedTypes: ['image/jpeg', 'image/png'],
@@ -5147,7 +5147,7 @@ const [mortgageLoanFormFields, setMortgageLoanFormFields] = useState({
 ///////INSURANCE LOAN FORM FIELDS/////////////////////////////////////
 const[insuranceLoanFormFields, setInsuranceLoanFormFields] = useState({
     photo: {
-            category: "PERSONAL DETAILS",
+            category: "APPLICANT DETAILS",
             inputType: 'photo',
             required: true,
             label: "Photo",
@@ -5163,8 +5163,8 @@ const[insuranceLoanFormFields, setInsuranceLoanFormFields] = useState({
                 : undefined
             }).min(1, {error: "Photo is required"})
         },
-        fullname: {
-            category: "APPLICANT DETAILS",
+        fullName: {
+           
             label: "Full Name",
             inputType: 'text',
             required: true,
@@ -5179,16 +5179,17 @@ const[insuranceLoanFormFields, setInsuranceLoanFormFields] = useState({
         },
         dob: {
             label: "Date of Birth",
-            inputType: 'date',
+            inputType: "date",
             required: true,
-            validation: z.date({
+            validation: z.string({
                 error: issue =>
                   issue.input === undefined
-                    ? 'Date of birth is required'
+                    ? 'DOB is required'
                     : issue.code === 'invalid_type'
-                    ? 'Date of birth must be a valid date'
+                    ? 'DOB must be string'
                     : undefined
-              }).max(new Date(), { error: 'Date of birth cannot be in the future' }),
+              }).regex(/^\d{4}-\d{2}-\d{2}$/, { error: 'DOB must be in yyyy-mm-dd format' }),
+            colSpan: 4
         },
         email: {
             label: "Email",
@@ -5316,7 +5317,7 @@ const[insuranceLoanFormFields, setInsuranceLoanFormFields] = useState({
             validation: z.enum(INSURANCE_COUNTRIES, { error: 'Country is required' }),
             colSpan: 3
         },
-        InsuranceType: {
+        insuranceType: {
             category : "INSURANCE DETAILS",
             label: "Insurance Type",
             inputType: "select",
