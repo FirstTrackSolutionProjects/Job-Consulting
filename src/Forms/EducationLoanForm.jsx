@@ -9,9 +9,9 @@ const EducationLoanForm = () => {
   const { educationLoanFormFields, setEducationLoanFormFields} = useApp();
   const formRef = useRef(null);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(formRef.current);
+  const handleSubmit = async () => {
+  
+    const formData = formRef?.current?.formData;
     try {
       await applyForEducationLoanService(formData);
       toast.success("Education Loan Application Submitted Successfully");
