@@ -56,9 +56,9 @@ const Jobs = () => {
       {/* ✅ Banner Image */}
     
       <img
-        src="/images/jobs-banner.jpg"
+        src="/images/jobs-banner .jpg"
         alt="Job Opportunities"
-        className="w-full h-80 object-cover rounded-xl mb-6"
+        className="w-full h-90 object-cover rounded-xl mb-6"
       />
 
       <div className="grid grid-cols-1 md:grid-cols-4 gap-8">

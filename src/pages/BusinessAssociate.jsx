@@ -200,7 +200,7 @@ const BusinessAssociate = () => {
           <img
             src="/Partners/business-associate.jpg"
             alt="partner"
-            className="w-full h-96 object-cover lg:h-auto"
+            className="w-full h-96 lg:h-[400px] object-cover"
           />
         </div>
 

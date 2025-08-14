@@ -13,18 +13,19 @@ const Partner = () => {
   };
 
   return (
-    <div className="max-w-5xl mx-auto px-6 py-10 mt-10">
+    <div className="max-w-5xl lg:max-w-7xl mx-auto px-6 lg:px-8  py-10 lg:py-14 mt-10">
+      <h1 className="text-3xl font-bold mb-6 text-center">Partner</h1>
       {!userType ? (
         <div className="grid lg:grid-cols-2 bg-white rounded-xl shadow-lg overflow-hidden">
           {/* Left Side - Image */}
           <img
             src="/Partners/partner.jpg"
             alt="Partner with us"
-            className="w-full h-96 object-cover lg:h-auto"
+            className="w-full h-96 lg:h-[550px] object-cover "
           />
 
           {/* Right Side - Text and Options */}
-          <div className="flex flex-col justify-center p-8">
+          <div className="flex flex-col justify-center  p-8 lg:p-12">
             <h2 className="text-3xl font-bold text-blue-700 mb-3">
               Looking to associate with us?
             </h2>
@@ -39,7 +40,7 @@ const Partner = () => {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800">Freelancer</h3>
                   <p className="text-sm text-gray-600">
-                    Register your company and post job openings to find the right talent.
+                    Register yourself to associate with us
                   </p>
                 </div>
               </div>
@@ -52,7 +53,7 @@ const Partner = () => {
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800">Business Associate</h3>
                   <p className="text-sm text-gray-600">
-                    Apply for jobs and get career guidance from our consulting team.
+                   Register your firm / company to associate with us
                   </p>
                 </div>
               </div>
