@@ -152,7 +152,7 @@ const Freelancer = () => {
           <img
             src="/Partners/freelancer.jpg"
             alt="partner"
-            className="w-full h-96 object-cover lg:h-auto"
+            className="w-full h-80 lg:h-[400px] object-cover rounded-l-xl"
           />
         </div>
 
