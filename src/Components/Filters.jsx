@@ -14,16 +14,15 @@ const Filters = ({ filters, onChange, onSubmit }) => {
 
   return (
     <section
-      className="relative bg-cover bg-center min-h-[600px] flex items-center justify-center"
-      style={{ backgroundImage: `url('/images/your-background.jpg')` }}
-    >
+      className="relative min-h-[580px] flex items-center justify-center"
+      >
     
       {/* Overlay */}
-      <div className="absolute inset-0 bg-amber-400 bg-opacity-50 z-0" />
+      <div className="absolute inset-0  bg-amber-400 bg-opacity-50 z-0" />
 
       {/* Content */}
-      <div className="relative z-10 w-full max-w-xl px-6">
-        <div className="w-full py-2 font-extrabold text-center text-white text-3xl md:text-4xl lg:text-5xl">
+      <div className="relative z-10  w-full max-w-xl px-6">
+        <div className="w-full py-2 font-extrabold lg:text-center text-white text-3xl md:text-4xl lg:text-5xl">
           Find A Job
         </div>
 
