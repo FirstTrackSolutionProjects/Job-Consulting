@@ -72,12 +72,8 @@ const Jobs = () => {
         </div>
 
         {/* 📋 Job Listings Section */}
-        <div className="md:col-span-3 space-y-6">
-          {!hasSearched ? (
-            <p className="text-gray-400 text-sm">
-              Please search to see job listings.
-            </p>
-          ) : filteredJobs.length === 0 ? (
+        <div className="md:col-span-3 space-y-6 h-[80vh] overflow-y-auto pr-2">
+          { filteredJobs.length === 0 ? (
             <p className="text-gray-500 mt-4">No jobs match your filters.</p>
           ) : (
             <>
