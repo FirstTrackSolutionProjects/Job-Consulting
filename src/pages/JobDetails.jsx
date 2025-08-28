@@ -90,12 +90,15 @@ const JobDetails = () => {
 
         {/* Apply Now Button */}
         <div className="text-center pt-6">
-          <button
-            onClick={() => navigate("/career-form", { state: { jobTitle: job.title } })}
-            className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition"
-          >
-            Apply Now
-          </button>
+         <a 
+          href="https://firsttracksolutiontechnologies.com/career" 
+          target="_blank" 
+          rel="noopener noreferrer"
+          className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded-lg font-medium transition"
+        >
+          Apply Now
+        </a>
+
         </div>
       </div>
     </div>
