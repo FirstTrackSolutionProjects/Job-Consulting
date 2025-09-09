@@ -1,4 +1,5 @@
 import React from "react";
+import { Helmet } from "react-helmet"
 
 const Filters = ({ filters, onChange, onSubmit }) => {
   const internshipEligibleTitles = [
@@ -13,6 +14,15 @@ const Filters = ({ filters, onChange, onSubmit }) => {
   );
 
   return (
+    <>
+       <Helmet>
+               <title>Job | FTST </title>
+               <meta
+                 name="description"
+                 content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+               />
+             </Helmet>
+
     <section
       className="relative min-h-[580px] flex items-center justify-center"
       >
@@ -93,6 +103,7 @@ const Filters = ({ filters, onChange, onSubmit }) => {
         </div>
       </div>
     </section>
+    </>
   );
 };
 
