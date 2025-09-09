@@ -5,6 +5,7 @@ import getPutObjectUrlService from "../services/s3Services/getPutObjectUrlServic
 import putObjectService from "../services/s3Services/putObjectService";
 import { toast } from "react-toastify";
 import applyForCreditCardService from "../services/creditCardServices/applyForCreditCardService";
+import { Helmet } from "react-helmet";
 
 // For future file uploads, keep these arrays ready
 const fileFields = [
@@ -122,13 +123,22 @@ const CreditCard = () => {
   };
 
   return (
+     <>
+    <Helmet>
+            <title>Credit Card | FTST </title>
+            <meta
+              name="description"
+              content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+            />
+          </Helmet>
     <div className="max-w-2xl mx-auto mt-10 p-6 bg-white shadow-md rounded-lg">
       <h2 className="text-2xl font-bold text-center text-blue-700 mb-4">
-        Credit Card – Coming Soon!
+        Credit Card 
       </h2>
-      <p className="text-center text-gray-600 mb-6">
-        We're launching our credit card services soon. Leave your details and we'll contact you as soon as it's available.
-      </p>
+     <p className="text-center text-gray-600 mb-6">
+      Credit card services are available. Choose a card that suits your needs and start enjoying the benefits.
+    </p>
+
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="grid lg:grid-cols-2 bg-white rounded-xl shadow-lg overflow-hidden">
@@ -345,6 +355,7 @@ const CreditCard = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 

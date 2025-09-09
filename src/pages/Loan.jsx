@@ -1,6 +1,7 @@
 
 import React from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 
 const loanTypes = [
   { name: "Personal Loan", type: "personal"},
@@ -14,6 +15,16 @@ const loanTypes = [
 
 const LoanPage = () => {
   return (
+      <>
+   
+      <Helmet>
+        <title>Loans | FTST </title>
+        <meta
+          name="description"
+          content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+        />
+      </Helmet>
+
     <div className="max-w-5xl mx-auto p-8 mt-10 bg-white rounded shadow-md">
       <h2 className="text-3xl font-bold text-blue-700 mb-5 text-center">
         Choose a Loan Type
@@ -55,6 +66,7 @@ const LoanPage = () => {
         ))}
       </div>
     </div>
+    </>
   );
 };
 

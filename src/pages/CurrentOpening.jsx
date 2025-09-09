@@ -1,11 +1,20 @@
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import jobs from "../data/jobs";
+import { Helmet } from "react-helmet";
 
 const CurrentOpening = () => {
   const navigate = useNavigate();
 
   return (
+     <>
+    <Helmet>
+            <title>Current Openings | FTST </title>
+            <meta
+              name="description"
+              content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+            />
+          </Helmet>
     <div className="max-w-4xl mx-auto px-4 py-10 mt-12">
       <h1 className="text-3xl font-bold text-center text-gray-800 mb-10">
         Current Openings
@@ -83,6 +92,7 @@ const CurrentOpening = () => {
         </div>
       )}
     </div>
+    </>
   );
 };
 
