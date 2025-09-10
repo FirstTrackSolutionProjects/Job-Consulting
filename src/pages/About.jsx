@@ -1,7 +1,17 @@
 import React from "react";
+import { Helmet } from "react-helmet";
 
 const About = () => {
   return (
+    <>
+       
+          <Helmet>
+            <title>About | FTST </title>
+            <meta
+              name="description"
+              content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+            />
+            </Helmet>
     <div className="max-w-4xl mx-auto px-4 py-10 mt-10">
       <h1 className="text-3xl font-bold mb-6">About Us</h1>
       <img
@@ -16,6 +26,7 @@ const About = () => {
         
       </p>
     </div>
+    </>
   );
 };
 

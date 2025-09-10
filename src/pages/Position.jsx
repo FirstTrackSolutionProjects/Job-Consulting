@@ -3,6 +3,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import bannerImg from "/images/banner-consulting.jpg";
 import team1 from "/images/team-1.jpg";
 import team2 from "/images/team-2.jpg";
+import {Helmet} from "react-helmet";
 
 const sectors = {
   voiceBPO: [
@@ -139,6 +140,15 @@ export default function Position() {
   };
 
   return (
+    <>
+   
+      <Helmet>
+        <title>Position | FTST </title>
+        <meta
+          name="description"
+          content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+        />
+        </Helmet>
     <div className="px-6 md:px-12 py-8 space-y-12 max-w-7xl mx-auto mt-12">
       
       {/* Banner / Hero */}
@@ -251,9 +261,7 @@ export default function Position() {
           <span key={tag} className="inline-block bg-gray-100 px-3 py-1 rounded-full">{tag}</span>
         ))}
       </aside>
-
-     
-      
     </div>
+    </>
   );
 }

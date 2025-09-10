@@ -12,7 +12,7 @@ import Register from "./pages/Register";
 import Position from "./pages/Position";
 import Contact from "./pages/Contact";
 
- import Career from "./pages/Career";
+import Career from "./pages/Career";
 import Jobs from "./pages/Jobs";
 import JobDetails from "./pages/JobDetails";
 import CurrentOpening from "./pages/CurrentOpening";

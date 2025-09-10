@@ -96,9 +96,19 @@
 // export default Contact;
 
 import React from 'react'
+import { Helmet} from "react-helmet"
 
 const Contact = () => {
   return (
+    <>
+   
+      <Helmet>
+        <title>Contact | FTST </title>
+        <meta
+          name="description"
+          content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+        />
+        </Helmet>
      <div className="min-h-screen flex items-center justify-center bg-gray-100">
       <a
         href="https://firsttracksolutiontechnologies.com/contact" // Replace with your actual link
@@ -107,6 +117,7 @@ const Contact = () => {
       >
       </a>
     </div>
+    </>
   )
 }
 

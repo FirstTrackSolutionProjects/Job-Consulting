@@ -53,7 +53,18 @@
     "/loan", 
     "/loan-details/personal", 
     "/loan-details/business",
-    "/insurance"
+    "/insurance",
+    "/credit-card",
+    "/about",
+    "/contact",
+    "/Partner",
+    "/partner/freelance",
+    "/partner/business",
+    "/position",
+    "/jobs",
+    "/terms",
+    "/privacy"
+
   ]
 }
 }

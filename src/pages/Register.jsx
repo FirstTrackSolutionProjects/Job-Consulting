@@ -1,8 +1,18 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet"
 
 const Register = () => {
   return (
+    <>
+   
+      <Helmet>
+        <title>Register | FTST </title>
+        <meta
+          name="description"
+          content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+        />
+        </Helmet>
     <div className="min-h-screen flex items-center justify-center p-6">
       <div className="w-full max-w-md bg-white p-8 rounded-xl shadow-lg">
         <h2 className="text-2xl font-bold text-center mb-6 text-gray-800">Register</h2>
@@ -55,6 +65,7 @@ const Register = () => {
         </p>
       </div>
     </div>
+    </>
   );
 };
 

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Freelancer from "./Freelancer";
 import BusinessAssociate from "./BusinessAssociate";
+import { Helmet } from "react-helmet"
 
 const Partner = () => {
   const [userType, setUserType] = useState(null);
@@ -13,6 +14,15 @@ const Partner = () => {
   };
 
   return (
+    <>
+   
+      <Helmet>
+        <title>Partner| FTST </title>
+        <meta
+          name="description"
+          content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+        />
+        </Helmet>
     <div className="max-w-5xl lg:max-w-7xl mx-auto px-6 lg:px-8  py-10 lg:py-14 mt-10">
       <h1 className="text-3xl font-bold mb-6 text-center">Partner</h1>
       {!userType ? (
@@ -66,6 +76,7 @@ const Partner = () => {
         <BusinessAssociate />
       )}
     </div>
+    </>
   );
 };
 
