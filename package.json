@@ -52,7 +52,8 @@
     "/", 
     "/loan", 
     "/loan-details/personal", 
-    "/loan-details/business"
+    "/loan-details/business",
+    "/insurance"
   ]
 }
 }
