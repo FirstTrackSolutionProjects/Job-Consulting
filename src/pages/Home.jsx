@@ -9,11 +9,20 @@ import TrustedPartners from "../Components/TrustedPartner";
 import StartupIndia from "../Components/StartupIndia";
 import ISO from "../Components/ISO";
 import ApplicationForm from "../Components/ApplicationForm";
+import { Helmet } from "react-helmet"
 
 
 
 const Home = () => {
     return (
+         <>
+    <Helmet>
+            <title>Home | FTST </title>
+            <meta
+              name="description"
+              content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+            />
+          </Helmet>
         <div className="min-h-screen bg-gray-100">
         <HeroSection />
         <OurService />
@@ -26,6 +35,7 @@ const Home = () => {
         <ISO />
         <ApplicationForm />
         </div>
+        </>
     );
 }
 export default Home;
