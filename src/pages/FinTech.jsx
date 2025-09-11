@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import CreditCard from "./CreditCard";
+import {Helmet }from "react-helmet"
 const Fintech = () => {
   const [formData, setFormData] = useState({
     fullName: "",
@@ -28,6 +29,15 @@ const Fintech = () => {
   };
 
   return (
+    <>
+   
+      <Helmet>
+        <title>Fintech | FTST </title>
+        <meta
+          name="description"
+          content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+        />
+        </Helmet>
     <div className="max-w-3xl mx-auto p-6 bg-white rounded shadow-md mt-12">
       <h2 className="text-2xl font-bold text-blue-700 text-center mb-6">
         Apply for a Loan
@@ -143,6 +153,7 @@ const Fintech = () => {
         </button>
       </form>
     </div>
+    </>
   );
 };
 

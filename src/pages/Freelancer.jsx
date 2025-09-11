@@ -4,6 +4,7 @@ import getPutObjectUrlService from "../services/s3Services/getPutObjectUrlServic
 import putObjectService from "../services/s3Services/putObjectService";
 import { toast } from "react-toastify";
 import applyForFreelancerService from "../services/partnerServices/applyForFreelancerService";
+import { Helmet } from "react-helmet"
 
 const fileFields = [
   "resume",
@@ -142,6 +143,15 @@ const Freelancer = () => {
   };
 
   return (
+    <>
+   
+      <Helmet>
+        <title>Freelancer | FTST </title>
+        <meta
+          name="description"
+          content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+        />
+        </Helmet>
     <div className="bg-white p-6 rounded-lg shadow-md max-w-3xl mx-auto mt-10">
       <h2 className="text-2xl font-semibold mb-6 text-center text-cyan-900">
         Freelancer Registration Form
@@ -405,6 +415,7 @@ const Freelancer = () => {
         </div>
       </form>
     </div>
+    </>
   );
 };
 

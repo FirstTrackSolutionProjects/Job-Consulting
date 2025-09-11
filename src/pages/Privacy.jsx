@@ -1,7 +1,18 @@
 import React from "react";
+import { Helmet } from "react-helmet"
 
 const Privacy = () => {
+  
   return (
+    <>
+   
+      <Helmet>
+        <title>Privacy | FTST </title>
+        <meta
+          name="description"
+          content="Apply for personal, business, home, car, education, and other loans with FTST Job Consulting. Quick approval and minimal documentation."
+        />
+        </Helmet>
     <div className="max-w-4xl mx-auto px-4 py-10 mt-20">
       <h1 className="text-3xl font-bold mb-6">Privacy Policy</h1>
       
@@ -49,6 +60,7 @@ const Privacy = () => {
       <h2 className="text-xl font-semibold mt-6 mb-2">7. Contact</h2>
       <p>Email: support@firsttracksolutiontechnologies.com</p>
     </div>
+    </>
   );
 };
 
