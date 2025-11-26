@@ -239,8 +239,8 @@ const jobs = [
   {
   id: 14,
   title: "Relationship Manager",
-  location: ["Mumbai", "Delhi", "Bhubaneswar", "Kolkata"],
-  experience: "2-4",
+  location: ["All India"],
+  experience: "3-7",
   jobType: "full-time",
   workmode: ["onsite", "hybrid"],
   description:
@@ -256,8 +256,8 @@ const jobs = [
   {
     id: 15,
     title: "Relationship Officer",
-    location: ["Mumbai", "Delhi", "Bhubaneswar", "Kolkata"],
-    experience: "1-3",
+    location: ["All India"],
+    experience: "2-5",
     jobType: "full-time",
     workmode: ["onsite", "hybrid"],
     description:
@@ -265,7 +265,7 @@ const jobs = [
     education: "Bachelor's in Finance, Business, or related field",
     skills: ["Communication", "Client Handling", "CRM Tools"],
     responsibilities: [
-       "Support sales team with client coordination",
+      "Support sales team with client coordination",
     "Handle documentation and backend operations",
     "Assist in upselling financial services",
     ],
@@ -304,7 +304,34 @@ const jobs = [
       "Track sales performance and prepare reports",
     ],
   },
-
+  {
+  id: 16,
+  title: "Branch/State Head",
+  location: ["All India"],
+  experience: "12+",
+  jobType: "full-time",
+  workmode: ["onsite"],
+  description:
+    "Lead branch or state-level operations, drive business growth, manage teams, and ensure compliance across banking and financial services.",
+  education: "Bachelor’s or Master’s degree in Business, Finance, or related field",
+  skills: [
+    "Team Leadership",
+    "Branch Operations",
+    "Loan Products",
+    "Investment Products",
+    "Customer Relationship Management",
+    "Regulatory Compliance",
+    "Sales Management"
+  ],
+  responsibilities: [
+    "Oversee branch or state operations to ensure smooth workflow",
+    "Lead and mentor sales and operations teams",
+    "Drive business growth through loan and investment products",
+    "Ensure regulatory and policy compliance",
+    "Build strong customer and partner relationships",
+    "Achieve monthly and yearly business targets"
+  ]
+}
 ];
 
 export default jobs;
